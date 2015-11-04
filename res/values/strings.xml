@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">一卡通</string>
+    
+    <string name="action_search">查找</string>
+    <string name="action_add">添加</string>
+    <string name="menu_group_chat">添加丢卡信息</string>
+    <string name="menu_feedback">退出</string>
+    <string name="menu_addfriend">添加拾卡信息</string>
+    <string name="menu_scan">修改个人信息</string>
+    
+    <string name="tab_lost">丢卡</string>
+    <string name="tab_found">拾获</string>
+    <string name="tab_me">我</string>
+
+</resources>

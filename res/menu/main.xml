@@ -1,0 +1,22 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/action_search"
+        android:actionViewClass="android.widget.SearchView"
+        android:showAsAction="ifRoom|collapseActionView"
+        android:title="@string/action_search"/>
+ 
+    <item
+        android:id="@+id/action_group_chat"
+        android:title="@string/menu_group_chat"/>
+    <item
+        android:id="@+id/action_add_friend"
+        android:title="@string/menu_addfriend"/>
+    <item
+        android:id="@+id/action_scan"
+        android:title="@string/menu_scan"/>
+    <item
+        android:id="@+id/action_feedback"
+        android:title="@string/menu_feedback"/>
+
+</menu>
