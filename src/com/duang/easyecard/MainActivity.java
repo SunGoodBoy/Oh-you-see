@@ -47,6 +47,8 @@ public class MainActivity extends FragmentActivity implements OnClickListener, O
 		initDatas();
 		mViewPager.setAdapter(mAdapter);
 		initEvent();
+		
+		
 
 	}
 
