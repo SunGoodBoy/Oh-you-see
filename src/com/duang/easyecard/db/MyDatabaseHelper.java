@@ -8,16 +8,19 @@ import android.widget.Toast;
 
 public class MyDatabaseHelper extends SQLiteOpenHelper {
 	
-	public static final String CREATE_BASIC_INFO = "create table Book ("
+	public static final String CREATE_BASIC_INFO = "create table Basic_Info ("
 			+ "stu_id char(11) primary key not null, "
+			+ "password text, "
 			+ "nick_name text, "
 			+ "real_name text, "
 			+ "gender integer, "
 			+ "college text, "
 			+ "department text, "
+			+ "email text, "
 			+ "contact text, "
 			+ "lost_flag integer not null, "
-			+ "found_flag integer not null)";
+			+ "found_flag integer not null, "
+			+ "found_id char(11) not null)";
 	
 	private Context mContext;
 	

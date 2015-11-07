@@ -10,8 +10,10 @@
     <string name="login_label_signup">注册</string>
     <string name="forget_password">忘记密码？ </string>
 
-    <string name="nickname">昵 称</string>
     <string name="stu_id">学号</string>
+    <string name="nickname">昵称</string>
+    <string name="realname">真实姓名</string>
+    <string name="gender">性别</string>
     <string name="password">密码</string>
     <string name="password_confirm">确认密码</string>
     <string name="grade">年级</string>
