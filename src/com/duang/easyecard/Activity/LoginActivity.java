@@ -3,9 +3,12 @@ package com.duang.easyecard.Activity;
 import com.duang.easyecard.R;
 import com.duang.easyecard.R.id;
 import com.duang.easyecard.R.layout;
+import com.duang.easyecard.db.MyDatabaseHelper;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -17,12 +20,12 @@ import android.widget.Toast;
 
 public class LoginActivity extends Activity {
 	
+	private MyDatabaseHelper dbHelper;
+	
 	private Button signin_button;
 	private Button login_signup_button;
-	private EditText usernameEditText;
-	private EditText passwordEditText;
-	final String usernameStored = "10000";
-	final String passwordStored = "123456";
+	private EditText mUsername;
+	private EditText mPassword;
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
@@ -32,8 +35,8 @@ public class LoginActivity extends Activity {
         
         signin_button = (Button) findViewById(R.id.signin_button);
         login_signup_button = (Button) findViewById(R.id.login_signup_button);
-        usernameEditText = (EditText) findViewById(R.id.username_edit);
-    	passwordEditText = (EditText) findViewById(R.id.password_edit); 
+        mUsername = (EditText) findViewById(R.id.username_edit);
+    	mPassword = (EditText) findViewById(R.id.password_edit); 
     	
     	//登录按钮的点击事件
     	signin_button.setOnClickListener(new OnClickListener() {
@@ -59,48 +62,65 @@ public class LoginActivity extends Activity {
 	
 	//登录判断
 	public void login_main(View v)	{
-		String mUsername = usernameEditText.getText().toString();
-		String mPassword = passwordEditText.getText().toString();
+		String username = mUsername.getText().toString();
+		String password = mPassword.getText().toString();
 		
-		if (signInJudge(mUsername, mPassword))	{
-			//Intent intent = new Intent();
-			//intent.setClass(LoginActivity.this, ****************要跳转的Activity*********************)
-			//startActivity(intent);
-			this.finish();
+		if (!username.isEmpty())	{
+			if (wasSigned(username))	{
+				if (!password.isEmpty())	{
+					if (passwordIsRight(username, password))	{
+						//跳转到程序功能界面，结束LoginActivity
+						
+					}	else	{
+						Toast.makeText(LoginActivity.this, "密码错误", Toast.LENGTH_SHORT).show();
+					}
+				}	else	{
+					Toast.makeText(LoginActivity.this, "请输入密码", Toast.LENGTH_SHORT).show();
+				}
+				
+			}	else	{
+				Toast.makeText(LoginActivity.this, "未注册的帐号", Toast.LENGTH_SHORT).show();
+			}
+		}	else	{
+			Toast.makeText(LoginActivity.this, "帐号不能为空", Toast.LENGTH_SHORT).show();
 		}
 	}
 	
-	//判断帐号密码输入是否正确
-	public boolean signInJudge(String stu_id, String password)	{
-		
-		Log.d("Input", stu_id);
-		Log.d("Input", password);
-		Log.d("Stored", usernameStored);
-		Log.d("Stored", passwordStored);
-		
-		//判断输入是否为空
-		if (stu_id.isEmpty() || password.isEmpty())
-		{
-			Toast.makeText(LoginActivity.this, "帐号或密码不能为空", Toast.LENGTH_SHORT).show();
-			return false;
+	//判断密码是否正确
+	private boolean passwordIsRight(String username, String password)	{
+		SQLiteDatabase db = dbHelper.getWritableDatabase();
+		Cursor cursor = db.query("BasicInfo", null, null, null, null, null, null);
+		if (cursor.moveToFirst())	{
+			do	{
+				if (username.equals(cursor.getString(cursor.getColumnIndex("stu_id"))))	{
+					if (password.equals(cursor.getString(cursor.getColumnIndex("password"))))	{
+						return true;
+					}	else
+						return false;
+				}	else	{
+					return false;
+				}
+			}	while (cursor.moveToNext());
 		}
+		cursor.close();
 		
-		//比较字符串用equal方法
-     	if (stu_id.equals(usernameStored) && password.equals(passwordStored))	{
-     		Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
-     		return true;
-     	}
-     	else if (stu_id.equals(usernameStored) && !password.equals(passwordStored))	{
-     		Toast.makeText(LoginActivity.this, "密码错误", Toast.LENGTH_SHORT).show();
-     		passwordEditText.setText("");
-     		return false;
-     	}
-     	else if (!stu_id.equals(usernameStored))	{
-     		Toast.makeText(LoginActivity.this, "帐号不存在", Toast.LENGTH_SHORT).show();
-     		return false;
-     	}
-     	else
-     		return false;
+		return false;
     }
+	
+	//判断帐号是否已经注册
+	private boolean wasSigned(String stu_id_input) {
+		// TODO Auto-generated method stub
+		SQLiteDatabase db = dbHelper.getWritableDatabase();
+		Cursor cursor = db.query("BasicInfo", null, null, null, null, null, null);
+		if (cursor.moveToFirst())	{
+			do	{
+				if (stu_id_input.equals(cursor.getString(cursor.getColumnIndex("stu_id"))))	{
+					return true;
+				}
+			}	while (cursor.moveToNext());
+		}
+		cursor.close();
+		return false;
+	}
     
 }
