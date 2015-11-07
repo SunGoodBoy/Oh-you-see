@@ -1,4 +1,4 @@
-package com.duang.easyecard;
+package com.duang.easyecard.db;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

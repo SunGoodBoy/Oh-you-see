@@ -14,13 +14,20 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.duang.easyecard.MainActivity"
+            android:name="com.duang.easyecard.Activity.AppStart"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        
+        <activity 
+            android:name="com.duang.easyecard.Activity.LoginActivity">
+        </activity>
+        
+        <activity 
+            android:name="com.duang.easyecard.Activity.SignupActivity">
         </activity>
     </application>
 

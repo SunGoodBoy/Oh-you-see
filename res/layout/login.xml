@@ -47,6 +47,7 @@
       	android:password="true"
       	android:singleLine="true"
       	android:inputType="textPassword" />
+      
       <!-- 登录button -->
       <Button 
       	android:id="@+id/signin_button"
@@ -55,19 +56,29 @@
       	android:layout_below="@id/password_edit"
       	android:layout_alignRight="@id/password_edit"
       	android:text="@string/login_label_signin" />
+      
+	  <!-- 注册button -->
+      <Button
+          android:id="@+id/login_signup_button"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignBaseline="@+id/signin_button"
+          android:layout_alignBottom="@+id/signin_button"
+          android:layout_centerHorizontal="true"
+          android:text="@string/login_label_signup" />
+
   	</RelativeLayout>
   
   	<RelativeLayout 
       	android:layout_width="fill_parent"
       	android:layout_height="wrap_content" >
      <TextView  
-         android:id="@+id/register_link"
-         android:text="@string/login_register_link"
+         android:id="@+id/forget_password"
+         android:text="@string/forget_password"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
          android:layout_marginLeft="15dp"
-         android:textColor="#888"
-         android:textColorLink="#FF0066CC" />
+         android:textColor="#888" />
     <ImageView 
         android:id="@+id/miniTwitter_logo"
         android:src="@drawable/emo_im_cool"
