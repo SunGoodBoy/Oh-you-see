@@ -14,6 +14,8 @@
     <string name="nickname">昵称</string>
     <string name="realname">真实姓名</string>
     <string name="gender">性别</string>
+    <string name="male">男</string>
+    <string name="female">女</string>
     <string name="password">密码</string>
     <string name="password_confirm">确认密码</string>
     <string name="grade">年级</string>
