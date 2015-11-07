@@ -29,6 +29,11 @@
         <activity 
             android:name="com.duang.easyecard.Activity.SignupActivity">
         </activity>
+        
+        <activity
+            android:name="com.duang.easyecard.db.MyDatabaseHelper">
+            
+        </activity>
     </application>
 
 </manifest>

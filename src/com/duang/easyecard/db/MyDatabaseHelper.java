@@ -8,19 +8,20 @@ import android.widget.Toast;
 
 public class MyDatabaseHelper extends SQLiteOpenHelper {
 	
-	public static final String CREATE_BASIC_INFO = "create table Basic_Info ("
-			+ "stu_id char(11) primary key not null, "
-			+ "password text, "
+	public static final String CREATE_BASICINFO = "create table BasicInfo ("
+			+ "stu_id text primary key not null, "
+			+ "password text not null, "
 			+ "nick_name text, "
 			+ "real_name text, "
 			+ "gender integer, "
+			+ "grade integer, "
 			+ "college text, "
 			+ "department text, "
 			+ "email text, "
 			+ "contact text, "
-			+ "lost_flag integer not null, "
-			+ "found_flag integer not null, "
-			+ "found_id char(11) not null)";
+			+ "lost_flag integer, "
+			+ "found_flag integer, "
+			+ "found_id text)";
 	
 	private Context mContext;
 	
@@ -32,8 +33,8 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 	
 	@Override
 	public void onCreate(SQLiteDatabase db)	{
-		db.execSQL(CREATE_BASIC_INFO);
-		Toast.makeText(mContext, "Create succeeded", Toast.LENGTH_SHORT).show();
+		db.execSQL(CREATE_BASICINFO);
+		Toast.makeText(mContext, "×¢²á³É¹¦", Toast.LENGTH_SHORT).show();
 	}
 	
 	@Override
