@@ -10,7 +10,6 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.text.method.HideReturnsTransformationMethod;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -99,6 +98,9 @@ public class SignupActivity extends Activity{
 						if (password.length() <= 16)	{
 							if (password.equals(password_confirm))	{
 								writeDataToDb();
+								Toast.makeText(SignupActivity.this, "注册成功！", Toast.LENGTH_SHORT).show();
+								//销毁SignupActivity，跳转至登录界面
+								finish();
 							}
 							else	{
 								Toast.makeText(SignupActivity.this, "两次密码输入不一致\n请重新输入", Toast.LENGTH_SHORT).show();

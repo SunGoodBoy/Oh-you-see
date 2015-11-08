@@ -34,7 +34,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db)	{
 		db.execSQL(CREATE_BASICINFO);
-		Toast.makeText(mContext, "注册成功", Toast.LENGTH_SHORT).show();
+		Toast.makeText(mContext, "已成功建立数据库", Toast.LENGTH_SHORT).show();
 	}
 	
 	@Override

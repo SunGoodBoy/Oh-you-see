@@ -6,6 +6,7 @@ import com.duang.easyecard.R.layout;
 import com.duang.easyecard.db.MyDatabaseHelper;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -38,6 +39,9 @@ public class LoginActivity extends Activity {
         mUsername = (EditText) findViewById(R.id.username_edit);
     	mPassword = (EditText) findViewById(R.id.password_edit); 
     	
+    	//创建或打开数据库
+    	dbHelper = new MyDatabaseHelper(this, "EcardInfo.db", null, 1);
+    	
     	//登录按钮的点击事件
     	signin_button.setOnClickListener(new OnClickListener() {
 			
@@ -65,14 +69,16 @@ public class LoginActivity extends Activity {
 		String username = mUsername.getText().toString();
 		String password = mPassword.getText().toString();
 		
+		
 		if (!username.isEmpty())	{
 			if (wasSigned(username))	{
 				if (!password.isEmpty())	{
 					if (passwordIsRight(username, password))	{
 						//跳转到程序功能界面，结束LoginActivity
-						
+						Toast.makeText(LoginActivity.this, "登录成功！", Toast.LENGTH_SHORT).show();
 					}	else	{
 						Toast.makeText(LoginActivity.this, "密码错误", Toast.LENGTH_SHORT).show();
+						mPassword.setText("");
 					}
 				}	else	{
 					Toast.makeText(LoginActivity.this, "请输入密码", Toast.LENGTH_SHORT).show();
@@ -87,7 +93,7 @@ public class LoginActivity extends Activity {
 	}
 	
 	//判断密码是否正确
-	private boolean passwordIsRight(String username, String password)	{
+	protected boolean passwordIsRight(String username, String password)	{
 		SQLiteDatabase db = dbHelper.getWritableDatabase();
 		Cursor cursor = db.query("BasicInfo", null, null, null, null, null, null);
 		if (cursor.moveToFirst())	{
@@ -108,9 +114,9 @@ public class LoginActivity extends Activity {
     }
 	
 	//判断帐号是否已经注册
-	private boolean wasSigned(String stu_id_input) {
+	protected boolean wasSigned(String stu_id_input) {
 		// TODO Auto-generated method stub
-		SQLiteDatabase db = dbHelper.getWritableDatabase();
+		SQLiteDatabase db = dbHelper.getReadableDatabase();
 		Cursor cursor = db.query("BasicInfo", null, null, null, null, null, null);
 		if (cursor.moveToFirst())	{
 			do	{
