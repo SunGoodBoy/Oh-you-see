@@ -76,57 +76,86 @@ containing a value of this type.
         public static final int ic_menu_home=0x7f020015;
         public static final int ic_menu_search=0x7f020016;
         public static final int tab_bg=0x7f020017;
+        public static final int xlistview_arrow=0x7f020018;
     }
     public static final class id {
-        public static final int action_add_friend=0x7f080022;
-        public static final int action_feedback=0x7f080024;
-        public static final int action_group_chat=0x7f080021;
-        public static final int action_scan=0x7f080023;
-        public static final int action_search=0x7f080020;
-        public static final int cancel_signup=0x7f08001e;
-        public static final int college=0x7f080018;
-        public static final int college_edit=0x7f080019;
-        public static final int contact=0x7f08001c;
-        public static final int contact_edit=0x7f08001d;
-        public static final int email=0x7f08001a;
-        public static final int email_edit=0x7f08001b;
-        public static final int forget_password=0x7f080007;
-        public static final int gender=0x7f080012;
-        public static final int gender_radioGroup=0x7f080013;
-        public static final int grade=0x7f080016;
-        public static final int grade_edit=0x7f080017;
-        public static final int login_div=0x7f080000;
-        public static final int login_password_input=0x7f080003;
-        public static final int login_signup_button=0x7f080006;
-        public static final int login_user_input=0x7f080001;
-        public static final int miniTwitter_logo=0x7f080008;
-        public static final int nickname=0x7f08000e;
-        public static final int nickname_edit=0x7f08000f;
-        public static final int password=0x7f08000b;
-        public static final int password_confirm=0x7f08000c;
-        public static final int password_confirm_edit=0x7f08000d;
-        public static final int password_edit=0x7f080004;
-        public static final int radioFemale=0x7f080015;
-        public static final int radioMale=0x7f080014;
-        public static final int realname=0x7f080010;
-        public static final int realname_edit=0x7f080011;
-        public static final int signin_button=0x7f080005;
-        public static final int signup_button=0x7f08001f;
-        public static final int stu_id=0x7f080009;
-        public static final int stu_id_edit=0x7f08000a;
-        public static final int username_edit=0x7f080002;
+        public static final int action_add_found_info=0x7f080035;
+        public static final int action_add_lost_info=0x7f080034;
+        public static final int action_exit=0x7f080037;
+        public static final int action_feedback=0x7f080036;
+        public static final int action_search=0x7f080033;
+        public static final int cancel_signup=0x7f080028;
+        public static final int college=0x7f080022;
+        public static final int college_edit=0x7f080023;
+        public static final int contact=0x7f080026;
+        public static final int contact_edit=0x7f080027;
+        public static final int email=0x7f080024;
+        public static final int email_edit=0x7f080025;
+        public static final int forget_password=0x7f080011;
+        public static final int gender=0x7f08001c;
+        public static final int gender_radioGroup=0x7f08001d;
+        public static final int grade=0x7f080020;
+        public static final int grade_edit=0x7f080021;
+        public static final int id_indicator_four=0x7f080004;
+        public static final int id_indicator_one=0x7f080001;
+        public static final int id_indicator_three=0x7f080003;
+        public static final int id_indicator_two=0x7f080002;
+        public static final int list_user_img=0x7f080007;
+        public static final int list_user_name=0x7f080009;
+        public static final int list_user_stu_id=0x7f080008;
+        public static final int login_div=0x7f08000a;
+        public static final int login_password_input=0x7f08000d;
+        public static final int login_signup_button=0x7f080010;
+        public static final int login_user_input=0x7f08000b;
+        public static final int miniTwitter_logo=0x7f080012;
+        public static final int nickname=0x7f080018;
+        public static final int nickname_edit=0x7f080019;
+        public static final int password=0x7f080015;
+        public static final int password_confirm=0x7f080016;
+        public static final int password_confirm_edit=0x7f080017;
+        public static final int password_edit=0x7f08000e;
+        public static final int radioFemale=0x7f08001f;
+        public static final int radioMale=0x7f08001e;
+        public static final int realname=0x7f08001a;
+        public static final int realname_edit=0x7f08001b;
+        public static final int signin_button=0x7f08000f;
+        public static final int signup_button=0x7f080029;
+        public static final int stu_id=0x7f080013;
+        public static final int stu_id_edit=0x7f080014;
+        public static final int textView1=0x7f080005;
+        public static final int username_edit=0x7f08000c;
+        public static final int view_pager=0x7f080000;
+        public static final int xListView=0x7f080006;
+        public static final int xlistview_footer_content=0x7f08002a;
+        public static final int xlistview_footer_hint_textview=0x7f08002c;
+        public static final int xlistview_footer_progressbar=0x7f08002b;
+        public static final int xlistview_header_arrow=0x7f080031;
+        public static final int xlistview_header_content=0x7f08002d;
+        public static final int xlistview_header_hint_textview=0x7f08002f;
+        public static final int xlistview_header_progressbar=0x7f080032;
+        public static final int xlistview_header_text=0x7f08002e;
+        public static final int xlistview_header_time=0x7f080030;
     }
     public static final class layout {
-        public static final int activity_start=0x7f030000;
-        public static final int login=0x7f030001;
-        public static final int signup=0x7f030002;
+        public static final int activity_main=0x7f030000;
+        public static final int activity_start=0x7f030001;
+        public static final int first=0x7f030002;
+        public static final int fourth=0x7f030003;
+        public static final int list_item=0x7f030004;
+        public static final int login=0x7f030005;
+        public static final int second=0x7f030006;
+        public static final int signup=0x7f030007;
+        public static final int third=0x7f030008;
+        public static final int xlistview_footer=0x7f030009;
+        public static final int xlistview_header=0x7f03000a;
     }
     public static final class menu {
         public static final int main=0x7f070000;
     }
     public static final class string {
-        public static final int action_add=0x7f050016;
-        public static final int action_search=0x7f050015;
+        /**  Menu 
+         */
+        public static final int action_search=0x7f05001f;
         public static final int app_name=0x7f050000;
         public static final int cancel_signup_button=0x7f050014;
         public static final int college=0x7f050010;
@@ -142,19 +171,28 @@ containing a value of this type.
         public static final int login_label_username=0x7f050001;
         public static final int login_username_hint=0x7f050002;
         public static final int male=0x7f05000b;
-        public static final int menu_addfriend=0x7f050019;
-        public static final int menu_feedback=0x7f050018;
-        public static final int menu_group_chat=0x7f050017;
-        public static final int menu_scan=0x7f05001a;
+        public static final int menu_add_found_info=0x7f050021;
+        public static final int menu_add_lost_info=0x7f050020;
+        public static final int menu_exit=0x7f050023;
+        public static final int menu_feedback=0x7f050022;
         public static final int nickname=0x7f050008;
         public static final int password=0x7f05000d;
         public static final int password_confirm=0x7f05000e;
         public static final int realname=0x7f050009;
         public static final int signup_button=0x7f050013;
         public static final int stu_id=0x7f050007;
-        public static final int tab_found=0x7f05001c;
-        public static final int tab_lost=0x7f05001b;
-        public static final int tab_me=0x7f05001d;
+        public static final int tab_campus=0x7f05001d;
+        public static final int tab_foundcard=0x7f05001c;
+        /**  Tab 
+         */
+        public static final int tab_lostcard=0x7f05001b;
+        public static final int tab_me=0x7f05001e;
+        public static final int xlistview_footer_hint_normal=0x7f050019;
+        public static final int xlistview_footer_hint_ready=0x7f05001a;
+        public static final int xlistview_header_hint_loading=0x7f050017;
+        public static final int xlistview_header_hint_normal=0x7f050015;
+        public static final int xlistview_header_hint_ready=0x7f050016;
+        public static final int xlistview_header_last_time=0x7f050018;
     }
     public static final class style {
         /** 

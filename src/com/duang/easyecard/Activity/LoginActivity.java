@@ -76,6 +76,10 @@ public class LoginActivity extends Activity {
 					if (passwordIsRight(username, password))	{
 						//跳转到程序功能界面，结束LoginActivity
 						Toast.makeText(LoginActivity.this, "登录成功！", Toast.LENGTH_SHORT).show();
+						Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+						startActivity(intent);
+						finish();
+						
 					}	else	{
 						Toast.makeText(LoginActivity.this, "密码错误", Toast.LENGTH_SHORT).show();
 						mPassword.setText("");

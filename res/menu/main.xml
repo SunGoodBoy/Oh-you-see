@@ -3,20 +3,27 @@
     <item
         android:id="@+id/action_search"
         android:actionViewClass="android.widget.SearchView"
+        android:icon="@drawable/ic_launcher"
         android:showAsAction="ifRoom|collapseActionView"
         android:title="@string/action_search"/>
  
     <item
-        android:id="@+id/action_group_chat"
-        android:title="@string/menu_group_chat"/>
+        android:id="@+id/action_add_lost_info"
+        android:icon="@drawable/ic_launcher"
+        android:title="@string/menu_add_lost_info"/>
     <item
-        android:id="@+id/action_add_friend"
-        android:title="@string/menu_addfriend"/>
-    <item
-        android:id="@+id/action_scan"
-        android:title="@string/menu_scan"/>
+        android:id="@+id/action_add_found_info"
+        android:icon="@drawable/ic_launcher"
+        android:title="@string/menu_add_found_info"/>
+    
     <item
         android:id="@+id/action_feedback"
+        android:icon="@drawable/ic_launcher"
         android:title="@string/menu_feedback"/>
+    
+    <item
+        android:id="@+id/action_exit"
+        android:icon="@drawable/ic_launcher"
+        android:title="@string/menu_exit"/>
 
 </menu>
