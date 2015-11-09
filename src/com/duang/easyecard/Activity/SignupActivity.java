@@ -1,8 +1,6 @@
 package com.duang.easyecard.Activity;
 
 import com.duang.easyecard.R;
-import com.duang.easyecard.R.id;
-import com.duang.easyecard.R.layout;
 import com.duang.easyecard.db.MyDatabaseHelper;
 
 import android.app.Activity;
@@ -115,6 +113,7 @@ public class SignupActivity extends Activity{
 										// TODO Auto-generated method stub
 										Intent intent = new Intent(SignupActivity.this, MainActivity.class);
 										startActivity(intent);
+										finish();
 									}
 								});
 								dialog.setNegativeButton("·ñ", new DialogInterface.OnClickListener() {
