@@ -40,7 +40,7 @@ public class LoginActivity extends Activity {
     	mPassword = (EditText) findViewById(R.id.password_edit); 
     	
     	//创建或打开数据库
-    	dbHelper = new MyDatabaseHelper(this, "EcardInfo.db", null, 1);
+    	dbHelper = new MyDatabaseHelper(this, "EasyEcard.db", null, 1);
     	
     	//登录按钮的点击事件
     	signin_button.setOnClickListener(new OnClickListener() {

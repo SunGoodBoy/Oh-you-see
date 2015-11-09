@@ -6,7 +6,10 @@ import com.duang.easyecard.R.layout;
 import com.duang.easyecard.db.MyDatabaseHelper;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.ContentValues;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -59,7 +62,7 @@ public class SignupActivity extends Activity{
 		mCancel_signup_button = (Button) findViewById(R.id.cancel_signup);
 
 		//创建数据库
-		dbHelper = new MyDatabaseHelper(this, "EcardInfo.db", null, 1);
+		dbHelper = new MyDatabaseHelper(this, "EasyEcard.db", null, 1);
 		
 		//注册按钮的点击事件
 		mSignup_button.setOnClickListener(new OnClickListener() {
@@ -99,8 +102,32 @@ public class SignupActivity extends Activity{
 							if (password.equals(password_confirm))	{
 								writeDataToDb();
 								Toast.makeText(SignupActivity.this, "注册成功！", Toast.LENGTH_SHORT).show();
-								//销毁SignupActivity，跳转至登录界面
-								finish();
+								
+								//通过AlertDialog询问是否直接登录
+								AlertDialog.Builder dialog = new AlertDialog.Builder(SignupActivity.this);
+								dialog.setTitle("注册成功！");
+								dialog.setMessage("您已经成功注册，是否直接登录？");
+								dialog.setCancelable(false);
+								dialog.setPositiveButton("是", new DialogInterface.OnClickListener() {
+									
+									@Override
+									public void onClick(DialogInterface dialog, int which) {
+										// TODO Auto-generated method stub
+										Intent intent = new Intent(SignupActivity.this, MainActivity.class);
+										startActivity(intent);
+									}
+								});
+								dialog.setNegativeButton("否", new DialogInterface.OnClickListener() {
+									
+									@Override
+									public void onClick(DialogInterface dialog, int which) {
+										// TODO Auto-generated method stub
+										//销毁SignupActivity，跳转至登录界面
+										finish();
+									}
+								});
+								dialog.show();
+								
 							}
 							else	{
 								Toast.makeText(SignupActivity.this, "两次密码输入不一致\n请重新输入", Toast.LENGTH_SHORT).show();
