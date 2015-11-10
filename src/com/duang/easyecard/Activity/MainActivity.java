@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.duang.easyecard.R;
 import com.duang.easyecard.util.ChangeColorIconWithText;
+import com.duang.easyecard.util.PagerAdapter;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

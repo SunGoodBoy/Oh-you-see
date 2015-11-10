@@ -23,6 +23,14 @@
         </activity>
         
         <activity
+            android:name=".Activity.BaseActivity">
+        </activity>
+        
+        <activity
+            android:name=".Activity.ActivityCollector">
+        </activity>
+        
+        <activity
             android:name=".Activity.MainActivity">
         </activity>
         
