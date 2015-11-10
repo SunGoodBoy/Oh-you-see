@@ -9,12 +9,12 @@ import com.duang.easyecard.R;
 import com.duang.easyecard.util.ChangeColorIconWithText;
 import com.duang.easyecard.util.PagerAdapter;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -130,8 +130,28 @@ OnPageChangeListener{
 			//跳转到意见反馈
 			break;
 		case R.id.action_exit:
-			//退出应用程序
-			ActivityCollector.finishAll();
+			//通过AlertDialog询问是否要退出应用程序
+			AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+			dialog.setTitle("提示");
+			dialog.setMessage("退出应用？");
+			dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					// TODO Auto-generated method stub
+					ActivityCollector.finishAll();
+				}
+			});
+			dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
+			dialog.show();
+			
 			break;
 		}
 		return true;
@@ -181,6 +201,38 @@ OnPageChangeListener{
 	}
 
 	
+	//监听Back按钮的点击
+	public boolean onKeyDown(int keyCode, KeyEvent event)	{
+		if (keyCode == KeyEvent.KEYCODE_BACK)	{
+			//通过AlertDialog询问是否要退出应用程序
+			AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+			dialog.setTitle("提示");
+			dialog.setMessage("退出应用？");
+			dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					// TODO Auto-generated method stub
+					ActivityCollector.finishAll();
+				}
+			});
+			dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
+			dialog.show();
+			
+			return false;
+		}
+		
+		return false;
+	}
+	
+	
 	//点击事件
 	@Override
 	public void onClick(View v)
@@ -190,7 +242,7 @@ OnPageChangeListener{
 	}
 
 	/**
-	 * 点击Tab按钮
+	 * 监听Tab按钮点击
 	 * 
 	 * @param v
 	 */

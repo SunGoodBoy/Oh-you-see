@@ -3,7 +3,6 @@ package com.duang.easyecard.Activity;
 import com.duang.easyecard.R;
 import com.duang.easyecard.db.MyDatabaseHelper;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;

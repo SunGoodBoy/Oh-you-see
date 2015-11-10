@@ -18,4 +18,5 @@ public class BaseActivity extends Activity{
 		super.onDestroy();
 		ActivityCollector.removeActivity(this);
 	}
+	
 }

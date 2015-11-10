@@ -19,4 +19,5 @@ public class BaseFragmentActivity extends FragmentActivity	{
 		super.onDestroy();
 		ActivityCollector.removeActivity(this);
 	}
+	
 }
