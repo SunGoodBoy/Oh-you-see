@@ -16,12 +16,13 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.Window;
 import android.view.View.OnClickListener;
 
-public class MainActivity extends FragmentActivity implements OnClickListener,
+public class MainActivity extends BaseFragmentActivity implements OnClickListener,
 OnPageChangeListener{
 
 	private ViewPager mViewPager;
@@ -116,6 +117,27 @@ OnPageChangeListener{
 		return true;
 	}
 	
+	//设置菜单按钮的点击事件
+	public boolean onMenuItemSelected(int featureId, MenuItem item)	{
+		switch (item.getItemId())	{
+		case R.id.action_add_lost_info:
+			//跳转到添加丢失信息
+			break;
+		case R.id.action_add_found_info:
+			//跳转到添加拾获信息
+			break;
+		case R.id.action_feedback:
+			//跳转到意见反馈
+			break;
+		case R.id.action_exit:
+			//退出应用程序
+			ActivityCollector.finishAll();
+			break;
+		}
+		return true;
+	}
+	
+	
 	private void setOverflowButtonAlways()
 	{
 		try
@@ -158,6 +180,8 @@ OnPageChangeListener{
 		return super.onMenuOpened(featureId, menu);
 	}
 
+	
+	//点击事件
 	@Override
 	public void onClick(View v)
 	{
