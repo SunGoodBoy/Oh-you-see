@@ -11,6 +11,7 @@
     <string name="forget_password">忘记密码？ </string>
 
     <string name="stu_id">学号</string>
+    <string name="name">姓名</string>
     <string name="nickname">昵称</string>
     <string name="realname">真实姓名</string>
     <string name="gender">性别</string>
@@ -22,8 +23,14 @@
     <string name="college">学院</string>
     <string name="email">邮箱</string>
     <string name="contact">联系方式</string>
-    <string name="signup_button">注册</string>
-    <string name="cancel_signup_button">取消</string>
+    <string name="signup">注册</string>
+    <string name="cancel">取消</string>
+    
+    <string name="lost_time">丢失时间</string>
+    <string name="lost_date">丢失日期</string>
+    <string name="lost_place">丢失地点</string>
+    <string name="submit">提交</string>
+    <string name="decription">描述</string>
     
     <string name="xlistview_header_hint_normal">下拉刷新</string>
     <string name="xlistview_header_hint_ready">松开刷新数据</string>
@@ -33,15 +40,15 @@
     <string name="xlistview_footer_hint_ready">松开载入更多</string>
     
     <!-- Tab -->
-    <string name="tab_lostcard">丢卡</string>
-    <string name="tab_foundcard">拾卡</string>
+    <string name="tab_lost">丢失</string>
+    <string name="tab_found">拾获</string>
     <string name="tab_campus">校园</string>
     <string name="tab_me">我</string>
     
     <!-- Menu -->
     <string name="action_search">搜索</string>
-    <string name="menu_add_lost_info">添加丢卡信息</string>
-    <string name="menu_add_found_info">添加拾卡信息</string>
+    <string name="menu_add_lost_info">添加丢失信息</string>
+    <string name="menu_add_found_info">添加拾获信息</string>
     <string name="menu_feedback">意见反馈</string>
     <string name="menu_exit">退出应用</string>
 

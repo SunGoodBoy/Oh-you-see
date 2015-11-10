@@ -17,14 +17,14 @@
 	    <!-- 学号 -->
 	    <TableRow>
 	        <TextView 
-		        android:id="@+id/stu_id"
+		        android:id="@+id/signup_stu_id"
 		        android:layout_width="0dp"
 		        android:layout_height="wrap_content"
 		        android:layout_weight="2"
 		        android:gravity="center"
 		        android:text="@string/stu_id"/>
 		    <EditText 
-		        android:id="@+id/stu_id_edit"
+		        android:id="@+id/signup_stu_id_edit"
 		        android:layout_width="match_parent"
 		        android:layout_height="wrap_content"
 		        android:layout_weight="5"
@@ -35,14 +35,14 @@
 	    <!-- 密码 -->
 	    <TableRow>
 	        <TextView 
-		        android:id="@+id/password"
+		        android:id="@+id/signup_password"
 		        android:layout_width="0dp"
 		        android:layout_height="wrap_content"
 		        android:layout_weight="2"
 		        android:gravity="center"
 		        android:text="@string/password"/>
 		    <EditText 
-		        android:id="@+id/password_edit"
+		        android:id="@+id/signup_password_edit"
 		        android:layout_width="match_parent"
 		        android:layout_height="wrap_content"
 		        android:layout_weight="5"
@@ -54,14 +54,14 @@
 	    <!-- 密码确认 -->
 	    <TableRow>
 	        <TextView 
-			    android:id="@+id/password_confirm"
+			    android:id="@+id/signup_password_confirm"
 			    android:layout_width="0dp"
 		        android:layout_height="wrap_content"
 		        android:layout_weight="2"
 		        android:gravity="center"
 			    android:text="@string/password_confirm"/>
 			<EditText 
-			    android:id="@+id/password_confirm_edit"
+			    android:id="@+id/signup_password_confirm_edit"
 			    android:layout_width="match_parent"
 			    android:layout_height="wrap_content"
 			    android:layout_weight="5"
@@ -74,14 +74,14 @@
 	    <TableRow>
 	   
 	        <TextView 
-		        android:id="@+id/nickname"
+		        android:id="@+id/signup_nickname"
 		        android:layout_width="0dp"
 		        android:layout_height="wrap_content"
 		        android:layout_weight="2"
 		        android:gravity="center"
 		        android:text="@string/nickname"/>
 	    	<EditText 
-		        android:id="@+id/nickname_edit"
+		        android:id="@+id/signup_nickname_edit"
 		        android:layout_width="match_parent"
 		        android:layout_height="wrap_content"
 		        android:layout_weight="5"
@@ -93,14 +93,14 @@
 	    <TableRow>
 	   
 	        <TextView 
-		        android:id="@+id/realname"
+		        android:id="@+id/signup_realname"
 		        android:layout_width="0dp"
 		        android:layout_height="wrap_content"
 		        android:layout_weight="2"
 		        android:gravity="center"
 		        android:text="@string/realname"/>
 	    	<EditText 
-		        android:id="@+id/realname_edit"
+		        android:id="@+id/signup_realname_edit"
 		        android:layout_width="match_parent"
 		        android:layout_height="wrap_content"
 		        android:singleLine="true"
@@ -112,7 +112,7 @@
 	    <TableRow> 
 	    	
 	        <TextView 
-		        android:id="@+id/gender"
+		        android:id="@+id/signup_gender"
 		        android:layout_width="0dp"
 		        android:layout_height="wrap_content"
 		        android:layout_weight="2"
@@ -121,7 +121,7 @@
 		        android:text="@string/gender"/>
 	        
 	        <RadioGroup 
-	            android:id="@+id/gender_radioGroup"
+	            android:id="@+id/signup_gender_radioGroup"
 	            android:contentDescription="性别"
 	            android:layout_width="0dp"
 	            android:layout_height="wrap_content"
@@ -134,7 +134,7 @@
 					android:layout_height="wrap_content" 
 					android:layout_weight="1"
 					android:gravity="center"
-					android:id="@+id/radioMale" 
+					android:id="@+id/signup_radioMale" 
 					android:text="@string/male"
 					android:checked="true">
 				</RadioButton>
@@ -144,7 +144,7 @@
 					android:layout_height="wrap_content" 
 					android:layout_weight="1" 
 					android:gravity="center"
-					android:id="@+id/radioFemale" 
+					android:id="@+id/signup_radioFemale" 
 					android:text="@string/female">
 				</RadioButton>
 	
@@ -154,14 +154,14 @@
 		<!-- 年级  自动填充-->
 		<TableRow>
 	        <TextView 
-			    android:id="@+id/grade"
+			    android:id="@+id/signup_grade"
 			    android:layout_width="0dp"
 		        android:layout_height="wrap_content"
 		        android:layout_weight="2"
 		        android:gravity="center"
 			    android:text="@string/grade"/>
 			<EditText 
-			    android:id="@+id/grade_edit"
+			    android:id="@+id/signup_grade_edit"
 			    android:layout_width="match_parent"
 			    android:layout_height="wrap_content"
 			    android:layout_weight="5"
@@ -173,14 +173,14 @@
 		<!-- 学院  自动填充-->
 		<TableRow>
 	        <TextView 
-			    android:id="@+id/college"
+			    android:id="@+id/signup_college"
 			    android:layout_width="0dp"
 		        android:layout_height="wrap_content"
 		        android:layout_weight="2"
 		        android:gravity="center"
 			    android:text="@string/college"/>
 			<EditText 
-			    android:id="@+id/college_edit"
+			    android:id="@+id/signup_college_edit"
 			    android:layout_width="match_parent"
 			    android:layout_height="wrap_content"
 			    android:layout_weight="5"
@@ -192,14 +192,14 @@
 		<!-- 邮箱 -->
 		<TableRow>
 	        <TextView 
-			    android:id="@+id/email"
+			    android:id="@+id/signup_email"
 			    android:layout_width="0dp"
 		        android:layout_height="wrap_content"
 		        android:layout_weight="2"
 		        android:gravity="center"
 			    android:text="@string/email"/>
 			<EditText 
-			    android:id="@+id/email_edit"
+			    android:id="@+id/signup_email_edit"
 			    android:layout_width="match_parent"
 			    android:layout_height="wrap_content"
 			    android:layout_weight="5"
@@ -212,14 +212,14 @@
 		<TableRow>
 	        
 		    <TextView 
-			    android:id="@+id/contact"
+			    android:id="@+id/signup_contact"
 			    android:layout_width="0dp"
 		        android:layout_height="wrap_content"
 		        android:layout_weight="2"
 		        android:gravity="center"
 			    android:text="@string/contact"/>
 			<EditText 
-			    android:id="@+id/contact_edit"
+			    android:id="@+id/signup_contact_edit"
 			    android:layout_width="match_parent"
 			    android:layout_height="wrap_content"
 			    android:layout_weight="5"
@@ -230,12 +230,12 @@
 		<TableRow>
 		    <!-- 取消button -->
 			<Button
-			    android:id="@+id/cancel_signup"
+			    android:id="@+id/signup_cancel"
 			    android:layout_width="0dp"
 		        android:layout_height="wrap_content"
 		        android:layout_weight="2"
 		        android:gravity="center"
-			    android:text="@string/cancel_signup_button"/>
+			    android:text="@string/cancel"/>
 			    />
 	
 			<!-- 注册button -->
@@ -245,7 +245,7 @@
 			    android:layout_height="wrap_content"
 			    android:layout_weight="2"
 			    android:gravity="center"
-			    android:text="@string/signup_button"/>
+			    android:text="@string/signup"/>
 			
 		</TableRow>
 		

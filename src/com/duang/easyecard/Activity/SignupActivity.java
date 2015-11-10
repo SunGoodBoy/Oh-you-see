@@ -45,18 +45,18 @@ public class SignupActivity extends BaseActivity {
 		setContentView(R.layout.signup);
 		
 		//初始化控件对应的变量
-		mStu_id = (EditText) findViewById(R.id.stu_id_edit);
-		mPassword = (EditText) findViewById(R.id.password_edit);
-		mPassword_confirm = (EditText) findViewById(R.id.password_confirm_edit);
-		mNickname = (EditText) findViewById(R.id.nickname_edit);
-		mRealname = (EditText) findViewById(R.id.realname_edit);
-		mGrade = (EditText) findViewById(R.id.grade_edit);
-		mCollege = (EditText) findViewById(R.id.college_edit);
-		mEmail = (EditText) findViewById(R.id.email_edit);
-		mContact = (EditText) findViewById(R.id.contact_edit);
-		mRadioMale = (RadioButton) findViewById(R.id.radioMale);
+		mStu_id = (EditText) findViewById(R.id.signup_stu_id_edit);
+		mPassword = (EditText) findViewById(R.id.signup_password_edit);
+		mPassword_confirm = (EditText) findViewById(R.id.signup_password_confirm_edit);
+		mNickname = (EditText) findViewById(R.id.signup_nickname_edit);
+		mRealname = (EditText) findViewById(R.id.signup_realname_edit);
+		mGrade = (EditText) findViewById(R.id.signup_grade_edit);
+		mCollege = (EditText) findViewById(R.id.signup_college_edit);
+		mEmail = (EditText) findViewById(R.id.signup_email_edit);
+		mContact = (EditText) findViewById(R.id.signup_contact_edit);
+		mRadioMale = (RadioButton) findViewById(R.id.signup_radioMale);
 		mSignup_button = (Button) findViewById(R.id.signup_button);
-		mCancel_signup_button = (Button) findViewById(R.id.cancel_signup);
+		mCancel_signup_button = (Button) findViewById(R.id.signup_cancel);
 
 		//创建数据库
 		dbHelper = new MyDatabaseHelper(this, "EasyEcard.db", null, 1);

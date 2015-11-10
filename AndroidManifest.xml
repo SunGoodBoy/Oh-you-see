@@ -42,6 +42,11 @@
             android:name=".Activity.SignupActivity">
         </activity>
         
+        <activity 
+            android:name=".Activity.AddLostEventActivity">
+            
+        </activity>
+        
         <activity
             android:name=".db.MyDatabaseHelper">
         </activity>

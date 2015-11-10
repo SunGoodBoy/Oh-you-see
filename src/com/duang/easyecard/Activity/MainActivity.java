@@ -11,6 +11,7 @@ import com.duang.easyecard.util.PagerAdapter;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
@@ -122,6 +123,8 @@ OnPageChangeListener{
 		switch (item.getItemId())	{
 		case R.id.action_add_lost_info:
 			//跳转到添加丢失信息
+			Intent intent = new Intent(MainActivity.this, AddLostEventActivity.class);
+			startActivity(intent);
 			break;
 		case R.id.action_add_found_info:
 			//跳转到添加拾获信息

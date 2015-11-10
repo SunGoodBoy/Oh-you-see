@@ -27,7 +27,7 @@
             android:layout_weight="1"
             android:padding="5dp"
             hyman:icon="@drawable/ic_launcher"
-            hyman:text="@string/tab_lostcard"
+            hyman:text="@string/tab_lost"
             hyman:text_size="12sp"
             hyman:color="#ff45c01a" />
 
@@ -38,7 +38,7 @@
             android:layout_weight="1"
             android:padding="5dp"
             hyman:icon="@drawable/ic_launcher"
-            hyman:text="@string/tab_foundcard"
+            hyman:text="@string/tab_found"
             hyman:text_size="12sp"
             hyman:color="#ff45c01a" />
 
