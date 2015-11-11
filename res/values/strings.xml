@@ -26,6 +26,7 @@
     <string name="signup">注册</string>
     <string name="cancel">取消</string>
     
+    <string name="add_lost_event">添加丢失信息</string>
     <string name="set_lost_time">设置丢失时间</string>
     <string name="set_lost_date">设置丢失日期</string>
     <string name="lost_place">丢失地点</string>
