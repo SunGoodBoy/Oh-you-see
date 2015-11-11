@@ -31,10 +31,12 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 			+ "founder_stu_id text, "
 			+ "founder_name text, "
 			+ "founder_contact text, "
-			+ "lost_date DATE, "
+			+ "lost_date text, "
+			+ "lost_time text, "
 			+ "lost_place text, "
+			+ "description, "
 			+ "duration text, "
-			+ "due_date DATE, "
+			+ "due_date text, "
 			+ "found_flag bool, "
 			+ "close_flag bool)";
 	

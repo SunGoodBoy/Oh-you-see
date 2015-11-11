@@ -11,7 +11,7 @@
     
     <!-- 分割线 -->
 	<View android:layout_width="fill_parent" 
-	    android:layout_height="5dp" 
+	    android:layout_height="3dp" 
 	    android:background="#90909090" 
 	    android:layout_marginBottom="5dp" 
 	    android:layout_marginTop="5dp"/>
@@ -27,7 +27,7 @@
         android:textSize="20sp"/>"
     <!-- 分割线 -->
 	<View android:layout_width="fill_parent" 
-	    android:layout_height="5dp" 
+	    android:layout_height="3dp" 
 	    android:background="#90909090" 
 	    android:layout_marginBottom="5dp" 
 	    android:layout_marginTop="5dp"/>
@@ -102,7 +102,7 @@
 		        android:gravity="center"
 			    android:text="@string/contact"/>
 			<EditText 
-			    android:id="@+id/contact_edit"
+			    android:id="@+id/add_event_contact_edit"
 			    android:layout_width="0dp"
 			    android:layout_height="wrap_content"
 			    android:layout_weight="5"
@@ -128,6 +128,7 @@
 			    android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
 		        android:layout_gravity="left"
+		        android:paddingLeft="15dp"
 		        android:gravity="bottom"
 			    android:text="@string/set_lost_date"/>
            <DatePicker
@@ -154,6 +155,7 @@
 			    android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
 		        android:layout_gravity="left"
+		        android:paddingLeft="15dp"
 		        android:gravity="bottom"
 			    android:text="@string/set_lost_time"/>
         	<TimePicker 

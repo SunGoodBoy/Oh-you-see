@@ -20,6 +20,16 @@ public class ActivityCollector {
 		activities.remove(activity);
 	}
 	
+	
+	//ºÊ»›FragmentActivity
+	public static void addActivity(FragmentActivity fragmentActivity)	{
+		activities.add(fragmentActivity);
+	}
+	
+	public static void removeActivity(FragmentActivity fragmentActivity)	{
+		activities.remove(fragmentActivity);
+	}
+	
 	public static void finishAll()	{
 		for (Activity activity : activities)	{
 			if (!activity.isFinishing())	{
@@ -36,14 +46,7 @@ public class ActivityCollector {
 	}
 	
 	
-	//ºÊ»›FragmentActivity
-	public static void addActivity(FragmentActivity fragmentActivity)	{
-		activities.add(fragmentActivity);
-	}
-	
-	public static void removeActivity(FragmentActivity fragmentActivity)	{
-		activities.remove(fragmentActivity);
-	}
+
 	
 
 }
