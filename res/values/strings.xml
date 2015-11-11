@@ -26,11 +26,11 @@
     <string name="signup">注册</string>
     <string name="cancel">取消</string>
     
-    <string name="lost_time">丢失时间</string>
-    <string name="lost_date">丢失日期</string>
+    <string name="set_lost_time">设置丢失时间</string>
+    <string name="set_lost_date">设置丢失日期</string>
     <string name="lost_place">丢失地点</string>
     <string name="submit">提交</string>
-    <string name="decription">描述</string>
+    <string name="description">描述</string>
     
     <string name="xlistview_header_hint_normal">下拉刷新</string>
     <string name="xlistview_header_hint_ready">松开刷新数据</string>
