@@ -1,21 +1,25 @@
 package com.duang.easyecard.Activity;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import com.duang.easyecard.R;
 import com.duang.easyecard.db.MyDatabaseHelper;
 
-import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.text.format.Time;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.DatePicker.OnDateChangedListener;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.TimePicker;
+import android.widget.TimePicker.OnTimeChangedListener;
 import android.widget.Toast;
 
 public class AddLostEventActivity extends BaseActivity	{
@@ -31,8 +35,6 @@ public class AddLostEventActivity extends BaseActivity	{
 	
 	private DatePicker mDatePicker;
 	private TimePicker mTimePicker;
-	private Calendar mCalendar;
-	
 	private Button mSubmit_button;
 	private Button mCancel_button;
 	
@@ -52,6 +54,8 @@ public class AddLostEventActivity extends BaseActivity	{
 		
 		mSubmit_button = (Button) findViewById(R.id.add_event_submit);
 		mCancel_button = (Button) findViewById(R.id.add_event_cancel);
+		
+		mTimePicker.setIs24HourView(true);	//设置时钟为24小时制
 		
 		//打开或创建数据库
 		dbHelper = new MyDatabaseHelper(this, "EasyEcard.db", null, 1);
@@ -87,15 +91,21 @@ public class AddLostEventActivity extends BaseActivity	{
 		//判断学号是否为空
 		if (!stu_id.isEmpty())	{
 			if (stu_id.length() == 11)	{
-				if (!contact.isEmpty())	{
-					//将数据写入数据库
-					writeDataToDb();
-					finish();
-					Toast.makeText(AddLostEventActivity.this, "提交成功！", Toast.LENGTH_SHORT).show();
+				if (!name.isEmpty())	{
+					if (!contact.isEmpty())	{
+						//将数据写入数据库
+						writeDataToDb();
+						finish();
+						Toast.makeText(AddLostEventActivity.this, "提交成功！", Toast.LENGTH_SHORT).show();
+					}
+					else {
+						Toast.makeText(AddLostEventActivity.this, "必须填写联系方式！", Toast.LENGTH_SHORT).show();
+					}
 				}
-				else {
-					Toast.makeText(AddLostEventActivity.this, "必须填写联系方式！", Toast.LENGTH_SHORT).show();
+				else	{
+					Toast.makeText(AddLostEventActivity.this, "姓名不能为空！", Toast.LENGTH_SHORT).show();
 				}
+				
 			}
 			else {
 				Toast.makeText(AddLostEventActivity.this, "学号必须为11位！", Toast.LENGTH_SHORT).show();
@@ -108,22 +118,48 @@ public class AddLostEventActivity extends BaseActivity	{
 
 	//将数据写入数据库
 	private void writeDataToDb() {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub		
 		String stu_id = mStu_id.getText().toString();
 		String name = mName.getText().toString();
 		String contact = mContact.getText().toString();
 		String lost_place = mLost_place.getText().toString();
 		String descrption = mDescription.getText().toString();
 		
-		mCalendar = Calendar.getInstance();
-		int lost_year = mCalendar.get(Calendar.YEAR);
-		int lost_month = mCalendar.get(Calendar.MONTH);
-		int lost_day_of_month = mCalendar.get(Calendar.DAY_OF_MONTH);
-		int lost_hour = mCalendar.get(Calendar.HOUR);
-		int lost_minute = mCalendar.get(Calendar.MINUTE);
+		//将系统的当前日期传给add_date，当前时间传给add_time
+		Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day_of_month = calendar.get(Calendar.DAY_OF_MONTH);
+		int hour = calendar.get(Calendar.HOUR_OF_DAY);
+		int minute = calendar.get(Calendar.MINUTE);
 		
+		String add_date = String.valueOf(year) + "-" + String.valueOf(month) + "-" + String.valueOf(day_of_month);
+		String add_time = String.valueOf(hour) + ":" + String.valueOf(minute) + ":" + "00";
+		
+		//获取DatePicker中的日期
+		year = mDatePicker.getYear();
+		month = mDatePicker.getMonth();
+		day_of_month = mDatePicker.getDayOfMonth();
+		String lost_date = String.valueOf(year) + "-" + String.valueOf(month) + "-" + String.valueOf(day_of_month);
+		
+		/** 打印时间以确认是否正确
+		Log.d("year", String.valueOf(year));
+		Log.d("month", String.valueOf(month));
+		Log.d("day_of_month", String.valueOf(day_of_month));
+		Log.d("hour", String.valueOf(hour));
+		Log.d("minute", String.valueOf(minute));
+		*/
+		
+		//获取TimePicker中的时间
+		hour = mTimePicker.getCurrentHour();
+		minute = mTimePicker.getCurrentMinute();
+		String lost_time = String.valueOf(hour) + ":" + String.valueOf(minute) + ":" + "00";
+		
+		//写入数据库
 		SQLiteDatabase db = dbHelper.getWritableDatabase();
 		db.execSQL("insert into LostEvent ("
+				+ "add_date, "
+				+ "add_time, "
 				+ "owner_stu_id, "
 				+ "owner_name, "
 				+ "owner_contact, "
@@ -132,14 +168,11 @@ public class AddLostEventActivity extends BaseActivity	{
 				+ "lost_place, "
 				+ "description, "
 				+ "duration, "
-				+ "due_date, "
 				+ "found_flag, "
 				+ "close_flag)"
-				+ "values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-				new String[] {
-						stu_id, name, contact, "default", "default", lost_place, descrption,
-						"10", "default", "0", "0"});
-		
+				+ "values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+				new String[] {add_date, add_time, stu_id, name, contact, lost_date, lost_time, 
+						lost_place, descrption, "30", "0", "0"});
 		
 	}
 	
