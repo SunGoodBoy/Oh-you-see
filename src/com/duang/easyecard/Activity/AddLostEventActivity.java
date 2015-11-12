@@ -53,7 +53,7 @@ public class AddLostEventActivity extends BaseActivity	{
 		mSubmit_button = (Button) findViewById(R.id.add_event_submit);
 		mCancel_button = (Button) findViewById(R.id.add_event_cancel);
 		
-		//创建数据库
+		//打开或创建数据库
 		dbHelper = new MyDatabaseHelper(this, "EasyEcard.db", null, 1);
 		
 		//提交按钮点击事件

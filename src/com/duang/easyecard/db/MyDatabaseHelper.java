@@ -25,6 +25,8 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 	
 	public static final String CREATE_LOSTEVENT = "create table LostEvent ("
 			+ "event_id integer primary key autoincrement, "
+			+ "add_date text"
+			+ "add_time text"
 			+ "owner_stu_id text, "
 			+ "owner_name text, "
 			+ "owner_contact text, "
