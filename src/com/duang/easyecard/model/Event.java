@@ -4,9 +4,9 @@ public class Event {
 
 	private long event_id;			//事件序号
 	
-	User owner;
+	protected User owner;
 
-	User founder;
+	protected User founder;
 	
 	private String date;			//事件日期
 	private String place;			//事件地点
@@ -30,6 +30,23 @@ public class Event {
 			closeEvent();
 	}
 	
+	//设置事件中的失主
+	public void setEvent_owner(User owner)	{
+		this.owner = owner;
+	}
+	//获取事件中的失主
+	public User getEvent_owner()	{
+		return owner;
+	}
+	
+	//设置事件中的拾获者
+	public void setEvent_founder(User founder)	{
+		this.founder = founder;
+	}
+	//获取事件的拾获者
+	public User getEvent_founder()	{
+		return founder;
+	}
 	
 	
 	/**

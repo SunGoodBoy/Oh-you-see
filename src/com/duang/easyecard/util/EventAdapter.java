@@ -3,6 +3,7 @@ package com.duang.easyecard.util;
 import java.util.List;
 
 import com.duang.easyecard.R;
+import com.duang.easyecard.model.Event;
 import com.duang.easyecard.model.User;
 
 import android.R.layout;
@@ -15,29 +16,29 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class UserAdapter extends BaseAdapter{
+public class EventAdapter extends BaseAdapter{
 
 	private Context context;
-	private List<User> userList;
+	private List<Event> eventList;
 	private LayoutInflater layoutInflater;
 
 	//构造函数，初始化
-	public UserAdapter(Context context, List<User> userList)	{
+	public EventAdapter(Context context, List<Event> eventList)	{
 		this.context = context;
-		this.userList = userList;
+		this.eventList = eventList;
 		layoutInflater = LayoutInflater.from(this.context);
 	}
 	
 	//获得长度，一般返回数据的长度即可
 	@Override
 	public int getCount()	{
-		return userList.size();
+		return eventList.size();
 	}
 	
 	//获取当前的实例，看来getItem是BaseAdapter的函数
 	@Override
 	public Object getItem(int position)	{
-		return userList.get(position);
+		return eventList.get(position);
 	}
 	
 	@Override
@@ -64,9 +65,9 @@ public class UserAdapter extends BaseAdapter{
 		//TextView userCollege = (TextView) view.findViewById(R.id.list_user_college);
 		//TextView userContact = (TextView) view.findViewById(R.id.list_user_contact);
 		
-		userImage.setBackgroundResource(userList.get(position).getImageId());
-		userStu_id.setText(userList.get(position).getStu_id());
-		userName.setText(userList.get(position).getUsername());
+		userImage.setBackgroundResource(eventList.get(position).getEvent_owner().getImageId());
+		userStu_id.setText(eventList.get(position).getEvent_owner().getStu_id());
+		userName.setText(eventList.get(position).getEvent_owner().getUsername());
 		
 		return convertView;
 	}
