@@ -17,7 +17,7 @@ public class Event {
 
 	//无参构造函数
 	public Event(){}
-	
+
 	//关闭事件
 	private void closeEvent(){
 		setClose_flag(true);

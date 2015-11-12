@@ -77,8 +77,7 @@ OnPageChangeListener{
 	}
 
 	private void initData() {
-		mViewPager
-				.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+		mViewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
 					@Override
 					public void onPageScrolled(int position,
 							float positionOffset, int positionOffsetPixels) {

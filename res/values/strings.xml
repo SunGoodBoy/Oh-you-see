@@ -33,6 +33,8 @@
     <string name="submit">提交</string>
     <string name="description">描述</string>
     
+    <!-- list_item -->
+    
     <string name="xlistview_header_hint_normal">下拉刷新</string>
     <string name="xlistview_header_hint_ready">松开刷新数据</string>
     <string name="xlistview_header_hint_loading">正在加载...</string>

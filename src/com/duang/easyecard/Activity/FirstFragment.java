@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.duang.easyecard.R;
 import com.duang.easyecard.model.Event;
-import com.duang.easyecard.model.User;
 import com.duang.easyecard.util.EventAdapter;
 import com.duang.easyecard.util.XListView;
 import com.duang.easyecard.util.XListView.IXListViewListener;
@@ -22,7 +21,7 @@ public class FirstFragment extends Fragment implements IXListViewListener{
 	private View viewFragment;
 	private XListView xListView = null;
 	private EventAdapter mAdapter;
-	private List<Event> eventList = getLists();
+	private List<Event> eventList;
 	private Handler mHandler;
 	private int start = 0;
 	private static int refreshCnt = 0;
@@ -38,16 +37,20 @@ public class FirstFragment extends Fragment implements IXListViewListener{
 	
 	//返回数据
 	private List<Event> getLists()	{
-		List<Event> userList = new ArrayList<Event>();
+		List<Event> eventList = new ArrayList<Event>();
+		
+		//从数据库中取出数据
+		//Event event = new Event();
 		for (int i = 0; i < 20; i++)	{
 			Event event = new Event();
-			event.getEvent_owner().setImageId(R.drawable.ic_launcher);
-			event.getEvent_owner().setStu_id("学号" + i);
-			event.getEvent_owner().setUsername("姓名");
+			event.getEvent_owner().setImageId(R.drawable.app_icon);
+			event.getEvent_owner().setStu_id("1111111");
+			event.getEvent_owner().setUsername("小二");
 		}
-		return userList;
+		return eventList;
 	}
 	
+	//初始化ListView
 	private void initViews(){
 		xListView=(XListView) viewFragment.findViewById(R.id.xListView);
 		xListView.setPullLoadEnable(true);
@@ -57,6 +60,7 @@ public class FirstFragment extends Fragment implements IXListViewListener{
 		mHandler = new Handler();
 	}
 
+	//刷新
 	@Override
 	public void onRefresh() {
 		mHandler.postDelayed(new Runnable() {
@@ -65,14 +69,14 @@ public class FirstFragment extends Fragment implements IXListViewListener{
 				start = ++refreshCnt;
 				eventList.clear();
 				geneItems();
-				//mAdapter = new UserAdaper(getActivity(), userList);
+				mAdapter = new EventAdapter(FirstFragment.this.getActivity(), eventList);
 				xListView.setAdapter(new EventAdapter(getActivity(), eventList));
 				onLoad();
 			}
 		}, 2000);
 	}
 	
-
+	//加载更多
 	@Override
 	public void onLoadMore() {
 		mHandler.postDelayed(new Runnable() {
@@ -86,13 +90,15 @@ public class FirstFragment extends Fragment implements IXListViewListener{
 		}, 2000);
 	}
 	
-	//生成新的列表项，现在由于String改成了对像，暂时不会了
+	//生成Item项
 	private void geneItems() {
+		for (int i = 0; i != 5; i++){
 		Event event = new Event();
 		event.getEvent_owner().setImageId(R.drawable.ic_launcher);
 		event.getEvent_owner().setStu_id("学号");
 		event.getEvent_owner().setUsername("姓名");
 		eventList.add(event);
+		}
 	}
 
 	private void onLoad() {
