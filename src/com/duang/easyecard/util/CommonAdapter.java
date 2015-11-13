@@ -2,26 +2,25 @@ package com.duang.easyecard.util;
 
 import java.util.List;
 
-import com.duang.easyecard.R;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.TextView;
 
 public abstract class CommonAdapter<T> extends BaseAdapter {
 
 	protected Context mContext;
 	protected List<T> mDatas;
 	protected LayoutInflater mInflater;
+	protected final int mItemLayoutId;
 	
 	
-	public CommonAdapter(Context context, List<T> datas) {
+	public CommonAdapter(Context context, List<T> datas, int itemLayoutId) {
 		this.mContext = context;
 		mInflater = LayoutInflater.from(context);
 		this.mDatas = datas;
+		this.mItemLayoutId = itemLayoutId;
 	}
 	
 	@Override
@@ -45,14 +44,20 @@ public abstract class CommonAdapter<T> extends BaseAdapter {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent)
 	{
-		ViewHolder holder = ViewHolder.get(mContext, convertView, parent, R.layout.list_item, position);
-
-		return holder.getConvertView();
+		final ViewHolder viewHolder = getViewHolder(position, convertView, parent);
+		convert(viewHolder, getItem(position));
+		
+		return viewHolder.getConvertView();
 	}
 	
 	public abstract void convert(ViewHolder holder, T t);
 
-	
+	private ViewHolder getViewHolder(int position, View convertView,  
+            ViewGroup parent)  
+    {  
+        return ViewHolder.get(mContext, convertView, parent, mItemLayoutId,  
+                position);  
+    }
 }
 	
 	

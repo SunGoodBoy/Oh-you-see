@@ -20,9 +20,9 @@ public class EventAdapter extends CommonAdapter<Event>
 {
 
 	//构造函数，初始化
-	public EventAdapter(Context context, List<Event> datas)	
+	public EventAdapter(Context context, List<Event> datas, int itemLayoutId)	
 	{
-		super(context, datas);
+		super(context, datas, itemLayoutId);
 	}
 	
 
@@ -31,7 +31,8 @@ public class EventAdapter extends CommonAdapter<Event>
 		holder.setText(R.id.list_item_text_stu_id, "学号")
 			  .setText(R.id.list_item_owner_stu_id, event.getEvent_owner().getStu_id())
 			  .setText(R.id.list_item_text_name, "姓名")
-			  .setText(R.id.list_item_owner_name, event.getEvent_owner().getUsername());
+			  .setText(R.id.list_item_owner_name, event.getEvent_owner().getUsername())
+			  .setImageResource(R.id.list_user_img, event.getEvent_owner().getImageId());
 	}
 
 }

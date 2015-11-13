@@ -21,10 +21,8 @@ public class FirstFragment extends Fragment implements IXListViewListener{
 	private View viewFragment;
 	private XListView xListView = null;
 	private EventAdapter mAdapter;
-	private List<Event> eventList;
+	private List<Event> eventList = getLists();
 	private Handler mHandler;
-	private int start = 0;
-	private static int refreshCnt = 0;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -39,14 +37,25 @@ public class FirstFragment extends Fragment implements IXListViewListener{
 	private List<Event> getLists()	{
 		List<Event> eventList = new ArrayList<Event>();
 		
-		//从数据库中取出数据
-		//Event event = new Event();
-		for (int i = 0; i < 20; i++)	{
-			Event event = new Event();
-			event.getEvent_owner().setImageId(R.drawable.app_icon);
-			event.getEvent_owner().setStu_id("1111111");
-			event.getEvent_owner().setUsername("小二");
-		}
+		Event event = new Event("test0001001");
+		event.getEvent_owner().setImageId(R.drawable.app_icon);
+		event.getEvent_owner().setUsername("小二");
+		eventList.add(event);
+		
+		event.getEvent_owner().setStu_id("test0001002");
+		event.getEvent_owner().setImageId(R.drawable.app_icon);
+		event.getEvent_owner().setUsername("小二");
+		eventList.add(event);
+		
+		event.getEvent_owner().setStu_id("test0001003");
+		event.getEvent_owner().setImageId(R.drawable.app_icon);
+		event.getEvent_owner().setUsername("小二");
+		eventList.add(event);
+		event.getEvent_owner().setStu_id("test0001004");
+		event.getEvent_owner().setImageId(R.drawable.app_icon);
+		event.getEvent_owner().setUsername("小二");
+		eventList.add(event);
+		
 		return eventList;
 	}
 	
@@ -54,23 +63,46 @@ public class FirstFragment extends Fragment implements IXListViewListener{
 	private void initViews(){
 		xListView=(XListView) viewFragment.findViewById(R.id.xListView);
 		xListView.setPullLoadEnable(true);
-		mAdapter = new EventAdapter(this.getActivity(), eventList);
+		mAdapter = new EventAdapter(this.getActivity(), eventList, R.layout.list_item);
 		xListView.setAdapter(mAdapter);
 		xListView.setXListViewListener(this);
 		mHandler = new Handler();
 	}
 
+	//生成Item项
+	private void geneItems() {
+		List<Event> eventList = new ArrayList<Event>();
+		
+		Event event = new Event("test0001001");
+		event.getEvent_owner().setImageId(R.drawable.app_icon);
+		event.getEvent_owner().setUsername("小二");
+		eventList.add(event);
+		
+		event.getEvent_owner().setStu_id("test0001002");
+		event.getEvent_owner().setImageId(R.drawable.app_icon);
+		event.getEvent_owner().setUsername("小二");
+		eventList.add(event);
+		
+		event.getEvent_owner().setStu_id("test0001003");
+		event.getEvent_owner().setImageId(R.drawable.app_icon);
+		event.getEvent_owner().setUsername("小二");
+		eventList.add(event);
+		event.getEvent_owner().setStu_id("test0001004");
+		event.getEvent_owner().setImageId(R.drawable.app_icon);
+		event.getEvent_owner().setUsername("小二");
+		eventList.add(event);
+	}
+	
 	//刷新
 	@Override
 	public void onRefresh() {
 		mHandler.postDelayed(new Runnable() {
 			@Override
 			public void run() {
-				start = ++refreshCnt;
 				eventList.clear();
 				geneItems();
-				mAdapter = new EventAdapter(FirstFragment.this.getActivity(), eventList);
-				xListView.setAdapter(new EventAdapter(getActivity(), eventList));
+				mAdapter = new EventAdapter(FirstFragment.this.getActivity(), eventList, R.layout.list_item);
+				xListView.setAdapter(mAdapter);
 				onLoad();
 			}
 		}, 2000);
@@ -83,28 +115,19 @@ public class FirstFragment extends Fragment implements IXListViewListener{
 			@Override
 			public void run() {
 				geneItems();
-				//mAdapter.notifyDataSetChanged();
+				mAdapter.notifyDataSetChanged();
 				
 				onLoad();
 			}
 		}, 2000);
 	}
 	
-	//生成Item项
-	private void geneItems() {
-		for (int i = 0; i != 5; i++){
-		Event event = new Event();
-		event.getEvent_owner().setImageId(R.drawable.ic_launcher);
-		event.getEvent_owner().setStu_id("学号");
-		event.getEvent_owner().setUsername("姓名");
-		eventList.add(event);
-		}
-	}
+	
+	
 
 	private void onLoad() {
 		xListView.stopRefresh();
 		xListView.stopLoadMore();
 		xListView.setRefreshTime("暂时不知道");
 	}
-	
 }

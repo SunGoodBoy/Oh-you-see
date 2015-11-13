@@ -16,8 +16,18 @@ public class Event {
 	private boolean close_flag;		//关闭事件标志
 
 	//无参构造函数
-	public Event(){}
+	public Event()
+	{
+		super();
+	}
 
+	//构造函数
+	public Event(String stu_id)
+	{
+		super();
+		this.owner = new User(stu_id);
+	}
+	
 	//关闭事件
 	private void closeEvent(){
 		setClose_flag(true);

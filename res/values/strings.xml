@@ -42,6 +42,9 @@
     <string name="xlistview_footer_hint_normal">查看更多</string>
     <string name="xlistview_footer_hint_ready">松开载入更多</string>
     
+    <!-- Fragment Title -->
+    <string name="lost_event">丢卡信息</string>
+    
     <!-- Tab -->
     <string name="tab_lost">丢失</string>
     <string name="tab_found">拾获</string>
