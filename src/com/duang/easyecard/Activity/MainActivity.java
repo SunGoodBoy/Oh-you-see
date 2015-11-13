@@ -10,17 +10,23 @@ import com.duang.easyecard.util.ChangeColorIconWithText;
 import com.duang.easyecard.util.PagerAdapter;
 
 import android.app.AlertDialog;
+import android.app.SearchManager;
+import android.app.SearchableInfo;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.Window;
+import android.widget.SearchView;
 import android.view.View.OnClickListener;
 
 public class MainActivity extends BaseFragmentActivity implements OnClickListener,
@@ -28,8 +34,6 @@ OnPageChangeListener{
 
 	private ViewPager mViewPager;
 	private PagerAdapter mPagerAdapter;
-	//private FragmentPagerAdapter mFragmentPagerAdapter;
-	//List<Fragment> mTabs = new ArrayList<Fragment>();
 	
 	private List<ChangeColorIconWithText> mTabIndicators = new ArrayList<ChangeColorIconWithText>();
 
@@ -39,10 +43,8 @@ OnPageChangeListener{
 		setOverflowButtonAlways();
 		getActionBar().setDisplayShowHomeEnabled(false);
 		
-		
 		initView();
 		initData();
-		//mViewPager.setAdapter(mFragmentPagerAdapter);
 		initEvent();
 	}
 
@@ -89,31 +91,46 @@ OnPageChangeListener{
 		mPagerAdapter.addTab(FourthFragment.class, null);
 		mViewPager.setAdapter(mPagerAdapter);
 		
-		/*
-		mFragmentPagerAdapter = new FragmentPagerAdapter(getSupportFragmentManager())
-		{
-
-			@Override
-			public int getCount()
-			{
-				return mTabs.size();
-			}
-
-			@Override
-			public Fragment getItem(int position)
-			{
-				return mTabs.get(position);
-			}
-		};
-		*/
 	}
 
 	
-	//显示菜单
+	//显示菜单，并设置action_search进入编辑状态后搜索按钮的点击事件
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)
 	{
 		getMenuInflater().inflate(R.menu.main, menu);
+		
+		//获取SearchView对象
+		SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
+		//MenuItem searchItem = menu.findItem(R.id.action_search);  
+	    //SearchView searchView = (SearchView) searchItem.getActionView();
+		//设置当查询条件为空时显示的一个提示字符串
+		searchView.setQueryHint("请输入学号或姓名");
+		if (searchView == null)
+		{
+			Log.e("SearchView", "Fail to get SearchView");
+			return true;
+		}
+		
+		//获取搜索服务管理器
+		SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+		//Intent intent = getIntent();
+		//所在Activity中的 component name，由此系统可以通过Intent唤起
+		ComponentName cn = new ComponentName(MainActivity.this, SearchResultActivity.class);
+		//intent.setComponent(cn);
+		
+		/* 通过搜索管理器，从searchable activity(所在的Activity)中获取相关搜索信息，就是searchable的xml设置。
+		 * 如果返回null，表示该activity不存在，或者不是searchable
+		*/	
+		SearchableInfo info = searchManager.getSearchableInfo(cn);
+		if (info == null)
+		{
+			Log.e("SearchableInfo", "Fail to get search info");
+		}
+		//将searchable activity的搜索信息与searchView关联
+		searchView.setSearchableInfo(info);
+		
+		//searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
 		return true;
 	}
 	

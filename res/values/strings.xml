@@ -45,6 +45,9 @@
     <!-- Fragment Title -->
     <string name="lost_event">丢卡信息</string>
     
+    <!-- SearchResultActivity -->
+    <string name="search_result">搜索结果</string>
+    
     <!-- Tab -->
     <string name="tab_lost">丢失</string>
     <string name="tab_found">拾获</string>

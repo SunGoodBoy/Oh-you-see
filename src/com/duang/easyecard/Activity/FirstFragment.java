@@ -48,7 +48,7 @@ public class FirstFragment extends Fragment implements IXListViewListener, OnIte
 	
 	//初始化ListView
 	private void initViews(){
-		xListView=(XListView) viewFragment.findViewById(R.id.xListView);
+		xListView = (XListView) viewFragment.findViewById(R.id.xListView_first_fragment);
 		xListView.setPullLoadEnable(true);
 		mAdapter = new EventAdapter(this.getActivity(), eventList, R.layout.list_item);
 		xListView.setAdapter(mAdapter);
@@ -116,6 +116,7 @@ public class FirstFragment extends Fragment implements IXListViewListener, OnIte
 	public void onItemClick(AdapterView<?> view, View arg1, int position, long arg3) {
 		//可以跳转至详细信息界面了
 		Toast.makeText(this.getActivity(), ((Event)view.getItemAtPosition(position))
-				.getEvent_owner().getUsername(), 0).show();
+				.getEvent_owner().getUsername(), Toast.LENGTH_SHORT).show();
 	}
+	
 }

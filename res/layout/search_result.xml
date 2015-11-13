@@ -5,15 +5,15 @@
     android:orientation="vertical" >
 
     <TextView
-        android:id="@+id/text_lost_fragment_title"
+        android:id="@+id/text_search_result_title"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
+        android:textSize="30sp"
         android:gravity="center"
-        android:text="@string/lost_event" />
+        android:text="@string/search_result" />
 
     <com.duang.easyecard.util.XListView 
-        android:id="@+id/xListView_first_fragment"
+        android:id="@+id/xListView_search_result"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" 
         android:fastScrollEnabled="true"
