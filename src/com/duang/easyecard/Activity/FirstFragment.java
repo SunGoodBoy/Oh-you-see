@@ -4,60 +4,45 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.duang.easyecard.R;
+import com.duang.easyecard.db.MyDatabaseHelper;
 import com.duang.easyecard.model.Event;
 import com.duang.easyecard.util.EventAdapter;
 import com.duang.easyecard.util.XListView;
 import com.duang.easyecard.util.XListView.IXListViewListener;
+
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.net.UrlQuerySanitizer.ValueSanitizer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 
 public class FirstFragment extends Fragment implements IXListViewListener{
+	
+	private MyDatabaseHelper dbHelper;
 
 	private View viewFragment;
 	private XListView xListView = null;
 	private EventAdapter mAdapter;
-	private List<Event> eventList = getLists();
+	private List<Event> eventList = new ArrayList<Event>();
 	private Handler mHandler;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		
 		viewFragment = inflater.inflate(R.layout.first, null);
+		//打开或创建数据库
+		dbHelper = new MyDatabaseHelper(this.getActivity(), "EasyEcard.db", null, 1);
 		geneItems();
 		initViews();
 		return viewFragment;
 	}
 	
-	//返回数据
-	private List<Event> getLists()	{
-		List<Event> eventList = new ArrayList<Event>();
-		
-		Event event = new Event("test0001001");
-		event.getEvent_owner().setImageId(R.drawable.app_icon);
-		event.getEvent_owner().setUsername("小二");
-		eventList.add(event);
-		
-		event.getEvent_owner().setStu_id("test0001002");
-		event.getEvent_owner().setImageId(R.drawable.app_icon);
-		event.getEvent_owner().setUsername("小二");
-		eventList.add(event);
-		
-		event.getEvent_owner().setStu_id("test0001003");
-		event.getEvent_owner().setImageId(R.drawable.app_icon);
-		event.getEvent_owner().setUsername("小二");
-		eventList.add(event);
-		event.getEvent_owner().setStu_id("test0001004");
-		event.getEvent_owner().setImageId(R.drawable.app_icon);
-		event.getEvent_owner().setUsername("小二");
-		eventList.add(event);
-		
-		return eventList;
-	}
 	
 	//初始化ListView
 	private void initViews(){
@@ -71,26 +56,22 @@ public class FirstFragment extends Fragment implements IXListViewListener{
 
 	//生成Item项
 	private void geneItems() {
-		List<Event> eventList = new ArrayList<Event>();
-		
-		Event event = new Event("test0001001");
-		event.getEvent_owner().setImageId(R.drawable.app_icon);
-		event.getEvent_owner().setUsername("小二");
-		eventList.add(event);
-		
-		event.getEvent_owner().setStu_id("test0001002");
-		event.getEvent_owner().setImageId(R.drawable.app_icon);
-		event.getEvent_owner().setUsername("小二");
-		eventList.add(event);
-		
-		event.getEvent_owner().setStu_id("test0001003");
-		event.getEvent_owner().setImageId(R.drawable.app_icon);
-		event.getEvent_owner().setUsername("小二");
-		eventList.add(event);
-		event.getEvent_owner().setStu_id("test0001004");
-		event.getEvent_owner().setImageId(R.drawable.app_icon);
-		event.getEvent_owner().setUsername("小二");
-		eventList.add(event);
+		eventList = new ArrayList<Event>();
+		//从数据库中取出数据生成项
+		SQLiteDatabase db = dbHelper.getReadableDatabase();
+		Cursor cursor = db.query("LostEvent", null, null, null, null, null, null);
+		if (cursor.moveToFirst())
+		{
+			do{
+				Event event = new Event(cursor.getString(cursor.getColumnIndex("owner_stu_id")));
+				event.getEvent_owner().setUsername(cursor.getString(cursor.getColumnIndex("owner_name")));
+				event.getEvent_owner().setImageId(R.drawable.app_icon);
+				eventList.add(event);
+				Log.d("eventListSize", String.valueOf(eventList.size()));
+			} while (cursor.moveToNext());
+		}
+		cursor.close();
+		mAdapter = new EventAdapter(this.getActivity(), eventList, R.layout.list_item);
 	}
 	
 	//刷新
@@ -116,18 +97,14 @@ public class FirstFragment extends Fragment implements IXListViewListener{
 			public void run() {
 				geneItems();
 				mAdapter.notifyDataSetChanged();
-				
 				onLoad();
 			}
 		}, 2000);
 	}
 	
-	
-	
-
 	private void onLoad() {
 		xListView.stopRefresh();
 		xListView.stopLoadMore();
-		xListView.setRefreshTime("暂时不知道");
+		xListView.setRefreshTime("刚刚");
 	}
 }

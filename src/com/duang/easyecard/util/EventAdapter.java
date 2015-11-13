@@ -3,21 +3,13 @@ package com.duang.easyecard.util;
 import java.util.List;
 
 import com.duang.easyecard.R;
+import com.duang.easyecard.db.MyDatabaseHelper;
 import com.duang.easyecard.model.Event;
-import com.duang.easyecard.model.User;
-
-import android.R.layout;
 import android.content.Context;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 public class EventAdapter extends CommonAdapter<Event>
 {
+	private MyDatabaseHelper dbHelper;
 
 	//构造函数，初始化
 	public EventAdapter(Context context, List<Event> datas, int itemLayoutId)	
