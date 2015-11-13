@@ -60,7 +60,7 @@ public class FirstFragment extends Fragment implements IXListViewListener{
 		//从数据库中取出数据生成项
 		SQLiteDatabase db = dbHelper.getReadableDatabase();
 		Cursor cursor = db.query("LostEvent", null, null, null, null, null, null);
-		if (cursor.moveToFirst())
+		if (cursor.moveToLast())
 		{
 			do{
 				Event event = new Event(cursor.getString(cursor.getColumnIndex("owner_stu_id")));
@@ -68,7 +68,7 @@ public class FirstFragment extends Fragment implements IXListViewListener{
 				event.getEvent_owner().setImageId(R.drawable.app_icon);
 				eventList.add(event);
 				Log.d("eventListSize", String.valueOf(eventList.size()));
-			} while (cursor.moveToNext());
+			} while (cursor.moveToPrevious());
 		}
 		cursor.close();
 		mAdapter = new EventAdapter(this.getActivity(), eventList, R.layout.list_item);
