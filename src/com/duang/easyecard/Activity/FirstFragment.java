@@ -10,6 +10,7 @@ import com.duang.easyecard.util.EventAdapter;
 import com.duang.easyecard.util.XListView;
 import com.duang.easyecard.util.XListView.IXListViewListener;
 
+import android.content.DialogInterface.OnClickListener;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.UrlQuerySanitizer.ValueSanitizer;
@@ -20,9 +21,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Toast;
 
 
-public class FirstFragment extends Fragment implements IXListViewListener{
+public class FirstFragment extends Fragment implements IXListViewListener, OnItemClickListener{
 	
 	private MyDatabaseHelper dbHelper;
 
@@ -51,6 +55,7 @@ public class FirstFragment extends Fragment implements IXListViewListener{
 		mAdapter = new EventAdapter(this.getActivity(), eventList, R.layout.list_item);
 		xListView.setAdapter(mAdapter);
 		xListView.setXListViewListener(this);
+		xListView.setOnItemClickListener(this);
 		mHandler = new Handler();
 	}
 
@@ -106,5 +111,12 @@ public class FirstFragment extends Fragment implements IXListViewListener{
 		xListView.stopRefresh();
 		xListView.stopLoadMore();
 		xListView.setRefreshTime("刚刚");
+	}
+	
+	//Item的点击监听事件
+	@Override
+	public void onItemClick(AdapterView<?> view, View arg1, int position, long arg3) {
+		//可以跳转至详细信息界面了
+		Toast.makeText(this.getActivity(), ((Event)view.getItemAtPosition(position)).getEvent_owner().getUsername(), 0).show();
 	}
 }
