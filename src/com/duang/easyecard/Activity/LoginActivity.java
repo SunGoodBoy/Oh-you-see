@@ -94,7 +94,7 @@ public class LoginActivity extends BaseActivity {
 	//≈–∂œ√‹¬Î «∑Ò’˝»∑
 	protected boolean passwordIsRight(String username, String password)	{
 		SQLiteDatabase db = dbHelper.getWritableDatabase();
-		Cursor cursor = db.query("BasicInfo", null, null, null, null, null, null);
+		Cursor cursor = db.query("UserInfo", null, null, null, null, null, null);
 		if (cursor.moveToFirst())	{
 			do	{
 				if (username.equals(cursor.getString(cursor.getColumnIndex("stu_id"))))	{
@@ -116,7 +116,7 @@ public class LoginActivity extends BaseActivity {
 	protected boolean wasSigned(String stu_id_input) {
 		// TODO Auto-generated method stub
 		SQLiteDatabase db = dbHelper.getReadableDatabase();
-		Cursor cursor = db.query("BasicInfo", null, null, null, null, null, null);
+		Cursor cursor = db.query("UserInfo", null, null, null, null, null, null);
 		if (cursor.moveToFirst())	{
 			do	{
 				if (stu_id_input.equals(cursor.getString(cursor.getColumnIndex("stu_id"))))	{

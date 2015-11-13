@@ -8,20 +8,17 @@ import android.widget.Toast;
 
 public class MyDatabaseHelper extends SQLiteOpenHelper {
 	
-	public static final String CREATE_BASICINFO = "create table BasicInfo ("
-			+ "stu_id text primary key not null, "
+	public static final String CREATE_USERINFO = "create table UserInfo ("
+			+ "stu_id char(11) primary key not null, "
 			+ "password text not null, "
-			+ "nick_name text, "
+			+ "name text, "
 			+ "real_name text, "
 			+ "gender integer, "
+			+ "contact text"
 			+ "grade integer, "
 			+ "college text, "
 			+ "department text, "
-			+ "email text, "
-			+ "contact text, "
-			+ "lost_flag integer, "
-			+ "found_flag integer, "
-			+ "found_id text)";
+			+ "email text)";
 	
 	public static final String CREATE_LOSTEVENT = "create table LostEvent ("
 			+ "event_id integer primary key autoincrement, "
@@ -39,7 +36,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 			+ "description, "
 			+ "duration text, "
 			+ "due_date int, "
-			+ "publiser text, "
+			+ "publiser_stu_id text, "
 			+ "found_flag bool, "
 			+ "close_flag bool)";
 	
@@ -54,10 +51,11 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 			+ "founder_name text, "
 			+ "founder_contact text, "
 			+ "found_date DATE, "
+			+ "found_time TIME, "
 			+ "found_place text, "
 			+ "duration text, "
 			+ "due_date DATE, "
-			+ "publiser text, "
+			+ "publiser_stu_id text, "
 			+ "returned_flag bool, "
 			+ "close_flag bool)";
 			
@@ -72,7 +70,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 	
 	@Override
 	public void onCreate(SQLiteDatabase db)	{
-		db.execSQL(CREATE_BASICINFO);
+		db.execSQL(CREATE_USERINFO);
 		db.execSQL(CREATE_LOSTEVENT);
 		db.execSQL(CREATE_FOUNDEVENT);
 		Toast.makeText(mContext, "已成功建立数据库", Toast.LENGTH_SHORT).show();

@@ -25,7 +25,7 @@ public class SignupActivity extends BaseActivity {
 	private EditText mStu_id;
 	private EditText mPassword;
 	private EditText mPassword_confirm;
-	private EditText mNickname;
+	private EditText mName;
 	private EditText mRealname;
 	private EditText mGrade;
 	private EditText mCollege;
@@ -48,7 +48,7 @@ public class SignupActivity extends BaseActivity {
 		mStu_id = (EditText) findViewById(R.id.signup_stu_id_edit);
 		mPassword = (EditText) findViewById(R.id.signup_password_edit);
 		mPassword_confirm = (EditText) findViewById(R.id.signup_password_confirm_edit);
-		mNickname = (EditText) findViewById(R.id.signup_nickname_edit);
+		mName = (EditText) findViewById(R.id.signup_name_edit);
 		mRealname = (EditText) findViewById(R.id.signup_realname_edit);
 		mGrade = (EditText) findViewById(R.id.signup_grade_edit);
 		mCollege = (EditText) findViewById(R.id.signup_college_edit);
@@ -158,7 +158,7 @@ public class SignupActivity extends BaseActivity {
 	private boolean wasSigned(String stu_id_input) {
 		// TODO Auto-generated method stub
 		SQLiteDatabase db = dbHelper.getReadableDatabase();
-		Cursor cursor = db.query("BasicInfo", null, null, null, null, null, null);
+		Cursor cursor = db.query("UserInfo", null, null, null, null, null, null);
 		if (cursor.moveToFirst())	{
 			do	{
 				if (stu_id_input.equals(cursor.getString(cursor.getColumnIndex("stu_id"))))	{
@@ -175,7 +175,7 @@ public class SignupActivity extends BaseActivity {
 		// TODO Auto-generated method stub
 		String stu_id = mStu_id.getText().toString();
 		String password = mPassword.getText().toString();
-		String nickName = mNickname.getText().toString();
+		String name = mName.getText().toString();
 		String realName = mRealname.getText().toString();
 		String grade = mGrade.getText().toString();
 		String college = mCollege.getText().toString();
@@ -187,14 +187,14 @@ public class SignupActivity extends BaseActivity {
 		ContentValues values = new ContentValues();
 		values.put("stu_id", stu_id);
 		values.put("password", password);
-		values.put("nick_name", nickName);
+		values.put("name", name);
 		values.put("real_name", realName);
 		values.put("grade", grade);
 		values.put("college", college);
 		values.put("email", email);
 		values.put("contact", contact);
 		values.put("gender", gender);
-		db.insert("BasicInfo", null, values);
+		db.insert("UserInfo", null, values);
 		values.clear();
 	}
 }
