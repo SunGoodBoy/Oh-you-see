@@ -11,7 +11,7 @@
     </style>
     
     <style name="YikatongActionOverflowButtonStyle">
-        <item name="android:src">@drawable/emo_im_happy</item>
+        <item name="android:src">@drawable/actionbar_add_icon</item>
     </style>
 
 </resources>

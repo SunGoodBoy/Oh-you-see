@@ -1,17 +1,12 @@
 package com.duang.easyecard.Activity;
 
 import com.duang.easyecard.R;
-import com.duang.easyecard.R.id;
-import com.duang.easyecard.R.layout;
 import com.duang.easyecard.db.MyDatabaseHelper;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;

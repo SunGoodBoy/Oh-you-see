@@ -10,10 +10,8 @@ import com.duang.easyecard.util.EventAdapter;
 import com.duang.easyecard.util.XListView;
 import com.duang.easyecard.util.XListView.IXListViewListener;
 
-import android.content.DialogInterface.OnClickListener;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.net.UrlQuerySanitizer.ValueSanitizer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -117,6 +115,7 @@ public class FirstFragment extends Fragment implements IXListViewListener, OnIte
 	@Override
 	public void onItemClick(AdapterView<?> view, View arg1, int position, long arg3) {
 		//可以跳转至详细信息界面了
-		Toast.makeText(this.getActivity(), ((Event)view.getItemAtPosition(position)).getEvent_owner().getUsername(), 0).show();
+		Toast.makeText(this.getActivity(), ((Event)view.getItemAtPosition(position))
+				.getEvent_owner().getUsername(), 0).show();
 	}
 }
