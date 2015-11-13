@@ -14,7 +14,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 			+ "name text, "
 			+ "real_name text, "
 			+ "gender integer, "
-			+ "contact text"
+			+ "contact text, "
 			+ "grade integer, "
 			+ "college text, "
 			+ "department text, "

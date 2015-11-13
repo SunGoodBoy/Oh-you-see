@@ -112,7 +112,7 @@ public class LoginActivity extends BaseActivity {
 		return false;
     }
 	
-	//判断帐号是否已经注册
+	//判断帐号是否已经注册，true为已经注册，false为未注册
 	protected boolean wasSigned(String stu_id_input) {
 		// TODO Auto-generated method stub
 		SQLiteDatabase db = dbHelper.getReadableDatabase();
