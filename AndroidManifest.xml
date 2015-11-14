@@ -65,7 +65,11 @@
             
         </activity>
 
-        
+        <activity 
+            android:name=".Activity.EventDetailsActivity"
+            android:label="@string/event_details">
+            
+        </activity>
     </application>
 
 </manifest>

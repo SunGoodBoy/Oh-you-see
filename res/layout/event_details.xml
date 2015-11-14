@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+    
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp">
+        
+        <ImageView 
+            android:id="@+id/event_details_img"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:contentDescription="@string/user_img"
+            android:src="@drawable/app_icon"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:orientation="vertical"
+            android:padding="5dp" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp" >
+
+                <TextView
+                    android:id="@+id/event_details_stu_id_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="@string/stu_id"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/event_details_stu_id"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="10dp" >
+
+                <TextView
+                    android:id="@+id/event_details_name_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="@string/name"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/event_details_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:textSize="20sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+    
+    <!-- 联系方式 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp">
+        <TextView 
+            android:id="@+id/event_details_contact_title"
+	        android:layout_width="0dp"
+	        android:layout_weight="2"
+	        android:layout_height="wrap_content"
+	        android:gravity="center"
+	        android:textSize="20sp"
+	        android:text="@string/contact"        
+	        />
+        <TextView
+            android:id="@+id/event_details_contact"
+            android:layout_width="0dp"
+            android:layout_weight="5"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="20sp"
+            /> 
+    </LinearLayout>
+    
+    <!-- 事件时间 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp">
+        <TextView 
+            android:id="@+id/event_details_event_time_title"
+	        android:layout_width="0dp"
+	        android:layout_weight="2"
+	        android:layout_height="wrap_content"
+	        android:gravity="center"
+	        android:textSize="20sp"       
+	        />
+        <TextView
+            android:id="@+id/event_details_event_time"
+            android:layout_width="0dp"
+            android:layout_weight="5"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:gravity="center"
+            /> 
+    </LinearLayout>
+    
+    <!-- 地点 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp">
+        <TextView 
+            android:id="@+id/event_details_event_place_title"
+	        android:layout_width="0dp"
+	        android:layout_weight="2"
+	        android:layout_height="wrap_content"
+	        android:gravity="center"
+	        android:layout_gravity="center"
+	        android:textSize="20sp"    
+	        />
+        <TextView
+            android:id="@+id/event_details_event_place"
+            android:layout_width="0dp"
+            android:layout_weight="5"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:gravity="center"
+            /> 
+    </LinearLayout>
+    
+    <!-- 描述 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp">
+        <TextView 
+            android:id="@+id/event_details_event_description_title"
+	        android:layout_width="0dp"
+	        android:layout_weight="2"
+	        android:layout_height="wrap_content"
+	        android:gravity="center"
+	        android:layout_gravity="center"
+	        android:textSize="20sp"  
+	        android:text="@string/description"     
+	        />
+        <TextView
+            android:id="@+id/event_details_event_description"
+            android:layout_width="0dp"
+            android:layout_weight="5"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:gravity="center"
+            /> 
+    </LinearLayout>
+    
+    <!-- 发布者 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp">
+        <TextView 
+            android:id="@+id/event_details_event_publisher_title"
+	        android:layout_width="0dp"
+	        android:layout_weight="2"
+	        android:layout_height="wrap_content"
+	        android:gravity="center"
+	        android:layout_gravity="center"
+	        android:textSize="20sp"  
+	        android:text="@string/publisher"     
+	        />
+        <TextView
+            android:id="@+id/event_details_event_publisher"
+            android:layout_width="0dp"
+            android:layout_weight="5"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:gravity="center"
+            /> 
+    </LinearLayout>
+    
+    <!-- 发布时间 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/event_details_event_add_time_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text="@string/add_time"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/event_details_event_add_time"
+            android:layout_width="0dp"
+            android:layout_weight="5"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:gravity="center"
+            /> 
+    </LinearLayout>
+    
+    <!-- 事件状态 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp">
+        <TextView 
+            android:id="@+id/event_details_event_state_title"
+	        android:layout_width="0dp"
+	        android:layout_weight="2"
+	        android:layout_height="wrap_content"
+	        android:gravity="center"
+	        android:textSize="20sp"
+	        android:text="@string/event_state"
+	        />
+        <TextView
+            android:id="@+id/event_details_event_state"
+            android:layout_width="0dp"
+            android:layout_weight="5"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:gravity="center"
+            /> 
+    </LinearLayout>
+
+</LinearLayout>
+</ScrollView>
