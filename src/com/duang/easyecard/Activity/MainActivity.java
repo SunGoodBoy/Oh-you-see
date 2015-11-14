@@ -104,8 +104,10 @@ OnPageChangeListener{
 		SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
 		//MenuItem searchItem = menu.findItem(R.id.action_search);  
 	    //SearchView searchView = (SearchView) searchItem.getActionView();
+		
 		//设置当查询条件为空时显示的一个提示字符串
 		searchView.setQueryHint("请输入学号或姓名");
+		
 		if (searchView == null)
 		{
 			Log.e("SearchView", "Fail to get SearchView");
@@ -121,7 +123,7 @@ OnPageChangeListener{
 		
 		/* 通过搜索管理器，从searchable activity(所在的Activity)中获取相关搜索信息，就是searchable的xml设置。
 		 * 如果返回null，表示该activity不存在，或者不是searchable
-		*/	
+		*/
 		SearchableInfo info = searchManager.getSearchableInfo(cn);
 		if (info == null)
 		{
