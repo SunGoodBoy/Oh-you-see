@@ -18,12 +18,14 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 			+ "grade integer, "
 			+ "college text, "
 			+ "department text, "
-			+ "email text)";
+			+ "email text, "
+			+ "user_img text)";
 	
 	public static final String CREATE_LOSTEVENT = "create table LostEvent ("
 			+ "event_id integer primary key autoincrement, "
 			+ "add_date DATE, "
 			+ "add_time TIME, "
+			+ "user_img text, "
 			+ "owner_stu_id text, "
 			+ "owner_name text, "
 			+ "owner_contact text, "
@@ -44,6 +46,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 			+ "event_id integer primary key autoincrement, "
 			+ "add_date DATE, "
 			+ "add_time TIME, "
+			+ "user_img text, "
 			+ "owner_stu_id text, "
 			+ "owner_name text, "
 			+ "owner_contact text, "
