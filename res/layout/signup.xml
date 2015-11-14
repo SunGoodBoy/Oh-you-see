@@ -1,117 +1,134 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView  xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:scrollbars="vertical">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
     android:background="@drawable/background_login">
     
-    <TableLayout
+    <!-- 学号 -->
+    <LinearLayout
 	    android:layout_width="match_parent"
-	    android:layout_height="match_parent"
-	    android:layout_marginTop="10dp"
-	    android:layout_marginBottom="10dp"
-	    android:layout_marginLeft="5dp"
-	    android:layout_marginRight="5dp"
-	    android:stretchColumns="2"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal"
 	    android:background="@drawable/background_login_div_bg" >
-	    
-	    <!-- 学号 -->
-	    <TableRow>
-	        <TextView 
+	    <TextView 
 		        android:id="@+id/signup_stu_id"
 		        android:layout_width="0dp"
 		        android:layout_height="wrap_content"
 		        android:layout_weight="2"
 		        android:gravity="center"
 		        android:text="@string/stu_id"/>
-		    <EditText 
+	    <EditText 
 		        android:id="@+id/signup_stu_id_edit"
-		        android:layout_width="match_parent"
+		        android:layout_width="0dp"
 		        android:layout_height="wrap_content"
 		        android:layout_weight="5"
 		        android:singleLine="true"
 		        />
-	    </TableRow>
-	    
-	    <!-- 密码 -->
-	    <TableRow>
-	        <TextView 
+	</LinearLayout>
+	
+    <!-- 密码 -->
+    <LinearLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal"
+	    android:background="@drawable/background_login_div_bg" >
+	    <TextView 
 		        android:id="@+id/signup_password"
 		        android:layout_width="0dp"
 		        android:layout_height="wrap_content"
 		        android:layout_weight="2"
 		        android:gravity="center"
 		        android:text="@string/password"/>
-		    <EditText 
+	    <EditText 
 		        android:id="@+id/signup_password_edit"
-		        android:layout_width="match_parent"
+		        android:layout_width="0dp"
 		        android:layout_height="wrap_content"
 		        android:layout_weight="5"
 		        android:inputType="textPassword"
 		        android:singleLine="true"
 		        />
-	    </TableRow>
-	    
-	    <!-- 密码确认 -->
-	    <TableRow>
-	        <TextView 
+	</LinearLayout>
+	
+    <!-- 密码确认 -->
+    <LinearLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal"
+	    android:background="@drawable/background_login_div_bg" >
+	    <TextView 
 			    android:id="@+id/signup_password_confirm"
 			    android:layout_width="0dp"
 		        android:layout_height="wrap_content"
 		        android:layout_weight="2"
 		        android:gravity="center"
 			    android:text="@string/password_confirm"/>
-			<EditText 
+	    <EditText 
 			    android:id="@+id/signup_password_confirm_edit"
-			    android:layout_width="match_parent"
+			    android:layout_width="0dp"
 			    android:layout_height="wrap_content"
 			    android:layout_weight="5"
 			    android:inputType="textPassword"
 			    android:singleLine="true"
 			    />
-	    </TableRow>
-	    
-	    <!-- 姓名 -->
-	    <TableRow>
-	   
-	        <TextView 
+	</LinearLayout>
+	
+    <!-- 姓名 -->
+    <LinearLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal"
+	    android:background="@drawable/background_login_div_bg" >
+	     <TextView 
 		        android:id="@+id/signup_nickname"
 		        android:layout_width="0dp"
 		        android:layout_height="wrap_content"
 		        android:layout_weight="2"
 		        android:gravity="center"
 		        android:text="@string/name"/>
-	    	<EditText 
+	    <EditText 
 		        android:id="@+id/signup_name_edit"
-		        android:layout_width="match_parent"
+		        android:layout_width="0dp"
 		        android:layout_height="wrap_content"
 		        android:layout_weight="5"
 		        android:singleLine="true"
 		        />
-	    </TableRow>
-	   
-	    <!-- 真实姓名 -->
-	    <TableRow>
-	   
-	        <TextView 
+	</LinearLayout>
+
+    <!-- 真实姓名 -->
+    <LinearLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal"
+	    android:background="@drawable/background_login_div_bg" >
+	     <TextView 
 		        android:id="@+id/signup_realname"
 		        android:layout_width="0dp"
 		        android:layout_height="wrap_content"
 		        android:layout_weight="2"
 		        android:gravity="center"
 		        android:text="@string/realname"/>
-	    	<EditText 
+	    <EditText 
 		        android:id="@+id/signup_realname_edit"
-		        android:layout_width="match_parent"
+		        android:layout_width="0dp"
 		        android:layout_height="wrap_content"
 		        android:singleLine="true"
 		        android:layout_weight="5"
 		        />
-	    </TableRow>
-	    
-	    <!-- 性别 -->
-	    <TableRow> 
-	    	
-	        <TextView 
+	</LinearLayout>
+	  
+
+    <!-- 性别 -->
+    <LinearLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal"
+	    android:background="@drawable/background_login_div_bg" >
+	    <TextView 
 		        android:id="@+id/signup_gender"
 		        android:layout_width="0dp"
 		        android:layout_height="wrap_content"
@@ -119,8 +136,7 @@
 		        android:layout_gravity="center"
 		        android:gravity="center"
 		        android:text="@string/gender"/>
-	        
-	        <RadioGroup 
+	    <RadioGroup 
 	            android:id="@+id/signup_gender_radioGroup"
 	            android:contentDescription="性别"
 	            android:layout_width="0dp"
@@ -149,86 +165,101 @@
 				</RadioButton>
 	
 	        </RadioGroup>
-	    </TableRow>
-	
-		<!-- 年级  自动填充-->
-		<TableRow>
-	        <TextView 
+	</LinearLayout>
+
+    <!-- 年级  自动填充-->
+    <LinearLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal"
+	    android:background="@drawable/background_login_div_bg" >
+	    <TextView 
 			    android:id="@+id/signup_grade"
 			    android:layout_width="0dp"
 		        android:layout_height="wrap_content"
 		        android:layout_weight="2"
 		        android:gravity="center"
 			    android:text="@string/grade"/>
-			<EditText 
+	    <EditText 
 			    android:id="@+id/signup_grade_edit"
-			    android:layout_width="match_parent"
+			    android:layout_width="0dp"
 			    android:layout_height="wrap_content"
 			    android:layout_weight="5"
 			    android:singleLine="true"
 			    />
-	    </TableRow>
+	</LinearLayout>
 	
-		
-		<!-- 学院  自动填充-->
-		<TableRow>
-	        <TextView 
+    <!-- 学院  自动填充-->
+    <LinearLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal"
+	    android:background="@drawable/background_login_div_bg" >
+	    <TextView 
 			    android:id="@+id/signup_college"
 			    android:layout_width="0dp"
 		        android:layout_height="wrap_content"
 		        android:layout_weight="2"
 		        android:gravity="center"
 			    android:text="@string/college"/>
-			<EditText 
+	    <EditText 
 			    android:id="@+id/signup_college_edit"
-			    android:layout_width="match_parent"
+			    android:layout_width="0dp"
 			    android:layout_height="wrap_content"
 			    android:layout_weight="5"
 			    android:singleLine="true"
 			    />
-	    </TableRow>
-		
-		
-		<!-- 邮箱 -->
-		<TableRow>
-	        <TextView 
+	</LinearLayout>
+	
+	<!-- 邮箱 -->
+    <LinearLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal"
+	    android:background="@drawable/background_login_div_bg" >
+	    <TextView 
 			    android:id="@+id/signup_email"
 			    android:layout_width="0dp"
 		        android:layout_height="wrap_content"
 		        android:layout_weight="2"
 		        android:gravity="center"
 			    android:text="@string/email"/>
-			<EditText 
+	    <EditText 
 			    android:id="@+id/signup_email_edit"
-			    android:layout_width="match_parent"
+			    android:layout_width="0dp"
 			    android:layout_height="wrap_content"
 			    android:layout_weight="5"
 			    android:singleLine="true"
 			    />
-	    </TableRow>
+	</LinearLayout>
 		
-		
-		<!-- 联系方式 -->
-		<TableRow>
-	        
-		    <TextView 
+	<!-- 联系方式 -->
+    <LinearLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal"
+	    android:background="@drawable/background_login_div_bg" >
+	    <TextView 
 			    android:id="@+id/signup_contact"
 			    android:layout_width="0dp"
 		        android:layout_height="wrap_content"
 		        android:layout_weight="2"
 		        android:gravity="center"
 			    android:text="@string/contact"/>
-			<EditText 
+	    <EditText 
 			    android:id="@+id/signup_contact_edit"
-			    android:layout_width="match_parent"
+			    android:layout_width="0dp"
 			    android:layout_height="wrap_content"
 			    android:layout_weight="5"
-			    android:singleLine="true"
-		    />
-	    </TableRow>
-	    
-		<TableRow>
-		    <!-- 取消button -->
+			    android:singleLine="true"/>
+	</LinearLayout>
+
+    <LinearLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal"
+	    android:background="@drawable/background_login_div_bg" >
+	    	<!-- 取消button -->
 			<Button
 			    android:id="@+id/signup_cancel"
 			    android:layout_width="0dp"
@@ -237,21 +268,15 @@
 		        android:gravity="center"
 			    android:text="@string/cancel"/>
 			    />
-	
-			<!-- 注册button -->
-			<Button
+			 <!-- 注册button -->
+			 <Button
 			    android:id="@+id/signup_button"
 			    android:layout_width="0dp"
 			    android:layout_height="wrap_content"
 			    android:layout_weight="2"
 			    android:gravity="center"
 			    android:text="@string/signup"/>
-			
-		</TableRow>
-		
-		
-	
-	
-	</TableLayout>
-</LinearLayout>
+	</LinearLayout>
 
+</LinearLayout>
+</ScrollView>
