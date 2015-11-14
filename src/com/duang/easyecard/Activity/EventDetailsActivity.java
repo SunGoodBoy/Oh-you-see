@@ -19,25 +19,43 @@ public class EventDetailsActivity extends BaseActivity{
 	
 	private MyDatabaseHelper dbHelper;
 	
-	//private ImageView imgvUserImg = (ImageView) findViewById(R.id.event_details_img);
+	//private ImageView imgvUserImg;
 	
-	private TextView tvStu_id = (TextView) findViewById(R.id.event_details_stu_id);
-	private TextView tvName = (TextView) findViewById(R.id.event_details_name);
-	private TextView tvContact = (TextView) findViewById(R.id.event_details_contact);
-	private TextView tvEventTimeTitle = (TextView) findViewById(R.id.event_details_event_time_title);
-	private TextView tvEventTime = (TextView) findViewById(R.id.event_details_event_time);
-	private TextView tvEventPlaceTitle = (TextView) findViewById(R.id.event_details_event_place_title);
-	private TextView tvEventPlace = (TextView) findViewById(R.id.event_details_event_place);
-	private TextView tvEventDescription = (TextView) findViewById(R.id.event_details_event_description);
-	private TextView tvEventPublisher = (TextView) findViewById(R.id.event_details_event_publisher);
-	private TextView tvEventAddTime = (TextView) findViewById(R.id.event_details_event_add_time);
-	private TextView tvEventState = (TextView) findViewById(R.id.event_details_event_state);
+	private TextView tvStu_id;
+	private TextView tvName;
+	private TextView tvContact;
+	private TextView tvEventTimeTitle;
+	private TextView tvEventTime;
+	private TextView tvEventPlaceTitle;
+	private TextView tvEventPlace;
+	private TextView tvEventDescription;
+	private TextView tvEventPublisher;
+	private TextView tvEventAddTime;
+	private TextView tvEventState;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.event_details);
+		
+		//控件的初始化 要在加载布局文件之后
+		//imgvUserImg = (ImageView) findViewById(R.id.event_details_img);
+		
+		tvStu_id = (TextView) findViewById(R.id.event_details_stu_id);
+		tvName = (TextView) findViewById(R.id.event_details_name);
+		tvContact = (TextView) findViewById(R.id.event_details_contact);
+		tvEventTimeTitle = (TextView) findViewById(R.id.event_details_event_time_title);
+		tvEventTime = (TextView) findViewById(R.id.event_details_event_time);
+		tvEventPlaceTitle = (TextView) findViewById(R.id.event_details_event_place_title);
+		tvEventPlace = (TextView) findViewById(R.id.event_details_event_place);
+		tvEventDescription = (TextView) findViewById(R.id.event_details_event_description);
+		tvEventPublisher = (TextView) findViewById(R.id.event_details_event_publisher);
+		tvEventAddTime = (TextView) findViewById(R.id.event_details_event_add_time);
+		tvEventState = (TextView) findViewById(R.id.event_details_event_state);
+		
+		//打开或创建数据库
+		dbHelper = new MyDatabaseHelper(this, "EasyEcard.db", null, 1);
 		
 		Intent intent = getIntent();
 		String data = intent.getStringExtra("extra_data");
