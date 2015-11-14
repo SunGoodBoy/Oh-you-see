@@ -26,6 +26,12 @@
             android:orientation="vertical"
             android:padding="5dp" >
 
+            <!-- 分割线 -->
+			<View android:layout_width="fill_parent" 
+			    android:layout_height="1dp" 
+			    android:background="#90909090" 
+			    android:layout_marginBottom="1dp" 
+			    android:layout_marginTop="1dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -47,8 +53,15 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="5"
                     android:textSize="20sp" />
+                
             </LinearLayout>
 
+            <!-- 分割线 -->
+			<View android:layout_width="fill_parent" 
+			    android:layout_height="1dp" 
+			    android:background="#90909090" 
+			    android:layout_marginBottom="1dp" 
+			    android:layout_marginTop="1dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -72,11 +85,17 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="5"
                     android:textSize="20sp" />
+                
             </LinearLayout>
         </LinearLayout>
 
     </LinearLayout>
-    
+    <!-- 分割线 -->
+	<View android:layout_width="fill_parent" 
+		android:layout_height="1dp" 
+		android:background="#90909090" 
+		android:layout_marginBottom="1dp" 
+		android:layout_marginTop="1dp"/>			    			
     <!-- 联系方式 -->
     <LinearLayout
         android:layout_width="match_parent"
@@ -101,7 +120,12 @@
             android:textSize="20sp"
             /> 
     </LinearLayout>
-    
+    <!-- 分割线 -->
+	<View android:layout_width="fill_parent" 
+		android:layout_height="1dp" 
+		android:background="#90909090" 
+		android:layout_marginBottom="1dp" 
+		android:layout_marginTop="1dp"/>
     <!-- 事件时间 -->
     <LinearLayout
         android:layout_width="match_parent"
@@ -125,7 +149,12 @@
             android:gravity="center"
             /> 
     </LinearLayout>
-    
+    <!-- 分割线 -->
+	<View android:layout_width="fill_parent" 
+		android:layout_height="1dp" 
+		android:background="#90909090" 
+		android:layout_marginBottom="1dp" 
+		android:layout_marginTop="1dp"/>
     <!-- 地点 -->
     <LinearLayout
         android:layout_width="match_parent"
@@ -150,7 +179,12 @@
             android:gravity="center"
             /> 
     </LinearLayout>
-    
+    <!-- 分割线 -->
+	<View android:layout_width="fill_parent" 
+		android:layout_height="1dp" 
+		android:background="#90909090" 
+		android:layout_marginBottom="1dp" 
+		android:layout_marginTop="1dp"/>
     <!-- 描述 -->
     <LinearLayout
         android:layout_width="match_parent"
@@ -176,7 +210,12 @@
             android:gravity="center"
             /> 
     </LinearLayout>
-    
+    <!-- 分割线 -->
+	<View android:layout_width="fill_parent" 
+		android:layout_height="1dp" 
+		android:background="#90909090" 
+		android:layout_marginBottom="1dp" 
+		android:layout_marginTop="1dp"/>
     <!-- 发布者 -->
     <LinearLayout
         android:layout_width="match_parent"
@@ -202,7 +241,12 @@
             android:gravity="center"
             /> 
     </LinearLayout>
-    
+    <!-- 分割线 -->
+	<View android:layout_width="fill_parent" 
+		android:layout_height="1dp" 
+		android:background="#90909090" 
+		android:layout_marginBottom="1dp" 
+		android:layout_marginTop="1dp"/>
     <!-- 发布时间 -->
     <LinearLayout
         android:layout_width="match_parent"
@@ -228,7 +272,12 @@
             android:gravity="center"
             /> 
     </LinearLayout>
-    
+    <!-- 分割线 -->
+	<View android:layout_width="fill_parent" 
+		android:layout_height="1dp" 
+		android:background="#90909090" 
+		android:layout_marginBottom="1dp" 
+		android:layout_marginTop="1dp"/>
     <!-- 事件状态 -->
     <LinearLayout
         android:layout_width="match_parent"
@@ -253,6 +302,12 @@
             android:gravity="center"
             /> 
     </LinearLayout>
+    <!-- 分割线 -->
+	<View android:layout_width="fill_parent" 
+		android:layout_height="1dp" 
+		android:background="#90909090" 
+		android:layout_marginBottom="1dp" 
+		android:layout_marginTop="1dp"/>
 
 </LinearLayout>
 </ScrollView>

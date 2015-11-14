@@ -109,7 +109,7 @@ public class SearchResultActivity extends BaseActivity implements IXListViewList
     				event.getEvent_owner().setUsername(cursor.getString(cursor.getColumnIndex("owner_name")));
     				event.getEvent_owner().setImageId(R.drawable.app_icon);
     				eventList.add(event);
-    				Log.d("SearchResult eventListSize", String.valueOf(eventList.size()));
+    				//Log.d("SearchResult eventListSize", String.valueOf(eventList.size()));
 				}
 				else if (queryString.equals(cursor.getString(cursor.getColumnIndex("owner_name"))))
 				{
@@ -151,8 +151,15 @@ public class SearchResultActivity extends BaseActivity implements IXListViewList
 	public void onItemClick(AdapterView<?> view, View arg1, int position, long arg3) {
 		// TODO Auto-generated method stub
 		//可以跳转至详细信息界面了
-		Toast.makeText(this, ((Event)view.getItemAtPosition(position))
-				.getEvent_owner().getUsername(), Toast.LENGTH_SHORT).show();		
+		//Toast.makeText(this, ((Event)view.getItemAtPosition(position))
+			//	.getEvent_owner().getUsername(), Toast.LENGTH_SHORT).show();
+		//获得点击项的学号并传递到EventDetailsActivity
+		Intent intent = new Intent(this, EventDetailsActivity.class);
+		String stu_id = ((Event)view.getItemAtPosition(position)).getEvent_owner().getStu_id();
+		String data = stu_id + "__3";
+		intent.putExtra("extra_data", data);
+		Log.d("extra_data in SearchResultActivity", data);
+		startActivity(intent);
 	}
 
 	//activity重新置顶

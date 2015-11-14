@@ -10,6 +10,7 @@ import com.duang.easyecard.util.EventAdapter;
 import com.duang.easyecard.util.XListView;
 import com.duang.easyecard.util.XListView.IXListViewListener;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -114,9 +115,17 @@ public class FirstFragment extends Fragment implements IXListViewListener, OnIte
 	//Item的点击监听事件
 	@Override
 	public void onItemClick(AdapterView<?> view, View arg1, int position, long arg3) {
-		//可以跳转至详细信息界面了
-		Toast.makeText(this.getActivity(), ((Event)view.getItemAtPosition(position))
-				.getEvent_owner().getUsername(), Toast.LENGTH_SHORT).show();
+		//跳转至详细信息界面
+		//Toast.makeText(this.getActivity(), ((Event)view.getItemAtPosition(position))
+				//.getEvent_owner().getUsername(), Toast.LENGTH_SHORT).show();
+		
+		//获得点击项的学号并传递到EventDetailsActivity
+		Intent intent = new Intent(getActivity(), EventDetailsActivity.class);
+		String stu_id = ((Event)view.getItemAtPosition(position)).getEvent_owner().getStu_id();
+		String data = stu_id + "__1";
+		intent.putExtra("extra_data", data);
+		Log.d("extra_data in FirstFragment", data);
+		startActivity(intent);
 	}
 	
 }
