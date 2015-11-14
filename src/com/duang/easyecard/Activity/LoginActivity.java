@@ -2,6 +2,7 @@ package com.duang.easyecard.Activity;
 
 import com.duang.easyecard.R;
 import com.duang.easyecard.db.MyDatabaseHelper;
+import com.duang.easyecard.model.User;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -69,6 +70,10 @@ public class LoginActivity extends BaseActivity {
 				if (!password.isEmpty())	{
 					if (passwordIsRight(username, password))	{
 						//跳转到程序功能界面，结束LoginActivity
+						
+						//设置为当前用户
+						User.setCurrentUserStuId(username);
+						
 						Toast.makeText(LoginActivity.this, "登录成功！", Toast.LENGTH_SHORT).show();
 						Intent intent = new Intent(LoginActivity.this, MainActivity.class);
 						startActivity(intent);

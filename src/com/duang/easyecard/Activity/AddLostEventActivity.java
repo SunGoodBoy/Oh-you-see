@@ -4,6 +4,7 @@ import java.util.Calendar;
 
 import com.duang.easyecard.R;
 import com.duang.easyecard.db.MyDatabaseHelper;
+import com.duang.easyecard.model.User;
 
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -111,7 +112,10 @@ public class AddLostEventActivity extends BaseActivity	{
 
 	//将数据写入数据库
 	private void writeDataToDb() {
-		// TODO Auto-generated method stub		
+		
+		//获得当前用户作为发布者
+		String publisher = User.getCurrentUserStuId();
+		
 		String stu_id = mStu_id.getText().toString();
 		String name = mName.getText().toString();
 		String contact = mContact.getText().toString();
@@ -151,6 +155,7 @@ public class AddLostEventActivity extends BaseActivity	{
 		//写入数据库
 		SQLiteDatabase db = dbHelper.getWritableDatabase();
 		db.execSQL("insert into LostEvent ("
+				+ "publiser_stu_id, "
 				+ "add_date, "
 				+ "add_time, "
 				+ "owner_stu_id, "
@@ -163,8 +168,8 @@ public class AddLostEventActivity extends BaseActivity	{
 				+ "duration, "
 				+ "found_flag, "
 				+ "close_flag)"
-				+ "values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-				new String[] {add_date, add_time, stu_id, name, contact, lost_date, lost_time, 
+				+ "values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+				new String[] {publisher, add_date, add_time, stu_id, name, contact, lost_date, lost_time, 
 						lost_place, descrption, "30", "0", "0"});
 		
 	}

@@ -9,6 +9,8 @@ public class User {
 	
 	private int imageId;
 	
+	private static String currentUserStuId;
+	
 	public User()	{
 		super();
 	}
@@ -64,5 +66,19 @@ public class User {
 	
 	public void setImageId(int imageId)	{
 		this.imageId = imageId;
+	}
+
+	/**
+	 * @return the currentUserStuId
+	 */
+	public static String getCurrentUserStuId() {
+		return currentUserStuId;
+	}
+
+	/**
+	 * @param currentUserStuId the currentUserStuId to set
+	 */
+	public static void setCurrentUserStuId(String currentUserStuId) {
+		User.currentUserStuId = currentUserStuId;
 	}
 }

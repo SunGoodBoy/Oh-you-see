@@ -2,6 +2,7 @@ package com.duang.easyecard.Activity;
 
 import com.duang.easyecard.R;
 import com.duang.easyecard.db.MyDatabaseHelper;
+import com.duang.easyecard.model.User;
 
 import android.app.AlertDialog;
 import android.content.ContentValues;
@@ -97,6 +98,9 @@ public class SignupActivity extends BaseActivity {
 							if (password.equals(password_confirm))	{
 								writeDataToDb();
 								Toast.makeText(SignupActivity.this, "注册成功！", Toast.LENGTH_SHORT).show();
+								
+								//设置为当前用户
+								User.setCurrentUserStuId(stu_id);
 								
 								//通过AlertDialog询问是否直接登录
 								AlertDialog.Builder dialog = new AlertDialog.Builder(SignupActivity.this);
