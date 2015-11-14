@@ -49,7 +49,8 @@
     <string name="xlistview_footer_hint_ready">松开载入更多</string>
     
     <!-- Fragment Title -->
-    <string name="lost_event">丢卡信息</string>
+    <string name="lost_event">丢失信息</string>
+    <string name="found_event">拾获信息</string>
     
     <!-- SearchResultActivity -->
     <string name="search_result">搜索结果</string>
