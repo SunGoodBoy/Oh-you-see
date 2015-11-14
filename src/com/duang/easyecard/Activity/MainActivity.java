@@ -140,6 +140,8 @@ OnPageChangeListener{
 			break;
 		case R.id.action_add_found_info:
 			//跳转到添加拾获信息
+			intent = new Intent(MainActivity.this, AddFoundEventActivity.class);
+			startActivity(intent);
 			break;
 		case R.id.action_feedback:
 			//跳转到意见反馈

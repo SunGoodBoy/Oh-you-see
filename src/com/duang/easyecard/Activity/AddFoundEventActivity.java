@@ -15,7 +15,7 @@ import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-public class AddLostEventActivity extends BaseActivity	{
+public class AddFoundEventActivity extends BaseActivity	{
 
 	
 	private MyDatabaseHelper dbHelper;
@@ -23,7 +23,7 @@ public class AddLostEventActivity extends BaseActivity	{
 	private EditText mStu_id;
 	private EditText mName;
 	private EditText mContact;
-	private EditText mLost_place;
+	private EditText mFound_place;
 	private EditText mDescription;
 	
 	private DatePicker mDatePicker;
@@ -34,19 +34,19 @@ public class AddLostEventActivity extends BaseActivity	{
 	public void onCreate(Bundle savedInstanceState)	{
 		super.onCreate(savedInstanceState);
 		//requestWindowFeature(Window.FEATURE_NO_TITLE);
-		setContentView(R.layout.add_lost_event);
+		setContentView(R.layout.add_found_event);
 		
-		mStu_id = (EditText) findViewById(R.id.add_lost_event_stu_id_edit);
-		mName = (EditText) findViewById(R.id.add_lost_event_name_edit);
-		mContact = (EditText) findViewById(R.id.add_lost_event_contact_edit);
-		mLost_place = (EditText) findViewById(R.id.add_event_lost_place_edit);
-		mDescription = (EditText) findViewById(R.id.add_event_lost_lost_decription_edit);
+		mStu_id = (EditText) findViewById(R.id.add_found_event_stu_id_edit);
+		mName = (EditText) findViewById(R.id.add_found_event_name_edit);
+		mContact = (EditText) findViewById(R.id.add_found_event_contact_edit);
+		mFound_place = (EditText) findViewById(R.id.add_event_found_place_edit);
+		mDescription = (EditText) findViewById(R.id.add_event_found_decription_edit);
 		
-		mDatePicker = (DatePicker) findViewById(R.id.add_event_lost_date_picker);
-		mTimePicker = (TimePicker) findViewById(R.id.add_event_lost_time_picker);
+		mDatePicker = (DatePicker) findViewById(R.id.add_event_found_date_picker);
+		mTimePicker = (TimePicker) findViewById(R.id.add_event_found_time_picker);
 		
-		mSubmit_button = (Button) findViewById(R.id.add_lost_event_submit);
-		mCancel_button = (Button) findViewById(R.id.add_lost_event_cancel);
+		mSubmit_button = (Button) findViewById(R.id.add_found_event_submit);
+		mCancel_button = (Button) findViewById(R.id.add_found_event_cancel);
 		
 		mTimePicker.setIs24HourView(true);	//设置时钟为24小时制
 		
@@ -59,7 +59,7 @@ public class AddLostEventActivity extends BaseActivity	{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				addLostEvent_main(v);
+				addFoundEvent_main(v);
 			}
 		});
 		
@@ -75,7 +75,7 @@ public class AddLostEventActivity extends BaseActivity	{
 		});
 	}
 	
-	private void addLostEvent_main(View v)	{
+	private void addFoundEvent_main(View v)	{
 		
 		String stu_id = mStu_id.getText().toString();
 		String name = mName.getText().toString();
@@ -89,23 +89,23 @@ public class AddLostEventActivity extends BaseActivity	{
 						//将数据写入数据库
 						writeDataToDb();
 						finish();
-						Toast.makeText(AddLostEventActivity.this, "提交成功！", Toast.LENGTH_SHORT).show();
+						Toast.makeText(AddFoundEventActivity.this, "提交成功！", Toast.LENGTH_SHORT).show();
 					}
 					else {
-						Toast.makeText(AddLostEventActivity.this, "必须填写联系方式！", Toast.LENGTH_SHORT).show();
+						Toast.makeText(AddFoundEventActivity.this, "必须填写联系方式！", Toast.LENGTH_SHORT).show();
 					}
 				}
 				else	{
-					Toast.makeText(AddLostEventActivity.this, "姓名不能为空！", Toast.LENGTH_SHORT).show();
+					Toast.makeText(AddFoundEventActivity.this, "姓名不能为空！", Toast.LENGTH_SHORT).show();
 				}
 				
 			}
 			else {
-				Toast.makeText(AddLostEventActivity.this, "学号必须为11位！", Toast.LENGTH_SHORT).show();
+				Toast.makeText(AddFoundEventActivity.this, "学号必须为11位！", Toast.LENGTH_SHORT).show();
 			}
 		}
 		else	{
-			Toast.makeText(AddLostEventActivity.this, "学号不能为空", Toast.LENGTH_LONG).show();
+			Toast.makeText(AddFoundEventActivity.this, "学号不能为空", Toast.LENGTH_LONG).show();
 		}
 	}
 
@@ -115,7 +115,7 @@ public class AddLostEventActivity extends BaseActivity	{
 		String stu_id = mStu_id.getText().toString();
 		String name = mName.getText().toString();
 		String contact = mContact.getText().toString();
-		String lost_place = mLost_place.getText().toString();
+		String found_place = mFound_place.getText().toString();
 		String descrption = mDescription.getText().toString();
 		
 		//将系统的当前日期传给add_date，当前时间传给add_time
@@ -133,7 +133,7 @@ public class AddLostEventActivity extends BaseActivity	{
 		year = mDatePicker.getYear();
 		month = mDatePicker.getMonth();
 		day_of_month = mDatePicker.getDayOfMonth();
-		String lost_date = String.valueOf(year) + "-" + String.valueOf(month) + "-" + String.valueOf(day_of_month);
+		String found_date = String.valueOf(year) + "-" + String.valueOf(month) + "-" + String.valueOf(day_of_month);
 		
 		/** 打印时间以确认是否正确
 		Log.d("year", String.valueOf(year));
@@ -146,31 +146,28 @@ public class AddLostEventActivity extends BaseActivity	{
 		//获取TimePicker中的时间
 		hour = mTimePicker.getCurrentHour();
 		minute = mTimePicker.getCurrentMinute();
-		String lost_time = String.valueOf(hour) + ":" + String.valueOf(minute) + ":" + "00";
+		String found_time = String.valueOf(hour) + ":" + String.valueOf(minute) + ":" + "00";
 		
 		//写入数据库
 		SQLiteDatabase db = dbHelper.getWritableDatabase();
-		db.execSQL("insert into LostEvent ("
+		db.execSQL("insert into FoundEvent ("
 				+ "add_date, "
 				+ "add_time, "
 				+ "owner_stu_id, "
 				+ "owner_name, "
 				+ "owner_contact, "
-				+ "lost_date, "
-				+ "lost_time, "
-				+ "lost_place, "
+				+ "found_date, "
+				+ "found_time, "
+				+ "found_place, "
 				+ "description, "
 				+ "duration, "
-				+ "found_flag, "
+				+ "returned_flag, "
 				+ "close_flag)"
 				+ "values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-				new String[] {add_date, add_time, stu_id, name, contact, lost_date, lost_time, 
-						lost_place, descrption, "30", "0", "0"});
+				new String[] {add_date, add_time, stu_id, name, contact, found_date, found_time, 
+						found_place, descrption, "30", "0", "0"});
 		
 	}
-	
-	
-	
-	
+		
 }
 

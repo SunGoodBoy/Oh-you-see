@@ -34,6 +34,11 @@
     <string name="submit">提交</string>
     <string name="description">描述</string>
     
+    <string name="add_found_event">添加拾获信息</string>
+    <string name="set_found_time">设置拾获时间</string>
+    <string name="set_found_date">设置拾获日期</string>
+    <string name="found_place">拾获地点</string>
+    
     <!-- list_item -->
     
     <string name="xlistview_header_hint_normal">下拉刷新</string>
