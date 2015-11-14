@@ -21,6 +21,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.TextView;
 
 public class SearchResultActivity extends BaseActivity implements IXListViewListener, OnItemClickListener
 {
@@ -31,11 +32,17 @@ public class SearchResultActivity extends BaseActivity implements IXListViewList
 	private List<Event> eventList = new ArrayList<Event>();
 	private Handler mHandler;
 	
+	private TextView tvSearchResultTitle;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.search_result);
+		Log.d("SearchResultActivity", "onCreate is called");
+		
+		//打开或创建数据库
+		dbHelper = new MyDatabaseHelper(this, "EasyEcard.db", null, 1);
 		
 		geneSearchQueryItems(getIntent());
 		
@@ -44,8 +51,8 @@ public class SearchResultActivity extends BaseActivity implements IXListViewList
 	}
 
 	private void initView() {
-		// TODO Auto-generated method stub
-		xListView = (XListView) findViewById(R.id.xListView_first_fragment);
+		Log.d("SearchResultActivity doSearchQuery", "initView is called");
+		xListView = (XListView) findViewById(R.id.xListView_search_result);
 		xListView.setPullLoadEnable(true);
 		xListView.setPullRefreshEnable(true);
 		mAdapter = new EventAdapter(this, eventList, R.layout.list_item);
@@ -53,6 +60,7 @@ public class SearchResultActivity extends BaseActivity implements IXListViewList
 		xListView.setXListViewListener(this);
 		xListView.setOnItemClickListener(this);
 		mHandler = new Handler();
+		Log.d("SearchResultActivity doSearchQuery", "initView called finished");
 	}
 
 	//生成Item项
@@ -69,59 +77,73 @@ public class SearchResultActivity extends BaseActivity implements IXListViewList
         {
         	//获取搜索内容
         	String queryString = intent.getStringExtra(SearchManager.QUERY);
+        	Log.d("QureyString", queryString);
         	
-        	/*
-        	 * 根据queryString依次在数据库的两张Event表中搜索
-        	 * 只搜索owner_stu_id和owner_name列
-        	 */
-        	eventList = new ArrayList<Event>();
-        	SQLiteDatabase db = dbHelper.getReadableDatabase();
-        	//遍历LostEvent表
-    		Cursor cursor = db.query("LostEvent", null, null, null, null, null, null);
-    		if (cursor.moveToLast())
-    		{
-    			do{
-    				if (queryString.equals(cursor.getString(cursor.getColumnIndex("owner_stu_id"))))
-    				{
-    					Event event = new Event(cursor.getString(cursor.getColumnIndex("owner_stu_id")));
-        				event.getEvent_owner().setUsername(cursor.getString(cursor.getColumnIndex("owner_name")));
-        				event.getEvent_owner().setImageId(R.drawable.app_icon);
-        				eventList.add(event);
-    				}
-    				else if (queryString.equals(cursor.getString(cursor.getColumnIndex("owner_name"))))
-    				{
-    					Event event = new Event(cursor.getString(cursor.getColumnIndex("owner_stu_id")));
-        				event.getEvent_owner().setUsername(cursor.getString(cursor.getColumnIndex("owner_name")));
-        				event.getEvent_owner().setImageId(R.drawable.app_icon);
-        				eventList.add(event);
-    				}
-    			} while (cursor.moveToPrevious());
-    		}
-    		//遍历FoundEvent表
-    		cursor = db.query("FoundEvent", null, null, null, null, null, null);
-    		if (cursor.moveToLast())
-    		{
-    			do{
-    				if (queryString.equals(cursor.getString(cursor.getColumnIndex("owner_stu_id"))))
-    				{
-    					Event event = new Event(cursor.getString(cursor.getColumnIndex("owner_stu_id")));
-        				event.getEvent_owner().setUsername(cursor.getString(cursor.getColumnIndex("owner_name")));
-        				event.getEvent_owner().setImageId(R.drawable.app_icon);
-        				eventList.add(event);
-    				}
-    				else if (queryString.equals(cursor.getString(cursor.getColumnIndex("owner_name"))))
-    				{
-    					Event event = new Event(cursor.getString(cursor.getColumnIndex("owner_stu_id")));
-        				event.getEvent_owner().setUsername(cursor.getString(cursor.getColumnIndex("owner_name")));
-        				event.getEvent_owner().setImageId(R.drawable.app_icon);
-        				eventList.add(event);
-    				}
-    			} while (cursor.moveToPrevious());
-    		}
-			cursor.close();
-			mAdapter = new EventAdapter(this, eventList, R.layout.list_item);
+        	tvSearchResultTitle = (TextView) findViewById(R.id.text_search_result_title);
+        	tvSearchResultTitle.setText("搜索内容：" + queryString);
+        	
+        	doSearchQuery(queryString);
         }
         
+	}
+
+	/*
+	 * 根据queryString依次在数据库的两张Event表中搜索
+	 * 只搜索owner_stu_id和owner_name列
+	 */
+	private void doSearchQuery(String queryString) {
+		
+		Log.d("SearchResultActivity doSearchQuery", "doSearchQuery is called.");
+		
+		eventList = new ArrayList<Event>();
+    	SQLiteDatabase db = dbHelper.getReadableDatabase();
+    	Log.d("SearchResultActivity doSearchQuery", "get database");
+    	//遍历LostEvent表
+		Cursor cursor = db.query("LostEvent", null, null, null, null, null, null);
+		if (cursor.moveToLast())
+		{
+			do{
+				if (queryString.equals(cursor.getString(cursor.getColumnIndex("owner_stu_id"))))
+				{
+					Event event = new Event(cursor.getString(cursor.getColumnIndex("owner_stu_id")));
+    				event.getEvent_owner().setUsername(cursor.getString(cursor.getColumnIndex("owner_name")));
+    				event.getEvent_owner().setImageId(R.drawable.app_icon);
+    				eventList.add(event);
+    				Log.d("SearchResult eventListSize", String.valueOf(eventList.size()));
+				}
+				else if (queryString.equals(cursor.getString(cursor.getColumnIndex("owner_name"))))
+				{
+					Event event = new Event(cursor.getString(cursor.getColumnIndex("owner_stu_id")));
+    				event.getEvent_owner().setUsername(cursor.getString(cursor.getColumnIndex("owner_name")));
+    				event.getEvent_owner().setImageId(R.drawable.app_icon);
+    				eventList.add(event);
+				}
+			} while (cursor.moveToPrevious());
+		}
+		
+		//遍历FoundEvent表
+		cursor = db.query("FoundEvent", null, null, null, null, null, null);
+		if (cursor.moveToLast())
+		{
+			do{
+				if (queryString.equals(cursor.getString(cursor.getColumnIndex("owner_stu_id"))))
+				{
+					Event event = new Event(cursor.getString(cursor.getColumnIndex("owner_stu_id")));
+    				event.getEvent_owner().setUsername(cursor.getString(cursor.getColumnIndex("owner_name")));
+    				event.getEvent_owner().setImageId(R.drawable.app_icon);
+    				eventList.add(event);
+				}
+				else if (queryString.equals(cursor.getString(cursor.getColumnIndex("owner_name"))))
+				{
+					Event event = new Event(cursor.getString(cursor.getColumnIndex("owner_stu_id")));
+    				event.getEvent_owner().setUsername(cursor.getString(cursor.getColumnIndex("owner_name")));
+    				event.getEvent_owner().setImageId(R.drawable.app_icon);
+    				eventList.add(event);
+				}
+			} while (cursor.moveToPrevious());
+		}
+		cursor.close();
+		mAdapter = new EventAdapter(this, eventList, R.layout.list_item);
 	}
 
 	//Item项的点击事件

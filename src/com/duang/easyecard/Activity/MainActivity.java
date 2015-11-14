@@ -104,10 +104,7 @@ OnPageChangeListener{
 		SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
 		//MenuItem searchItem = menu.findItem(R.id.action_search);  
 	    //SearchView searchView = (SearchView) searchItem.getActionView();
-		
-		//设置当查询条件为空时显示的一个提示字符串
-		searchView.setQueryHint("请输入学号或姓名");
-		
+
 		if (searchView == null)
 		{
 			Log.e("SearchView", "Fail to get SearchView");
@@ -116,14 +113,12 @@ OnPageChangeListener{
 		
 		//获取搜索服务管理器
 		SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-		//Intent intent = getIntent();
 		//所在Activity中的 component name，由此系统可以通过Intent唤起
-		ComponentName cn = new ComponentName(MainActivity.this, SearchResultActivity.class);
-		//intent.setComponent(cn);
-		
-		/* 通过搜索管理器，从searchable activity(所在的Activity)中获取相关搜索信息，就是searchable的xml设置。
-		 * 如果返回null，表示该activity不存在，或者不是searchable
-		*/
+		ComponentName cn = new ComponentName(this, SearchResultActivity.class);
+		/*
+		 *  通过搜索管理器，从searchable activity(所在的Activity)中获取相关搜索信息，就是searchable的xml设置。
+		 *  如果返回null，表示该activity不存在，或者不是searchable
+		 */
 		SearchableInfo info = searchManager.getSearchableInfo(cn);
 		if (info == null)
 		{
@@ -131,8 +126,7 @@ OnPageChangeListener{
 		}
 		//将searchable activity的搜索信息与searchView关联
 		searchView.setSearchableInfo(info);
-		
-		//searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+
 		return true;
 	}
 	

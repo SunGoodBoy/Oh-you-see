@@ -47,6 +47,9 @@
     
     <!-- SearchResultActivity -->
     <string name="search_result">搜索结果</string>
+    <string name="search_content">搜索内容</string>
+    <string name="search_label">搜索标签</string>
+    <string name="search_hint">请输入学号或姓名</string>
     
     <!-- Tab -->
     <string name="tab_lost">丢失</string>

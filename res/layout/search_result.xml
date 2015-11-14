@@ -9,8 +9,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textSize="20sp"
-        android:gravity="center"
-        android:text="@string/search_result" />
+        android:gravity="center" />
 
     <com.duang.easyecard.util.XListView 
         android:id="@+id/xListView_search_result"
