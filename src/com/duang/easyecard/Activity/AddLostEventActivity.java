@@ -8,7 +8,6 @@ import com.duang.easyecard.db.MyDatabaseHelper;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.DatePicker;
