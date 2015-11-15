@@ -130,23 +130,15 @@ public class AddFoundEventActivity extends BaseActivity	{
 		int hour = calendar.get(Calendar.HOUR_OF_DAY);
 		int minute = calendar.get(Calendar.MINUTE);
 		
-		String add_date = String.valueOf(year) + "-" + String.valueOf(month) + "-" + String.valueOf(day_of_month);
+		String add_date = String.valueOf(year) + "-" + String.valueOf(month+1) + "-" + String.valueOf(day_of_month);
 		String add_time = String.valueOf(hour) + ":" + String.valueOf(minute) + ":" + "00";
 		
 		//获取DatePicker中的日期
 		year = mDatePicker.getYear();
 		month = mDatePicker.getMonth();
 		day_of_month = mDatePicker.getDayOfMonth();
-		String found_date = String.valueOf(year) + "-" + String.valueOf(month) + "-" + String.valueOf(day_of_month);
-		
-		/** 打印时间以确认是否正确
-		Log.d("year", String.valueOf(year));
-		Log.d("month", String.valueOf(month));
-		Log.d("day_of_month", String.valueOf(day_of_month));
-		Log.d("hour", String.valueOf(hour));
-		Log.d("minute", String.valueOf(minute));
-		*/
-		
+		String found_date = String.valueOf(year) + "-" + String.valueOf(month+1) + "-" + String.valueOf(day_of_month);
+
 		//获取TimePicker中的时间
 		hour = mTimePicker.getCurrentHour();
 		minute = mTimePicker.getCurrentMinute();
