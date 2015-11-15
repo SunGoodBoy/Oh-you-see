@@ -143,6 +143,7 @@ public class SearchResultActivity extends BaseActivity implements IXListViewList
 			} while (cursor.moveToPrevious());
 		}
 		cursor.close();
+		db.close();
 		mAdapter = new EventAdapter(this, eventList, R.layout.list_item);
 	}
 

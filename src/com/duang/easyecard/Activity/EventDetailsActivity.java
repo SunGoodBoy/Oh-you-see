@@ -4,9 +4,6 @@ import java.util.StringTokenizer;
 
 import com.duang.easyecard.R;
 import com.duang.easyecard.db.MyDatabaseHelper;
-import com.duang.easyecard.model.Event;
-import com.duang.easyecard.model.User;
-
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -56,6 +53,10 @@ public class EventDetailsActivity extends BaseActivity{
 		
 		//打开或创建数据库
 		dbHelper = new MyDatabaseHelper(this, "EasyEcard.db", null, 1);
+		if (dbHelper == null)
+		{
+			Log.e("dbHelper", "Fail to open database.");
+		}		
 		
 		Intent intent = getIntent();
 		String data = intent.getStringExtra("extra_data");
@@ -67,7 +68,7 @@ public class EventDetailsActivity extends BaseActivity{
 		//Log.d("EventDetailsActivity stu_id in data", stu_id);
 		
 		int FLAG = Integer.parseInt(token.nextToken());
-		//Log.d("EventDetailsActivity FLAG in data", String.valueOf(FLAG));
+		Log.d("EventDetailsActivity FLAG in data", String.valueOf(FLAG));
 		
 		tvStu_id.setText(stu_id);	//显示学号
 		
@@ -86,10 +87,12 @@ public class EventDetailsActivity extends BaseActivity{
 		
 	}
 
-	private void getInfoFromLostEvent(String stu_id) {
-		// TODO Auto-generated method stub
+	protected void getInfoFromLostEvent(String stu_id) {
+		Log.d("stu_id in getInfoFromLostEvent", stu_id);
+		//Log.d("dbHelper in getInfoFromLostEvent", dbHelper.);
 		SQLiteDatabase db = dbHelper.getReadableDatabase();
 		Cursor cursor = db.query("LostEvent", null, null, null, null, null, null);
+		
 		if (cursor.moveToLast())
 		{
 			do{
@@ -102,19 +105,36 @@ public class EventDetailsActivity extends BaseActivity{
 					//显示丢失时间，格式为“2015年11月14日22点54分”
 					tvEventTimeTitle.setText("丢失时间");
 					String date = cursor.getString(cursor.getColumnIndex("lost_date"));
-					String split = "_";
+					String split = "-";
 					StringTokenizer token = new StringTokenizer(date, split);
-					String year = token.nextToken();
-					String month = token.nextToken();
-					String day = token.nextToken();
+					String year = null, month = null, day = null;
+					if (token.hasMoreTokens())
+					{
+						year = token.nextToken();
+					}
+					if (token.hasMoreTokens())
+					{
+						month = token.nextToken();
+					}
+					if (token.hasMoreTokens())
+					{
+						day = token.nextToken();
+					}
 					String time_in_day = cursor.getString(cursor.getColumnIndex("lost_time"));
 					split = ":";
 					token = new StringTokenizer(time_in_day, split);
-					String hour = token.nextToken();
-					String minute = token.nextToken();
+					String hour = null, minute = null;
+					if (token.hasMoreTokens())
+					{
+						hour = token.nextToken();
+					}
+					if (token.hasMoreTokens())
+					{
+						minute = token.nextToken();
+					}
 					tvEventTime.setText(year + "年" + month + "月" + day + "日" + hour + "点" + minute + "分");
 					Log.d("EventTime", year + "年" + month + "月" + day + "日" + hour + "点" + minute + "分");
-					
+
 					//显示丢失地点
 					tvEventPlaceTitle.setText("丢失地点");
 					tvEventPlace.setText(cursor.getString(cursor.getColumnIndex("lost_place")));
@@ -124,16 +144,36 @@ public class EventDetailsActivity extends BaseActivity{
 					tvEventPublisher.setText(cursor.getString(cursor.getColumnIndex("publiser_stu_id")));
 					//显示发布时间
 					date = cursor.getString(cursor.getColumnIndex("lost_date"));
-					split = "_";
+					split = "-";
 					token = new StringTokenizer(date, split);
-					year = token.nextToken();
-					month = token.nextToken();
-					day = token.nextToken();
+					year = null;
+					month = null;
+					day = null;
+					if (token.hasMoreTokens())
+					{
+						year = token.nextToken();
+					}
+					if (token.hasMoreTokens())
+					{
+						month = token.nextToken();
+					}
+					if (token.hasMoreTokens())
+					{
+						day = token.nextToken();
+					}
 					time_in_day = cursor.getString(cursor.getColumnIndex("lost_time"));
 					split = ":";
 					token = new StringTokenizer(time_in_day, split);
-					hour = token.nextToken();
-					minute = token.nextToken();
+					hour = null;
+					minute = null;
+					if (token.hasMoreTokens())
+					{
+						hour = token.nextToken();
+					}
+					if (token.hasMoreTokens())
+					{
+						minute = token.nextToken();
+					}
 					tvEventAddTime.setText(year + "年" + month + "月" + day + "日" + hour + "点" + minute + "分");
 					Log.d("EventTime", year + "年" + month + "月" + day + "日" + hour + "点" + minute + "分");
 					
@@ -168,16 +208,35 @@ public class EventDetailsActivity extends BaseActivity{
 					//显示拾获时间，格式为“2015年11月14日22点54分”
 					tvEventTimeTitle.setText("拾获时间");
 					String date = cursor.getString(cursor.getColumnIndex("found_date"));
-					String split = "_";
+					String split = "-";
 					StringTokenizer token = new StringTokenizer(date, split);
-					String year = token.nextToken();
-					String month = token.nextToken();
-					String day = token.nextToken();
+					String year = null, month = null, day = null;
+					if (token.hasMoreTokens())
+					{
+						year = token.nextToken();
+					}
+					if (token.hasMoreTokens())
+					{
+						month = token.nextToken();
+					}
+					if (token.hasMoreTokens())
+					{
+						day = token.nextToken();
+					}
+
 					String time_in_day = cursor.getString(cursor.getColumnIndex("found_time"));
 					split = ":";
 					token = new StringTokenizer(time_in_day, split);
-					String hour = token.nextToken();
-					String minute = token.nextToken();
+					String hour = null;
+					String minute = null;
+					if (token.hasMoreTokens())
+					{
+						hour = token.nextToken();
+					}
+					if (token.hasMoreTokens())
+					{
+						minute = token.nextToken();
+					}
 					tvEventTime.setText(year + "年" + month + "月" + day + "日" + hour + "点" + minute + "分");
 					Log.d("EventTime", year + "年" + month + "月" + day + "日" + hour + "点" + minute + "分");
 					
@@ -190,16 +249,33 @@ public class EventDetailsActivity extends BaseActivity{
 					tvEventPublisher.setText(cursor.getString(cursor.getColumnIndex("publiser_stu_id")));
 					//显示发布时间
 					date = cursor.getString(cursor.getColumnIndex("lost_date"));
-					split = "_";
+					split = "-";
 					token = new StringTokenizer(date, split);
-					year = token.nextToken();
-					month = token.nextToken();
-					day = token.nextToken();
+					if (token.hasMoreTokens())
+					{
+						year = token.nextToken();
+					}
+					if (token.hasMoreTokens())
+					{
+						month = token.nextToken();
+					}
+					if (token.hasMoreTokens())
+					{
+						day = token.nextToken();
+					}
 					time_in_day = cursor.getString(cursor.getColumnIndex("lost_time"));
 					split = ":";
 					token = new StringTokenizer(time_in_day, split);
-					hour = token.nextToken();
-					minute = token.nextToken();
+					hour = null;
+					minute = null;
+					if (token.hasMoreTokens())
+					{
+						hour = token.nextToken();
+					}
+					if (token.hasMoreTokens())
+					{
+						minute = token.nextToken();
+					}
 					tvEventAddTime.setText(year + "年" + month + "月" + day + "日" + hour + "点" + minute + "分");
 					Log.d("EventTime", year + "年" + month + "月" + day + "日" + hour + "点" + minute + "分");
 					
@@ -217,6 +293,5 @@ public class EventDetailsActivity extends BaseActivity{
 		}
 		cursor.close();
 	}
-
 	
 }

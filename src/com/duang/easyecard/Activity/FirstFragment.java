@@ -75,6 +75,7 @@ public class FirstFragment extends Fragment implements IXListViewListener, OnIte
 			} while (cursor.moveToPrevious());
 		}
 		cursor.close();
+		db.close();
 		mAdapter = new EventAdapter(this.getActivity(), eventList, R.layout.list_item);
 	}
 	

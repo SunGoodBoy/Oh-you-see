@@ -97,7 +97,7 @@ public class LoginActivity extends BaseActivity {
 	
 	//≈–∂œ√‹¬Î «∑Ò’˝»∑
 	protected boolean passwordIsRight(String username, String password)	{
-		SQLiteDatabase db = dbHelper.getWritableDatabase();
+		SQLiteDatabase db = dbHelper.getReadableDatabase();
 		Cursor cursor = db.query("UserInfo", null, null, null, null, null, null);
 		if (cursor.moveToFirst())	{
 			do	{
@@ -112,7 +112,7 @@ public class LoginActivity extends BaseActivity {
 			}	while (cursor.moveToNext());
 		}
 		cursor.close();
-		
+		db.close();
 		return false;
     }
 	
@@ -129,6 +129,7 @@ public class LoginActivity extends BaseActivity {
 			}	while (cursor.moveToNext());
 		}
 		cursor.close();
+		db.close();
 		return false;
 	}
     

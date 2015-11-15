@@ -75,6 +75,7 @@ public class SecondFragment extends Fragment implements IXListViewListener, OnIt
 			} while (cursor.moveToPrevious());
 		}
 		cursor.close();
+		db.close();
 		mAdapter = new EventAdapter(this.getActivity(), eventList, R.layout.list_item);
 	}
 	
