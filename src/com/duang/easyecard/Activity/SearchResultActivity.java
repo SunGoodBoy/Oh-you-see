@@ -103,7 +103,7 @@ public class SearchResultActivity extends BaseActivity implements IXListViewList
 		if (cursor.moveToLast())
 		{
 			do{
-				if (queryString.equals(cursor.getString(cursor.getColumnIndex("owner_stu_id"))))
+				if ((cursor.getString(cursor.getColumnIndex("owner_stu_id"))).contains(queryString))
 				{
 					Event event = new Event(cursor.getString(cursor.getColumnIndex("owner_stu_id")));
     				event.getEvent_owner().setUsername(cursor.getString(cursor.getColumnIndex("owner_name")));
@@ -111,7 +111,7 @@ public class SearchResultActivity extends BaseActivity implements IXListViewList
     				eventList.add(event);
     				//Log.d("SearchResult eventListSize", String.valueOf(eventList.size()));
 				}
-				else if (queryString.equals(cursor.getString(cursor.getColumnIndex("owner_name"))))
+				else if ((cursor.getString(cursor.getColumnIndex("owner_name"))).contains(queryString))
 				{
 					Event event = new Event(cursor.getString(cursor.getColumnIndex("owner_stu_id")));
     				event.getEvent_owner().setUsername(cursor.getString(cursor.getColumnIndex("owner_name")));
@@ -126,14 +126,14 @@ public class SearchResultActivity extends BaseActivity implements IXListViewList
 		if (cursor.moveToLast())
 		{
 			do{
-				if (queryString.equals(cursor.getString(cursor.getColumnIndex("owner_stu_id"))))
+				if ((cursor.getString(cursor.getColumnIndex("owner_stu_id"))).contains(queryString))
 				{
 					Event event = new Event(cursor.getString(cursor.getColumnIndex("owner_stu_id")));
     				event.getEvent_owner().setUsername(cursor.getString(cursor.getColumnIndex("owner_name")));
     				event.getEvent_owner().setImageId(R.drawable.app_icon);
     				eventList.add(event);
 				}
-				else if (queryString.equals(cursor.getString(cursor.getColumnIndex("owner_name"))))
+				else if ((cursor.getString(cursor.getColumnIndex("owner_name"))).contains(queryString))
 				{
 					Event event = new Event(cursor.getString(cursor.getColumnIndex("owner_stu_id")));
     				event.getEvent_owner().setUsername(cursor.getString(cursor.getColumnIndex("owner_name")));

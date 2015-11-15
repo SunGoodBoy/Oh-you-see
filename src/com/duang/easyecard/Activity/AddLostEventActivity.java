@@ -155,7 +155,7 @@ public class AddLostEventActivity extends BaseActivity	{
 		//Ğ´ÈëÊı¾İ¿â
 		SQLiteDatabase db = dbHelper.getWritableDatabase();
 		db.execSQL("insert into LostEvent ("
-				+ "publiser_stu_id, "
+				+ "publisher_stu_id, "
 				+ "add_date, "
 				+ "add_time, "
 				+ "owner_stu_id, "
