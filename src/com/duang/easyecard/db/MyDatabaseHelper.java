@@ -38,7 +38,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 			+ "description, "
 			+ "duration text, "
 			+ "due_date int, "
-			+ "publiser_stu_id text, "
+			+ "publisher_stu_id text, "
 			+ "found_flag bool, "
 			+ "close_flag bool)";
 	

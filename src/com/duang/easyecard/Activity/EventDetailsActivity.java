@@ -133,7 +133,7 @@ public class EventDetailsActivity extends BaseActivity{
 						minute = token.nextToken();
 					}
 					tvEventTime.setText(year + "年" + month + "月" + day + "日" + hour + "点" + minute + "分");
-					Log.d("EventTime", year + "年" + month + "月" + day + "日" + hour + "点" + minute + "分");
+					Log.d("EventLostTime", year + "年" + month + "月" + day + "日" + hour + "点" + minute + "分");
 
 					//显示丢失地点
 					tvEventPlaceTitle.setText("丢失地点");
@@ -141,7 +141,7 @@ public class EventDetailsActivity extends BaseActivity{
 					//显示描述
 					tvEventDescription.setText(cursor.getString(cursor.getColumnIndex("description")));
 					//显示发布者（仅学号）
-					tvEventPublisher.setText(cursor.getString(cursor.getColumnIndex("publiser_stu_id")));
+					tvEventPublisher.setText(cursor.getString(cursor.getColumnIndex("publisher_stu_id")));
 					//显示发布时间
 					date = cursor.getString(cursor.getColumnIndex("lost_date"));
 					split = "-";
@@ -175,21 +175,24 @@ public class EventDetailsActivity extends BaseActivity{
 						minute = token.nextToken();
 					}
 					tvEventAddTime.setText(year + "年" + month + "月" + day + "日" + hour + "点" + minute + "分");
-					Log.d("EventTime", year + "年" + month + "月" + day + "日" + hour + "点" + minute + "分");
+					Log.d("EventAddTime", year + "年" + month + "月" + day + "日" + hour + "点" + minute + "分");
 					
 					//显示事件状态  {"已经找到", "正在寻找"}
-					if (cursor.getColumnIndex("found_flag") == 0)
+					if (cursor.getString(cursor.getColumnIndex("found_flag")).equals("0"))
 					{
+						Log.d("found_flag", cursor.getString(cursor.getColumnIndex("found_flag")));
 						tvEventState.setText("正在寻找");
 					}
 					else
 					{
+						Log.d("found_flag", cursor.getString(cursor.getColumnIndex("found_flag")));
 						tvEventState.setText("已经找到");
 					}
 				}
 			} while (cursor.moveToPrevious());
 		}
 		cursor.close();
+		db.close();
 	}
 	
 	private void getInfoFromFoundEvent(String stu_id) {
@@ -238,7 +241,7 @@ public class EventDetailsActivity extends BaseActivity{
 						minute = token.nextToken();
 					}
 					tvEventTime.setText(year + "年" + month + "月" + day + "日" + hour + "点" + minute + "分");
-					Log.d("EventTime", year + "年" + month + "月" + day + "日" + hour + "点" + minute + "分");
+					Log.d("EventFoundTime", year + "年" + month + "月" + day + "日" + hour + "点" + minute + "分");
 					
 					//显示拾获地点
 					tvEventPlaceTitle.setText("拾获地点");
@@ -246,7 +249,7 @@ public class EventDetailsActivity extends BaseActivity{
 					//显示描述
 					tvEventDescription.setText(cursor.getString(cursor.getColumnIndex("description")));
 					//显示发布者（仅学号）
-					tvEventPublisher.setText(cursor.getString(cursor.getColumnIndex("publiser_stu_id")));
+					tvEventPublisher.setText(cursor.getString(cursor.getColumnIndex("publisher_stu_id")));
 					//显示发布时间
 					date = cursor.getString(cursor.getColumnIndex("lost_date"));
 					split = "-";
@@ -277,21 +280,24 @@ public class EventDetailsActivity extends BaseActivity{
 						minute = token.nextToken();
 					}
 					tvEventAddTime.setText(year + "年" + month + "月" + day + "日" + hour + "点" + minute + "分");
-					Log.d("EventTime", year + "年" + month + "月" + day + "日" + hour + "点" + minute + "分");
+					Log.d("EventAddTime", year + "年" + month + "月" + day + "日" + hour + "点" + minute + "分");
 					
 					//显示事件状态  {"已经归还", "寻找失主"}
-					if (cursor.getColumnIndex("returned_flag") == 0)
+					if (cursor.getString(cursor.getColumnIndex("returned_flag")).equals("0"))
 					{
+						Log.d("returned_flag", cursor.getString(cursor.getColumnIndex("returned_flag")));
 						tvEventState.setText("寻找失主");
 					}
 					else
 					{
+						Log.d("returned_flag", cursor.getString(cursor.getColumnIndex("returned_flag")));
 						tvEventState.setText("已经归还");
 					}
 				}
 			} while (cursor.moveToPrevious());
 		}
 		cursor.close();
+		db.close();
 	}
 	
 }
