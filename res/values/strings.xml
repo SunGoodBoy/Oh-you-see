@@ -57,7 +57,7 @@
     <string name="event_about_me">有关我的</string>
     <string name="event_by_me">我发布的</string>
     <string name="change_password">修改密码</string>
-    <string name="logout">退出登录</string>
+    <string name="logout">注销登录</string>
     
     <!-- SearchResultActivity -->
     <string name="search_result">搜索结果</string>

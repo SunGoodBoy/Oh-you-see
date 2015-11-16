@@ -2,28 +2,53 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:padding="10dp" >
     
     <Button
         android:id="@+id/personal_info_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/personal_info" />
+    <!-- 分割线 -->
+			<View android:layout_width="fill_parent" 
+			    android:layout_height="1dp" 
+			    android:background="#90909090" 
+			    android:layout_marginBottom="1dp" 
+			    android:layout_marginTop="1dp"/>
     <Button
         android:id="@+id/event_about_me_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/event_about_me" />
+    <!-- 分割线 -->
+			<View android:layout_width="fill_parent" 
+			    android:layout_height="1dp" 
+			    android:background="#90909090" 
+			    android:layout_marginBottom="1dp" 
+			    android:layout_marginTop="1dp"/>
     <Button
         android:id="@+id/event_by_me_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/event_by_me" />
+    <!-- 分割线 -->
+			<View android:layout_width="fill_parent" 
+			    android:layout_height="1dp" 
+			    android:background="#90909090" 
+			    android:layout_marginBottom="1dp" 
+			    android:layout_marginTop="1dp"/>
     <Button
         android:id="@+id/change_password_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/change_password" />
+    <!-- 分割线 -->
+			<View android:layout_width="fill_parent" 
+			    android:layout_height="1dp" 
+			    android:background="#90909090" 
+			    android:layout_marginBottom="1dp" 
+			    android:layout_marginTop="1dp"/>
     <Button
         android:id="@+id/logout_button"
         android:layout_width="match_parent"
