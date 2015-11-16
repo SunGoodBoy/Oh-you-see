@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+    
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textSize="15sp"
+            android:layout_gravity="left"
+            android:gravity="center"
+            android:text="@string/user_img"/>
+
+        <ImageView
+            android:id="@+id/personal_info_img"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="right"
+            android:contentDescription="@string/user_img"
+            android:src="@drawable/app_icon" />
+
+    </LinearLayout>
+    <!-- 分割线 -->
+			<View android:layout_width="fill_parent" 
+			    android:layout_height="1dp" 
+			    android:background="#90909090" 
+			    android:layout_marginBottom="1dp" 
+			    android:layout_marginTop="1dp"/>
+	<LinearLayout 
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal">
+		<!-- 学号 -->
+		<TextView
+			android:id="@+id/personal_info_stu_id_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text="@string/stu_id"
+            android:textSize="15sp" />
+		<EditText 
+			android:id="@+id/personal_info_stu_id_edit"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="5"
+			android:textSize="15sp"/>
+	</LinearLayout>
+	<!-- 分割线 -->
+			<View android:layout_width="fill_parent" 
+			    android:layout_height="1dp" 
+			    android:background="#90909090" 
+			    android:layout_marginBottom="1dp" 
+			    android:layout_marginTop="1dp"/>
+    <LinearLayout 
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+		<!-- 姓名 -->
+            <TextView
+			        android:id="@+id/personal_info_name_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="@string/name"
+                    android:textSize="15sp" />
+			<EditText 
+			    android:id="@+id/personal_info_name_edit"
+			    android:layout_width="0dp"
+			    android:layout_height="wrap_content"
+			    android:layout_weight="5"
+			    android:textSize="15sp"/>
+	</LinearLayout>
+			<!-- 分割线 -->
+			<View android:layout_width="fill_parent" 
+			    android:layout_height="1dp" 
+			    android:background="#90909090" 
+			    android:layout_marginBottom="1dp" 
+			    android:layout_marginTop="1dp"/>
+	<LinearLayout 
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    android:orientation="horizontal">
+			    <!-- 真实姓名 -->
+			<TextView
+			        android:id="@+id/personal_info_real_name_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="@string/realname"
+                    android:textSize="15sp" />
+			<EditText 
+			    android:id="@+id/personal_info_real_name_edit"
+			    android:layout_width="0dp"
+			    android:layout_height="wrap_content"
+			    android:layout_weight="5"
+			    android:textSize="15sp"/>
+	</LinearLayout>
+	
+
+</LinearLayout>
+</ScrollView>
