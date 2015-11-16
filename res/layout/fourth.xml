@@ -4,10 +4,30 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
     
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="fill_parent"
+    <Button
+        android:id="@+id/personal_info_button"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="第四个Fragment" />
+        android:text="@string/personal_info" />
+    <Button
+        android:id="@+id/event_about_me_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/event_about_me" />
+    <Button
+        android:id="@+id/event_by_me_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/event_by_me" />
+    <Button
+        android:id="@+id/change_password_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/change_password" />
+    <Button
+        android:id="@+id/logout_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/logout" />
 
 </LinearLayout>

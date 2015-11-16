@@ -251,7 +251,7 @@ public class EventDetailsActivity extends BaseActivity{
 					//显示发布者（仅学号）
 					tvEventPublisher.setText(cursor.getString(cursor.getColumnIndex("publisher_stu_id")));
 					//显示发布时间
-					date = cursor.getString(cursor.getColumnIndex("lost_date"));
+					date = cursor.getString(cursor.getColumnIndex("add_date"));
 					split = "-";
 					token = new StringTokenizer(date, split);
 					if (token.hasMoreTokens())
@@ -266,7 +266,7 @@ public class EventDetailsActivity extends BaseActivity{
 					{
 						day = token.nextToken();
 					}
-					time_in_day = cursor.getString(cursor.getColumnIndex("lost_time"));
+					time_in_day = cursor.getString(cursor.getColumnIndex("add_time"));
 					split = ":";
 					token = new StringTokenizer(time_in_day, split);
 					hour = null;
