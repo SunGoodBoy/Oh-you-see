@@ -22,6 +22,7 @@
     <string name="password_confirm">确认密码</string>
     <string name="grade">年级</string>
     <string name="college">学院</string>
+    <string name="department">系别</string>
     <string name="email">邮箱</string>
     <string name="contact">联系方式</string>
     <string name="signup">注册</string>

@@ -5,29 +5,42 @@
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical" >
+    android:orientation="vertical" 
+    android:padding="10dp">
     
-    <LinearLayout 
+    
+    <!-- 分割线 -->
+			<View android:layout_width="fill_parent" 
+			    android:layout_height="1dp" 
+			    android:background="#90909090" 
+			    android:layout_marginBottom="1dp" 
+			    android:layout_marginTop="1dp"/>
+    <RelativeLayout 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-        <TextView 
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:textSize="15sp"
-            android:layout_gravity="left"
-            android:gravity="center"
-            android:text="@string/user_img"/>
 
         <ImageView
             android:id="@+id/personal_info_img"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:layout_gravity="right"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
             android:contentDescription="@string/user_img"
+            android:paddingRight="20dp"
             android:src="@drawable/app_icon" />
 
-    </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:gravity="center"
+            android:text="@string/user_img"
+            android:textSize="15sp" />
+
+    </RelativeLayout>
     <!-- 分割线 -->
 			<View android:layout_width="fill_parent" 
 			    android:layout_height="1dp" 
@@ -37,22 +50,26 @@
 	<LinearLayout 
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:orientation="horizontal">
+		android:orientation="horizontal"
+		android:padding="10dp">
 		<!-- 学号 -->
 		<TextView
 			android:id="@+id/personal_info_stu_id_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:gravity="center"
-            android:text="@string/stu_id"
-            android:textSize="15sp" />
-		<EditText 
+            android:gravity="left"
+            android:layout_marginLeft="6dp"
+            android:textSize="15sp"
+            android:text="@string/stu_id" />
+		<TextView
 			android:id="@+id/personal_info_stu_id_edit"
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
 			android:layout_weight="5"
-			android:textSize="15sp"/>
+			android:textSize="15sp"
+			android:gravity="right"
+			android:paddingRight="10dp"/>
 	</LinearLayout>
 	<!-- 分割线 -->
 			<View android:layout_width="fill_parent" 
@@ -64,6 +81,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:padding="10dp"
             >
 		<!-- 姓名 -->
             <TextView
@@ -71,14 +89,17 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:gravity="center"
+                    android:gravity="left"
+            		android:layout_marginLeft="6dp"
                     android:text="@string/name"
                     android:textSize="15sp" />
-			<EditText 
+			<TextView
 			    android:id="@+id/personal_info_name_edit"
 			    android:layout_width="0dp"
 			    android:layout_height="wrap_content"
 			    android:layout_weight="5"
+			    android:paddingRight="10dp"
+			    android:gravity="right"
 			    android:textSize="15sp"/>
 	</LinearLayout>
 			<!-- 分割线 -->
@@ -90,6 +111,7 @@
 	<LinearLayout 
 			    android:layout_width="match_parent"
 			    android:layout_height="wrap_content"
+			    android:padding="10dp"
 			    android:orientation="horizontal">
 			    <!-- 真实姓名 -->
 			<TextView
@@ -97,17 +119,200 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:gravity="center"
+                    android:gravity="left"
+            		android:layout_marginLeft="6dp"
                     android:text="@string/realname"
                     android:textSize="15sp" />
-			<EditText 
+			<TextView
 			    android:id="@+id/personal_info_real_name_edit"
 			    android:layout_width="0dp"
 			    android:layout_height="wrap_content"
 			    android:layout_weight="5"
+			    android:paddingRight="10dp"
+			    android:gravity="right"
 			    android:textSize="15sp"/>
 	</LinearLayout>
+	<!-- 分割线 -->
+			<View android:layout_width="fill_parent" 
+			    android:layout_height="1dp" 
+			    android:background="#90909090" 
+			    android:layout_marginBottom="1dp" 
+			    android:layout_marginTop="1dp"/>
+	<LinearLayout 
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:padding="10dp"
+	    android:orientation="horizontal">
+		<!-- 性别 -->
+	    <TextView 
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="2"
+	        android:text="@string/gender"
+	        android:gravity="left"
+            android:layout_marginLeft="6dp"
+	        android:textSize="15sp"/>
+	    <TextView 
+	        android:id="@+id/personal_info_gender_edit"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="5"
+	        android:gravity="right"
+	        android:paddingRight="10dp"
+	        android:textSize="15sp"/>
+	</LinearLayout>
 	
+	<!-- 分割线 -->
+			<View android:layout_width="fill_parent" 
+			    android:layout_height="1dp" 
+			    android:background="#90909090" 
+			    android:layout_marginBottom="1dp" 
+			    android:layout_marginTop="1dp"/>
+	<LinearLayout 
+	    android:layout_height="wrap_content"
+	    android:layout_width="match_parent"
+	    android:padding="10dp"
+	    android:orientation="horizontal">
+	    <!-- 年级 -->
+	    <TextView 
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="2"
+	        android:text="@string/grade"
+	        android:gravity="left"
+            android:layout_marginLeft="6dp"
+	        android:textSize="15sp"/>
+	    <TextView 
+	        android:id="@+id/personal_info_grade_edit"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="5"
+	        android:gravity="right"
+	        android:paddingRight="10dp"
+	        android:textSize="15sp"/>
+	</LinearLayout>
+	<!-- 分割线 -->
+			<View android:layout_width="fill_parent" 
+			    android:layout_height="1dp" 
+			    android:background="#90909090" 
+			    android:layout_marginBottom="1dp" 
+			    android:layout_marginTop="1dp"/>
+	<LinearLayout 
+	    android:layout_height="wrap_content"
+	    android:layout_width="match_parent"
+	    android:padding="10dp"
+	    android:orientation="horizontal">
+	    <!-- 学院 -->
+	    <TextView 
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="2"
+	        android:text="@string/college"
+	        android:gravity="left"
+            android:layout_marginLeft="6dp"
+	        android:textSize="15sp"/>
+	    <TextView 
+	        android:id="@+id/personal_info_college_edit"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="5"
+	        android:gravity="right"
+	        android:paddingRight="10dp"
+	        android:textSize="15sp"/>
+	</LinearLayout>
 
+	<!-- 分割线 -->
+			<View android:layout_width="fill_parent" 
+			    android:layout_height="1dp" 
+			    android:background="#90909090" 
+			    android:layout_marginBottom="1dp" 
+			    android:layout_marginTop="1dp"/>
+	<LinearLayout 
+	    android:layout_height="wrap_content"
+	    android:layout_width="match_parent"
+	    android:padding="10dp"
+	    android:orientation="horizontal">
+	    <!-- 系别 -->
+	    <TextView 
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="2"
+	        android:text="@string/department"
+	        android:gravity="left"
+            android:layout_marginLeft="6dp"
+	        android:textSize="15sp"/>
+	    <TextView
+	        android:id="@+id/personal_info_department_edit"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="5"
+	        android:gravity="right"
+	        android:paddingRight="10dp"
+	        android:textSize="15sp"/>
+	</LinearLayout>
+	<!-- 分割线 -->
+			<View android:layout_width="fill_parent" 
+			    android:layout_height="1dp" 
+			    android:background="#90909090" 
+			    android:layout_marginBottom="1dp" 
+			    android:layout_marginTop="1dp"/>
+	<LinearLayout 
+	    android:layout_height="wrap_content"
+	    android:layout_width="match_parent"
+	    android:padding="10dp"
+	    android:orientation="horizontal">
+	    <!-- 联系方式 -->
+	    <TextView 
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="2"
+	        android:text="@string/contact"
+	        android:gravity="left"
+            android:layout_marginLeft="6dp"
+	        android:textSize="15sp"/>
+	    <TextView
+	        android:id="@+id/personal_info_contact_edit"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="5"
+	        android:gravity="right"
+	        android:paddingRight="10dp"
+	        android:textSize="15sp"/>
+	</LinearLayout>
+	<!-- 分割线 -->
+			<View android:layout_width="fill_parent" 
+			    android:layout_height="1dp" 
+			    android:background="#90909090" 
+			    android:layout_marginBottom="1dp" 
+			    android:layout_marginTop="1dp"/>
+	<LinearLayout 
+	    android:layout_height="wrap_content"
+	    android:layout_width="match_parent"
+	    android:padding="10dp"
+	    android:orientation="horizontal">
+	    <!-- Email -->
+	    <TextView 
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="2"
+	        android:text="@string/email"
+	        android:gravity="left"
+            android:layout_marginLeft="6dp"
+	        android:textSize="15sp"/>
+	    <TextView 
+	        android:id="@+id/personal_info_email_edit"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="5"
+	        android:gravity="right"
+	        android:paddingRight="10dp"
+	        android:textSize="15sp"/>
+	</LinearLayout>
+	<!-- 分割线 -->
+			<View android:layout_width="fill_parent" 
+			    android:layout_height="1dp" 
+			    android:background="#90909090" 
+			    android:layout_marginBottom="1dp" 
+			    android:layout_marginTop="1dp"/>
 </LinearLayout>
 </ScrollView>

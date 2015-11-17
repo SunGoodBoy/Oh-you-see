@@ -2,6 +2,7 @@ package com.duang.easyecard.Activity;
 
 import com.duang.easyecard.R;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -52,6 +53,8 @@ public class FourthFragment extends Fragment implements OnClickListener{
 		case R.id.personal_info_button:
 			//跳转到个人信息界面
 			Toast.makeText(this.getActivity(),"个人信息", Toast.LENGTH_SHORT).show();
+			Intent intent = new Intent(this.getActivity(), PersonalInfoActivity.class);
+			startActivity(intent);
 			break;
 		case R.id.event_about_me_button:
 			//跳转到与我相关界面

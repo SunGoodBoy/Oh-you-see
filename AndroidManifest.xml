@@ -61,14 +61,17 @@
                 <action android:name="android.intent.action.SEARCH"/>
             </intent-filter> 
             <meta-data android:name="android.app.searchable"
-                 android:resource="@xml/searchable"/>
-            
+                 android:resource="@xml/searchable"/>      
         </activity>
 
         <activity 
             android:name=".Activity.EventDetailsActivity"
             android:label="@string/event_details">
-            
+        </activity>
+        
+        <activity 
+            android:name=".Activity.PersonalInfoActivity"
+            android:label="@string/personal_info">
         </activity>
     </application>
 
