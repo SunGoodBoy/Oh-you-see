@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:padding="5dp">
+    
+    
+	<LinearLayout 
+	    android:id="@+id/personal_info_layout_stu_id"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		android:padding="10dp">		
+	<TextView
+	    android:id="@+id/personal_info_list_item_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:gravity="left"
+            android:layout_marginLeft="6dp"
+             />
+		<TextView
+		    android:id="@+id/personal_info_list_item_content"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="5"
+			android:textSize="15sp"
+			android:gravity="right"
+			android:paddingRight="10dp"
+			/>
+	</LinearLayout>
+
+	<View
+		     android:layout_width="fill_parent" 
+			    android:layout_height="1dp" 
+			    android:background="#90909090" 
+			    android:layout_marginBottom="1dp" 
+			    android:layout_marginTop="1dp"/>
+</LinearLayout>
+<!-- 分割线 -->
+		
