@@ -6,53 +6,26 @@
     android:orientation="vertical" 
     android:padding="10dp">
     
-    
-    <!-- 分割线 -->
-			<View android:layout_width="fill_parent" 
-			    android:layout_height="1dp" 
-			    android:background="#90909090" 
-			    android:layout_marginBottom="1dp" 
-			    android:layout_marginTop="1dp"/>
-    <RelativeLayout 
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:id="@+id/personal_info_layout_userpic">
-
-        <ImageView
-            android:id="@+id/personal_info_img"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:contentDescription="@string/user_img"
-            android:paddingRight="20dp"
-            android:src="@drawable/app_icon" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="16dp"
-            android:gravity="center"
-            android:text="@string/user_img"
-            android:textSize="15sp" />
-
-    </RelativeLayout>
-    
-    <!-- 分割线 -->
-			<View android:layout_width="fill_parent" 
-			    android:layout_height="1dp" 
-			    android:background="#90909090" 
-			    android:layout_marginBottom="1dp" 
-			    android:layout_marginTop="1dp"/>
-			
-	<com.duang.easyecard.util.XListView 
-        android:id="@+id/xListView_personal_info"
+    <ListView
+        android:id="@+id/listView_personal_info_img"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" 
-        android:fastScrollEnabled="true"
+        android:fastScrollEnabled="false"
         android:cacheColorHint="#00000000">
-    </com.duang.easyecard.util.XListView>
+    </ListView>
+    <!-- 分割线 -->
+			<View android:layout_width="fill_parent" 
+			    android:layout_height="1dp" 
+			    android:background="#90909090" 
+			    android:layout_marginBottom="1dp" 
+			    android:layout_marginTop="1dp"/>
+	<ListView
+        android:id="@+id/listView_personal_info_text"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" 
+        android:fastScrollEnabled="false"
+        android:cacheColorHint="#00000000">
+    </ListView>
+	
 </LinearLayout>
+

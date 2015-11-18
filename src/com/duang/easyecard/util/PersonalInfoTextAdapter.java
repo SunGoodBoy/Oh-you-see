@@ -3,15 +3,14 @@ package com.duang.easyecard.util;
 import java.util.List;
 
 import com.duang.easyecard.R;
-import com.duang.easyecard.model.Event;
 import com.duang.easyecard.model.PersonalInfo;
 
 import android.content.Context;
 
-public class PersonalInfoAdapter extends CommonAdapter<PersonalInfo>
+public class PersonalInfoTextAdapter extends CommonAdapter<PersonalInfo>
 {
 	//构造函数，初始化
-		public PersonalInfoAdapter(Context context, List<PersonalInfo> datas, int itemLayoutId)	
+		public PersonalInfoTextAdapter(Context context, List<PersonalInfo> datas, int itemLayoutId)	
 		{
 			super(context, datas, itemLayoutId);
 		}

@@ -13,7 +13,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 			+ "password text not null, "
 			+ "name text, "
 			+ "real_name text, "
-			+ "gender integer, "
+			+ "gender text, "
 			+ "contact text, "
 			+ "grade integer, "
 			+ "college text, "

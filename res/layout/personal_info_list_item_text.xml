@@ -29,14 +29,15 @@
 			android:gravity="right"
 			android:paddingRight="10dp"
 			/>
+		
 	</LinearLayout>
 
-	<View
-		     android:layout_width="fill_parent" 
+	<!-- 分割线 -->
+			<View android:layout_width="fill_parent" 
 			    android:layout_height="1dp" 
 			    android:background="#90909090" 
 			    android:layout_marginBottom="1dp" 
 			    android:layout_marginTop="1dp"/>
 </LinearLayout>
-<!-- 分割线 -->
+
 		
