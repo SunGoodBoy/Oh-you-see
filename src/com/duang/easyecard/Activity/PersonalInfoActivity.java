@@ -7,8 +7,7 @@ import com.duang.easyecard.R;
 import com.duang.easyecard.db.MyDatabaseHelper;
 import com.duang.easyecard.model.PersonalInfo;
 import com.duang.easyecard.model.User;
-import com.duang.easyecard.util.PersonalInfoImageAdapter;
-import com.duang.easyecard.util.PersonalInfoTextAdapter;
+import com.duang.easyecard.util.PersonalInfoAdapter;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -22,12 +21,9 @@ public class PersonalInfoActivity extends BaseActivity implements  OnItemClickLi
 {
 	private MyDatabaseHelper dbHelper;
 
-	private ListView ListView1;
-	private ListView ListView2;
-	private PersonalInfoImageAdapter mAdapter1;
-	private PersonalInfoTextAdapter mAdapter2;
-	private List<PersonalInfo> infoList1 = new ArrayList<PersonalInfo>();
-	private List<PersonalInfo> infoList2 = new ArrayList<PersonalInfo>();
+	private ListView ListView;
+	private PersonalInfoAdapter mAdapter;
+	private List<PersonalInfo> infoList = new ArrayList<PersonalInfo>();
 	private Handler mHandler;
 	
 	@Override
@@ -47,8 +43,7 @@ public class PersonalInfoActivity extends BaseActivity implements  OnItemClickLi
 
 	private void geneItems(String stu_id) 
 	{
-		infoList1 = new ArrayList<PersonalInfo>();
-		infoList2 = new ArrayList<PersonalInfo>();
+		infoList = new ArrayList<PersonalInfo>();
 		
 		//从数据库中取出数据生成项
 		SQLiteDatabase db = dbHelper.getReadableDatabase();
@@ -60,43 +55,43 @@ public class PersonalInfoActivity extends BaseActivity implements  OnItemClickLi
 				{
 					PersonalInfo info = new PersonalInfo("用户头像");
 					info.setImgId(R.drawable.app_icon);
-					infoList1.add(info);
+					infoList.add(info);
 					
 					info = new PersonalInfo("学号");
 					info.setContent(cursor.getString(cursor.getColumnIndex("stu_id")));
-					infoList2.add(info);
+					infoList.add(info);
 					
 					info = new PersonalInfo("姓名");
 					info.setContent(cursor.getString(cursor.getColumnIndex("name")));
-					infoList2.add(info);
+					infoList.add(info);
 					
 					info = new PersonalInfo("真实姓名");
 					info.setContent(cursor.getString(cursor.getColumnIndex("real_name")));
-					infoList2.add(info);
+					infoList.add(info);
 					
 					info = new PersonalInfo("性别");
 					info.setContent(cursor.getString(cursor.getColumnIndex("gender")));
-					infoList2.add(info);
+					infoList.add(info);
 					
 					info = new PersonalInfo("年级");
 					info.setContent(cursor.getString(cursor.getColumnIndex("grade")));
-					infoList2.add(info);
+					infoList.add(info);
 					
 					info = new PersonalInfo("学院");
 					info.setContent(cursor.getString(cursor.getColumnIndex("college")));
-					infoList2.add(info);
+					infoList.add(info);
 					
 					info = new PersonalInfo("系别");
 					info.setContent(cursor.getString(cursor.getColumnIndex("department")));
-					infoList2.add(info);
+					infoList.add(info);
 					
 					info = new PersonalInfo("联系方式");
 					info.setContent(cursor.getString(cursor.getColumnIndex("contact")));
-					infoList2.add(info);
+					infoList.add(info);
 					
 					info = new PersonalInfo("邮箱");
 					info.setContent(cursor.getString(cursor.getColumnIndex("email")));
-					infoList2.add(info);
+					infoList.add(info);
 					
 					break;
 				}
@@ -104,20 +99,15 @@ public class PersonalInfoActivity extends BaseActivity implements  OnItemClickLi
 		}
 		cursor.close();
 		db.close();
-		mAdapter1 = new PersonalInfoImageAdapter(this, infoList1, R.layout.personal_info_list_item_image);
-		mAdapter2 = new PersonalInfoTextAdapter(this, infoList2, R.layout.personal_info_list_item_text);
+		mAdapter = new PersonalInfoAdapter(this, infoList);
 	}
 
 	private void initView() 
 	{
-		ListView1 = (ListView) findViewById(R.id.listView_personal_info_img);
-		mAdapter1 = new PersonalInfoImageAdapter(this, infoList1, R.layout.personal_info_list_item_image);
-		ListView1.setAdapter(mAdapter1);
-		ListView2 = (ListView) findViewById(R.id.listView_personal_info_text);
-		mAdapter2 = new PersonalInfoTextAdapter(this, infoList2, R.layout.personal_info_list_item_text);
-		ListView2.setAdapter(mAdapter2);
-		ListView1.setOnItemClickListener(this);
-		ListView2.setOnItemClickListener(this);
+		ListView = (ListView) findViewById(R.id.listView_personal_info);
+		mAdapter = new PersonalInfoAdapter(this, infoList);
+		ListView.setAdapter(mAdapter);
+		ListView.setOnItemClickListener(this);
 		mHandler = new Handler();
 	}
 	
