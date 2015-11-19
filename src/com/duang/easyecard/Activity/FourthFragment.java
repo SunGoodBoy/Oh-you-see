@@ -1,7 +1,10 @@
 package com.duang.easyecard.Activity;
 
 import com.duang.easyecard.R;
+import com.duang.easyecard.model.User;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -69,8 +72,31 @@ public class FourthFragment extends Fragment implements OnClickListener{
 			Toast.makeText(this.getActivity(),"修改密码", Toast.LENGTH_SHORT).show();
 			break;
 		case R.id.logout_button:
-			//注销登录，结束所在活动，跳转至LoginActivity
-			Toast.makeText(this.getActivity(),"注销登录", Toast.LENGTH_SHORT).show();
+			//注销登录
+			//Toast.makeText(this.getActivity(),"注销登录", Toast.LENGTH_SHORT).show();
+			AlertDialog.Builder dialog = new AlertDialog.Builder(this.getActivity());
+			dialog.setTitle("提示");
+			dialog.setMessage("确定注销帐号吗？");
+			dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					//跳转至LoginActivity，并结束所在活动，把当前用户置为默认值null
+					User.setCurrentUserStuId(null);
+					Intent intent = new Intent(getActivity(), LoginActivity.class);
+					startActivity(intent);
+					getActivity().finish();
+				}
+			});
+			dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
+			dialog.show();
 			break;
 		default:
 				

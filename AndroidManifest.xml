@@ -73,6 +73,11 @@
             android:name=".Activity.PersonalInfoActivity"
             android:label="@string/personal_info">
         </activity>
+        
+        <activity 
+            android:name=".Activity.ChangePasswordActivity"
+            android:label="@string/change_password">
+        </activity>
     </application>
 
 </manifest>

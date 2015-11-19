@@ -115,26 +115,26 @@ public class PersonalInfoAdapter extends CommonAdapter<PersonalInfo>
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent){
 		
-		final ViewHolder viewHolder_img = ViewHolder.get(mContext, convertView, parent,
-				R.layout.personal_info_list_item_image, position);
-		final ViewHolder viewHolder_text = ViewHolder.get(mContext, convertView, parent,
-				R.layout.personal_info_list_item_text, position);
+		ViewHolder viewHolder_img = null;
+		ViewHolder viewHolder_text = null;
 		
 		int type = getItemViewType(position);
 		switch (type)
 		{
 		case TYPE_1:
+			viewHolder_img = new ViewHolder(mContext, parent, R.layout.personal_info_list_item_image, position);
 			viewHolder_img.setText(R.id.personal_info_img_title, getItem(position).getTitle());
 			viewHolder_img.setImageResource(R.id.personal_info_img, getItem(position).getImgId());
 			Log.d("viewHolder_img at position", String.valueOf(position) + "viewHolder_img设置资源成功");
 			return viewHolder_img.getConvertView();
 		case TYPE_2:
+			viewHolder_text = new ViewHolder(mContext, parent, R.layout.personal_info_list_item_text, position);
 			viewHolder_text.setText(R.id.personal_info_list_item_title, getItem(position).getTitle());
 			viewHolder_text.setText(R.id.personal_info_list_item_content, getItem(position).getContent());
 			Log.d("viewHolder_text at position", String.valueOf(position) + "viewHolder_text设置资源成功");
 			return viewHolder_text.getConvertView();
 		default:
-			return viewHolder_text.getConvertView();
+			return convertView;
 		}
 	}
 	

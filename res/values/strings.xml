@@ -86,7 +86,10 @@
     <string name="menu_feedback">意见反馈</string>
     <string name="menu_exit">退出应用</string>
 
-    
-    
+    <!-- ChangePassword -->
+    <string name="old_password">旧密码</string>
+    <string name="new_password">新密码</string>
+    <string name="confirm_new_password">确认新密码</string>
+    <string name="confirm">确定</string>
 
 </resources>
