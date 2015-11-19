@@ -14,7 +14,7 @@ public class EventAdapter extends CommonAdapter<Event>
 		super(context, datas, itemLayoutId);
 	}
 	
-
+	//设置资源
 	public void convert(ViewHolder holder, Event event)
 	{
 		holder.setText(R.id.list_item_text_stu_id, "学号")

@@ -23,12 +23,11 @@ public class PersonalInfoActivity extends BaseActivity implements  OnItemClickLi
 
 	private ListView ListView;
 	private PersonalInfoAdapter mAdapter;
-	private List<PersonalInfo> infoList = new ArrayList<PersonalInfo>();
+	private List<PersonalInfo> personalInfoList = new ArrayList<PersonalInfo>();
 	private Handler mHandler;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.personal_info);
 		
@@ -43,7 +42,7 @@ public class PersonalInfoActivity extends BaseActivity implements  OnItemClickLi
 
 	private void geneItems(String stu_id) 
 	{
-		infoList = new ArrayList<PersonalInfo>();
+		personalInfoList = new ArrayList<PersonalInfo>();
 		
 		//从数据库中取出数据生成项
 		SQLiteDatabase db = dbHelper.getReadableDatabase();
@@ -51,47 +50,48 @@ public class PersonalInfoActivity extends BaseActivity implements  OnItemClickLi
 		if (cursor.moveToLast())
 		{
 			do{
-				if (User.getCurrentUserStuId().equals(cursor.getString(cursor.getColumnIndex("stu_id"))))
+				if (stu_id.equals(cursor.getString(cursor.getColumnIndex("stu_id"))))
 				{
-					PersonalInfo info = new PersonalInfo("用户头像");
-					info.setImgId(R.drawable.app_icon);
-					infoList.add(info);
+					PersonalInfo personalInfo = new PersonalInfo("用户头像");
+					personalInfo.setImgId(R.drawable.app_icon);
+					personalInfoList.add(personalInfo);
 					
-					info = new PersonalInfo("学号");
-					info.setContent(cursor.getString(cursor.getColumnIndex("stu_id")));
-					infoList.add(info);
+					personalInfo = new PersonalInfo("学号");
+					personalInfo.setTitle("学号");
+					personalInfo.setContent(cursor.getString(cursor.getColumnIndex("stu_id")));
+					personalInfoList.add(personalInfo);
 					
-					info = new PersonalInfo("姓名");
-					info.setContent(cursor.getString(cursor.getColumnIndex("name")));
-					infoList.add(info);
+					personalInfo = new PersonalInfo("姓名");
+					personalInfo.setContent(cursor.getString(cursor.getColumnIndex("name")));
+					personalInfoList.add(personalInfo);
 					
-					info = new PersonalInfo("真实姓名");
-					info.setContent(cursor.getString(cursor.getColumnIndex("real_name")));
-					infoList.add(info);
+					personalInfo = new PersonalInfo("真实姓名");
+					personalInfo.setContent(cursor.getString(cursor.getColumnIndex("real_name")));
+					personalInfoList.add(personalInfo);
 					
-					info = new PersonalInfo("性别");
-					info.setContent(cursor.getString(cursor.getColumnIndex("gender")));
-					infoList.add(info);
+					personalInfo = new PersonalInfo("性别");
+					personalInfo.setContent(cursor.getString(cursor.getColumnIndex("gender")));
+					personalInfoList.add(personalInfo);
 					
-					info = new PersonalInfo("年级");
-					info.setContent(cursor.getString(cursor.getColumnIndex("grade")));
-					infoList.add(info);
+					personalInfo = new PersonalInfo("年级");
+					personalInfo.setContent(cursor.getString(cursor.getColumnIndex("grade")));
+					personalInfoList.add(personalInfo);
 					
-					info = new PersonalInfo("学院");
-					info.setContent(cursor.getString(cursor.getColumnIndex("college")));
-					infoList.add(info);
+					personalInfo = new PersonalInfo("学院");
+					personalInfo.setContent(cursor.getString(cursor.getColumnIndex("college")));
+					personalInfoList.add(personalInfo);
 					
-					info = new PersonalInfo("系别");
-					info.setContent(cursor.getString(cursor.getColumnIndex("department")));
-					infoList.add(info);
+					personalInfo = new PersonalInfo("系别");
+					personalInfo.setContent(cursor.getString(cursor.getColumnIndex("department")));
+					personalInfoList.add(personalInfo);
 					
-					info = new PersonalInfo("联系方式");
-					info.setContent(cursor.getString(cursor.getColumnIndex("contact")));
-					infoList.add(info);
+					personalInfo = new PersonalInfo("联系方式");
+					personalInfo.setContent(cursor.getString(cursor.getColumnIndex("contact")));
+					personalInfoList.add(personalInfo);
 					
-					info = new PersonalInfo("邮箱");
-					info.setContent(cursor.getString(cursor.getColumnIndex("email")));
-					infoList.add(info);
+					personalInfo = new PersonalInfo("邮箱");
+					personalInfo.setContent(cursor.getString(cursor.getColumnIndex("email")));
+					personalInfoList.add(personalInfo);
 					
 					break;
 				}
@@ -99,13 +99,13 @@ public class PersonalInfoActivity extends BaseActivity implements  OnItemClickLi
 		}
 		cursor.close();
 		db.close();
-		mAdapter = new PersonalInfoAdapter(this, infoList);
+		mAdapter = new PersonalInfoAdapter(this, personalInfoList, R.layout.personal_info);
 	}
 
 	private void initView() 
 	{
 		ListView = (ListView) findViewById(R.id.listView_personal_info);
-		mAdapter = new PersonalInfoAdapter(this, infoList);
+		mAdapter = new PersonalInfoAdapter(this, personalInfoList, R.layout.personal_info);
 		ListView.setAdapter(mAdapter);
 		ListView.setOnItemClickListener(this);
 		mHandler = new Handler();

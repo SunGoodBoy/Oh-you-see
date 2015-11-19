@@ -22,6 +22,12 @@ public abstract class CommonAdapter<T> extends BaseAdapter {
 		this.mDatas = datas;
 		this.mItemLayoutId = itemLayoutId;
 	}
+	public CommonAdapter(Context context, List<T> datas) {
+		this.mContext = context;
+		mInflater = LayoutInflater.from(context);
+		this.mDatas = datas;
+		this.mItemLayoutId = 0;
+	}
 	
 	@Override
 	public int getCount() {

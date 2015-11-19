@@ -1,9 +1,11 @@
 package com.duang.easyecard.util;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.zip.Inflater;
 
 import com.duang.easyecard.R;
+import com.duang.easyecard.Activity.PersonalInfoActivity;
 import com.duang.easyecard.model.PersonalInfo;
 
 import android.content.Context;
@@ -15,8 +17,9 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class PersonalInfoAdapter extends BaseAdapter
+public class PersonalInfoAdapter extends CommonAdapter<PersonalInfo>
 {
+	protected List<PersonalInfo> mDatas;
 	protected Context mContext;
 	protected LayoutInflater mInflater;
 	
@@ -24,17 +27,16 @@ public class PersonalInfoAdapter extends BaseAdapter
 	final int TYPE_1 = 0;
 	final int TYPE_2 = 1;
 	
-	//构造函数，初始化
-	public PersonalInfoAdapter(Context context)
+	//构造函数
+	public PersonalInfoAdapter(Context context, List<PersonalInfo> data, int itemLayoutId)
 	{
-		mContext = context;
-		mInflater = LayoutInflater.from(context);
+		super(context, data, itemLayoutId);
 	}
-
+	
 	//获得当前需要的View样式
 	@Override
 	public int getItemViewType(int position)	{
-		if (position == 1)	{
+		if (position == 0)	{
 			return TYPE_1;
 		} else	{
 			return TYPE_2;
@@ -47,7 +49,7 @@ public class PersonalInfoAdapter extends BaseAdapter
 	}
 	
 	
-	
+	/*
 	//通过position的值来决定布局
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
@@ -63,8 +65,7 @@ public class PersonalInfoAdapter extends BaseAdapter
 			switch (type)
 			{
 			case TYPE_1:
-				convertView = mInflater.inflate(R.layout.personal_info_list_item_image, parent, false);
-				holder1 = new viewHolder1();
+				holder1 = new viewHolder1(, parent, R.layout.personal_info_list_item_image, position);
 				holder1.imageView = (ImageView) convertView.findViewById(R.id.personal_info_img);
 				holder1.textVeiw = (TextView) convertView.findViewById(R.id.personal_info_img_title);
 				convertView.setTag(holder1);
@@ -77,6 +78,7 @@ public class PersonalInfoAdapter extends BaseAdapter
 				convertView.setTag(holder2);
 				break;
 			default:
+				break;
 			}
 		} else	{
 			//有convertView，按样式，取得不用布局
@@ -88,28 +90,59 @@ public class PersonalInfoAdapter extends BaseAdapter
 			case TYPE_2:
 				holder2 = (viewHolder2) convertView.getTag();
 				break;
+			default:
+				break;
 			}
 		}
-		return null;
+		
+		//设置资源
+		switch (type)
+		{
+		case TYPE_1:
+			holder1.textVeiw.setText("用户头像");
+			holder1.imageView.setImageResource(R.drawable.app_icon);
+			break;
+		case TYPE_2:
+			break;
+		default:
+			break;
+		}
+		
+		return convertView;
 	}
-
+*/
+	//重写CommonAdapter的 getView方法
+	@Override
+	public View getView(int position, View convertView, ViewGroup parent){
+		
+		final ViewHolder viewHolder_img = ViewHolder.get(mContext, convertView, parent,
+				R.layout.personal_info_list_item_image, position);
+		final ViewHolder viewHolder_text = ViewHolder.get(mContext, convertView, parent,
+				R.layout.personal_info_list_item_text, position);
+		
+		int type = getItemViewType(position);
+		switch (type)
+		{
+		case TYPE_1:
+			viewHolder_img.setText(R.id.personal_info_img_title, getItem(position).getTitle());
+			viewHolder_img.setImageResource(R.id.personal_info_img, getItem(position).getImgId());
+			Log.d("viewHolder_img at position", String.valueOf(position) + "viewHolder_img设置资源成功");
+			return viewHolder_img.getConvertView();
+		case TYPE_2:
+			viewHolder_text.setText(R.id.personal_info_list_item_title, getItem(position).getTitle());
+			viewHolder_text.setText(R.id.personal_info_list_item_content, getItem(position).getContent());
+			Log.d("viewHolder_text at position", String.valueOf(position) + "viewHolder_text设置资源成功");
+			return viewHolder_text.getConvertView();
+		default:
+			return viewHolder_text.getConvertView();
+		}
+	}
+	
 
 	@Override
-	public long getItemId(int position) {
-		// TODO Auto-generated method stub
-		return position;
+	public void convert(ViewHolder holder, PersonalInfo personalInfo) {
+		
 	}
-
-	@Override
-	public int getCount() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public Object getItem(int position) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 	
 }
