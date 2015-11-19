@@ -69,7 +69,9 @@ public class FourthFragment extends Fragment implements OnClickListener{
 			break;
 		case R.id.change_password_button:
 			//跳转到修改密码界面
-			Toast.makeText(this.getActivity(),"修改密码", Toast.LENGTH_SHORT).show();
+			//Toast.makeText(this.getActivity(),"修改密码", Toast.LENGTH_SHORT).show();
+			intent = new Intent(getActivity(), ChangePasswordActivity.class);
+			startActivity(intent);
 			break;
 		case R.id.logout_button:
 			//注销登录
