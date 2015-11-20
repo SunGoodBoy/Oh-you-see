@@ -24,7 +24,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 
-public class EventAboutMeActivity extends BaseActivity implements IXListViewListener, OnItemClickListener
+public class EventByMeActivity extends BaseActivity implements IXListViewListener, OnItemClickListener
 {
 	private MyDatabaseHelper dbHelper;
 	
@@ -40,15 +40,15 @@ public class EventAboutMeActivity extends BaseActivity implements IXListViewList
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.event_about_me);
-		Log.d("EventAboutMeActivity", "onCreate is called");
+		setContentView(R.layout.event_by_me);
+		Log.d("EventByMeActivity", "onCreate is called");
 		
 		//打开或创建数据库
 		dbHelper = new MyDatabaseHelper(this, "EasyEcard.db", null, 1);
 		
 		//初始化控件
-		lostEventCheckBox = (CheckBox) findViewById(R.id.event_about_me_check_box_lost);
-		foundEventCheckBox = (CheckBox) findViewById(R.id.event_about_me_check_box_found);
+		lostEventCheckBox = (CheckBox) findViewById(R.id.event_by_me_check_box_lost);
+		foundEventCheckBox = (CheckBox) findViewById(R.id.event_by_me_check_box_found);
 		
 		//初始化视图，显示全部事件
 		doSearchQueryBoth();
@@ -115,7 +115,7 @@ public class EventAboutMeActivity extends BaseActivity implements IXListViewList
 	}
 
 	private void initView() {
-		xListView = (XListView) findViewById(R.id.xListView_event_about_me);
+		xListView = (XListView) findViewById(R.id.xListView_event_by_me);
 		xListView.setPullLoadEnable(false);
 		xListView.setPullRefreshEnable(false);
 		mAdapter = new EventAdapter(this, eventList, R.layout.list_item);
@@ -144,7 +144,8 @@ public class EventAboutMeActivity extends BaseActivity implements IXListViewList
 		if (cursor.moveToLast())
 		{
 			do{
-				if ((cursor.getString(cursor.getColumnIndex("owner_stu_id"))).equals(User.getCurrentUserStuId()))
+				if ((cursor.getString(cursor.getColumnIndex("publisher_stu_id")))
+						.equals(User.getCurrentUserStuId()))
 				{
 					Event event = new Event(cursor.getString(cursor.getColumnIndex("owner_stu_id")));
     				event.getEvent_owner().setUsername(cursor.getString(cursor.getColumnIndex("owner_name")));
@@ -171,7 +172,8 @@ public class EventAboutMeActivity extends BaseActivity implements IXListViewList
 		if (cursor.moveToLast())
 		{
 			do{
-				if ((cursor.getString(cursor.getColumnIndex("owner_stu_id"))).equals(User.getCurrentUserStuId()))
+				if ((cursor.getString(cursor.getColumnIndex("publisher_stu_id")))
+						.equals(User.getCurrentUserStuId()))
 				{
 					Event event = new Event(cursor.getString(cursor.getColumnIndex("owner_stu_id")));
     				event.getEvent_owner().setUsername(cursor.getString(cursor.getColumnIndex("owner_name")));
@@ -198,7 +200,8 @@ public class EventAboutMeActivity extends BaseActivity implements IXListViewList
 		if (cursor.moveToLast())
 		{
 			do{
-				if ((cursor.getString(cursor.getColumnIndex("owner_stu_id"))).equals(User.getCurrentUserStuId()))
+				if ((cursor.getString(cursor.getColumnIndex("publisher_stu_id")))
+						.equals(User.getCurrentUserStuId()))
 				{
 					Event event = new Event(cursor.getString(cursor.getColumnIndex("owner_stu_id")));
     				event.getEvent_owner().setUsername(cursor.getString(cursor.getColumnIndex("owner_name")));
@@ -214,7 +217,8 @@ public class EventAboutMeActivity extends BaseActivity implements IXListViewList
 		if (cursor.moveToLast())
 		{
 			do{
-				if ((cursor.getString(cursor.getColumnIndex("owner_stu_id"))).equals(User.getCurrentUserStuId()))
+				if ((cursor.getString(cursor.getColumnIndex("publisher_stu_id")))
+						.equals(User.getCurrentUserStuId()))
 				{
 					Event event = new Event(cursor.getString(cursor.getColumnIndex("owner_stu_id")));
     				event.getEvent_owner().setUsername(cursor.getString(cursor.getColumnIndex("owner_name")));

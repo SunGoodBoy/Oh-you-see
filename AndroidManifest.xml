@@ -78,6 +78,10 @@
             android:label="@string/event_about_me">
         </activity>
         <activity 
+            android:name=".Activity.EventByMeActivity"
+            android:label="@string/event_by_me">
+        </activity>
+        <activity 
             android:name=".Activity.ChangePasswordActivity"
             android:label="@string/change_password">
         </activity>
