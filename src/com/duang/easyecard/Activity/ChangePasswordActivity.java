@@ -68,6 +68,7 @@ public class ChangePasswordActivity extends BaseActivity implements OnFocusChang
 		confirmButton.setOnClickListener(this);
 	}
 	
+	//EditText的焦点监听事件
 	@Override
 	public void onFocusChange(View v, boolean hasFocus) {
 		switch (v.getId())
@@ -75,22 +76,27 @@ public class ChangePasswordActivity extends BaseActivity implements OnFocusChang
 		// oldPassword
 		case R.id.change_password_old_password_edit:
 			if (hasFocus) {
+				//获取焦点
 				if (oldPasswordEdit.getText().toString().isEmpty()) {
-					oldPasswordCheckBox.setChecked(false);
-					newPasswordCheckBox.setChecked(false);
-					confirmNewPasswordCheckBox.setChecked(false);
+					setConfirmNewPasswordCheckBoxChecked(false);
+					hintTextView.setText("提示：请输入旧密码");
 				} else if (!checkOldPassword(oldPasswordEdit.getText().toString())){
-					oldPasswordCheckBox.setChecked(false);
-					newPasswordCheckBox.setChecked(false);
-					confirmNewPasswordCheckBox.setChecked(false);
-				}
-				hintTextView.setText("提示：请输入旧密码");
-			} else {
-				if (checkOldPassword(oldPasswordEdit.getText().toString())) {
-					hintTextView.setText("提示：请输入新密码");
-					oldPasswordCheckBox.setChecked(true);
-				} else {
+					setConfirmNewPasswordCheckBoxChecked(false);
 					hintTextView.setText("提示：旧密码输入有误，请重新输入");
+				}
+			} else {
+				//失去焦点
+				if (oldPasswordEdit.getText().toString().isEmpty()) {
+					setConfirmNewPasswordCheckBoxChecked(false);
+					hintTextView.setText("提示：请输入旧密码");
+				} else {
+					if (checkOldPassword(oldPasswordEdit.getText().toString())) {
+						setOldPasswordCheckBoxChecked(true);
+						hintTextView.setText("提示：请输入新密码");
+					} else {
+						setConfirmNewPasswordCheckBoxChecked(false);
+						hintTextView.setText("提示：旧密码输入有误，请重新输入");
+					}
 				}
 			}
 			break;
@@ -98,23 +104,31 @@ public class ChangePasswordActivity extends BaseActivity implements OnFocusChang
 		// newPassword
 		case R.id.change_password_new_password_edit:
 			if (hasFocus) {
+				//获取焦点
 				if (oldPasswordEdit.getText().toString().isEmpty()) {
-					if (!oldPasswordCheckBox.isChecked()) {
-						hintTextView.setText("提示：请先输入旧密码");
-					}
-				} else if (checkOldPassword(oldPasswordEdit.getText().toString())) {
-					hintTextView.setText("提示：请输入新密码");
-					oldPasswordCheckBox.setChecked(true);
+					setNewPasswordCheckBoxChecked(false);
+					hintTextView.setText("提示：请输入旧密码");
 				} else {
-					hintTextView.setText("提示：旧密码输入有误，请重新输入");
+					//旧密码已经通过验证,获取焦点时编辑框内无内容
+					if (oldPasswordCheckBox.isChecked()) {
+						if (newPasswordEdit.getText().toString().isEmpty()) {
+							setNewPasswordCheckBoxChecked(false);
+							hintTextView.setText("提示：请输入新密码");
+						} else {
+							//旧密码已经通过验证，且获取焦点时编辑框内已经有内容
+							if (checkNewPassword(newPasswordEdit.getText().toString())) {
+								setNewPasswordCheckBoxChecked(true);
+							}
+						}
+					}
 				}
 			} else {
-				if (!oldPasswordCheckBox.isChecked()) {
-					hintTextView.setText("提示：请先输入旧密码");
-				} else {
+				//失去焦点
+				if (oldPasswordCheckBox.isChecked()) {
 					if (!newPasswordEdit.getText().toString().isEmpty()) {
 						if (checkNewPassword(newPasswordEdit.getText().toString())) {
-							newPasswordCheckBox.setChecked(true);
+							setNewPasswordCheckBoxChecked(true);
+							hintTextView.setText("提示：再次输入新密码以确认");
 						}
 					}
 				}
@@ -123,21 +137,32 @@ public class ChangePasswordActivity extends BaseActivity implements OnFocusChang
 		//confirmNewPassword
 		case R.id.change_password_confirm_new_password_edit:
 			if (hasFocus) {
-				if (!oldPasswordCheckBox.isChecked()) {
-					hintTextView.setText("提示：请先输入旧密码");
-				} else if (!newPasswordCheckBox.isChecked()) {
-					hintTextView.setText("提示：请输入新密码后再进行确认");
+				//获取焦点
+				if (!newPasswordCheckBox.isChecked()) {
+					setConfirmNewPasswordCheckBoxChecked(false);
 				} else {
-					if (checkConfirmNewPassword(confirmNewPasswordEdit.getText().toString())) {
-						hintTextView.setText("提示：验证成功，确认后修改生效");
-						confirmNewPasswordCheckBox.setChecked(true);
-					} else {
-						hintTextView.setText("提示：两次密码输入不一致");
+					//新密码已经通过验证，且获取焦点时确认密码编辑栏有内容
+					if (!confirmNewPasswordEdit.getText().toString().isEmpty()) {
+						if (!checkConfirmNewPassword(confirmNewPasswordEdit.getText().toString())) {
+							setConfirmNewPasswordCheckBoxChecked(false);
+						}
+					}
+				}
+			} else {
+				//失去焦点
+				if (!newPasswordCheckBox.isChecked()) {
+					setConfirmNewPasswordCheckBoxChecked(false);
+				} else {
+					//新密码已经通过验证，且失去焦点时确认密码编辑栏有内容
+					if (!confirmNewPasswordEdit.getText().toString().isEmpty()) {
+						if (checkConfirmNewPassword(confirmNewPasswordEdit.getText().toString())) {
+							setConfirmNewPasswordCheckBoxChecked(true);
+						}
 					}
 				}
 			}
-			
 		}
+		
 	}
 
 	//验证旧密码
@@ -164,33 +189,31 @@ public class ChangePasswordActivity extends BaseActivity implements OnFocusChang
 		return false;
 	}
 
-	//验证新密码是否符合条件
+	//验证新密码是否符合条件(已经确保不会为空)
 	private boolean checkNewPassword(String newPassword) {
 		//是否与旧密码相同
-		if (!newPassword.isEmpty()) {
-			if (newPassword.equals(oldPasswordEdit.getText().toString())) {
-				hintTextView.setText("提示：新密码不能与旧密码相同");
-				return false;
-			} else {
-				//其他限制条件
-				return true;
-			}
+		if (!newPassword.equals(oldPasswordEdit.getText().toString())) {
+			//其他限制条件
+			return true;
 		} else {
-			hintTextView.setText("提示：密码不能为空");
+			setNewPasswordCheckBoxChecked(false);
+			hintTextView.setText("提示：新密码不能与旧密码相同");
 			return false;
 		}
-		
 	}
 
 	//验证两次密码输入是否一致
 	private boolean checkConfirmNewPassword(String confirmNewPassword) {
-		if(confirmNewPassword.equals(newPasswordEdit.getText().toString()) ||
-				!confirmNewPassword.isEmpty()) {
+		if(confirmNewPassword.equals(newPasswordEdit.getText().toString())) {
+			hintTextView.setText("提示：通过验证，点击确定完成修改");
 			return true;
 		} else {
+			hintTextView.setText("提示：新密码两次输入不一致");
 			return false;
 		}
 	}	
+	
+	//Button的点击事件
 	@Override
 	public void onClick(View v) {
 		switch (v.getId())
@@ -209,7 +232,7 @@ public class ChangePasswordActivity extends BaseActivity implements OnFocusChang
 						new String[] { newPasswordEdit.getText().toString(), User.getCurrentUserStuId()});
 				db.close();
 				Toast.makeText(this, "修改成功！", Toast.LENGTH_SHORT).show();
-				intent = new Intent(this, FourthFragment.class);
+				intent = new Intent(this, MainActivity.class);
 				startActivity(intent);
 				finish();
 				break;
@@ -219,4 +242,37 @@ public class ChangePasswordActivity extends BaseActivity implements OnFocusChang
 		}
 	}
 	
+	//设置oldPasswordCheckBox的选中状态
+	protected void setOldPasswordCheckBoxChecked(boolean flag) {
+		if (flag) {
+			oldPasswordCheckBox.setChecked(true);
+		} else {
+			oldPasswordCheckBox.setChecked(false);
+			newPasswordCheckBox.setChecked(false);
+			confirmNewPasswordCheckBox.setChecked(false);
+		}
+	}
+	//设置newPasswordCheckBox的选中状态
+	protected void setNewPasswordCheckBoxChecked(boolean flag) {
+		if (flag) {
+			if (oldPasswordCheckBox.isChecked()) {
+				newPasswordCheckBox.setChecked(true);
+			}
+		} else {
+			newPasswordCheckBox.setChecked(false);
+			confirmNewPasswordCheckBox.setChecked(false);
+		}
+	}
+	//设置confirmNewPasswordCheckBox的选中状态
+	protected void setConfirmNewPasswordCheckBoxChecked(boolean flag) {
+		if (flag) {
+			if (oldPasswordCheckBox.isChecked()) {
+				if (newPasswordCheckBox.isChecked()) {
+					confirmNewPasswordCheckBox.setChecked(true);
+				}
+			}
+		} else {
+			confirmNewPasswordCheckBox.setChecked(false);
+		}
+	}
 }

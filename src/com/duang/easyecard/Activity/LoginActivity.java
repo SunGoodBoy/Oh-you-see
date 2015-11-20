@@ -100,7 +100,7 @@ public class LoginActivity extends BaseActivity {
 		SQLiteDatabase db = dbHelper.getReadableDatabase();
 		Cursor cursor = db.query("UserInfo", null, null, null, null, null, null);
 		if (cursor.moveToFirst())	{
-			do	{
+			do {
 				if (username.equals(cursor.getString(cursor.getColumnIndex("stu_id"))))	{
 					if (password.equals(cursor.getString(cursor.getColumnIndex("password"))))	{
 						return true;
@@ -109,7 +109,7 @@ public class LoginActivity extends BaseActivity {
 				}	else	{
 					return false;
 				}
-			}	while (cursor.moveToNext());
+			} while (cursor.moveToNext());
 		}
 		cursor.close();
 		db.close();
