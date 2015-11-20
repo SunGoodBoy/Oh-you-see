@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -104,15 +105,14 @@ public class LoginActivity extends BaseActivity {
 				if (username.equals(cursor.getString(cursor.getColumnIndex("stu_id"))))	{
 					if (password.equals(cursor.getString(cursor.getColumnIndex("password"))))	{
 						return true;
-					}	else
+					} else
 						return false;
-				}	else	{
-					return false;
 				}
 			} while (cursor.moveToNext());
 		}
 		cursor.close();
 		db.close();
+		Log.e("Error in LoginActivity", "Can't match in database.");
 		return false;
     }
 	
