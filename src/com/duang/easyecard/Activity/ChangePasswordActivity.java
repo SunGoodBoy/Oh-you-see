@@ -220,8 +220,6 @@ public class ChangePasswordActivity extends BaseActivity implements OnFocusChang
 		{
 		// 取消按钮
 		case R.id.change_password_cancel_button:
-			Intent intent = new Intent(this, FourthFragment.class);
-			startActivity(intent);
 			finish();
 			break;
 		// 确定按钮
@@ -232,10 +230,20 @@ public class ChangePasswordActivity extends BaseActivity implements OnFocusChang
 						new String[] { newPasswordEdit.getText().toString(), User.getCurrentUserStuId()});
 				db.close();
 				Toast.makeText(this, "修改成功！", Toast.LENGTH_SHORT).show();
-				intent = new Intent(this, MainActivity.class);
-				startActivity(intent);
 				finish();
 				break;
+			} else {
+				//点击确定按钮并不会使EditText立即失去焦点
+				if (!newPasswordCheckBox.isChecked()) {
+					setConfirmNewPasswordCheckBoxChecked(false);
+				} else {
+					//新密码已经通过验证，且点击确认按钮时确认密码编辑栏有内容
+					if (!confirmNewPasswordEdit.getText().toString().isEmpty()) {
+						if (checkConfirmNewPassword(confirmNewPasswordEdit.getText().toString())) {
+							setConfirmNewPasswordCheckBoxChecked(true);
+						}
+					}
+				}
 			}
 		default:
 			break;
