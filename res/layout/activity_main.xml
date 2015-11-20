@@ -26,7 +26,7 @@
             android:layout_height="fill_parent"
             android:layout_weight="1"
             android:padding="5dp"
-            hyman:icon="@drawable/ic_launcher"
+            hyman:icon="@drawable/lost2"
             hyman:text="@string/tab_lost"
             hyman:text_size="12sp"
             hyman:color="#ff45c01a" />
@@ -37,7 +37,7 @@
             android:layout_height="fill_parent"
             android:layout_weight="1"
             android:padding="5dp"
-            hyman:icon="@drawable/ic_launcher"
+            hyman:icon="@drawable/found"
             hyman:text="@string/tab_found"
             hyman:text_size="12sp"
             hyman:color="#ff45c01a" />
@@ -48,7 +48,7 @@
             android:layout_height="fill_parent"
             android:layout_weight="1"
             android:padding="5dp"
-            hyman:icon="@drawable/ic_launcher"
+            hyman:icon="@drawable/school37"
             hyman:text="@string/tab_campus"
             hyman:text_size="12sp"
             hyman:color="#ff45c01a" />
@@ -59,7 +59,7 @@
             android:layout_height="fill_parent"
             android:layout_weight="1"
             android:padding="5dp"
-            hyman:icon="@drawable/ic_launcher"
+            hyman:icon="@drawable/me2"
             hyman:text="@string/tab_me"
             hyman:text_size="12sp"
             hyman:color="#ff45c01a" />
