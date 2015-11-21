@@ -57,23 +57,26 @@
                 android:singleLine="true" />
 
         <Button
-            android:id="@+id/login_signup_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/signin_button"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_alignRight="@+id/password_edit"
             android:layout_below="@+id/password_edit"
-            android:layout_marginLeft="39dp"
-            android:layout_toRightOf="@+id/login_password_input"
-            android:text="@string/login_label_signup" />
+            android:layout_marginRight="20dp"
+            android:background="@drawable/green_button"
+            android:text="@string/login_label_signin"
+            android:textColor="#FFFFFFFF" />
 
         <Button
-            android:id="@+id/signin_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/login_signup_button"
-            android:layout_alignBottom="@+id/login_signup_button"
-            android:layout_alignRight="@+id/password_edit"
-            android:layout_marginRight="21dp"
-            android:text="@string/login_label_signin" />
+            android:id="@+id/login_signup_button"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_below="@+id/password_edit"
+            android:layout_marginRight="27dp"
+            android:layout_toLeftOf="@+id/signin_button"
+            android:background="@drawable/blue_button"
+            android:text="@string/login_label_signup"
+            android:textColor="#FFFFFFFF" />
 
     </RelativeLayout>
 
