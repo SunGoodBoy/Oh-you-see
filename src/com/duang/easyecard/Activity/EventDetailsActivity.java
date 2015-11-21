@@ -95,8 +95,10 @@ public class EventDetailsActivity extends BaseActivity implements OnClickListene
 			case 3:
 			case 1:
 				getInfoFromLostEvent(stu_id);
+				//将btnFunction显示为“我找到了”
+				btnFunction.setText("我找到了");
 				//如果当前用户是事件发布者，并且事件未被关闭，将“关闭事件”按钮置为可点击
-				if (User.getCurrentUserStuId().equals(mPublisher) ||
+				if (User.getCurrentUserStuId().equals(mPublisher) &&
 						mCloseFlag.equals("0")) {
 					btnCloseEvent.setClickable(true);
 					btnCloseEvent.setOnClickListener(this);
@@ -104,8 +106,10 @@ public class EventDetailsActivity extends BaseActivity implements OnClickListene
 				break;
 			case 2:
 				getInfoFromFoundEvent(stu_id);
+				//将btnFunction显示为“我是失主”
+				btnFunction.setText("我是失主");
 				//如果当前用户是事件发布者，并且事件未被关闭，将“关闭事件”按钮置为可点击
-				if (User.getCurrentUserStuId().equals(mPublisher) ||
+				if (User.getCurrentUserStuId().equals(mPublisher) &&
 						mCloseFlag.equals("0")) {
 					btnCloseEvent.setClickable(true);
 					btnCloseEvent.setOnClickListener(this);
@@ -382,8 +386,10 @@ public class EventDetailsActivity extends BaseActivity implements OnClickListene
 					// 根据事件类型，将改动写入数据库
 					if (FLAG == 1) {
 						closeLostEvent();
+						mCloseFlag = "1";
 					} else {
 						closeFoundEvent();
+						mCloseFlag = "1";
 					}
 				}
 			});
