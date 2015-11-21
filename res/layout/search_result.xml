@@ -11,6 +11,52 @@
         android:textSize="20sp"
         android:gravity="center" />
 
+    <!-- 分割线 -->
+        <View 
+            android:layout_width="match_parent" 
+			android:layout_height="1dp" 
+			android:background="#90909090" 
+			android:layout_marginRight="1dp" 
+			android:layout_marginLeft="1dp"/>
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+        
+        <CheckBox
+            android:id="@+id/search_result_check_box_lost"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:clickable="true"
+            android:layout_marginLeft="25dp"
+            android:text="@string/lost_event"/>
+        
+        <!-- 分割线 -->
+        <View 
+            android:layout_width="1dp" 
+			android:layout_height="match_parent" 
+			android:background="#90909090" 
+			android:layout_marginRight="1dp" 
+			android:layout_marginLeft="1dp"/>
+        
+        <CheckBox
+            android:id="@+id/search_result_check_box_found"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:layout_marginLeft="25dp"
+            android:text="@string/found_event"/>
+    </LinearLayout>
+    <!-- 分割线 -->
+        <View 
+            android:layout_width="match_parent" 
+			android:layout_height="1dp" 
+			android:background="#90909090" 
+			android:layout_marginRight="1dp" 
+			android:layout_marginLeft="1dp"/>
     <com.duang.easyecard.util.XListView 
         android:id="@+id/xListView_search_result"
         android:layout_width="fill_parent"
