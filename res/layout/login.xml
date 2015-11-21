@@ -18,63 +18,59 @@
         android:background="@drawable/background_login_div_bg"
         android:padding="15dip" >
 
-
-            <TextView
-                android:id="@+id/login_user_input"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginTop="5dp"
-                android:text="@string/login_label_username" />
-
-            <EditText
-                android:id="@+id/username_edit"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/login_user_input"
-                android:hint="@string/login_username_hint"
-                android:inputType="text"
-                android:singleLine="true" >
-
-                <requestFocus />
-            </EditText>
-
         <TextView
-                android:id="@+id/login_password_input"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/username_edit"
-                android:layout_marginTop="3dp"
-                android:text="@string/login_label_password" />
+            android:id="@+id/login_user_input"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="5dp"
+            android:text="@string/login_label_username" />
 
         <EditText
-                android:id="@+id/password_edit"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/login_password_input"
-                android:inputType="textPassword"
-                android:password="true"
-                android:singleLine="true" />
+            android:id="@+id/username_edit"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/login_user_input"
+            android:hint="@string/login_username_hint"
+            android:inputType="text"
+            android:singleLine="true" />
+
+        <TextView
+            android:id="@+id/login_password_input"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/username_edit"
+            android:layout_marginTop="3dp"
+            android:text="@string/login_label_password" />
+
+        <EditText
+            android:id="@+id/password_edit"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/login_password_input"
+            android:inputType="textPassword"
+            android:password="true"
+            android:singleLine="true" />
 
         <Button
             android:id="@+id/signin_button"
             android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_height="35dp"
             android:layout_alignRight="@+id/password_edit"
             android:layout_below="@+id/password_edit"
             android:layout_marginRight="20dp"
-            android:background="@drawable/green_button"
+            android:background="@drawable/green_button_selector"
             android:text="@string/login_label_signin"
             android:textColor="#FFFFFFFF" />
 
         <Button
             android:id="@+id/login_signup_button"
             android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_height="35dp"
             android:layout_below="@+id/password_edit"
-            android:layout_marginRight="27dp"
+            android:layout_marginRight="33dp"
             android:layout_toLeftOf="@+id/signin_button"
-            android:background="@drawable/blue_button"
+            android:background="@drawable/skyblue_button_selector"
             android:text="@string/login_label_signup"
             android:textColor="#FFFFFFFF" />
 

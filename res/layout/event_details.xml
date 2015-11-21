@@ -323,22 +323,26 @@
         android:padding="5dp">
         <Button
             android:id="@+id/event_details_close_event_button"
-	        android:layout_width="0dp"
-	        android:layout_weight="1"
-	        android:layout_height="wrap_content"
-	        android:gravity="center"
+	        android:layout_width="120dp"
+		    android:layout_height="40dp"
+		    android:gravity="center"
+		    android:layout_marginLeft="20dp"
+			android:layout_marginRight="30dp"
 	        android:textSize="20sp"
 	        android:text="@string/close_event"
 	        android:clickable="false"
+	        android:textColor="#FFFFFFFF"
+	        android:background="@drawable/red_button_selector"
 	        />
         <Button
             android:id="@+id/event_details_function_button"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
+            android:layout_width="120dp"
+		    android:layout_height="40dp"
             android:textSize="20sp"
             android:gravity="center"
             android:clickable="true"
+            android:textColor="#FFFFFFFF"
+            android:background="@drawable/green_button_selector"
             /> 
     </LinearLayout>
 </LinearLayout>
