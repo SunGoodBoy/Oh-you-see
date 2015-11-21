@@ -19,8 +19,10 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Toast;
+import android.widget.CompoundButton;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.CheckBox;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.TextView;
 
 public class SearchResultActivity extends BaseActivity implements IXListViewListener, OnItemClickListener
@@ -32,21 +34,26 @@ public class SearchResultActivity extends BaseActivity implements IXListViewList
 	private List<Event> eventList = new ArrayList<Event>();
 	private Handler mHandler;
 	
+	private String queryString;
+	
 	private TextView tvSearchResultTitle;
+	private CheckBox lostEventCheckBox;
+	private CheckBox foundEventCheckBox;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.search_result);
-		Log.d("SearchResultActivity", "onCreate is called");
+		
+		//初始化控件
+		lostEventCheckBox = (CheckBox) findViewById(R.id.search_result_check_box_lost);
+		foundEventCheckBox = (CheckBox) findViewById(R.id.search_result_check_box_found);
 		
 		//打开或创建数据库
 		dbHelper = new MyDatabaseHelper(this, "EasyEcard.db", null, 1);
 		
 		geneSearchQueryItems(getIntent());
-		
-		initView();
 		
 	}
 
@@ -76,22 +83,149 @@ public class SearchResultActivity extends BaseActivity implements IXListViewList
         if( Intent.ACTION_SEARCH.equals(queryAction))
         {
         	//获取搜索内容
-        	String queryString = intent.getStringExtra(SearchManager.QUERY);
+        	queryString = intent.getStringExtra(SearchManager.QUERY);
         	Log.d("QureyString", queryString);
         	
         	tvSearchResultTitle = (TextView) findViewById(R.id.text_search_result_title);
         	tvSearchResultTitle.setText("搜索内容：" + queryString);
         	
-        	doSearchQuery(queryString);
+        	//初始化视图，显示全部事件
+    		doSearchQueryBoth(queryString);
+    		initView();
+        	
+        	//对两个CheckBox设置监听事件
+    		lostEventCheckBox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+    			
+    			@Override
+    			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+    				if (isChecked) {
+    					// lostEventCheckBox被选中
+    					if (foundEventCheckBox.isChecked())
+    					{
+    						doSearchQueryBoth(queryString);
+    						initView();
+    					} else {
+    						doSearchQueryInLostEvent(queryString);
+    						initView();
+    					}
+    				} else {
+    					// lostEventCheckBox没有被选中的情况
+    					if (foundEventCheckBox.isChecked())
+    					{
+    						doSearchQueryInFoundEvent(queryString);
+    						initView();
+    					} else {
+    						// 都没有被选中
+    						dontSearchQuery();
+    						initView();
+    					}
+    				}
+    			}
+    		});
+        	
+        	foundEventCheckBox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+    			
+    			@Override
+    			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+    				if (isChecked) {
+    					if (lostEventCheckBox.isChecked()) {
+    						doSearchQueryBoth(queryString);
+    						initView();
+    					} else {
+    						doSearchQueryInFoundEvent(queryString);
+    						initView();
+    					}
+    				} else {
+    					// foundEventCheckBox没有被选中的情况
+    					if (lostEventCheckBox.isChecked())
+    					{
+    						doSearchQueryInLostEvent(queryString);
+    						initView();
+    					} else {
+    						// 都没有被选中
+    						dontSearchQuery();
+    						initView();
+    					}
+    				}
+    			}
+    		});
         }
         
+	}
+	
+	//不搜索
+	private void dontSearchQuery() {
+		eventList = new ArrayList<Event>();
+		mAdapter = new EventAdapter(this, eventList, R.layout.list_item);
+	}
+	
+	//仅在LostEvent中搜索
+	private void doSearchQueryInLostEvent(String queryString) {
+		eventList = new ArrayList<Event>();
+    	SQLiteDatabase db = dbHelper.getReadableDatabase();
+    	//遍历LostEvent表
+		Cursor cursor = db.query("LostEvent", null, null, null, null, null, null);
+		if (cursor.moveToLast())
+		{
+			do{
+				if ((cursor.getString(cursor.getColumnIndex("owner_stu_id"))).contains(queryString))
+				{
+					Event event = new Event(cursor.getString(cursor.getColumnIndex("owner_stu_id")));
+    				event.getEvent_owner().setUsername(cursor.getString(cursor.getColumnIndex("owner_name")));
+    				event.getEvent_owner().setImageId(R.drawable.app_icon);
+    				eventList.add(event);
+    				//Log.d("SearchResult eventListSize", String.valueOf(eventList.size()));
+				}
+				else if ((cursor.getString(cursor.getColumnIndex("owner_name"))).contains(queryString))
+				{
+					Event event = new Event(cursor.getString(cursor.getColumnIndex("owner_stu_id")));
+    				event.getEvent_owner().setUsername(cursor.getString(cursor.getColumnIndex("owner_name")));
+    				event.getEvent_owner().setImageId(R.drawable.app_icon);
+    				eventList.add(event);
+				}
+			} while (cursor.moveToPrevious());
+			cursor.close();
+			db.close();
+			mAdapter = new EventAdapter(this, eventList, R.layout.list_item);
+		}
+	}
+	
+	//仅在FoundEvent中进行搜索
+	private void doSearchQueryInFoundEvent(String queryString) {
+		eventList = new ArrayList<Event>();
+    	SQLiteDatabase db = dbHelper.getReadableDatabase();
+    	//遍历LostEvent表
+		Cursor cursor = db.query("FoundEvent", null, null, null, null, null, null);
+		if (cursor.moveToLast())
+		{
+			do{
+				if ((cursor.getString(cursor.getColumnIndex("owner_stu_id"))).contains(queryString))
+				{
+					Event event = new Event(cursor.getString(cursor.getColumnIndex("owner_stu_id")));
+    				event.getEvent_owner().setUsername(cursor.getString(cursor.getColumnIndex("owner_name")));
+    				event.getEvent_owner().setImageId(R.drawable.app_icon);
+    				eventList.add(event);
+    				//Log.d("SearchResult eventListSize", String.valueOf(eventList.size()));
+				}
+				else if ((cursor.getString(cursor.getColumnIndex("owner_name"))).contains(queryString))
+				{
+					Event event = new Event(cursor.getString(cursor.getColumnIndex("owner_stu_id")));
+    				event.getEvent_owner().setUsername(cursor.getString(cursor.getColumnIndex("owner_name")));
+    				event.getEvent_owner().setImageId(R.drawable.app_icon);
+    				eventList.add(event);
+				}
+			} while (cursor.moveToPrevious());
+			cursor.close();
+			db.close();
+			mAdapter = new EventAdapter(this, eventList, R.layout.list_item);
+		}
 	}
 
 	/*
 	 * 根据queryString依次在数据库的两张Event表中搜索
 	 * 只搜索owner_stu_id和owner_name列
 	 */
-	private void doSearchQuery(String queryString) {
+	private void doSearchQueryBoth(String queryString) {
 		
 		Log.d("SearchResultActivity doSearchQuery", "doSearchQuery is called.");
 		
