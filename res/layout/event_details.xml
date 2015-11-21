@@ -315,5 +315,31 @@
 		android:layout_marginBottom="1dp" 
 		android:layout_marginTop="1dp"/>
 
+	<!-- Button -->
+	<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="5dp">
+        <Button
+            android:id="@+id/event_details_close_event_button"
+	        android:layout_width="0dp"
+	        android:layout_weight="1"
+	        android:layout_height="wrap_content"
+	        android:gravity="center"
+	        android:textSize="20sp"
+	        android:text="@string/close_event"
+	        android:clickable="false"
+	        />
+        <Button
+            android:id="@+id/event_details_function_button"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:clickable="true"
+            /> 
+    </LinearLayout>
 </LinearLayout>
 </ScrollView>
