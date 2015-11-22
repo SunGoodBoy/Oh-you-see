@@ -7,6 +7,8 @@ public class PersonalInfo
 	private String content;
 	private int imgId;
 	
+	private int type;
+	
 	//无参构造函数
 	public PersonalInfo()
 	{
@@ -48,5 +50,19 @@ public class PersonalInfo
 	 */
 	public void setImgId(int imgId) {
 		this.imgId = imgId;
+	}
+
+	/**
+	 * @return the type
+	 */
+	public int getType() {
+		return type;
+	}
+
+	/**
+	 * @param type the type to set
+	 */
+	public void setType(int type) {
+		this.type = type;
 	}
 }

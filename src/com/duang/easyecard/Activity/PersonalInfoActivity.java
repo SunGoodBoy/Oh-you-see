@@ -12,6 +12,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -53,59 +54,71 @@ public class PersonalInfoActivity extends BaseActivity implements  OnItemClickLi
 				if (stu_id.equals(cursor.getString(cursor.getColumnIndex("stu_id"))))
 				{
 					PersonalInfo personalInfo = new PersonalInfo("用户头像");
+					personalInfo.setType(0);
+					personalInfo.setTitle("用户头像");
 					personalInfo.setImgId(R.drawable.app_icon);
 					personalInfoList.add(personalInfo);
 					
 					personalInfo = new PersonalInfo("学号");
+					personalInfo.setType(1);
 					personalInfo.setTitle("学号");
 					personalInfo.setContent(cursor.getString(cursor.getColumnIndex("stu_id")));
 					personalInfoList.add(personalInfo);
 					
 					personalInfo = new PersonalInfo("姓名");
+					personalInfo.setType(1);
 					personalInfo.setContent(cursor.getString(cursor.getColumnIndex("name")));
 					personalInfoList.add(personalInfo);
 					
 					personalInfo = new PersonalInfo("真实姓名");
+					personalInfo.setType(1);
 					personalInfo.setContent(cursor.getString(cursor.getColumnIndex("real_name")));
 					personalInfoList.add(personalInfo);
 					
 					personalInfo = new PersonalInfo("性别");
+					personalInfo.setType(1);
 					personalInfo.setContent(cursor.getString(cursor.getColumnIndex("gender")));
 					personalInfoList.add(personalInfo);
 					
 					personalInfo = new PersonalInfo("年级");
+					personalInfo.setType(1);
 					personalInfo.setContent(cursor.getString(cursor.getColumnIndex("grade")));
 					personalInfoList.add(personalInfo);
 					
 					personalInfo = new PersonalInfo("学院");
+					personalInfo.setType(1);
 					personalInfo.setContent(cursor.getString(cursor.getColumnIndex("college")));
 					personalInfoList.add(personalInfo);
 					
 					personalInfo = new PersonalInfo("系别");
+					personalInfo.setType(1);
 					personalInfo.setContent(cursor.getString(cursor.getColumnIndex("department")));
 					personalInfoList.add(personalInfo);
 					
 					personalInfo = new PersonalInfo("联系方式");
+					personalInfo.setType(1);
 					personalInfo.setContent(cursor.getString(cursor.getColumnIndex("contact")));
 					personalInfoList.add(personalInfo);
 					
 					personalInfo = new PersonalInfo("邮箱");
+					personalInfo.setType(1);
 					personalInfo.setContent(cursor.getString(cursor.getColumnIndex("email")));
 					personalInfoList.add(personalInfo);
 					
+					Log.d("In PersonalInfoActivity", "The entity is ready");
 					break;
 				}
 			} while (cursor.moveToPrevious());
 		}
 		cursor.close();
 		db.close();
-		mAdapter = new PersonalInfoAdapter(this, personalInfoList, R.layout.personal_info);
+		mAdapter = new PersonalInfoAdapter(this, personalInfoList);
 	}
 
 	private void initView() 
 	{
 		ListView = (ListView) findViewById(R.id.listView_personal_info);
-		mAdapter = new PersonalInfoAdapter(this, personalInfoList, R.layout.personal_info);
+		mAdapter = new PersonalInfoAdapter(this, personalInfoList);
 		ListView.setAdapter(mAdapter);
 		ListView.setOnItemClickListener(this);
 		mHandler = new Handler();

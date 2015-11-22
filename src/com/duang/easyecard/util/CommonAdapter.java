@@ -22,12 +22,6 @@ public abstract class CommonAdapter<T> extends BaseAdapter {
 		this.mDatas = datas;
 		this.mItemLayoutId = itemLayoutId;
 	}
-	public CommonAdapter(Context context, List<T> datas) {
-		this.mContext = context;
-		mInflater = LayoutInflater.from(context);
-		this.mDatas = datas;
-		this.mItemLayoutId = 0;
-	}
 	
 	@Override
 	public int getCount() {
@@ -58,7 +52,7 @@ public abstract class CommonAdapter<T> extends BaseAdapter {
 	
 	public abstract void convert(ViewHolder holder, T t);
 
-	private ViewHolder getViewHolder(int position, View convertView,  
+	protected ViewHolder getViewHolder(int position, View convertView,  
             ViewGroup parent)  
     {  
         return ViewHolder.get(mContext, convertView, parent, mItemLayoutId,  

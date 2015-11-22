@@ -3,6 +3,7 @@ package com.duang.easyecard.util;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.zip.Inflater;
 
 import com.duang.easyecard.R;
 import com.duang.easyecard.Activity.PersonalInfoActivity;
@@ -17,132 +18,124 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class PersonalInfoAdapter extends CommonAdapter<PersonalInfo>
+public class PersonalInfoAdapter extends BaseAdapter
 {
-	protected List<PersonalInfo> mDatas;
-	protected Context mContext;
-	protected LayoutInflater mInflater;
+	private Context mContext;
+	private LayoutInflater mInflater;
+	private List<PersonalInfo> mData;
 	
-	final int VIEW_TYPE = 2;
+	final int VIEW_TYPE = 3;
 	final int TYPE_1 = 0;
 	final int TYPE_2 = 1;
 	
-	//构造函数
-	public PersonalInfoAdapter(Context context, List<PersonalInfo> data, int itemLayoutId)
-	{
-		super(context, data, itemLayoutId);
-	}
 	
-	//获得当前需要的View样式
-	@Override
-	public int getItemViewType(int position)	{
-		if (position == 0)	{
-			return TYPE_1;
-		} else	{
-			return TYPE_2;
-		}
-	}
-	
-	@Override
-	public int getViewTypeCount()	{
-		return 2;
-	}
-	
-	
-	/*
-	//通过position的值来决定布局
-	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
-		viewHolder1 holder1 = null;
-		viewHolder2 holder2 = null;
-		int type = getItemViewType(position);
-		
-		//如果没有convertView，需要new出各个控件
-		if (convertView == null)	{
-			Log.e("convertView = ", "NULL");
-			
-			//按照当前所需的样式，确定new的布局
-			switch (type)
-			{
-			case TYPE_1:
-				holder1 = new viewHolder1(, parent, R.layout.personal_info_list_item_image, position);
-				holder1.imageView = (ImageView) convertView.findViewById(R.id.personal_info_img);
-				holder1.textVeiw = (TextView) convertView.findViewById(R.id.personal_info_img_title);
-				convertView.setTag(holder1);
-				break;
-			case TYPE_2:
-				convertView = mInflater.inflate(R.layout.personal_info_list_item_text, parent, false);
-				holder2 = new viewHolder2();
-				holder2.text_title = (TextView) convertView.findViewById(R.id.personal_info_list_item_title);
-				holder2.text_content = (TextView) convertView.findViewById(R.id.personal_info_list_item_content);
-				convertView.setTag(holder2);
-				break;
-			default:
-				break;
-			}
-		} else	{
-			//有convertView，按样式，取得不用布局
-			switch (type)
-			{
-			case TYPE_1:
-				holder1 = (viewHolder1) convertView.getTag();
-				break;
-			case TYPE_2:
-				holder2 = (viewHolder2) convertView.getTag();
-				break;
-			default:
-				break;
-			}
-		}
-		
-		//设置资源
-		switch (type)
-		{
-		case TYPE_1:
-			holder1.textVeiw.setText("用户头像");
-			holder1.imageView.setImageResource(R.drawable.app_icon);
-			break;
-		case TYPE_2:
-			break;
-		default:
-			break;
-		}
-		
-		return convertView;
-	}
-*/
-	//重写CommonAdapter的 getView方法
-	@Override
-	public View getView(int position, View convertView, ViewGroup parent){
-		
-		ViewHolder viewHolder_img = null;
-		ViewHolder viewHolder_text = null;
-		
-		int type = getItemViewType(position);
-		switch (type)
-		{
-		case TYPE_1:
-			viewHolder_img = new ViewHolder(mContext, parent, R.layout.personal_info_list_item_image, position);
-			viewHolder_img.setText(R.id.personal_info_img_title, getItem(position).getTitle());
-			viewHolder_img.setImageResource(R.id.personal_info_img, getItem(position).getImgId());
-			Log.d("viewHolder_img at position", String.valueOf(position) + "viewHolder_img设置资源成功");
-			return viewHolder_img.getConvertView();
-		case TYPE_2:
-			viewHolder_text = new ViewHolder(mContext, parent, R.layout.personal_info_list_item_text, position);
-			viewHolder_text.setText(R.id.personal_info_list_item_title, getItem(position).getTitle());
-			viewHolder_text.setText(R.id.personal_info_list_item_content, getItem(position).getContent());
-			Log.d("viewHolder_text at position", String.valueOf(position) + "viewHolder_text设置资源成功");
-			return viewHolder_text.getConvertView();
-		default:
-			return convertView;
-		}
+	public PersonalInfoAdapter(Context context, List<PersonalInfo> data) {
+		mContext = context;
+		mData = data;
+		mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}
 	
 
 	@Override
-	public void convert(ViewHolder holder, PersonalInfo personalInfo) {
+	public int getCount() {
+		// TODO Auto-generated method stub
+		return mData.size();
+	}
+
+	@Override
+	public PersonalInfo getItem(int position) {
+		// TODO Auto-generated method stub
+		return mData.get(position);
+	}
+
+	@Override
+	public long getItemId(int position) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public View getView(int position, View convertView, ViewGroup parent) {
+		PersonalInfo personalInfo = mData.get(position);
+		int type = getItemViewType(position);
+		ViewHolderImg holderImg = null;
+		ViewHolderText holderText = null;
 		
+		if (convertView == null) {
+			switch (type)
+			{
+			case TYPE_1:
+				holderImg = new ViewHolderImg();
+				convertView = mInflater.inflate(R.layout.personal_info_list_item_image, null);
+				holderImg.img_title = (TextView) convertView.findViewById(R.id.personal_info_img_title);
+				holderImg.img_content = (ImageView) convertView.findViewById(R.id.personal_info_img);
+				holderImg.img_title.setText(personalInfo.getTitle());
+				holderImg.img_content.setImageResource(personalInfo.getImgId());
+				convertView.setTag(holderImg);
+				break;
+			case TYPE_2:
+				holderText = new ViewHolderText();
+				convertView = mInflater.inflate(R.layout.personal_info_list_item_text, null);
+				holderText.text_title = (TextView) convertView.findViewById(R.id.personal_info_list_item_title);
+				holderText.text_content = (TextView) convertView.findViewById(R.id.personal_info_list_item_content);
+				holderText.text_title.setText(personalInfo.getTitle());
+				holderText.text_content.setText(personalInfo.getContent());
+				convertView.setTag(holderText);
+				break;
+			default:
+				break;
+			}
+		} else {
+			Log.d("baseAdapter", "Adapter_:"+(convertView == null));
+			switch (type)
+			{
+			case TYPE_1:
+				holderImg = (ViewHolderImg) convertView.getTag();
+				holderImg.img_title.setText(personalInfo.getTitle());
+				holderImg.img_content.setImageResource(personalInfo.getImgId());
+				break;
+			case TYPE_2:
+				holderText = (ViewHolderText) convertView.getTag();
+				holderText.text_title.setText(personalInfo.getTitle());
+				holderText.text_content.setText(personalInfo.getContent());
+				break;
+			default:
+				break;
+			}
+		}
+		return convertView;
 	}
 	
+	/** 
+     * 根据数据源的position返回需要显示的的layout的type 
+     *  
+     * type的值必须从0开始 
+     *  
+     * */
+	@Override
+	public int getItemViewType(int position) {
+		PersonalInfo personalInfo = mData.get(position);
+		int type = personalInfo.getType();
+		Log.e("TYPE:", type + "");
+		return type;
+	}
+	/** 
+     * 返回所有的layout的数量 
+     *  
+     * */ 
+	@Override
+	public int getViewTypeCount() {
+		return 7;
+	}
 	
+	class ViewHolderImg {
+		TextView img_title;
+		ImageView img_content;
+	}
+
+	
+	class ViewHolderText {
+		TextView text_title;
+		TextView text_content;
+	}
 }
