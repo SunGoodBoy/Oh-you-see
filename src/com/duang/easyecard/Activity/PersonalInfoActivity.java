@@ -37,7 +37,7 @@ public class PersonalInfoActivity extends BaseActivity implements  OnItemClickLi
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.personal_info);
 		
-		//打开或创建数据库
+		// 打开或创建数据库
 		dbHelper = new MyDatabaseHelper(this, "EasyEcard.db", null, 1);
 		
 		geneItems(User.getCurrentUserStuId());
@@ -141,11 +141,13 @@ public class PersonalInfoActivity extends BaseActivity implements  OnItemClickLi
 		switch (position)
 		{
 		case 0:
-			//修改用户图片
+			// 修改用户图片
 			Log.d("PersoanlInfo item", "ChangePersonalImage");
 			break;
+		case 1:
+			break;
 		case 4:
-			//通过AlertDialog来让用户选择修改性别
+			// 通过AlertDialog来让用户选择修改性别
 			AlertDialog.Builder dialog = new AlertDialog.Builder(this);
 			dialog.setTitle("更改性别");
 			dialog.setMessage("请选择您的性别");
@@ -173,18 +175,18 @@ public class PersonalInfoActivity extends BaseActivity implements  OnItemClickLi
 			refreshPersonalInfoList();	//刷新listView
 			break;
 		default:
-			//将对应位置的title和content传给ChangePersonalInfo，position作为请求码
+			// 将对应位置的title和content传给ChangePersonalInfo，position作为请求码
 			String title = ((PersonalInfo) view.getItemAtPosition(position)).getTitle();
 			String content = ((PersonalInfo) view.getItemAtPosition(position)).getContent();
 			Log.d("title-content at position", title + "-" + content + " at " + position);
-			//Intent intent = new Intent(this, ChangePersonalInfoActivity.class);
-			//intent.putExtra("title-content", title + "-" + content);
-			//startActivityForResult(intent, position);
+			Intent intent = new Intent(this, ChangePersonalInfoActivity.class);
+			intent.putExtra("title-content", title + "-" + content);
+			startActivityForResult(intent, position);
 			break;
 		}
 	}
 
-	//更新 personalInfoList
+	// 更新 personalInfoList
 	private void refreshPersonalInfoList() {
 		Log.d("In PersonalInfoActivity", "refreshPersonalInfoList");
 		mHandler.postDelayed(new Runnable() {
@@ -198,6 +200,61 @@ public class PersonalInfoActivity extends BaseActivity implements  OnItemClickLi
 			}
 		}, 1000);
 	}
-
-
+	
+	// 处理ChangePersonalInfoActivity的返回结果
+	@Override
+	protected void onActivityResult(int requesCode, int resultCode, Intent data) {
+		SQLiteDatabase db = dbHelper.getWritableDatabase();
+		String content = data.getStringExtra("content_return");
+		switch (requesCode)
+		{
+		case 2:
+			if (resultCode == RESULT_OK) {
+				db.execSQL("update UserInfo set name = ? where stu_id = ?",
+						new String[]{content, User.getCurrentUserStuId()});
+				break;
+			}
+		case 3:
+			if (resultCode == RESULT_OK) {
+				db.execSQL("update UserInfo set real_name = ? where stu_id = ?",
+						new String[]{content, User.getCurrentUserStuId()});
+				break;
+			}
+		case 5:
+			if (resultCode == RESULT_OK) {
+				db.execSQL("update UserInfo set grade = ? where stu_id = ?",
+						new String[]{content, User.getCurrentUserStuId()});
+				break;
+			}
+		case 6:
+			if (resultCode == RESULT_OK) {
+				db.execSQL("update UserInfo set college = ? where stu_id = ?",
+						new String[]{content, User.getCurrentUserStuId()});
+				break;
+			}
+		case 7:
+			if (resultCode == RESULT_OK) {
+				db.execSQL("update UserInfo set department = ? where stu_id = ?",
+						new String[]{content, User.getCurrentUserStuId()});
+				break;
+			}
+		case 8:
+			if (resultCode == RESULT_OK) {
+				db.execSQL("update UserInfo set contact = ? where stu_id = ?",
+						new String[]{content, User.getCurrentUserStuId()});
+				break;
+			}
+		case 9:
+			if (resultCode == RESULT_OK) {
+				db.execSQL("update UserInfo set email = ? where stu_id = ?",
+						new String[]{content, User.getCurrentUserStuId()});
+				break;
+			}
+		default:
+			break;
+		}
+		db.close();
+		refreshPersonalInfoList();	//刷新listView
+	}
+	
 }
