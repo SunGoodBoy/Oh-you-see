@@ -67,11 +67,15 @@ public class FirstFragment extends Fragment implements IXListViewListener, OnIte
 		if (cursor.moveToLast())
 		{
 			do{
-				Event event = new Event(cursor.getString(cursor.getColumnIndex("owner_stu_id")));
-				event.getEvent_owner().setUsername(cursor.getString(cursor.getColumnIndex("owner_name")));
-				event.getEvent_owner().setImageId(R.drawable.app_icon);
-				eventList.add(event);
-				Log.d("eventListSize", String.valueOf(eventList.size()));
+				// 只显示未关闭的事件
+				if (cursor.getString(cursor.getColumnIndex("close_flag")).equals("0")) {
+					Log.d("close_flag in firstfragment", cursor.getString(cursor.getColumnIndex("close_flag")));
+					Event event = new Event(cursor.getString(cursor.getColumnIndex("owner_stu_id")));
+					event.getEvent_owner().setUsername(cursor.getString(cursor.getColumnIndex("owner_name")));
+					event.getEvent_owner().setImageId(R.drawable.app_icon);
+					eventList.add(event);
+				}
+				
 			} while (cursor.moveToPrevious());
 		}
 		cursor.close();
