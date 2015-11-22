@@ -98,7 +98,7 @@ OnPageChangeListener{
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)
 	{
-		getMenuInflater().inflate(R.menu.main, menu);
+		getMenuInflater().inflate(R.menu.menu_main, menu);
 		
 		//获取SearchView对象
 		SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
@@ -174,7 +174,7 @@ OnPageChangeListener{
 		return true;
 	}
 	
-	
+	// 设置ActionBar的按钮在标题栏一直显示
 	private void setOverflowButtonAlways()
 	{
 		try

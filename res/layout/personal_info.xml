@@ -6,17 +6,17 @@
     android:orientation="vertical" 
     android:padding="10dp">
     <!-- 分割线 -->
-			<View android:layout_width="fill_parent" 
-			    android:layout_height="1dp" 
-			    android:background="#90909090" 
-			    android:layout_marginBottom="1dp" 
-			    android:layout_marginTop="1dp"/>
+	<View
+	    android:layout_width="fill_parent" 
+		android:layout_height="1dp" 
+		android:background="#90909090" 
+		android:layout_marginBottom="1dp" 
+		android:layout_marginTop="1dp"/>
 	<ListView
         android:id="@+id/listView_personal_info"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" 
-        android:fastScrollEnabled="false"
-        android:cacheColorHint="#00000000">
+        android:fastScrollEnabled="false">
     </ListView>
 	
 </LinearLayout>

@@ -116,7 +116,7 @@ public class PersonalInfoAdapter extends BaseAdapter
 	public int getItemViewType(int position) {
 		PersonalInfo personalInfo = mData.get(position);
 		int type = personalInfo.getType();
-		Log.e("TYPE:", type + "");
+		Log.d("TYPE:", type + "");
 		return type;
 	}
 	/** 

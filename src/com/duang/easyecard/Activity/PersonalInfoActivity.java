@@ -8,6 +8,11 @@ import com.duang.easyecard.db.MyDatabaseHelper;
 import com.duang.easyecard.model.PersonalInfo;
 import com.duang.easyecard.model.User;
 import com.duang.easyecard.util.PersonalInfoAdapter;
+
+import android.R.plurals;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -22,7 +27,7 @@ public class PersonalInfoActivity extends BaseActivity implements  OnItemClickLi
 {
 	private MyDatabaseHelper dbHelper;
 
-	private ListView ListView;
+	private ListView listView;
 	private PersonalInfoAdapter mAdapter;
 	private List<PersonalInfo> personalInfoList = new ArrayList<PersonalInfo>();
 	private Handler mHandler;
@@ -117,20 +122,82 @@ public class PersonalInfoActivity extends BaseActivity implements  OnItemClickLi
 
 	private void initView() 
 	{
-		ListView = (ListView) findViewById(R.id.listView_personal_info);
+		listView = (ListView) findViewById(R.id.listView_personal_info);
 		mAdapter = new PersonalInfoAdapter(this, personalInfoList);
-		ListView.setAdapter(mAdapter);
-		ListView.setOnItemClickListener(this);
+		listView.setAdapter(mAdapter);
+		listView.setOnItemClickListener(this);
 		mHandler = new Handler();
 	}
 	
+	/**
+	 *  根据position的值来决定修改信息对应的Activity
+	 *  intent需要携带要修改的内容进行修改
+	 *  修改完成后需要携带修改后的信息返回
+	 */
 	
 	@Override
-	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-		// TODO Auto-generated method stub
+	public void onItemClick(AdapterView<?> view, View arg1, int position, long arg3) {
 		
+		switch (position)
+		{
+		case 0:
+			//修改用户图片
+			Log.d("PersoanlInfo item", "ChangePersonalImage");
+			break;
+		case 4:
+			//通过AlertDialog来让用户选择修改性别
+			AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+			dialog.setTitle("更改性别");
+			dialog.setMessage("请选择您的性别");
+			dialog.setPositiveButton("男", new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					// 将修改后的性别“男”写入数据库
+					SQLiteDatabase db = dbHelper.getWritableDatabase();
+					db.execSQL("update UserInfo set gender = ? where stu_id = ?",
+							new String[]{"男", User.getCurrentUserStuId()});
+					db.close();
+				}
+			});
+			dialog.setNegativeButton("女", new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					// 将修改后的性别“男”写入数据库
+					SQLiteDatabase db = dbHelper.getWritableDatabase();
+					db.execSQL("update UserInfo set gender = ? where stu_id = ?",
+							new String[]{"女", User.getCurrentUserStuId()});
+					db.close();
+				}
+			});
+			dialog.show();
+			refreshPersonalInfoList();	//刷新listView
+			break;
+		default:
+			//将对应位置的title和content传给ChangePersonalInfo，position作为请求码
+			String title = ((PersonalInfo) view.getItemAtPosition(position)).getTitle();
+			String content = ((PersonalInfo) view.getItemAtPosition(position)).getContent();
+			Log.d("title-content at position", title + "-" + content + " at " + position);
+			//Intent intent = new Intent(this, ChangePersonalInfoActivity.class);
+			//intent.putExtra("title-content", title + "-" + content);
+			//startActivityForResult(intent, position);
+			break;
+		}
 	}
 
+	//更新 personalInfoList
+	private void refreshPersonalInfoList() {
+		Log.d("In PersonalInfoActivity", "refreshPersonalInfoList");
+		mHandler.postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				personalInfoList.clear();
+				geneItems(User.getCurrentUserStuId());
+				mAdapter = new PersonalInfoAdapter(getApplicationContext(), personalInfoList);
+				listView.setAdapter(mAdapter);
+				mAdapter.notifyDataSetChanged();
+			}
+		}, 1000);
+	}
 
 
 }

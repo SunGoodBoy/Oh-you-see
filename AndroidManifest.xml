@@ -47,13 +47,13 @@
         <activity 
             android:name=".Activity.AddLostEventActivity"
             android:label="@string/add_lost_event">
-            
         </activity>
+        
         <activity 
             android:name=".Activity.AddFoundEventActivity"
             android:label="@string/add_found_event">
-            
         </activity>
+        
         <activity 
             android:name=".Activity.SearchResultActivity"
             android:label="@string/search_result">
@@ -73,18 +73,27 @@
             android:name=".Activity.PersonalInfoActivity"
             android:label="@string/personal_info">
         </activity>
+        
+        <activity 
+            android:name=".Activity.ChangePersonalInfoActivity"
+            android:label="@string/change_personal_info">
+        </activity>
+        
         <activity 
             android:name=".Activity.EventAboutMeActivity"
             android:label="@string/event_about_me">
         </activity>
+        
         <activity 
             android:name=".Activity.EventByMeActivity"
             android:label="@string/event_by_me">
         </activity>
+        
         <activity 
             android:name=".Activity.ChangePasswordActivity"
             android:label="@string/change_password">
         </activity>
+        
     </application>
 
 </manifest>

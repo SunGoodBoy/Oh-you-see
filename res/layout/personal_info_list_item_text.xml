@@ -19,6 +19,7 @@
             android:layout_weight="2"
             android:gravity="left"
             android:layout_marginLeft="6dp"
+            android:textColor="#FF000000"
              />
 		<TextView
 		    android:id="@+id/personal_info_list_item_content"
@@ -28,16 +29,17 @@
 			android:textSize="15sp"
 			android:gravity="right"
 			android:paddingRight="10dp"
+			android:textColor="#FF000000"
 			/>
 		
 	</LinearLayout>
 
 	<!-- 分割线 -->
-			<View android:layout_width="fill_parent" 
-			    android:layout_height="1dp" 
-			    android:background="#90909090" 
-			    android:layout_marginBottom="1dp" 
-			    android:layout_marginTop="1dp"/>
+	<View android:layout_width="fill_parent" 
+		android:layout_height="1dp" 
+		android:background="#90909090" 
+		android:layout_marginBottom="1dp" 
+		android:layout_marginTop="1dp"/>
 </LinearLayout>
 
 		

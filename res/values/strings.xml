@@ -87,6 +87,10 @@
     <string name="menu_feedback">意见反馈</string>
     <string name="menu_exit">退出应用</string>
 
+    <!-- EditPersonalInfo -->
+    <string name="change_personal_info">修改个人信息</string>
+    <string name="save">保存</string>
+    
     <!-- ChangePassword -->
     <string name="old_password">旧密码</string>
     <string name="new_password">新密码</string>

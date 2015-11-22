@@ -28,6 +28,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="16dp"
             android:gravity="center"
+            android:textColor="#FF000000"
             android:text="@string/user_img"
             android:textSize="15sp" />
 
