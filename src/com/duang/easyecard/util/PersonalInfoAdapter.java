@@ -13,10 +13,12 @@ import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class PersonalInfoAdapter extends BaseAdapter
 {
@@ -71,6 +73,15 @@ public class PersonalInfoAdapter extends BaseAdapter
 				holderImg.img_content = (ImageView) convertView.findViewById(R.id.personal_info_img);
 				holderImg.img_title.setText(personalInfo.getTitle());
 				holderImg.img_content.setImageResource(personalInfo.getImgId());
+				// 设置userpic的点击事件
+				holderImg.img_content.setOnClickListener(new OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+						Toast.makeText(mContext, "ChangeUserpic", Toast.LENGTH_SHORT).show();
+					}
+				});
 				convertView.setTag(holderImg);
 				break;
 			case TYPE_2:

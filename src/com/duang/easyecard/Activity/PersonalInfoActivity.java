@@ -9,7 +9,6 @@ import com.duang.easyecard.model.PersonalInfo;
 import com.duang.easyecard.model.User;
 import com.duang.easyecard.util.PersonalInfoAdapter;
 
-import android.R.plurals;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -122,6 +121,7 @@ public class PersonalInfoActivity extends BaseActivity implements  OnItemClickLi
 
 	private void initView() 
 	{
+		//Log.d("initView", "start initView");
 		listView = (ListView) findViewById(R.id.listView_personal_info);
 		mAdapter = new PersonalInfoAdapter(this, personalInfoList);
 		listView.setAdapter(mAdapter);
@@ -134,15 +134,14 @@ public class PersonalInfoActivity extends BaseActivity implements  OnItemClickLi
 	 *  intent需要携带要修改的内容进行修改
 	 *  修改完成后需要携带修改后的信息返回
 	 */
-	
 	@Override
 	public void onItemClick(AdapterView<?> view, View arg1, int position, long arg3) {
 		
 		switch (position)
 		{
 		case 0:
-			// 修改用户图片
-			Log.d("PersoanlInfo item", "ChangePersonalImage");
+			// 修改头像
+			Log.d("PersoanlInfo item", "ChangeUserpic");
 			break;
 		case 1:
 			break;
@@ -256,5 +255,5 @@ public class PersonalInfoActivity extends BaseActivity implements  OnItemClickLi
 		db.close();
 		refreshPersonalInfoList();	//刷新listView
 	}
-	
+
 }
