@@ -142,6 +142,9 @@ public class PersonalInfoActivity extends BaseActivity implements  OnItemClickLi
 		case 0:
 			// ÐÞ¸ÄÍ·Ïñ
 			Log.d("PersoanlInfo item", "ChangeUserpic");
+			Intent intent = new Intent(this, ChangeUserpicActivity.class);
+			intent.putExtra("userpic", "userpic-uri");
+			startActivityForResult(intent, position);
 			break;
 		case 1:
 			break;
@@ -178,7 +181,7 @@ public class PersonalInfoActivity extends BaseActivity implements  OnItemClickLi
 			String title = ((PersonalInfo) view.getItemAtPosition(position)).getTitle();
 			String content = ((PersonalInfo) view.getItemAtPosition(position)).getContent();
 			Log.d("title-content at position", title + "-" + content + " at " + position);
-			Intent intent = new Intent(this, ChangePersonalInfoActivity.class);
+			intent = new Intent(this, ChangePersonalInfoActivity.class);
 			intent.putExtra("title-content", title + "-" + content);
 			startActivityForResult(intent, position);
 			break;

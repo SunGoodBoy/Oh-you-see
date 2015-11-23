@@ -93,6 +93,7 @@
     <string name="change_userpic">更改头像</string>
     
     <!-- ChangeUserpic -->
+    <string name="userpic">用户头像</string>
     <string name="take_photo">拍照</string>
     <string name="choose_from_album">从相册中选取</string>
     
