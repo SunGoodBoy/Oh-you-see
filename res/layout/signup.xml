@@ -9,11 +9,18 @@
     android:orientation="vertical"
     android:background="@drawable/background_login">
     
+    <!-- 分割线 -->
+	<View android:layout_width="fill_parent" 
+	    android:layout_height="1dp" 
+	    android:background="#90909090" 
+	    android:layout_marginBottom="5dp" 
+	    android:layout_marginTop="5dp"/>
     <!-- 学号 -->
     <LinearLayout
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
 	    android:orientation="horizontal"
+	    android:padding="5dp"
 	    android:background="@drawable/background_login_div_bg" >
 	    <TextView 
 		        android:id="@+id/signup_stu_id"
@@ -30,7 +37,12 @@
 		        android:singleLine="true"
 		        />
 	</LinearLayout>
-	
+	<!-- 分割线 -->
+	<View android:layout_width="fill_parent" 
+	    android:layout_height="1dp" 
+	    android:background="#90909090" 
+	    android:layout_marginBottom="5dp" 
+	    android:layout_marginTop="5dp"/>
     <!-- 密码 -->
     <LinearLayout
 	    android:layout_width="match_parent"
@@ -53,7 +65,12 @@
 		        android:singleLine="true"
 		        />
 	</LinearLayout>
-	
+	<!-- 分割线 -->
+	<View android:layout_width="fill_parent" 
+	    android:layout_height="1dp" 
+	    android:background="#90909090" 
+	    android:layout_marginBottom="5dp" 
+	    android:layout_marginTop="5dp"/>
     <!-- 密码确认 -->
     <LinearLayout
 	    android:layout_width="match_parent"
@@ -76,7 +93,12 @@
 			    android:singleLine="true"
 			    />
 	</LinearLayout>
-	
+	<!-- 分割线 -->
+	<View android:layout_width="fill_parent" 
+	    android:layout_height="1dp" 
+	    android:background="#90909090" 
+	    android:layout_marginBottom="5dp" 
+	    android:layout_marginTop="5dp"/>
     <!-- 姓名 -->
     <LinearLayout
 	    android:layout_width="match_parent"
@@ -99,6 +121,12 @@
 		        />
 	</LinearLayout>
 
+    <!-- 分割线 -->
+	<View android:layout_width="fill_parent" 
+	    android:layout_height="1dp" 
+	    android:background="#90909090" 
+	    android:layout_marginBottom="5dp" 
+	    android:layout_marginTop="5dp"/>
     <!-- 真实姓名 -->
     <LinearLayout
 	    android:layout_width="match_parent"
@@ -120,7 +148,12 @@
 		        android:layout_weight="5"
 		        />
 	</LinearLayout>
-	  
+	<!-- 分割线 -->
+	<View android:layout_width="fill_parent" 
+	    android:layout_height="1dp" 
+	    android:background="#90909090" 
+	    android:layout_marginBottom="5dp" 
+	    android:layout_marginTop="5dp"/>
 
     <!-- 性别 -->
     <LinearLayout
@@ -167,6 +200,12 @@
 	        </RadioGroup>
 	</LinearLayout>
 
+    <!-- 分割线 -->
+	<View android:layout_width="fill_parent" 
+	    android:layout_height="1dp" 
+	    android:background="#90909090" 
+	    android:layout_marginBottom="5dp" 
+	    android:layout_marginTop="5dp"/>
     <!-- 年级  自动填充-->
     <LinearLayout
 	    android:layout_width="match_parent"
@@ -188,7 +227,12 @@
 			    android:singleLine="true"
 			    />
 	</LinearLayout>
-	
+	<!-- 分割线 -->
+	<View android:layout_width="fill_parent" 
+	    android:layout_height="1dp" 
+	    android:background="#90909090" 
+	    android:layout_marginBottom="5dp" 
+	    android:layout_marginTop="5dp"/>
     <!-- 学院  自动填充-->
     <LinearLayout
 	    android:layout_width="match_parent"
@@ -210,7 +254,12 @@
 			    android:singleLine="true"
 			    />
 	</LinearLayout>
-	
+	<!-- 分割线 -->
+	<View android:layout_width="fill_parent" 
+	    android:layout_height="1dp" 
+	    android:background="#90909090" 
+	    android:layout_marginBottom="5dp" 
+	    android:layout_marginTop="5dp"/>
 	<!-- 邮箱 -->
     <LinearLayout
 	    android:layout_width="match_parent"
@@ -232,7 +281,12 @@
 			    android:singleLine="true"
 			    />
 	</LinearLayout>
-		
+	<!-- 分割线 -->
+	<View android:layout_width="fill_parent" 
+	    android:layout_height="1dp" 
+	    android:background="#90909090" 
+	    android:layout_marginBottom="5dp" 
+	    android:layout_marginTop="5dp"/>
 	<!-- 联系方式 -->
     <LinearLayout
 	    android:layout_width="match_parent"
@@ -254,31 +308,50 @@
 			    android:singleLine="true"/>
 	</LinearLayout>
 
+    <!-- 分割线 -->
+	<View android:layout_width="fill_parent" 
+	    android:layout_height="1dp" 
+	    android:background="#90909090" 
+	    android:layout_marginBottom="5dp" 
+	    android:layout_marginTop="5dp"/>
     <LinearLayout
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
 	    android:orientation="horizontal"
 	    android:padding="10dp"
 	    android:background="@drawable/background_login_div_bg" >
-	    	<!-- 取消button -->
+	    	<LinearLayout 
+	    	    android:layout_width="0dp"
+	    	    android:layout_weight="1"
+	    	    android:layout_height="wrap_content"
+	    	    android:orientation="vertical">
+	    	    <!-- 取消button -->
 			<Button
 			    android:id="@+id/signup_cancel"
 			    android:layout_width="120dp"
 		        android:layout_height="40dp"
 			    android:text="@string/cancel"
-			    android:layout_marginLeft="15dp"
-			    android:layout_marginRight="30dp"
+			    android:layout_gravity="center"
 			    android:background="@drawable/red_button_selector"
 			    android:textColor="#FFFFFFFF"/>
-			 <!-- 注册button -->
+	    	</LinearLayout>
+	    	
+			<LinearLayout 
+	    	    android:layout_width="0dp"
+	    	    android:layout_weight="1"
+	    	    android:layout_height="wrap_content"
+	    	    android:orientation="vertical">
+	    	    <!-- 注册button -->
 			 <Button
 			    android:id="@+id/signup_button"
 			    android:layout_width="120dp"
 			    android:layout_height="40dp"
-			    android:layout_marginRight="20dp"
+			    android:layout_gravity="center"
 			    android:background="@drawable/skyblue_button_selector"
 			    android:text="@string/signup"
 			    android:textColor="#FFFFFFFF"/>
+	    	</LinearLayout>
+			 
 	</LinearLayout>
 
 </LinearLayout>
