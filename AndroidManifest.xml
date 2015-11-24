@@ -6,6 +6,7 @@
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
     
     <uses-sdk
         android:minSdkVersion="11"
@@ -70,6 +71,11 @@
         <activity 
             android:name=".Activity.EventDetailsActivity"
             android:label="@string/event_details">
+        </activity>
+        
+        <activity 
+            android:name=".Activity.WebViewActivity"
+            android:label="@string/web_view">
         </activity>
         
         <activity 

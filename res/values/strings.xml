@@ -89,6 +89,7 @@
 
     <!-- CampusFragment -->
     <string name="open_webview">校园卡查询网站</string>
+    <string name="web_view">校园一卡通网站</string>
     <string name="call_phone">拨打挂失电话</string>
     
     <!-- ChangePersonalInfo -->

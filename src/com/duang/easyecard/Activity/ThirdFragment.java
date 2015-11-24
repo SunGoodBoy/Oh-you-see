@@ -43,6 +43,10 @@ public class ThirdFragment extends Fragment implements OnClickListener{
 		// TODO Auto-generated method stub
 		switch (v.getId())
 		{
+		case R.id.campus_open_webview_button:
+			Intent intent = new Intent(this.getActivity(), WebViewActivity.class);
+			startActivity(intent);
+			break;
 		case R.id.campus_call_phone_button:
 			Log.d("ThirdFragment", "ready_to_call_phone");
 			AlertDialog.Builder dialog = new AlertDialog.Builder(this.getActivity());

@@ -80,10 +80,11 @@ public class ChangeUserpicActivity extends BaseActivity implements OnClickListen
 			break;
 		case R.id.change_userpic_choose_from_album:
 			Intent intent = new Intent("android.intent.action.GET_CONTENT");
-			intent.setType("image/*");
+			intent.setType("image/*"); 
 			startActivityForResult(intent, GET_ALBUM);
-
 			break;
+		case R.id.change_userpic_cancel:
+			finish();
 		default:
 			break;
 		}
