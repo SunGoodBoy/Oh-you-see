@@ -5,29 +5,35 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import com.duang.easyecard.R;
+
+import android.content.ContentUris;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.DocumentsContract;
 import android.provider.MediaStore;
-import android.util.Log;
+import android.provider.MediaStore.Images.Media;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
-public class ChangeUserpicActivity extends BaseActivity {
+public class ChangeUserpicActivity extends BaseActivity implements OnClickListener{
 
-	private ImageView mUserpic;
+	private ImageView userpicImageView;
 	private Button takePhotoButton;
 	private Button chooseFromAlbumButton;
 	private Button cancelButton;
 	
-	public static final int TAKE_PHOTO = 1;
-	public static final int GET_PHOTO_FROM_ALBUM = 2;
-	public static final int CROP_PHOTO = 3;
+	private static final int TAKE_PHOTO = 1;
+	private static final int CROP_PHOTO = 2;
+	private static final int GET_ALBUM = 3;
 	
 	private Uri imageUri;
 	
@@ -37,110 +43,148 @@ public class ChangeUserpicActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.change_userpic);
 		//实例化控件
-		mUserpic = (ImageView) findViewById(R.id.change_userpic_img);
+		userpicImageView = (ImageView) findViewById(R.id.change_userpic_img);
 		takePhotoButton = (Button) findViewById(R.id.change_userpic_take_photo);
 		chooseFromAlbumButton = (Button) findViewById(R.id.change_userpic_choose_from_album);
 		cancelButton = (Button) findViewById(R.id.change_userpic_cancel);
 		
-		// 设置“拍照”按钮的点击事件
-		takePhotoButton.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				// 创建File对象，用于存储拍照后的图片
-				File outputImage = new File(Environment.getExternalStorageDirectory(),
-						"output_image.jpg");
-				try {
-					if (outputImage.exists()) {
-						outputImage.delete();
-					}
-					outputImage.createNewFile();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-				imageUri = Uri.fromFile(outputImage);
-				Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
-				intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
-				startActivityForResult(intent, TAKE_PHOTO);  //启动相机程序
-			}
-		});
+		// 监听“拍照”按钮
+		takePhotoButton.setOnClickListener(this);
 		
-		// 设置“从相册中选取”按钮的点击事件
-		chooseFromAlbumButton.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// 创建File对象，用于存储选择的图片
-				File outputImage = new File(Environment.getExternalStorageDirectory(),
-						"output_image.jpg");
-				try {
-					if (outputImage.exists()) {
-						outputImage.delete();
-					}
-					outputImage.createNewFile();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-				imageUri = Uri.fromFile(outputImage);
-				Intent intent = new Intent(Intent.ACTION_PICK);
-				intent.setType("image/*");
-				intent.putExtra("crop", true);
-				intent.putExtra("scale", true);
-				intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
-				startActivityForResult(intent, GET_PHOTO_FROM_ALBUM);
-			}
-		});
+		// 监听“从相册中选取”按钮
+		chooseFromAlbumButton.setOnClickListener(this);
 		
-		// 设置取消按钮的点击事件
-		cancelButton.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				finish();
-			}
-		});
+		// 监听“取消”按钮
+		cancelButton.setOnClickListener(this);
 	}
 	
 	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.change_userpic_take_photo:
+			File image = new File(Environment.getExternalStorageDirectory(),
+					"image.jpg");
+			if (image.exists()) {
+				image.delete();
+			}
+			try {
+				image.createNewFile();
+				imageUri = Uri.fromFile(image);
+				Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+				intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+				startActivityForResult(intent, TAKE_PHOTO);
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			break;
+		case R.id.change_userpic_choose_from_album:
+			Intent intent = new Intent("android.intent.action.GET_CONTENT");
+			intent.setType("image/*");
+			startActivityForResult(intent, GET_ALBUM);
+
+			break;
+		default:
+			break;
+		}
+
+	}
+
+	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
 		switch (requestCode) {
 		case TAKE_PHOTO:
 			if (resultCode == RESULT_OK) {
-				if (data != null) {
-					Uri imageUri = data.getData();
-					cropPhoto(imageUri);
+				Intent intent = new Intent("com.android.camera.action.CROP");
+				intent.setDataAndType(imageUri, "image/*");
+				intent.putExtra("scale", true);
+				intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+				startActivityForResult(intent, CROP_PHOTO);
+			}
+			break;
+		case CROP_PHOTO:
+			try {
+				Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver()
+						.openInputStream(imageUri));
+				userpicImageView.setImageBitmap(bitmap);
+
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
+			break;
+		case GET_ALBUM:
+			if (resultCode == RESULT_OK) {
+				// 首先判断系统是否4.4以上
+				if (Build.VERSION.SDK_INT >= 19) {
+					handleImageOnKitKat(data);
+				} else {
+					handleImageBeforeLitKat(data);
 				}
 			}
 			break;
-		case GET_PHOTO_FROM_ALBUM:
-			if (resultCode == RESULT_OK) {
-				if (data != null) {
-					Uri imageUri = data.getData();
-				}
-			}
-		
 		default:
 			break;
 		}
 	}
 
-	private void cropPhoto(Uri imageUri) {
-		// 裁剪图片意图
-		Intent intent = new Intent("com.android.camera.aciton.CROP");
-		intent.setDataAndType(imageUri, "image/*");
-		intent.putExtra("crop", true);
-		// 裁剪框的比例，1：1
-		intent.putExtra("aspectX", 1);
-		intent.putExtra("aspectY", 1);
-		// 裁剪后输出图片的尺寸大小
-		intent.putExtra("outputX", 250);
-		intent.putExtra("outputY", 250);
-
-		intent.putExtra("outputFormat", "JPEG");// 图片格式
-		intent.putExtra("noFaceDetection", true);// 取消人脸识别
-		intent.putExtra("return-data", true);
-		
-		// 开启一个带有返回值的Activity，请求码为CROP_PHOTO
-		startActivityForResult(intent, CROP_PHOTO);
+	public void handleImageBeforeLitKat(Intent data) {
+		Uri uri = data.getData();
+		String imagePath = getImagePath(uri, null);
+		showImage(imagePath);
 	}
+
+	public void handleImageOnKitKat(Intent data) {
+		String imagePath = null;
+		Uri uri = data.getData();
+		// 如果是document型的uri，则通过document id来处理
+		if (DocumentsContract.isDocumentUri(this, uri)) {
+			String docid = DocumentsContract.getDocumentId(uri);
+			// 如果uri的authority类型是media
+			if ("com.android.providers.media.documents".equals(uri
+					.getAuthority())) {
+				String id = docid.split(":")[0];
+				String selection = MediaStore.Images.Media._ID + "=" + id;
+				imagePath = getImagePath(
+						MediaStore.Images.Media.EXTERNAL_CONTENT_URI, selection);
+				// // 如果uri的authority类型是downloads
+			} else if ("com.android.providers.downloads.documents".equals(uri
+					.getAuthority())) {
+				Uri contentUri = ContentUris.withAppendedId(
+						Uri.parse("content://downloads/public_downloads"),
+						Long.valueOf(docid));
+				imagePath = getImagePath(contentUri, null);
+			}
+			// 如果不是document类型的uri，那么用普通方法处理
+		} else if ("content".equalsIgnoreCase(uri.getScheme())) {
+			imagePath = getImagePath(uri, null);
+		}
+
+		showImage(imagePath);
+	}
+
+	public String getImagePath(Uri uri, String selection) {
+		String imagePath = null;
+		Cursor cursor = null;
+		cursor = getContentResolver().query(uri, null, selection, null, null);
+		if (cursor != null) {
+			if (cursor.moveToFirst()) {
+				imagePath = cursor.getString(cursor.getColumnIndex(Media.DATA));
+			}
+		}
+		cursor.close();
+
+		return imagePath;
+	}
+
+	public void showImage(String imagePath) {
+		if (imagePath != null) {
+			Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
+			userpicImageView.setImageBitmap(bitmap);
+		} else {
+			Toast.makeText(this, "get image failure", Toast.LENGTH_SHORT)
+					.show();
+		}
+	}
+	
 }

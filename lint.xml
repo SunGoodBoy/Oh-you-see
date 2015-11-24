@@ -3,4 +3,7 @@
     <issue id="InflateParams">
         <ignore path="src/com/duang/easyecard/Activity/FirstFragment.java" />
     </issue>
+    <issue id="NewApi">
+        <ignore path="src/com/duang/easyecard/Activity/ChangeUserpicActivity.java" />
+    </issue>
 </lint>
