@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import com.duang.easyecard.R;
-
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -13,6 +12,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -26,7 +26,8 @@ public class ChangeUserpicActivity extends BaseActivity {
 	private Button cancelButton;
 	
 	public static final int TAKE_PHOTO = 1;
-	public static final int CROP_PHOTO = 2;
+	public static final int GET_PHOTO_FROM_ALBUM = 2;
+	public static final int CROP_PHOTO = 3;
 	
 	private Uri imageUri;
 	
@@ -68,7 +69,7 @@ public class ChangeUserpicActivity extends BaseActivity {
 			
 			@Override
 			public void onClick(View v) {
-				// 创建File对象，用于存储拍照后的图片
+				// 创建File对象，用于存储选择的图片
 				File outputImage = new File(Environment.getExternalStorageDirectory(),
 						"output_image.jpg");
 				try {
@@ -80,12 +81,12 @@ public class ChangeUserpicActivity extends BaseActivity {
 					e.printStackTrace();
 				}
 				imageUri = Uri.fromFile(outputImage);
-				Intent intent = new Intent("android.intent.action.GET_CONTENT");
+				Intent intent = new Intent(Intent.ACTION_PICK);
 				intent.setType("image/*");
 				intent.putExtra("crop", true);
 				intent.putExtra("scale", true);
 				intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
-				startActivityForResult(intent, CROP_PHOTO);
+				startActivityForResult(intent, GET_PHOTO_FROM_ALBUM);
 			}
 		});
 		
@@ -105,25 +106,41 @@ public class ChangeUserpicActivity extends BaseActivity {
 		switch (requestCode) {
 		case TAKE_PHOTO:
 			if (resultCode == RESULT_OK) {
-				Intent intent = new Intent("com.android.camera.action.CROP");
-				intent.setDataAndType(imageUri, "image/*");
-				intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
-				startActivityForResult(intent, CROP_PHOTO);
-			}
-			break;
-		case CROP_PHOTO:
-			if (resultCode == RESULT_OK) {
-				try {
-					Bitmap bitmap = BitmapFactory.decodeStream
-							(getContentResolver().openInputStream(imageUri));
-					mUserpic.setImageBitmap(bitmap);  //将裁剪后的照片显示出来
-				} catch (FileNotFoundException e) {
-					e.printStackTrace();
+				if (data != null) {
+					Uri imageUri = data.getData();
+					cropPhoto(imageUri);
 				}
 			}
 			break;
+		case GET_PHOTO_FROM_ALBUM:
+			if (resultCode == RESULT_OK) {
+				if (data != null) {
+					Uri imageUri = data.getData();
+				}
+			}
+		
 		default:
 			break;
 		}
+	}
+
+	private void cropPhoto(Uri imageUri) {
+		// 裁剪图片意图
+		Intent intent = new Intent("com.android.camera.aciton.CROP");
+		intent.setDataAndType(imageUri, "image/*");
+		intent.putExtra("crop", true);
+		// 裁剪框的比例，1：1
+		intent.putExtra("aspectX", 1);
+		intent.putExtra("aspectY", 1);
+		// 裁剪后输出图片的尺寸大小
+		intent.putExtra("outputX", 250);
+		intent.putExtra("outputY", 250);
+
+		intent.putExtra("outputFormat", "JPEG");// 图片格式
+		intent.putExtra("noFaceDetection", true);// 取消人脸识别
+		intent.putExtra("return-data", true);
+		
+		// 开启一个带有返回值的Activity，请求码为CROP_PHOTO
+		startActivityForResult(intent, CROP_PHOTO);
 	}
 }

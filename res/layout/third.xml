@@ -2,11 +2,27 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:padding="10dp" >
     
-	<TextView
-        android:id="@+id/textView1"
-        android:layout_width="fill_parent"
+	<Button
+        android:id="@+id/campus_open_webview_button"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="第三个Fragment" />
+        android:text="@string/open_webview"
+        android:background="@drawable/blue_button_selector"
+        android:textColor="#FFFFFFFF" />
+    <!-- 分割线 -->
+	<View android:layout_width="fill_parent" 
+		android:layout_height="1dp" 
+		android:background="#90909090" 
+		android:layout_marginBottom="1dp" 
+		android:layout_marginTop="1dp"/>
+    <Button
+        android:id="@+id/campus_call_phone_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/call_phone"
+        android:background="@drawable/skyblue_button_selector"
+        android:textColor="#FFFFFFFF" />
 </LinearLayout>

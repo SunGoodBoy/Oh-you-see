@@ -87,6 +87,10 @@
     <string name="menu_feedback">意见反馈</string>
     <string name="menu_exit">退出应用</string>
 
+    <!-- CampusFragment -->
+    <string name="open_webview">校园卡查询网站</string>
+    <string name="call_phone">拨打挂失电话</string>
+    
     <!-- ChangePersonalInfo -->
     <string name="change_personal_info">修改个人信息</string>
     <string name="save">保存</string>
