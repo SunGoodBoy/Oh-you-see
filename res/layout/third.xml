@@ -2,27 +2,24 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="10dp" >
+    android:orientation="vertical">
     
-	<Button
-        android:id="@+id/campus_open_webview_button"
+    <ImageView
+        android:id="@+id/campus_image_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/open_webview"
-        android:background="@drawable/blue_button_selector"
-        android:textColor="#FFFFFFFF" />
-    <!-- 分割线 -->
-	<View android:layout_width="fill_parent" 
-		android:layout_height="1dp" 
-		android:background="#90909090" 
-		android:layout_marginBottom="1dp" 
-		android:layout_marginTop="1dp"/>
-    <Button
-        android:id="@+id/campus_call_phone_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/call_phone"
-        android:background="@drawable/skyblue_button_selector"
-        android:textColor="#FFFFFFFF" />
+        android:src="@drawable/app_icon"/>
+    
+    <GridView    
+	    android:id="@+id/grid_view"  
+	    android:layout_width="fill_parent"   
+	    android:layout_height="fill_parent"  
+	    android:numColumns="auto_fit"  
+	    android:verticalSpacing="10dp"  
+	    android:horizontalSpacing="10dp"  
+	    android:columnWidth="90dp"  
+	    android:stretchMode="columnWidth"  
+	    android:gravity="center"  
+	    />
 </LinearLayout>
+  
