@@ -34,11 +34,16 @@ public class ThirdFragment extends Fragment implements OnItemClickListener{
 	
 	// ItemImage图标封装为一个数组
 	private int [] iconImage = {
-			R.drawable.ic_menu_compass,
-			R.drawable.app_icon
+			R.drawable.web_view_icon,
+			R.drawable.phone_icon,
+			R.drawable.notifications_icon,
+			R.drawable.rules_icon,
+			R.drawable.download_icon,
+			R.drawable.help_icon
 	};
 	// ItemText封装数组
-	private String[] iconText = {"校园一卡通网站", "拨打校园卡挂失电话"};
+	private String[] iconText = {"一卡通网站", "拨打挂失电话", "通知",
+								 "规章制度",   "下载",      "帮助"};
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
