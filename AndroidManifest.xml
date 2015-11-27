@@ -79,6 +79,11 @@
         </activity>
         
         <activity 
+            android:name=".Activity.NotificationActivity"
+            android:label="@string/notification">
+        </activity>
+        
+        <activity 
             android:name=".Activity.PersonalInfoActivity"
             android:label="@string/personal_info">
         </activity>

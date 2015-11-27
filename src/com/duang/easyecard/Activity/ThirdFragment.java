@@ -43,7 +43,7 @@ public class ThirdFragment extends Fragment implements OnItemClickListener{
 	};
 	// ItemText封装数组
 	private String[] iconText = {"一卡通网站", "拨打挂失电话", "通知",
-								 "规章制度",   "下载",      "帮助"};
+								 "规章制度",   "下载文件",  "校园卡帮助"};
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -80,18 +80,18 @@ public class ThirdFragment extends Fragment implements OnItemClickListener{
         return data_list;
     }
 
-	// Item的点击事件
+	// Item的点击事件,根据图片ID来确定点击对象
 	@Override
 	public void onItemClick(AdapterView<?> view, View arg1, int position, long arg3) {
 		// TODO Auto-generated method stub
 		switch (iconImage[position]) {
 		// 访问校园一卡通网站
-		case R.drawable.ic_menu_compass:
+		case R.drawable.web_view_icon:
 			Intent intent = new Intent(this.getActivity(), WebViewActivity.class);
 			startActivity(intent);
 			break;
 		// 拨打挂失电话
-		case R.drawable.app_icon:
+		case R.drawable.phone_icon:
 			AlertDialog.Builder dialog = new AlertDialog.Builder(this.getActivity());
 			dialog.setTitle("提示");
 			dialog.setMessage("您确定要拨打挂失电话\n(0532-6678-2221)吗？");
@@ -113,47 +113,23 @@ public class ThirdFragment extends Fragment implements OnItemClickListener{
 				}
 			});
 			dialog.show();
-		default:
-			break;
-			
-		}
-	}
-	
-	/*
-	@Override
-	public void onClick(View v) {
-		// TODO Auto-generated method stub
-		switch (v.getId())
-		{
-		case R.id.campus_open_webview_button:
-			Intent intent = new Intent(this.getActivity(), WebViewActivity.class);
+		// 通知
+		case R.drawable.notifications_icon:
+			intent = new Intent(this.getActivity(), NotificationActivity.class);
 			startActivity(intent);
 			break;
-		case R.id.campus_call_phone_button:
-			Log.d("ThirdFragment", "ready_to_call_phone");
-			AlertDialog.Builder dialog = new AlertDialog.Builder(this.getActivity());
-			dialog.setTitle("提示");
-			dialog.setMessage("您确定要拨打挂失电话\n(0532-6678-2221)吗？");
-			dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-				
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					// 通过Intent调用拨打电话程序
-					Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + "053266782221"));
-					startActivity(intent);
-				}
-			});
-			dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-				
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					// TODO Auto-generated method stub
-					
-				}
-			});
-			dialog.show();
+		// 规章制度
+		case R.drawable.rules_icon:
+			break;
+		// 下载文件
+		case R.drawable.download_icon:
+			break;
+		// 校园卡帮助
+		case R.drawable.help_icon:
+			break;
+		default:
+			break;
 		}
 	}
-	*/
 }
 
