@@ -72,26 +72,28 @@ public class NotificationActivity extends BaseActivity {
 			
 			try {
 				doc = Jsoup.parse(new URL(url), 5000);
+				// 在网页中解析出通知标题和发布时间
+				Elements es = doc.getElementsByClass("biaotou");
+				Log.d("es class biaotou", es.text());
+				for (Element e : es) {
+					Elements div = e.getElementsByTag("div");
+					String remainText = div.text();
+					// 通过指定标签搜索获得通知标题
+					for (Element title : div.select("a[style]:gt(0)")) {
+						HashMap<String, String> map = new HashMap<String, String>();
+						map.put("title", title.text());
+						Log.d("title", title.text());
+						// 通过字符串截取获得发布时间
+						remainText = remainText.substring(remainText.indexOf("<") + 1);
+						String titleText = remainText.substring(0, remainText.indexOf(">"));
+						map.put("publish_time", "发布时间：" + titleText);
+						arrayList.add(map);
+					}
+				}
 			} catch (MalformedURLException e1) {
 				e1.printStackTrace();
 			} catch (IOException e1) {
 				e1.printStackTrace();
-			}
-			
-			Elements es = doc.getElementsByClass("biaotou");
-			Log.d("es class biaotou", es.text());
-			for (Element e : es) {
-				Elements titles = e.getElementsByTag("div");
-				for (Element title : titles.select("a[style]:gt(0)")) {
-					HashMap<String, String> map = new HashMap<String, String>();
-					if (!title.text().isEmpty()) {
-						map.put("title", title.text());
-						Log.d("title", title.text());
-						Log.d("title's length", title.text().length()+"");
-						//map.put("publish_time", titles.select("a[&nbsp;&lt;]").text());
-					}
-					arrayList.add(map);
-				}
 			}
 			
 			return null;
