@@ -40,6 +40,7 @@ public class NotificationActivity extends BaseActivity {
 	String helpPostfixUrl = "xxsearch.action?lmid=5e431e054b4e1676014b4e24a6d40001";
 	String downloadPostfixUrl = "xxsearch.action?lmid=5e431e054b4e1676014b4e29b8500004";
 	
+	String flag = null;
 	String url = null;
 	
 	@Override
@@ -47,7 +48,7 @@ public class NotificationActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		// 通过flag的值来确定标题的名称和url的值
 		Intent intent = getIntent();
-		String flag = intent.getStringExtra("FLAG");
+		flag = intent.getStringExtra("FLAG");
 		if (flag.equals("N")) {
 			setTitle("通知");
 			url = prefixUrl + notificationsPostfixUrl;
@@ -117,12 +118,24 @@ public class NotificationActivity extends BaseActivity {
 						String titleText = remainText1.substring(0, remainText1.indexOf(">"));
 						map.put("publish_time", "发布时间：" + titleText);
 						// Log.d("publish_time", "发布时间：" + titleText);
-						// 通过字符串截取获得要跳转网页的后缀
-						remainText2 = remainText2.substring(remainText2.indexOf("('") + 2);
-						String postfixUrl = remainText2.substring(0, remainText2.indexOf("'"));
-						map.put("postfix_url", postfixUrl);
-						// Log.d("postfixUrl", postfixUrl);
-						arrayList.add(map);
+						/*
+						 * 但是download类型的网址和其他通知类的链接有区别
+						 * 所以先要判断是不是download类型
+						 * 然后通过不同的字符串截取方法获得要跳转网页的后缀
+						 */
+						if (flag.equals("D")) {
+							remainText2 = remainText2.substring(remainText2.indexOf("href=") + 6);
+							String postfixUrl = remainText2.substring(0, remainText2.indexOf(">") - 1);
+							map.put("postfix_url", postfixUrl);
+							// Log.d("postfixUrl", postfixUrl);
+							arrayList.add(map);
+						} else {
+							remainText2 = remainText2.substring(remainText2.indexOf("('") + 2);
+							String postfixUrl = remainText2.substring(0, remainText2.indexOf("'"));
+							map.put("postfix_url", postfixUrl);
+							// Log.d("postfixUrl", postfixUrl);
+							arrayList.add(map);
+						}
 					}
 				}
 			} catch (MalformedURLException e1) {

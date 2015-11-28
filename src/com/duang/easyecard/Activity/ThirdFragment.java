@@ -40,7 +40,7 @@ public class ThirdFragment extends Fragment implements OnItemClickListener{
 	};
 	// ItemText封装数组
 	private String[] iconText = {"一卡通网站", "拨打挂失电话", "通知",
-								 "规章制度",   "下载文件",  "校园卡帮助"};
+								 "规章制度",   "文件下载",  "校园卡帮助"};
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
