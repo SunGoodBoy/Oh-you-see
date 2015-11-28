@@ -5,8 +5,10 @@ import java.util.HashMap;
 
 import com.duang.easyecard.R;
 import com.duang.easyecard.Activity.NotificationActivity;
+import com.duang.easyecard.Activity.WebViewActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,6 +74,10 @@ public class NotificationListViewAdapter extends BaseAdapter {
 			 
 			@Override
 			public void onClick(View arg0) {
+				// Get the position
+				resultp = data.get(position);
+				Intent intent = new Intent(context, WebViewActivity.class);
+				//intent.putExtra("prefixUrl", );
 			}
 		});
 		return itemView;

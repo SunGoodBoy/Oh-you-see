@@ -29,9 +29,6 @@ public class ThirdFragment extends Fragment implements OnItemClickListener{
 	private List<Map<String, Object>> data_list;
 	private SimpleAdapter sim_adapter;
 	
-	//private Button mWebViewButton;
-	//private Button mCallPhone;
-	
 	// ItemImage图标封装为一个数组
 	private int [] iconImage = {
 			R.drawable.web_view_icon,
@@ -88,7 +85,7 @@ public class ThirdFragment extends Fragment implements OnItemClickListener{
 		// 访问校园一卡通网站
 		case R.drawable.web_view_icon:
 			Intent intent = new Intent(this.getActivity(), WebViewActivity.class);
-			intent.putExtra("IndexUrl", "http://ecard.ouc.edu.cn/homeLogin.action");
+			intent.putExtra("postfixUrl", "homeLogin.action");
 			startActivity(intent);
 			break;
 		// 拨打挂失电话

@@ -29,6 +29,7 @@ public class NotificationActivity extends BaseActivity {
 	
 	public static String TITLE = "title";
 	public static String PUBLISH_TIME = "publish_time";
+	public static String POSTFIX_URL = "postfix_url";
 	
 	// URL Adress
 	String url = "http://ecard.ouc.edu.cn/xxsearch.action?lmid=5e431e0548c5a86f0148f2e9dec90001";
@@ -54,9 +55,9 @@ public class NotificationActivity extends BaseActivity {
 			// Create a progressdialog
 			mProgressDialog = new ProgressDialog(NotificationActivity.this);
 			// Set progressdialog title
-			mProgressDialog.setTitle("Android Jsoup Ecard Web Notification Test");
+			mProgressDialog.setTitle("从一卡通网站获取通知");
 			// Set progressdialog message
-			mProgressDialog.setMessage("Loading...");
+			mProgressDialog.setMessage("正在加载……");
 			mProgressDialog.setIndeterminate(false);
 			// Show progressdialog
 			mProgressDialog.show();
@@ -74,19 +75,27 @@ public class NotificationActivity extends BaseActivity {
 				doc = Jsoup.parse(new URL(url), 5000);
 				// 在网页中解析出通知标题和发布时间
 				Elements es = doc.getElementsByClass("biaotou");
-				Log.d("es class biaotou", es.text());
+				String remainText2 = es.toString();
+				// Log.d("es class biaotou text", es.text());
+				// Log.d("es class biaotou string", remainText2);
 				for (Element e : es) {
 					Elements div = e.getElementsByTag("div");
-					String remainText = div.text();
+					String remainText1 = div.text();
 					// 通过指定标签搜索获得通知标题
 					for (Element title : div.select("a[style]:gt(0)")) {
 						HashMap<String, String> map = new HashMap<String, String>();
 						map.put("title", title.text());
-						Log.d("title", title.text());
+						// Log.d("title", title.text());
 						// 通过字符串截取获得发布时间
-						remainText = remainText.substring(remainText.indexOf("<") + 1);
-						String titleText = remainText.substring(0, remainText.indexOf(">"));
+						remainText1 = remainText1.substring(remainText1.indexOf("<") + 1);
+						String titleText = remainText1.substring(0, remainText1.indexOf(">"));
 						map.put("publish_time", "发布时间：" + titleText);
+						// Log.d("publish_time", "发布时间：" + titleText);
+						// 通过字符串截取获得要跳转网页的后缀
+						remainText2 = remainText2.substring(remainText2.indexOf("('") + 2);
+						String postfixUrl = remainText2.substring(0, remainText2.indexOf("'"));
+						map.put("postfix_url", postfixUrl);
+						// Log.d("postfixUrl", postfixUrl);
 						arrayList.add(map);
 					}
 				}

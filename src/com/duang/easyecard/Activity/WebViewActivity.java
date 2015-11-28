@@ -10,7 +10,8 @@ import android.webkit.WebViewClient;
 public class WebViewActivity extends BaseActivity {
 
 	private WebView webView;
-	
+	// 指定网址的前缀
+	private  final String prefixUrl = "http://ecard.ouc.edu.cn/";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -28,7 +29,7 @@ public class WebViewActivity extends BaseActivity {
 			}
 		});
 		Intent intent = getIntent();
-		String Url = intent.getStringExtra("IndexUrl");
+		String Url = prefixUrl + intent.getStringExtra("postfixUrl");
 		webView.loadUrl(Url);
 	}
 }
