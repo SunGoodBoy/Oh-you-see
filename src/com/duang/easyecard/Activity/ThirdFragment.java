@@ -88,6 +88,7 @@ public class ThirdFragment extends Fragment implements OnItemClickListener{
 		// 访问校园一卡通网站
 		case R.drawable.web_view_icon:
 			Intent intent = new Intent(this.getActivity(), WebViewActivity.class);
+			intent.putExtra("IndexUrl", "http://ecard.ouc.edu.cn/homeLogin.action");
 			startActivity(intent);
 			break;
 		// 拨打挂失电话

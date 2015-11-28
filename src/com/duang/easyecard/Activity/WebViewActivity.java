@@ -2,6 +2,7 @@ package com.duang.easyecard.Activity;
 
 import com.duang.easyecard.R;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -26,6 +27,8 @@ public class WebViewActivity extends BaseActivity {
 				return true;
 			}
 		});
-		webView.loadUrl("http://ecard.ouc.edu.cn/homeLogin.action");
+		Intent intent = getIntent();
+		String Url = intent.getStringExtra("IndexUrl");
+		webView.loadUrl(Url);
 	}
 }
