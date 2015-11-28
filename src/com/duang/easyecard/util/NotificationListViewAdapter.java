@@ -77,7 +77,8 @@ public class NotificationListViewAdapter extends BaseAdapter {
 				// Get the position
 				resultp = data.get(position);
 				Intent intent = new Intent(context, WebViewActivity.class);
-				//intent.putExtra("prefixUrl", );
+				intent.putExtra("postfixUrl", resultp.get(NotificationActivity.POSTFIX_URL));
+				context.startActivity(intent);
 			}
 		});
 		return itemView;

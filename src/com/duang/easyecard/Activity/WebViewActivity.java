@@ -3,7 +3,9 @@ package com.duang.easyecard.Activity;
 import com.duang.easyecard.R;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.webkit.DownloadListener;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -28,6 +30,22 @@ public class WebViewActivity extends BaseActivity {
 				return true;
 			}
 		});
+		
+		// 监听下载
+		webView.setDownloadListener(new DownloadListener() {
+			
+			@Override
+			public void onDownloadStart(String url, String userAgent,
+					String contentDisposition, String mimetype, long contentLength) {
+				// 当用户点击下载链接时，直接调用系统的浏览器下载
+				Uri uri = Uri.parse(url);
+				Intent intent = new Intent(Intent.ACTION_VIEW, uri);  
+                startActivity(intent);
+			}
+		});
+		// 设置支持缩放
+		webView.getSettings().setBuiltInZoomControls(true);
+		
 		Intent intent = getIntent();
 		String Url = prefixUrl + intent.getStringExtra("postfixUrl");
 		webView.loadUrl(Url);

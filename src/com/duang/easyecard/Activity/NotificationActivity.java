@@ -15,6 +15,7 @@ import com.duang.easyecard.R;
 import com.duang.easyecard.util.NotificationListViewAdapter;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -32,12 +33,37 @@ public class NotificationActivity extends BaseActivity {
 	public static String POSTFIX_URL = "postfix_url";
 	
 	// URL Adress
-	String url = "http://ecard.ouc.edu.cn/xxsearch.action?lmid=5e431e0548c5a86f0148f2e9dec90001";
+	String prefixUrl = "http://ecard.ouc.edu.cn/";
 	
-
+	String notificationsPostfixUrl = "xxsearch.action?lmid=5e431e0548c5a86f0148f2e9dec90001";
+	String rulesPostfixUrl = "xxsearch.action?lmid=5e431e054b4e1676014b4e24fd7f0002";
+	String helpPostfixUrl = "xxsearch.action?lmid=5e431e054b4e1676014b4e24a6d40001";
+	String downloadPostfixUrl = "xxsearch.action?lmid=5e431e054b4e1676014b4e29b8500004";
+	
+	String url = null;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		// 通过flag的值来确定标题的名称和url的值
+		Intent intent = getIntent();
+		String flag = intent.getStringExtra("FLAG");
+		if (flag.equals("N")) {
+			setTitle("通知");
+			url = prefixUrl + notificationsPostfixUrl;
+		}
+		if (flag.equals("R")) {
+			setTitle("规章制度");
+			url = prefixUrl + rulesPostfixUrl;
+		}
+		if (flag.equals("D")) {
+			setTitle("文件下载");
+			url = prefixUrl + downloadPostfixUrl;
+		}
+		if (flag.equals("H")) {
+			setTitle("校园卡使用帮助");
+			url = prefixUrl + helpPostfixUrl;
+		}
 		setContentView(R.layout.notification_list_view);
 		
 		// Execute DownloadJSON AsyncTask
@@ -55,7 +81,7 @@ public class NotificationActivity extends BaseActivity {
 			// Create a progressdialog
 			mProgressDialog = new ProgressDialog(NotificationActivity.this);
 			// Set progressdialog title
-			mProgressDialog.setTitle("从一卡通网站获取通知");
+			mProgressDialog.setTitle("从校园一卡通网站获取相关信息");
 			// Set progressdialog message
 			mProgressDialog.setMessage("正在加载……");
 			mProgressDialog.setIndeterminate(false);

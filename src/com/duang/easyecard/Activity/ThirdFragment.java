@@ -111,19 +111,30 @@ public class ThirdFragment extends Fragment implements OnItemClickListener{
 				}
 			});
 			dialog.show();
+			break;
 		// 通知
 		case R.drawable.notifications_icon:
 			intent = new Intent(this.getActivity(), NotificationActivity.class);
+			intent.putExtra("FLAG", "N");
 			startActivity(intent);
 			break;
 		// 规章制度
 		case R.drawable.rules_icon:
+			intent = new Intent(this.getActivity(), NotificationActivity.class);
+			intent.putExtra("FLAG", "R");
+			startActivity(intent);
 			break;
 		// 下载文件
 		case R.drawable.download_icon:
+			intent = new Intent(this.getActivity(), NotificationActivity.class);
+			intent.putExtra("FLAG", "D");
+			startActivity(intent);
 			break;
 		// 校园卡帮助
 		case R.drawable.help_icon:
+			intent = new Intent(this.getActivity(), NotificationActivity.class);
+			intent.putExtra("FLAG", "H");
+			startActivity(intent);
 			break;
 		default:
 			break;
