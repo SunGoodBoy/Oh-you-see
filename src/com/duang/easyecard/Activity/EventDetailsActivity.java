@@ -239,7 +239,7 @@ public class EventDetailsActivity extends BaseActivity implements OnClickListene
 		db.close();
 	}
 	
-	//从LostEvent获取信息，填充到布局
+	//从FoundEvent获取信息，填充到布局
 	private void getInfoFromFoundEvent(String stu_id) {
 		// TODO Auto-generated method stub
 		SQLiteDatabase db = dbHelper.getReadableDatabase();
@@ -358,7 +358,6 @@ public class EventDetailsActivity extends BaseActivity implements OnClickListene
 	// 关闭LostEvent
 	private void closeLostEvent() {
 		SQLiteDatabase db = dbHelper.getReadableDatabase();
-		//先判断事件是否已经关闭
 		db.execSQL("update LostEvent set close_flag = ? where publisher_stu_id = ?",
 				new String[] { "1", mPublisher});
 		db.close();

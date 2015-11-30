@@ -147,6 +147,7 @@ public class PersonalInfoActivity extends BaseActivity implements  OnItemClickLi
 			startActivityForResult(intent, position);
 			break;
 		case 1:
+			// 学号，不允许更改
 			break;
 		case 4:
 			// 通过AlertDialog来让用户选择修改性别

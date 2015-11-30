@@ -218,7 +218,7 @@ OnPageChangeListener{
 	}
 
 	
-	//监听Back按钮的点击
+	// 监听Back按钮的点击
 	public boolean onKeyDown(int keyCode, KeyEvent event)	{
 		if (keyCode == KeyEvent.KEYCODE_BACK)	{
 			//通过AlertDialog询问是否要退出应用程序
