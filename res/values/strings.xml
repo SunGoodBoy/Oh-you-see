@@ -73,6 +73,7 @@
     <string name="add_time">发布时间</string>
     <string name="event_state">事件状态</string>
     <string name="close_event">关闭事件</string>
+    <string name="alter_event">修改事件</string>
     
     <!-- Tab -->
     <string name="tab_lost">丢失</string>

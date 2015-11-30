@@ -1,5 +1,8 @@
 package com.duang.easyecard.Activity;
 
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.StringTokenizer;
 
 import com.duang.easyecard.R;
@@ -13,7 +16,11 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
@@ -40,14 +47,17 @@ public class EventDetailsActivity extends BaseActivity implements OnClickListene
 	private Button btnCloseEvent;
 	private Button btnFunction;
 	
-	private int FLAG;   //FLAG用于标识事件类型  {LostEvent, FoundEvent}
+	private int FLAG;   //FLAG用于标识事件类型  {LostEvent为1, FoundEvent为2}
 	private String mPublisher; //发布者
 	private String mCloseFlag; //事件的关闭标志
+	
+	private ArrayList<HashMap<String, String>> arrayList;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+		setOverflowButtonAlways();
 		setContentView(R.layout.event_details);
 		
 		//控件的初始化 要在加载布局文件之后
@@ -126,16 +136,21 @@ public class EventDetailsActivity extends BaseActivity implements OnClickListene
 	protected void getInfoFromLostEvent(String stu_id) {
 		SQLiteDatabase db = dbHelper.getReadableDatabase();
 		Cursor cursor = db.query("LostEvent", null, null, null, null, null, null);
+		arrayList = new ArrayList<HashMap<String, String>>();
 		
 		if (cursor.moveToLast())
 		{
 			do{
 				if (stu_id.equals(cursor.getString(cursor.getColumnIndex("owner_stu_id"))))
 				{
+					HashMap<String, String> map = new HashMap<String, String>();
+					
 					//失主姓名
 					tvName.setText(cursor.getString(cursor.getColumnIndex("owner_name")));
+					map.put("owner_name", tvName.getText().toString());
 					//失主联系方式
 					tvContact.setText(cursor.getString(cursor.getColumnIndex("owner_contact")));
+					map.put("owner_contact", tvContact.getText().toString());
 					//显示丢失时间，格式为“2015年11月14日22点54分”
 					tvEventTimeTitle.setText("丢失时间");
 					String date = cursor.getString(cursor.getColumnIndex("lost_date"));
@@ -168,10 +183,15 @@ public class EventDetailsActivity extends BaseActivity implements OnClickListene
 					}
 					tvEventTime.setText(year + "年" + month + "月" + day + "日" + hour + "点" + minute + "分");
 					Log.d("EventLostTime", year + "年" + month + "月" + day + "日" + hour + "点" + minute + "分");
-
+					map.put("year", year);
+					map.put("month", month);
+					map.put("day", day);
+					map.put("hour", hour);
+					map.put("minute", minute);
 					//显示丢失地点
 					tvEventPlaceTitle.setText("丢失地点");
 					tvEventPlace.setText(cursor.getString(cursor.getColumnIndex("lost_place")));
+					map.put("place_title", tvEventPlaceTitle.getText().toString());
 					//显示描述
 					tvEventDescription.setText(cursor.getString(cursor.getColumnIndex("description")));
 					//显示发布者（仅学号）
@@ -405,6 +425,41 @@ public class EventDetailsActivity extends BaseActivity implements OnClickListene
 			Toast.makeText(this, "那就尽快取得联系吧！^_^nn-", Toast.LENGTH_SHORT);
 			break;
 			default:
+		}
+	}
+	
+	// 创建菜单
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();  
+        inflater.inflate(R.menu.menu_event_details, menu);
+		return super.onCreateOptionsMenu(menu);
+	}
+	
+	// 设置ActionBar的按钮在标题栏一直显示
+	private void setOverflowButtonAlways()
+	{
+		try
+		{
+			ViewConfiguration config = ViewConfiguration.get(this);
+			Field menuKey = ViewConfiguration.class
+					.getDeclaredField("sHasPermanentMenuKey");
+			menuKey.setAccessible(true);
+			menuKey.setBoolean(config, false);
+		} catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+	//设置菜单按钮的点击事件
+	public boolean onMenuItemSelected(int featureId, MenuItem item)	{
+		switch (item.getItemId())	{
+		case R.id.action_alter_event:
+			if (FLAG == 1) {
+				Intent intent = new Intent(EventDetailsActivity.this, AlterEventActivity.class);
+				intent.putStringArrayListExtra(, value);
+			}
+			
 		}
 	}
 }
