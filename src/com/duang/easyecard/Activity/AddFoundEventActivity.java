@@ -6,6 +6,7 @@ import com.duang.easyecard.R;
 import com.duang.easyecard.db.MyDatabaseHelper;
 import com.duang.easyecard.model.User;
 
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
@@ -85,21 +86,25 @@ public class AddFoundEventActivity extends BaseActivity	{
 		//判断学号是否为空
 		if (!stu_id.isEmpty())	{
 			if (stu_id.length() == 11)	{
-				if (!name.isEmpty())	{
-					if (!contact.isEmpty())	{
-						//将数据写入数据库
-						writeDataToDb();
-						finish();
-						Toast.makeText(AddFoundEventActivity.this, "提交成功！", Toast.LENGTH_SHORT).show();
+				if (!hasRepeatedEvent(stu_id)) {
+					if (!name.isEmpty())	{
+						if (!contact.isEmpty())	{
+							//将数据写入数据库
+							writeDataToDb();
+							finish();
+							Toast.makeText(AddFoundEventActivity.this, "提交成功！", Toast.LENGTH_SHORT).show();
+						}
+						else {
+							Toast.makeText(AddFoundEventActivity.this, "必须填写联系方式！", Toast.LENGTH_SHORT).show();
+						}
 					}
-					else {
-						Toast.makeText(AddFoundEventActivity.this, "必须填写联系方式！", Toast.LENGTH_SHORT).show();
+					else	{
+						Toast.makeText(AddFoundEventActivity.this, "姓名不能为空！", Toast.LENGTH_SHORT).show();
 					}
 				}
-				else	{
-					Toast.makeText(AddFoundEventActivity.this, "姓名不能为空！", Toast.LENGTH_SHORT).show();
+				else {
+					Toast.makeText(AddFoundEventActivity.this, "该学号已经发布了丢失信息！", Toast.LENGTH_SHORT).show();
 				}
-				
 			}
 			else {
 				Toast.makeText(AddFoundEventActivity.this, "学号必须为11位！", Toast.LENGTH_SHORT).show();
@@ -110,6 +115,27 @@ public class AddFoundEventActivity extends BaseActivity	{
 		}
 	}
 
+	// 该学号存在重复的未关闭的事件
+	private boolean hasRepeatedEvent(String stu_id) {
+		// 获得可读数据库
+		SQLiteDatabase db = dbHelper.getReadableDatabase();
+		//遍历LostEvent表
+		Cursor cursor = db.query("FoundEvent", null, null, null, null, null, null);
+		if (cursor.moveToLast()) {
+			do {
+				if (stu_id.equals(cursor.getString(cursor.getColumnIndex("owner_stu_id"))))
+				{
+					if (cursor.getString(cursor.getColumnIndex("close_flag")).equals("0")) {
+						return true;
+					}
+				}
+			} while (cursor.moveToPrevious());
+		}
+		cursor.close();
+		db.close();
+		return false;
+	}
+	
 	//将数据写入数据库
 	private void writeDataToDb() {
 		
