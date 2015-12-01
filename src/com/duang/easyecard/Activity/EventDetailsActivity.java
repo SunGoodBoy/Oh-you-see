@@ -1,8 +1,6 @@
 package com.duang.easyecard.Activity;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.StringTokenizer;
 
 import com.duang.easyecard.R;
@@ -51,8 +49,6 @@ public class EventDetailsActivity extends BaseActivity implements OnClickListene
 	private String mPublisher; //发布者
 	private String mCloseFlag; //事件的关闭标志
 	
-	private ArrayList<HashMap<String, String>> arrayList;
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -85,6 +81,12 @@ public class EventDetailsActivity extends BaseActivity implements OnClickListene
 			Log.e("dbHelper", "Fail to open database.");
 		}		
 		
+		initViews();
+		
+	}
+
+	private void initViews() {
+		// TODO Auto-generated method stub
 		Intent intent = getIntent();
 		String data = intent.getStringExtra("extra_data");
 		Log.d("extra_data in EventDetailsActivity", data);
@@ -129,28 +131,23 @@ public class EventDetailsActivity extends BaseActivity implements OnClickListene
 		}
 		
 		btnFunction.setOnClickListener(this);
-		
 	}
 
 	//从LostEvent获取信息，填充到布局
 	protected void getInfoFromLostEvent(String stu_id) {
 		SQLiteDatabase db = dbHelper.getReadableDatabase();
 		Cursor cursor = db.query("LostEvent", null, null, null, null, null, null);
-		arrayList = new ArrayList<HashMap<String, String>>();
 		
 		if (cursor.moveToLast())
 		{
 			do{
 				if (stu_id.equals(cursor.getString(cursor.getColumnIndex("owner_stu_id"))))
 				{
-					HashMap<String, String> map = new HashMap<String, String>();
 					
 					//失主姓名
 					tvName.setText(cursor.getString(cursor.getColumnIndex("owner_name")));
-					map.put("owner_name", tvName.getText().toString());
 					//失主联系方式
 					tvContact.setText(cursor.getString(cursor.getColumnIndex("owner_contact")));
-					map.put("owner_contact", tvContact.getText().toString());
 					//显示丢失时间，格式为“2015年11月14日22点54分”
 					tvEventTimeTitle.setText("丢失时间");
 					String date = cursor.getString(cursor.getColumnIndex("lost_date"));
@@ -183,15 +180,9 @@ public class EventDetailsActivity extends BaseActivity implements OnClickListene
 					}
 					tvEventTime.setText(year + "年" + month + "月" + day + "日" + hour + "点" + minute + "分");
 					Log.d("EventLostTime", year + "年" + month + "月" + day + "日" + hour + "点" + minute + "分");
-					map.put("year", year);
-					map.put("month", month);
-					map.put("day", day);
-					map.put("hour", hour);
-					map.put("minute", minute);
 					//显示丢失地点
 					tvEventPlaceTitle.setText("丢失地点");
 					tvEventPlace.setText(cursor.getString(cursor.getColumnIndex("lost_place")));
-					map.put("place_title", tvEventPlaceTitle.getText().toString());
 					//显示描述
 					tvEventDescription.setText(cursor.getString(cursor.getColumnIndex("description")));
 					//显示发布者（仅学号）
@@ -252,6 +243,7 @@ public class EventDetailsActivity extends BaseActivity implements OnClickListene
 					} else {
 						tvEventState.setText("已经关闭");
 					}
+					
 				}
 			} while (cursor.moveToPrevious());
 		}
@@ -451,14 +443,32 @@ public class EventDetailsActivity extends BaseActivity implements OnClickListene
 			e.printStackTrace();
 		}
 	}
-	//设置菜单按钮的点击事件
+	// 设置菜单按钮的点击事件
 	public boolean onMenuItemSelected(int featureId, MenuItem item)	{
 		switch (item.getItemId())	{
 		case R.id.action_alter_event:
-			if (FLAG == 1) {
-				Intent intent = new Intent(EventDetailsActivity.this, AlterEventActivity.class);
-				intent.putStringArrayListExtra(, value);
+			if (mPublisher.equals(User.getCurrentUserStuId())) {
+				if (mCloseFlag.equals("0")) {
+					Intent intent = new Intent(EventDetailsActivity.this, AlterEventActivity.class);
+					intent.putExtra("stu_id__FLAG", tvStu_id.getText().toString() + "__" + FLAG);
+					startActivityForResult(intent, FLAG);
+				} else {
+					Toast.makeText(this, "无法修改已关闭事件", Toast.LENGTH_SHORT).show();
+				}
+			} else {
+				Toast.makeText(this, "只能修改您自己发布的事件", Toast.LENGTH_SHORT).show();
 			}
+		}
+		return false;
+	}
+	
+	// 事件的回调结果
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (requestCode == RESULT_OK) {
+			// 重新载入数据
+			initViews();
+		} else if (requestCode == RESULT_CANCELED) {
 			
 		}
 	}
