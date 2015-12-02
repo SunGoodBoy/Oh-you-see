@@ -1,15 +1,17 @@
 package com.duang.easyecard.Activity;
 
+import java.util.Calendar;
 import java.util.StringTokenizer;
 
 import com.duang.easyecard.R;
 import com.duang.easyecard.db.MyDatabaseHelper;
+import com.duang.easyecard.model.User;
+
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -38,7 +40,9 @@ public class AlterEventActivity extends BaseActivity {
 	private Button mSubmit_button;
 	private Button mCancel_button;
 	
-	private int FLAG; // 用于标识事件的类型，LostEvent为1，FoundEvent为2
+	private int FLAG;  // 用于标识事件的类型，LostEvent为1，FoundEvent为2
+	private String mOldStuId;  // OldStuId保存原学号
+	private String mPublisher = User.getCurrentUserStuId();  // 发布者
 	
 	public void onCreate(Bundle savedInstanceState)	{
 		super.onCreate(savedInstanceState);
@@ -86,7 +90,7 @@ public class AlterEventActivity extends BaseActivity {
 		
 		// 显示学号
 		mStuId.setText(stu_id);
-		
+		mOldStuId = stu_id;
 		switch (FLAG) {
 			case 1:
 				getInfoFromLostEvent(stu_id);
@@ -107,9 +111,9 @@ public class AlterEventActivity extends BaseActivity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				alterEventMain(v);
-				Intent intent = new Intent();
-				setResult(RESULT_OK, intent);
-				Toast.makeText(AlterEventActivity.this, "修改成功！", Toast.LENGTH_SHORT).show();
+				Intent intent = new Intent(AlterEventActivity.this, EventDetailsActivity.class);
+				intent.putExtra("extra_data", mStuId.getText().toString() + "__" + FLAG);
+				startActivity(intent);
 				finish();
 			}
 		});
@@ -118,9 +122,6 @@ public class AlterEventActivity extends BaseActivity {
 			
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				Intent intent = new Intent();
-				setResult(RESULT_CANCELED, intent);
 				finish();
 			}
 		});
@@ -263,24 +264,126 @@ public class AlterEventActivity extends BaseActivity {
 	}
 
 	private void alterEventMain(View v)	{
+		String stu_id = mStuId.getText().toString();
+		String name = mName.getText().toString();
+		String contact = mContact.getText().toString();
 		
+		//判断学号是否为空
+		if (!stu_id.isEmpty())	{
+			if (stu_id.length() == 11)	{
+				if (!name.isEmpty())	{
+					if (!contact.isEmpty())	{
+						//将数据写入数据库
+						writeDataToDb();
+						finish();
+						Toast.makeText(AlterEventActivity.this, "修改成功！", Toast.LENGTH_SHORT).show();
+					}
+					else {
+						Toast.makeText(AlterEventActivity.this, "必须填写联系方式！", Toast.LENGTH_SHORT).show();
+					}
+				}
+				else	{
+					Toast.makeText(AlterEventActivity.this, "姓名不能为空！", Toast.LENGTH_SHORT).show();
+				}
+			}
+			else {
+				Toast.makeText(AlterEventActivity.this, "学号必须为11位！", Toast.LENGTH_SHORT).show();
+			}
+		}
+		else	{
+			Toast.makeText(AlterEventActivity.this, "学号不能为空", Toast.LENGTH_LONG).show();
+		}
 		
 	}
 
 	// 将数据写入数据库
 	private void writeDataToDb() {
+		// 根据FLAG的值确定EVENT类型
+		String EVENT = null;
+		String EVENT_DATE = null;
+		String EVENT_TIME = null;
+		String EVENT_PLACE = null;
+		if (FLAG == 1) {
+			EVENT = "LostEvent";
+			EVENT_DATE = "lost_date";
+			EVENT_TIME = "lost_time";
+			EVENT_PLACE = "lost_place";
+		} else if (FLAG == 2) {
+			EVENT = "FoundEvent";
+			EVENT_DATE = "found_date";
+			EVENT_TIME = "found_time";
+			EVENT_PLACE = "found_place";
+		} else {
+			Log.e("Event Flag", "Unexpected FLAG");
+		}
+		String stu_id = mStuId.getText().toString();
+		String name = mName.getText().toString();
+		String contact = mContact.getText().toString();
+		String event_place = mEventPlace.getText().toString();
+		String descrption = mDescription.getText().toString();
 		
+		//将系统的当前日期传给add_date，当前时间传给add_time
+		Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day_of_month = calendar.get(Calendar.DAY_OF_MONTH);
+		int hour = calendar.get(Calendar.HOUR_OF_DAY);
+		int minute = calendar.get(Calendar.MINUTE);
 		
+		String add_date = String.valueOf(year) + "-" + String.valueOf(month+1) + "-" + String.valueOf(day_of_month);
+		String add_time = String.valueOf(hour) + ":" + String.valueOf(minute) + ":" + "00";
+		
+		//获取DatePicker中的日期
+		year = mDatePicker.getYear();
+		month = mDatePicker.getMonth();
+		day_of_month = mDatePicker.getDayOfMonth();
+		String event_date = String.valueOf(year) + "-" + String.valueOf(month+1) + "-" + String.valueOf(day_of_month);
+		//获取TimePicker中的时间
+		hour = mTimePicker.getCurrentHour();
+		minute = mTimePicker.getCurrentMinute();
+		String event_time = String.valueOf(hour) + ":" + String.valueOf(minute) + ":" + "00";
+		
+		// 获取可写数据库
+		SQLiteDatabase db = dbHelper.getWritableDatabase();
+		
+		// 判断学号是否改变
+		if (stu_id.equals(mOldStuId)) {
+			// 学号未改变，更新已有事件
+			db.execSQL("update " + EVENT +" set owner_name = ? where owner_stu_id = ?",
+							new String[]{name, stu_id});
+			db.execSQL("update " + EVENT +" set owner_contact = ? where owner_stu_id = ?",
+					new String[]{contact, stu_id});
+			db.execSQL("update " + EVENT +" set " + EVENT_DATE+ "= ? where owner_stu_id = ?",
+					new String[]{event_date, stu_id});
+			db.execSQL("update " + EVENT +" set " + EVENT_TIME + "= ? where owner_stu_id = ?",
+					new String[]{event_time, stu_id});
+			db.execSQL("update " + EVENT +" set " + EVENT_PLACE + "= ? where owner_stu_id = ?",
+					new String[]{event_place, stu_id});
+			db.execSQL("update " + EVENT +" set description = ? where owner_stu_id = ?",
+					new String[]{descrption, stu_id});
+		} else {
+			// 学号改变，新建事件
+			db.execSQL("insert into " + EVENT + " ("
+					+ "add_date, "
+					+ "add_time, "
+					+ "owner_stu_id, "
+					+ "owner_name, "
+					+ "owner_contact, "
+					+ EVENT_DATE + ", "
+					+ EVENT_TIME + ", "
+					+ EVENT_PLACE + ", "
+					+ "description, "
+					+ "duration, "
+					+ "publisher_stu_id, "
+					+ "found_flag, "
+					+ "close_flag)"
+					+ "values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+					new String[] {add_date, add_time, stu_id, name, contact, event_date, event_time, 
+							event_place, descrption, "30", mPublisher, "0", "0"});
+			// 删除旧学号的事件
+			db.execSQL("delete from " + EVENT +" where owner_stu_id = ?",
+					new String[] {mOldStuId});
+		}
 	}
 	
-	// 监听Back按钮的点击
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode == KeyEvent.KEYCODE_BACK)	{
-			// 不考虑信息是否修改，直接销毁活动
-			Intent intent = new Intent();
-			setResult(RESULT_CANCELED, intent);
-			finish();
-		}
-		return false;
-	}
 }

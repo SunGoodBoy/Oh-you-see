@@ -5,8 +5,6 @@ import java.util.StringTokenizer;
 
 import com.duang.easyecard.R;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;

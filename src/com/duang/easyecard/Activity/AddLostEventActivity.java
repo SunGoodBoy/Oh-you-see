@@ -197,11 +197,7 @@ public class AddLostEventActivity extends BaseActivity	{
 				+ "values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
 				new String[] {publisher, add_date, add_time, stu_id, name, contact, lost_date, lost_time, 
 						lost_place, descrption, "30", "0", "0"});
-		
 	}
-	
-	
-	
 	
 }
 

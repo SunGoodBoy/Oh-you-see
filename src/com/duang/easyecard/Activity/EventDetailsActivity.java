@@ -451,7 +451,8 @@ public class EventDetailsActivity extends BaseActivity implements OnClickListene
 				if (mCloseFlag.equals("0")) {
 					Intent intent = new Intent(EventDetailsActivity.this, AlterEventActivity.class);
 					intent.putExtra("stu_id__FLAG", tvStu_id.getText().toString() + "__" + FLAG);
-					startActivityForResult(intent, FLAG);
+					startActivity(intent);
+					finish();  // 销毁本活动，以方便重新加载
 				} else {
 					Toast.makeText(this, "无法修改已关闭事件", Toast.LENGTH_SHORT).show();
 				}
@@ -462,14 +463,4 @@ public class EventDetailsActivity extends BaseActivity implements OnClickListene
 		return false;
 	}
 	
-	// 事件的回调结果
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (requestCode == RESULT_OK) {
-			// 重新载入数据
-			initViews();
-		} else if (requestCode == RESULT_CANCELED) {
-			
-		}
-	}
 }
