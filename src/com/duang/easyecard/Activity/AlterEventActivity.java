@@ -1,12 +1,9 @@
 package com.duang.easyecard.Activity;
 
-import java.util.Calendar;
 import java.util.StringTokenizer;
 
 import com.duang.easyecard.R;
 import com.duang.easyecard.db.MyDatabaseHelper;
-import com.duang.easyecard.model.User;
-
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -17,7 +14,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.DatePicker.OnDateChangedListener;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -164,13 +160,9 @@ public class AlterEventActivity extends BaseActivity {
 					{
 						day = Integer.parseInt(token.nextToken());
 					}
-					// 初始化DatePicker
-					mDatePicker.init(year, month, day, new OnDateChangedListener() {
-						@Override
-						public void onDateChanged(DatePicker arg0, int arg1, int arg2, int arg3) {
-							// TODO Auto-generated method stub
-						}
-					});
+					Log.d("year-month-day", year + "-" + month + "-" + day);
+					// 设置DatePicker默认日期
+					mDatePicker.updateDate(year, month - 1, day);
 					// 显示为“设置拾获时间”
 					mEventTimeTitle.setText("设置拾获时间");
 					// 获取丢失时间
@@ -186,6 +178,7 @@ public class AlterEventActivity extends BaseActivity {
 					{
 						minute = Integer.parseInt(token.nextToken());
 					}
+					Log.d("hour:minute", hour + ":" + minute);
 					// 初始化TimePicker
 					mTimePicker.setCurrentHour(hour);
 					mTimePicker.setCurrentMinute(minute);
@@ -235,13 +228,9 @@ public class AlterEventActivity extends BaseActivity {
 					{
 						day = Integer.parseInt(token.nextToken());
 					}
-					// 初始化DatePicker
-					mDatePicker.init(year, month, day, new OnDateChangedListener() {
-						@Override
-						public void onDateChanged(DatePicker arg0, int arg1, int arg2, int arg3) {
-							// TODO Auto-generated method stub
-						}
-					});
+					Log.d("year-month-day", year + "-" + month + "-" + day);
+					// 设置DatePicker默认日期
+					mDatePicker.updateDate(year, month - 1, day);
 					// 显示为“设置丢失时间”
 					mEventTimeTitle.setText("设置丢失时间");
 					// 获取丢失时间
@@ -257,6 +246,7 @@ public class AlterEventActivity extends BaseActivity {
 					{
 						minute = Integer.parseInt(token.nextToken());
 					}
+					Log.d("hour:minute", hour + ":" + minute);
 					// 初始化TimePicker
 					mTimePicker.setCurrentHour(hour);
 					mTimePicker.setCurrentMinute(minute);
