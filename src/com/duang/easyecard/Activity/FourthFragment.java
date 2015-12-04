@@ -30,14 +30,14 @@ public class FourthFragment extends Fragment implements OnClickListener{
 			Bundle savedInstanceState) {
 		viewFragment = inflater.inflate(R.layout.fourth, null);
 		
-		//ÊµÀı»¯Button¿Ø¼ş
+		//å®ä¾‹åŒ–Buttonæ§ä»¶
 		mPersonalInfo = (Button) viewFragment.findViewById(R.id.personal_info_button);
 		mEventAboutMe = (Button) viewFragment.findViewById(R.id.event_about_me_button);
 		mEventByMe = (Button) viewFragment.findViewById(R.id.event_by_me_button);
 		mChangePassword = (Button) viewFragment.findViewById(R.id.change_password_button);
 		mLogout = (Button) viewFragment.findViewById(R.id.logout_button);
 		
-		//¼àÌıµã»÷ÊÂ¼ş
+		//ç›‘å¬ç‚¹å‡»äº‹ä»¶
 		mPersonalInfo.setOnClickListener(this);
 		mEventAboutMe.setOnClickListener(this);
 		mEventByMe.setOnClickListener(this);
@@ -54,47 +54,47 @@ public class FourthFragment extends Fragment implements OnClickListener{
 		switch (v.getId())
 		{
 		case R.id.personal_info_button:
-			//Ìø×ªµ½¸öÈËĞÅÏ¢½çÃæ
-			Toast.makeText(this.getActivity(),"¸öÈËĞÅÏ¢", Toast.LENGTH_SHORT).show();
+			//è·³è½¬åˆ°ä¸ªäººä¿¡æ¯ç•Œé¢
+			Toast.makeText(this.getActivity(),"ä¸ªäººä¿¡æ¯", Toast.LENGTH_SHORT).show();
 			Intent intent = new Intent(this.getActivity(), PersonalInfoActivity.class);
 			startActivity(intent);
 			break;
 		case R.id.event_about_me_button:
-			//Ìø×ªµ½ÓëÎÒÏà¹Ø½çÃæ
-			//Toast.makeText(this.getActivity(),"ÓëÎÒÏà¹Ø", Toast.LENGTH_SHORT).show();
+			//è·³è½¬åˆ°ä¸æˆ‘ç›¸å…³ç•Œé¢
+			//Toast.makeText(this.getActivity(),"ä¸æˆ‘ç›¸å…³", Toast.LENGTH_SHORT).show();
 			intent = new Intent(this.getActivity(), EventAboutMeActivity.class);
 			startActivity(intent);
 			break;
 		case R.id.event_by_me_button:
-			//Ìø×ªµ½ÎÒ·¢²¼µÄ½çÃæ
-			//Toast.makeText(this.getActivity(),"ÎÒ·¢²¼µÄ", Toast.LENGTH_SHORT).show();
+			//è·³è½¬åˆ°æˆ‘å‘å¸ƒçš„ç•Œé¢
+			//Toast.makeText(this.getActivity(),"æˆ‘å‘å¸ƒçš„", Toast.LENGTH_SHORT).show();
 			intent = new Intent(this.getActivity(), EventByMeActivity.class);
 			startActivity(intent);
 			break;
 		case R.id.change_password_button:
-			//Ìø×ªµ½ĞŞ¸ÄÃÜÂë½çÃæ
-			//Toast.makeText(this.getActivity(),"ĞŞ¸ÄÃÜÂë", Toast.LENGTH_SHORT).show();
+			//è·³è½¬åˆ°ä¿®æ”¹å¯†ç ç•Œé¢
+			//Toast.makeText(this.getActivity(),"ä¿®æ”¹å¯†ç ", Toast.LENGTH_SHORT).show();
 			intent = new Intent(getActivity(), ChangePasswordActivity.class);
 			startActivity(intent);
 			break;
 		case R.id.logout_button:
-			//×¢ÏúµÇÂ¼
-			//Toast.makeText(this.getActivity(),"×¢ÏúµÇÂ¼", Toast.LENGTH_SHORT).show();
+			//æ³¨é”€ç™»å½•
+			//Toast.makeText(this.getActivity(),"æ³¨é”€ç™»å½•", Toast.LENGTH_SHORT).show();
 			AlertDialog.Builder dialog = new AlertDialog.Builder(this.getActivity());
-			dialog.setTitle("ÌáÊ¾");
-			dialog.setMessage("È·¶¨×¢ÏúÕÊºÅÂğ£¿");
-			dialog.setPositiveButton("È·¶¨", new DialogInterface.OnClickListener() {
+			dialog.setTitle("æç¤º");
+			dialog.setMessage("ç¡®å®šæ³¨é”€å¸å·å—ï¼Ÿ");
+			dialog.setPositiveButton("ç¡®å®š", new DialogInterface.OnClickListener() {
 				
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					//Ìø×ªÖÁLoginActivity£¬²¢½áÊøËùÔÚ»î¶¯£¬°Ñµ±Ç°ÓÃ»§ÖÃÎªÄ¬ÈÏÖµnull
+					//è·³è½¬è‡³LoginActivityï¼Œå¹¶ç»“æŸæ‰€åœ¨æ´»åŠ¨ï¼ŒæŠŠå½“å‰ç”¨æˆ·ç½®ä¸ºé»˜è®¤å€¼null
 					User.setCurrentUserStuId(null);
 					Intent intent = new Intent(getActivity(), LoginActivity.class);
 					startActivity(intent);
 					getActivity().finish();
 				}
 			});
-			dialog.setNegativeButton("È¡Ïû", new DialogInterface.OnClickListener() {
+			dialog.setNegativeButton("å–æ¶ˆ", new DialogInterface.OnClickListener() {
 				
 				@Override
 				public void onClick(DialogInterface dialog, int which) {

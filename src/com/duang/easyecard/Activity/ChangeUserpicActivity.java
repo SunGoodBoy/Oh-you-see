@@ -42,25 +42,26 @@ public class ChangeUserpicActivity extends BaseActivity implements OnClickListen
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.change_userpic);
-		//ÊµÀý»¯¿Ø¼þ
+		// å®žä¾‹åŒ–æŽ§ä»¶
 		userpicImageView = (ImageView) findViewById(R.id.change_userpic_img);
 		takePhotoButton = (Button) findViewById(R.id.change_userpic_take_photo);
 		chooseFromAlbumButton = (Button) findViewById(R.id.change_userpic_choose_from_album);
 		cancelButton = (Button) findViewById(R.id.change_userpic_cancel);
 		
-		// ¼àÌý¡°ÅÄÕÕ¡±°´Å¥
+		// ç›‘å¬â€œæ‹ç…§â€æŒ‰é’®
 		takePhotoButton.setOnClickListener(this);
 		
-		// ¼àÌý¡°´ÓÏà²áÖÐÑ¡È¡¡±°´Å¥
+		// ç›‘å¬â€œä»Žç›¸å†Œä¸­é€‰å–â€æŒ‰é’®
 		chooseFromAlbumButton.setOnClickListener(this);
 		
-		// ¼àÌý¡°È¡Ïû¡±°´Å¥
+		// ç›‘å¬â€œå–æ¶ˆâ€æŒ‰é’®
 		cancelButton.setOnClickListener(this);
 	}
 	
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
+		// 
 		case R.id.change_userpic_take_photo:
 			File image = new File(Environment.getExternalStorageDirectory(),
 					"image.jpg");
@@ -78,11 +79,13 @@ public class ChangeUserpicActivity extends BaseActivity implements OnClickListen
 				e.printStackTrace();
 			}
 			break;
+		// 
 		case R.id.change_userpic_choose_from_album:
 			Intent intent = new Intent("android.intent.action.GET_CONTENT");
 			intent.setType("image/*"); 
 			startActivityForResult(intent, GET_ALBUM);
 			break;
+		// 
 		case R.id.change_userpic_cancel:
 			finish();
 		default:
@@ -90,102 +93,4 @@ public class ChangeUserpicActivity extends BaseActivity implements OnClickListen
 		}
 
 	}
-
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		super.onActivityResult(requestCode, resultCode, data);
-		switch (requestCode) {
-		case TAKE_PHOTO:
-			if (resultCode == RESULT_OK) {
-				Intent intent = new Intent("com.android.camera.action.CROP");
-				intent.setDataAndType(imageUri, "image/*");
-				intent.putExtra("scale", true);
-				intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
-				startActivityForResult(intent, CROP_PHOTO);
-			}
-			break;
-		case CROP_PHOTO:
-			try {
-				Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver()
-						.openInputStream(imageUri));
-				userpicImageView.setImageBitmap(bitmap);
-
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			}
-			break;
-		case GET_ALBUM:
-			if (resultCode == RESULT_OK) {
-				// Ê×ÏÈÅÐ¶ÏÏµÍ³ÊÇ·ñ4.4ÒÔÉÏ
-				if (Build.VERSION.SDK_INT >= 19) {
-					handleImageOnKitKat(data);
-				} else {
-					handleImageBeforeLitKat(data);
-				}
-			}
-			break;
-		default:
-			break;
-		}
-	}
-
-	public void handleImageBeforeLitKat(Intent data) {
-		Uri uri = data.getData();
-		String imagePath = getImagePath(uri, null);
-		showImage(imagePath);
-	}
-
-	public void handleImageOnKitKat(Intent data) {
-		String imagePath = null;
-		Uri uri = data.getData();
-		// Èç¹ûÊÇdocumentÐÍµÄuri£¬ÔòÍ¨¹ýdocument idÀ´´¦Àí
-		if (DocumentsContract.isDocumentUri(this, uri)) {
-			String docid = DocumentsContract.getDocumentId(uri);
-			// Èç¹ûuriµÄauthorityÀàÐÍÊÇmedia
-			if ("com.android.providers.media.documents".equals(uri
-					.getAuthority())) {
-				String id = docid.split(":")[0];
-				String selection = MediaStore.Images.Media._ID + "=" + id;
-				imagePath = getImagePath(
-						MediaStore.Images.Media.EXTERNAL_CONTENT_URI, selection);
-				// // Èç¹ûuriµÄauthorityÀàÐÍÊÇdownloads
-			} else if ("com.android.providers.downloads.documents".equals(uri
-					.getAuthority())) {
-				Uri contentUri = ContentUris.withAppendedId(
-						Uri.parse("content://downloads/public_downloads"),
-						Long.valueOf(docid));
-				imagePath = getImagePath(contentUri, null);
-			}
-			// Èç¹û²»ÊÇdocumentÀàÐÍµÄuri£¬ÄÇÃ´ÓÃÆÕÍ¨·½·¨´¦Àí
-		} else if ("content".equalsIgnoreCase(uri.getScheme())) {
-			imagePath = getImagePath(uri, null);
-		}
-
-		showImage(imagePath);
-	}
-
-	public String getImagePath(Uri uri, String selection) {
-		String imagePath = null;
-		Cursor cursor = null;
-		cursor = getContentResolver().query(uri, null, selection, null, null);
-		if (cursor != null) {
-			if (cursor.moveToFirst()) {
-				imagePath = cursor.getString(cursor.getColumnIndex(Media.DATA));
-			}
-		}
-		cursor.close();
-
-		return imagePath;
-	}
-
-	public void showImage(String imagePath) {
-		if (imagePath != null) {
-			Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
-			userpicImageView.setImageBitmap(bitmap);
-		} else {
-			Toast.makeText(this, "get image failure", Toast.LENGTH_SHORT)
-					.show();
-		}
-	}
-	
 }

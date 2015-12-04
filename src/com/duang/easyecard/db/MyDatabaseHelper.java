@@ -77,7 +77,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 		db.execSQL(CREATE_USERINFO);
 		db.execSQL(CREATE_LOSTEVENT);
 		db.execSQL(CREATE_FOUNDEVENT);
-		Toast.makeText(mContext, "ÒÑ³É¹¦½¨Á¢Êı¾İ¿â", Toast.LENGTH_SHORT).show();
+		Toast.makeText(mContext, "å·²æˆåŠŸåˆ›å»ºæ•°æ®åº“ï¼", Toast.LENGTH_SHORT).show();
 	}
 	
 	@Override

@@ -40,9 +40,9 @@ public class AlterEventActivity extends BaseActivity {
 	private Button mSubmit_button;
 	private Button mCancel_button;
 	
-	private int FLAG;  // ÓÃÓÚ±êÊ¶ÊÂ¼şµÄÀàĞÍ£¬LostEventÎª1£¬FoundEventÎª2
-	private String mOldStuId;  // OldStuId±£´æÔ­Ñ§ºÅ
-	private String mPublisher = User.getCurrentUserStuId();  // ·¢²¼Õß
+	private int FLAG;  // ç”¨äºæ ‡è¯†äº‹ä»¶çš„ç±»å‹ï¼ŒLostEventä¸º1ï¼ŒFoundEventä¸º2
+	private String mOldStuId;  // OldStuIdä¿å­˜åŸå­¦å·
+	private String mPublisher = User.getCurrentUserStuId();  // å‘å¸ƒè€…
 	
 	public void onCreate(Bundle savedInstanceState)	{
 		super.onCreate(savedInstanceState);
@@ -65,10 +65,10 @@ public class AlterEventActivity extends BaseActivity {
 		mSubmit_button = (Button) findViewById(R.id.add_lost_event_submit);
 		mCancel_button = (Button) findViewById(R.id.add_lost_event_cancel);
 		
-		mTimePicker.setIs24HourView(true);	//ÉèÖÃÊ±ÖÓÎª24Ğ¡Ê±ÖÆ
-		mSubmit_button.setText("±£´æĞŞ¸Ä");
+		mTimePicker.setIs24HourView(true);	//è®¾ç½®æ—¶é’Ÿä¸º24å°æ—¶åˆ¶
+		mSubmit_button.setText("ä¿å­˜ä¿®æ”¹");
 		
-		//´ò¿ª»ò´´½¨Êı¾İ¿â
+		//æ‰“å¼€æˆ–åˆ›å»ºæ•°æ®åº“
 		dbHelper = new MyDatabaseHelper(this, "EasyEcard.db", null, 1);
 		
 		initViews();
@@ -79,16 +79,16 @@ public class AlterEventActivity extends BaseActivity {
 		Intent intent = getIntent();
 		String data = intent.getStringExtra("stu_id__FLAG");
 
-		// »ñÈ¡ÊÂ¼şÊ§Ö÷µÄÑ§ºÅ
+		// è·å–äº‹ä»¶å¤±ä¸»çš„å­¦å·
 		String split = "_";
 		StringTokenizer token = new StringTokenizer(data, split);
 		String stu_id = token.nextToken();
 		Log.d("AlterEventActivity stu_id in data", stu_id);
-		// »ñÈ¡ÊÂ¼şµÄÀàĞÍ
+		// è·å–äº‹ä»¶çš„ç±»å‹
 		FLAG = Integer.parseInt(token.nextToken());
 		Log.d("AlterEventActivity FLAG in data", String.valueOf(FLAG));
 		
-		// ÏÔÊ¾Ñ§ºÅ
+		// æ˜¾ç¤ºå­¦å·
 		mStuId.setText(stu_id);
 		mOldStuId = stu_id;
 		switch (FLAG) {
@@ -104,7 +104,7 @@ public class AlterEventActivity extends BaseActivity {
 		
 		
 		
-		//Ìá½»°´Å¥µã»÷ÊÂ¼ş
+		//æäº¤æŒ‰é’®ç‚¹å‡»äº‹ä»¶
 		mSubmit_button.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -117,7 +117,7 @@ public class AlterEventActivity extends BaseActivity {
 				finish();
 			}
 		});
-		//¡°È¡Ïû¡±°´Å¥µÄµã»÷ÊÂ¼ş
+		//â€œå–æ¶ˆâ€æŒ‰é’®çš„ç‚¹å‡»äº‹ä»¶
 		mCancel_button.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -128,7 +128,7 @@ public class AlterEventActivity extends BaseActivity {
 	}
 	
 	private void getInfoFromFoundEvent(String stu_id) {
-		// ´ÓFoundEventÖĞËÑË÷ĞÅÏ¢
+		// ä»FoundEventä¸­æœç´¢ä¿¡æ¯
 		SQLiteDatabase db = dbHelper.getReadableDatabase();
 		Cursor cursor = db.query("FoundEvent", null, null, null, null, null, null);
 		
@@ -138,13 +138,13 @@ public class AlterEventActivity extends BaseActivity {
 				if (stu_id.equals(cursor.getString(cursor.getColumnIndex("owner_stu_id"))) ||
 						cursor.getString(cursor.getColumnIndex("close_flag")).equals("0"))
 				{
-					// Ê§Ö÷ĞÕÃû
+					// å¤±ä¸»å§“å
 					mName.setText(cursor.getString(cursor.getColumnIndex("owner_name")));
-					// Ê§Ö÷ÁªÏµ·½Ê½
+					// å¤±ä¸»è”ç³»æ–¹å¼
 					mContact.setText(cursor.getString(cursor.getColumnIndex("owner_contact")));
-					// ÏÔÊ¾Îª¡°ÉèÖÃÊ°»ñÈÕÆÚ¡±
-					mEventDateTitle.setText("ÉèÖÃÊ°»ñÈÕÆÚ");
-					// »ñÈ¡Ê°»ñÈÕÆÚ
+					// æ˜¾ç¤ºä¸ºâ€œè®¾ç½®æ‹¾è·æ—¥æœŸâ€
+					mEventDateTitle.setText("è®¾ç½®æ‹¾è·æ—¥æœŸ");
+					// è·å–æ‹¾è·æ—¥æœŸ
 					String date = cursor.getString(cursor.getColumnIndex("found_date"));
 					String split = "-";
 					StringTokenizer token = new StringTokenizer(date, split);
@@ -162,11 +162,11 @@ public class AlterEventActivity extends BaseActivity {
 						day = Integer.parseInt(token.nextToken());
 					}
 					Log.d("year-month-day", year + "-" + month + "-" + day);
-					// ÉèÖÃDatePickerÄ¬ÈÏÈÕÆÚ
+					// è®¾ç½®DatePickeré»˜è®¤æ—¥æœŸ
 					mDatePicker.updateDate(year, month - 1, day);
-					// ÏÔÊ¾Îª¡°ÉèÖÃÊ°»ñÊ±¼ä¡±
-					mEventTimeTitle.setText("ÉèÖÃÊ°»ñÊ±¼ä");
-					// »ñÈ¡¶ªÊ§Ê±¼ä
+					// æ˜¾ç¤ºä¸ºâ€œè®¾ç½®æ‹¾è·æ—¶é—´â€
+					mEventTimeTitle.setText("è®¾ç½®æ‹¾è·æ—¶é—´");
+					// è·å–ä¸¢å¤±æ—¶é—´
 					String time_in_day = cursor.getString(cursor.getColumnIndex("found_time"));
 					split = ":";
 					token = new StringTokenizer(time_in_day, split);
@@ -180,13 +180,13 @@ public class AlterEventActivity extends BaseActivity {
 						minute = Integer.parseInt(token.nextToken());
 					}
 					Log.d("hour:minute", hour + ":" + minute);
-					// ³õÊ¼»¯TimePicker
+					// åˆå§‹åŒ–TimePicker
 					mTimePicker.setCurrentHour(hour);
 					mTimePicker.setCurrentMinute(minute);
-					//ÏÔÊ¾Îª¡°¶ªÊ§µØµã¡±
-					mEventPlaceTitle.setText("Ê°»ñµØµã");
+					//æ˜¾ç¤ºä¸ºâ€œä¸¢å¤±åœ°ç‚¹â€
+					mEventPlaceTitle.setText("æ‹¾è·åœ°ç‚¹");
 					mEventPlace.setText(cursor.getString(cursor.getColumnIndex("found_place")));
-					//ÏÔÊ¾ÃèÊö
+					//æ˜¾ç¤ºæè¿°
 					mDescription.setText(cursor.getString(cursor.getColumnIndex("description")));
 				}
 			} while (cursor.moveToPrevious());
@@ -196,7 +196,7 @@ public class AlterEventActivity extends BaseActivity {
 	}
 
 	private void getInfoFromLostEvent(String stu_id) {
-		// ´ÓLostEventÖĞËÑË÷ĞÅÏ¢
+		// ä»LostEventä¸­æœç´¢ä¿¡æ¯
 		SQLiteDatabase db = dbHelper.getReadableDatabase();
 		Cursor cursor = db.query("LostEvent", null, null, null, null, null, null);
 		
@@ -206,13 +206,13 @@ public class AlterEventActivity extends BaseActivity {
 				if (stu_id.equals(cursor.getString(cursor.getColumnIndex("owner_stu_id"))) ||
 						cursor.getString(cursor.getColumnIndex("close_flag")).equals("0"))
 				{
-					// Ê§Ö÷ĞÕÃû
+					// å¤±ä¸»å§“å
 					mName.setText(cursor.getString(cursor.getColumnIndex("owner_name")));
-					// Ê§Ö÷ÁªÏµ·½Ê½
+					// å¤±ä¸»è”ç³»æ–¹å¼
 					mContact.setText(cursor.getString(cursor.getColumnIndex("owner_contact")));
-					// ÏÔÊ¾Îª¡°ÉèÖÃ¶ªÊ§ÈÕÆÚ¡±
-					mEventDateTitle.setText("ÉèÖÃ¶ªÊ§ÈÕÆÚ");
-					// »ñÈ¡¶ªÊ§ÈÕÆÚ
+					// æ˜¾ç¤ºä¸ºâ€œè®¾ç½®ä¸¢å¤±æ—¥æœŸâ€
+					mEventDateTitle.setText("è®¾ç½®ä¸¢å¤±æ—¥æœŸ");
+					// è·å–ä¸¢å¤±æ—¥æœŸ
 					String date = cursor.getString(cursor.getColumnIndex("lost_date"));
 					String split = "-";
 					StringTokenizer token = new StringTokenizer(date, split);
@@ -230,11 +230,11 @@ public class AlterEventActivity extends BaseActivity {
 						day = Integer.parseInt(token.nextToken());
 					}
 					Log.d("year-month-day", year + "-" + month + "-" + day);
-					// ÉèÖÃDatePickerÄ¬ÈÏÈÕÆÚ
+					// è®¾ç½®DatePickeré»˜è®¤æ—¥æœŸ
 					mDatePicker.updateDate(year, month - 1, day);
-					// ÏÔÊ¾Îª¡°ÉèÖÃ¶ªÊ§Ê±¼ä¡±
-					mEventTimeTitle.setText("ÉèÖÃ¶ªÊ§Ê±¼ä");
-					// »ñÈ¡¶ªÊ§Ê±¼ä
+					// æ˜¾ç¤ºä¸ºâ€œè®¾ç½®ä¸¢å¤±æ—¶é—´â€
+					mEventTimeTitle.setText("è®¾ç½®ä¸¢å¤±æ—¶é—´");
+					// è·å–ä¸¢å¤±æ—¶é—´
 					String time_in_day = cursor.getString(cursor.getColumnIndex("lost_time"));
 					split = ":";
 					token = new StringTokenizer(time_in_day, split);
@@ -248,13 +248,13 @@ public class AlterEventActivity extends BaseActivity {
 						minute = Integer.parseInt(token.nextToken());
 					}
 					Log.d("hour:minute", hour + ":" + minute);
-					// ³õÊ¼»¯TimePicker
+					// åˆå§‹åŒ–TimePicker
 					mTimePicker.setCurrentHour(hour);
 					mTimePicker.setCurrentMinute(minute);
-					//ÏÔÊ¾Îª¡°¶ªÊ§µØµã¡±
-					mEventPlaceTitle.setText("¶ªÊ§µØµã");
+					//æ˜¾ç¤ºä¸ºâ€œä¸¢å¤±åœ°ç‚¹â€
+					mEventPlaceTitle.setText("ä¸¢å¤±åœ°ç‚¹");
 					mEventPlace.setText(cursor.getString(cursor.getColumnIndex("lost_place")));
-					//ÏÔÊ¾ÃèÊö
+					//æ˜¾ç¤ºæè¿°
 					mDescription.setText(cursor.getString(cursor.getColumnIndex("description")));
 				}
 			} while (cursor.moveToPrevious());
@@ -268,37 +268,37 @@ public class AlterEventActivity extends BaseActivity {
 		String name = mName.getText().toString();
 		String contact = mContact.getText().toString();
 		
-		//ÅĞ¶ÏÑ§ºÅÊÇ·ñÎª¿Õ
+		//åˆ¤æ–­å­¦å·æ˜¯å¦ä¸ºç©º
 		if (!stu_id.isEmpty())	{
 			if (stu_id.length() == 11)	{
 				if (!name.isEmpty())	{
 					if (!contact.isEmpty())	{
-						//½«Êı¾İĞ´ÈëÊı¾İ¿â
+						//å°†æ•°æ®å†™å…¥æ•°æ®åº“
 						writeDataToDb();
 						finish();
-						Toast.makeText(AlterEventActivity.this, "ĞŞ¸Ä³É¹¦£¡", Toast.LENGTH_SHORT).show();
+						Toast.makeText(AlterEventActivity.this, "ä¿®æ”¹æˆåŠŸï¼", Toast.LENGTH_SHORT).show();
 					}
 					else {
-						Toast.makeText(AlterEventActivity.this, "±ØĞëÌîĞ´ÁªÏµ·½Ê½£¡", Toast.LENGTH_SHORT).show();
+						Toast.makeText(AlterEventActivity.this, "å¿…é¡»å¡«å†™è”ç³»æ–¹å¼ï¼", Toast.LENGTH_SHORT).show();
 					}
 				}
 				else	{
-					Toast.makeText(AlterEventActivity.this, "ĞÕÃû²»ÄÜÎª¿Õ£¡", Toast.LENGTH_SHORT).show();
+					Toast.makeText(AlterEventActivity.this, "å§“åä¸èƒ½ä¸ºç©ºï¼", Toast.LENGTH_SHORT).show();
 				}
 			}
 			else {
-				Toast.makeText(AlterEventActivity.this, "Ñ§ºÅ±ØĞëÎª11Î»£¡", Toast.LENGTH_SHORT).show();
+				Toast.makeText(AlterEventActivity.this, "å­¦å·å¿…é¡»ä¸º11ä½ï¼", Toast.LENGTH_SHORT).show();
 			}
 		}
 		else	{
-			Toast.makeText(AlterEventActivity.this, "Ñ§ºÅ²»ÄÜÎª¿Õ", Toast.LENGTH_LONG).show();
+			Toast.makeText(AlterEventActivity.this, "å­¦å·ä¸èƒ½ä¸ºç©º", Toast.LENGTH_LONG).show();
 		}
 		
 	}
 
-	// ½«Êı¾İĞ´ÈëÊı¾İ¿â
+	// å°†æ•°æ®å†™å…¥æ•°æ®åº“
 	private void writeDataToDb() {
-		// ¸ù¾İFLAGµÄÖµÈ·¶¨EVENTÀàĞÍ
+		// æ ¹æ®FLAGçš„å€¼ç¡®å®šEVENTç±»å‹
 		String EVENT = null;
 		String EVENT_DATE = null;
 		String EVENT_TIME = null;
@@ -322,7 +322,7 @@ public class AlterEventActivity extends BaseActivity {
 		String event_place = mEventPlace.getText().toString();
 		String descrption = mDescription.getText().toString();
 		
-		//½«ÏµÍ³µÄµ±Ç°ÈÕÆÚ´«¸øadd_date£¬µ±Ç°Ê±¼ä´«¸øadd_time
+		//å°†ç³»ç»Ÿçš„å½“å‰æ—¥æœŸä¼ ç»™add_dateï¼Œå½“å‰æ—¶é—´ä¼ ç»™add_time
 		Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH);
@@ -333,22 +333,22 @@ public class AlterEventActivity extends BaseActivity {
 		String add_date = String.valueOf(year) + "-" + String.valueOf(month+1) + "-" + String.valueOf(day_of_month);
 		String add_time = String.valueOf(hour) + ":" + String.valueOf(minute) + ":" + "00";
 		
-		//»ñÈ¡DatePickerÖĞµÄÈÕÆÚ
+		//è·å–DatePickerä¸­çš„æ—¥æœŸ
 		year = mDatePicker.getYear();
 		month = mDatePicker.getMonth();
 		day_of_month = mDatePicker.getDayOfMonth();
 		String event_date = String.valueOf(year) + "-" + String.valueOf(month+1) + "-" + String.valueOf(day_of_month);
-		//»ñÈ¡TimePickerÖĞµÄÊ±¼ä
+		//è·å–TimePickerä¸­çš„æ—¶é—´
 		hour = mTimePicker.getCurrentHour();
 		minute = mTimePicker.getCurrentMinute();
 		String event_time = String.valueOf(hour) + ":" + String.valueOf(minute) + ":" + "00";
 		
-		// »ñÈ¡¿ÉĞ´Êı¾İ¿â
+		// è·å–å¯å†™æ•°æ®åº“
 		SQLiteDatabase db = dbHelper.getWritableDatabase();
 		
-		// ÅĞ¶ÏÑ§ºÅÊÇ·ñ¸Ä±ä
+		// åˆ¤æ–­å­¦å·æ˜¯å¦æ”¹å˜
 		if (stu_id.equals(mOldStuId)) {
-			// Ñ§ºÅÎ´¸Ä±ä£¬¸üĞÂÒÑÓĞÊÂ¼ş
+			// å­¦å·æœªæ”¹å˜ï¼Œæ›´æ–°å·²æœ‰äº‹ä»¶
 			db.execSQL("update " + EVENT +" set owner_name = ? where owner_stu_id = ?",
 							new String[]{name, stu_id});
 			db.execSQL("update " + EVENT +" set owner_contact = ? where owner_stu_id = ?",
@@ -362,7 +362,7 @@ public class AlterEventActivity extends BaseActivity {
 			db.execSQL("update " + EVENT +" set description = ? where owner_stu_id = ?",
 					new String[]{descrption, stu_id});
 		} else {
-			// Ñ§ºÅ¸Ä±ä£¬ĞÂ½¨ÊÂ¼ş
+			// å­¦å·æ”¹å˜ï¼Œæ–°å»ºäº‹ä»¶
 			db.execSQL("insert into " + EVENT + " ("
 					+ "add_date, "
 					+ "add_time, "
@@ -380,7 +380,7 @@ public class AlterEventActivity extends BaseActivity {
 					+ "values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
 					new String[] {add_date, add_time, stu_id, name, contact, event_date, event_time, 
 							event_place, descrption, "30", mPublisher, "0", "0"});
-			// É¾³ı¾ÉÑ§ºÅµÄÊÂ¼ş
+			// åˆ é™¤æ—§å­¦å·çš„äº‹ä»¶
 			db.execSQL("delete from " + EVENT +" where owner_stu_id = ?",
 					new String[] {mOldStuId});
 		}

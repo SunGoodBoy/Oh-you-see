@@ -2,14 +2,14 @@ package com.duang.easyecard.model;
 
 public class FoundEvent extends Event	{
 
-	private long found_event_id;//Ê°»ñÊÂ¼ş±àºÅ
+	private long found_event_id;//æ‹¾è·äº‹ä»¶ç¼–å·
 
-	private String found_date = getDate();	//Ê°»ñÈÕÆÚ,´Ó¸¸Àà»ñÈ¡
-	private String found_place = getPlace();//Ê°»ñµØµã,´Ó¸¸Àà»ñÈ¡
+	private String found_date = getDate();	//æ‹¾è·æ—¥æœŸ,ä»çˆ¶ç±»è·å–
+	private String found_place = getPlace();//æ‹¾è·åœ°ç‚¹,ä»çˆ¶ç±»è·å–
 	
-	private boolean returned_flag;	//¹é»¹±êÖ¾
+	private boolean returned_flag;	//å½’è¿˜æ ‡å¿—
 
-	//¹¹Ôìº¯Êı
+	//æ„é€ å‡½æ•°
 	public FoundEvent()	{
 		super();
 	}

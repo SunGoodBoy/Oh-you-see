@@ -8,18 +8,18 @@ import android.content.Context;
 
 public class EventAdapter extends CommonAdapter<Event>
 {
-	//¹¹Ôìº¯Êı£¬³õÊ¼»¯
+	//æ„é€ å‡½æ•°ï¼Œåˆå§‹åŒ–
 	public EventAdapter(Context context, List<Event> datas, int itemLayoutId)	
 	{
 		super(context, datas, itemLayoutId);
 	}
 	
-	//ÉèÖÃ×ÊÔ´
+	//è®¾ç½®èµ„æº
 	public void convert(ViewHolder holder, Event event)
 	{
-		holder.setText(R.id.list_item_text_stu_id, "Ñ§ºÅ")
+		holder.setText(R.id.list_item_text_stu_id, "å­¦å·")
 			  .setText(R.id.list_item_owner_stu_id, event.getEvent_owner().getStu_id())
-			  .setText(R.id.list_item_text_name, "ĞÕÃû")
+			  .setText(R.id.list_item_text_name, "å§“å")
 			  .setText(R.id.list_item_owner_name, event.getEvent_owner().getUsername())
 			  .setImageResource(R.id.list_user_img, event.getEvent_owner().getImageId());
 	}

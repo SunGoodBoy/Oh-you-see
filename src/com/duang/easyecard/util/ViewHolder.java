@@ -40,7 +40,7 @@ public class ViewHolder {
 	}
 	
 	/**
-	 * Í¨¹ıviewId»ñÈ¡¿Ø¼ş
+	 * é€šè¿‡viewIdè·å–æ§ä»¶
 	 * @param viewId
 	 * @return
 	 */
@@ -62,7 +62,7 @@ public class ViewHolder {
 	}
 	
 	/**
-	 * ÉèÖÃTextViewµÄÖµ
+	 * è®¾ç½®TextViewçš„å€¼
 	 * @param viewId
 	 * @param text
 	 * @return

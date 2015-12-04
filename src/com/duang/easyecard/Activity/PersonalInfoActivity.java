@@ -36,7 +36,7 @@ public class PersonalInfoActivity extends BaseActivity implements  OnItemClickLi
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.personal_info);
 		
-		// ´ò¿ª»ò´´½¨Êı¾İ¿â
+		// æ‰“å¼€æˆ–åˆ›å»ºæ•°æ®åº“
 		dbHelper = new MyDatabaseHelper(this, "EasyEcard.db", null, 1);
 		
 		geneItems(User.getCurrentUserStuId());
@@ -49,7 +49,7 @@ public class PersonalInfoActivity extends BaseActivity implements  OnItemClickLi
 	{
 		personalInfoList = new ArrayList<PersonalInfo>();
 		
-		//´ÓÊı¾İ¿âÖĞÈ¡³öÊı¾İÉú³ÉÏî
+		// ä»æ•°æ®åº“ä¸­å–å‡ºæ•°æ®ç”Ÿæˆé¡¹
 		SQLiteDatabase db = dbHelper.getReadableDatabase();
 		Cursor cursor = db.query("UserInfo", null, null, null, null, null, null);
 		if (cursor.moveToLast())
@@ -57,54 +57,54 @@ public class PersonalInfoActivity extends BaseActivity implements  OnItemClickLi
 			do{
 				if (stu_id.equals(cursor.getString(cursor.getColumnIndex("stu_id"))))
 				{
-					PersonalInfo personalInfo = new PersonalInfo("ÓÃ»§Í·Ïñ");
+					PersonalInfo personalInfo = new PersonalInfo("ç”¨æˆ·å¤´åƒ");
 					personalInfo.setType(0);
-					personalInfo.setTitle("ÓÃ»§Í·Ïñ");
+					personalInfo.setTitle("ç”¨æˆ·å¤´åƒ");
 					personalInfo.setImgId(R.drawable.app_icon);
 					personalInfoList.add(personalInfo);
 					
-					personalInfo = new PersonalInfo("Ñ§ºÅ");
+					personalInfo = new PersonalInfo("å­¦å·");
 					personalInfo.setType(1);
-					personalInfo.setTitle("Ñ§ºÅ");
+					personalInfo.setTitle("å­¦å·");
 					personalInfo.setContent(cursor.getString(cursor.getColumnIndex("stu_id")));
 					personalInfoList.add(personalInfo);
 					
-					personalInfo = new PersonalInfo("ĞÕÃû");
+					personalInfo = new PersonalInfo("å§“å");
 					personalInfo.setType(1);
 					personalInfo.setContent(cursor.getString(cursor.getColumnIndex("name")));
 					personalInfoList.add(personalInfo);
 					
-					personalInfo = new PersonalInfo("ÕæÊµĞÕÃû");
+					personalInfo = new PersonalInfo("çœŸå®å§“å");
 					personalInfo.setType(1);
 					personalInfo.setContent(cursor.getString(cursor.getColumnIndex("real_name")));
 					personalInfoList.add(personalInfo);
 					
-					personalInfo = new PersonalInfo("ĞÔ±ğ");
+					personalInfo = new PersonalInfo("æ€§åˆ«");
 					personalInfo.setType(1);
 					personalInfo.setContent(cursor.getString(cursor.getColumnIndex("gender")));
 					personalInfoList.add(personalInfo);
 					
-					personalInfo = new PersonalInfo("Äê¼¶");
+					personalInfo = new PersonalInfo("å¹´çº§");
 					personalInfo.setType(1);
 					personalInfo.setContent(cursor.getString(cursor.getColumnIndex("grade")));
 					personalInfoList.add(personalInfo);
 					
-					personalInfo = new PersonalInfo("Ñ§Ôº");
+					personalInfo = new PersonalInfo("å­¦é™¢");
 					personalInfo.setType(1);
 					personalInfo.setContent(cursor.getString(cursor.getColumnIndex("college")));
 					personalInfoList.add(personalInfo);
 					
-					personalInfo = new PersonalInfo("Ïµ±ğ");
+					personalInfo = new PersonalInfo("ç³»åˆ«");
 					personalInfo.setType(1);
 					personalInfo.setContent(cursor.getString(cursor.getColumnIndex("department")));
 					personalInfoList.add(personalInfo);
 					
-					personalInfo = new PersonalInfo("ÁªÏµ·½Ê½");
+					personalInfo = new PersonalInfo("è”ç³»æ–¹å¼");
 					personalInfo.setType(1);
 					personalInfo.setContent(cursor.getString(cursor.getColumnIndex("contact")));
 					personalInfoList.add(personalInfo);
 					
-					personalInfo = new PersonalInfo("ÓÊÏä");
+					personalInfo = new PersonalInfo("ç”µå­é‚®ç®±");
 					personalInfo.setType(1);
 					personalInfo.setContent(cursor.getString(cursor.getColumnIndex("email")));
 					personalInfoList.add(personalInfo);
@@ -130,9 +130,9 @@ public class PersonalInfoActivity extends BaseActivity implements  OnItemClickLi
 	}
 	
 	/**
-	 *  ¸ù¾İpositionµÄÖµÀ´¾ö¶¨ĞŞ¸ÄĞÅÏ¢¶ÔÓ¦µÄActivity
-	 *  intentĞèÒªĞ¯´øÒªĞŞ¸ÄµÄÄÚÈİ½øĞĞĞŞ¸Ä
-	 *  ĞŞ¸ÄÍê³ÉºóĞèÒªĞ¯´øĞŞ¸ÄºóµÄĞÅÏ¢·µ»Ø
+	 *  æ ¹æ®positionçš„å€¼æ¥å†³å®šä¿®æ”¹ä¿¡æ¯å¯¹åº”çš„Activity
+	 *  intentéœ€è¦æºå¸¦è¦ä¿®æ”¹çš„å†…å®¹è¿›è¡Œä¿®æ”¹
+	 *  ä¿®æ”¹å®Œæˆåéœ€è¦æºå¸¦ä¿®æ”¹åçš„ä¿¡æ¯è¿”å›
 	 */
 	@Override
 	public void onItemClick(AdapterView<?> view, View arg1, int position, long arg3) {
@@ -140,45 +140,45 @@ public class PersonalInfoActivity extends BaseActivity implements  OnItemClickLi
 		switch (position)
 		{
 		case 0:
-			// ĞŞ¸ÄÍ·Ïñ
+			// ä¿®æ”¹å¤´åƒ
 			Log.d("PersoanlInfo item", "ChangeUserpic");
 			Intent intent = new Intent(this, ChangeUserpicActivity.class);
 			intent.putExtra("userpic", "userpic-uri");
 			startActivityForResult(intent, position);
 			break;
 		case 1:
-			// Ñ§ºÅ£¬²»ÔÊĞí¸ü¸Ä
+			// å­¦å·ï¼Œä¸å…è®¸æ›´æ”¹
 			break;
 		case 4:
-			// Í¨¹ıAlertDialogÀ´ÈÃÓÃ»§Ñ¡ÔñĞŞ¸ÄĞÔ±ğ
+			// é€šè¿‡AlertDialogæ¥è®©ç”¨æˆ·é€‰æ‹©ä¿®æ”¹æ€§åˆ«
 			AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-			dialog.setTitle("¸ü¸ÄĞÔ±ğ");
-			dialog.setMessage("ÇëÑ¡ÔñÄúµÄĞÔ±ğ");
-			dialog.setPositiveButton("ÄĞ", new DialogInterface.OnClickListener() {
+			dialog.setTitle("æ›´æ”¹æ€§åˆ«");
+			dialog.setMessage("è¯·é€‰æ‹©æ‚¨çš„æ€§åˆ«");
+			dialog.setPositiveButton("ç”·", new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					// ½«ĞŞ¸ÄºóµÄĞÔ±ğ¡°ÄĞ¡±Ğ´ÈëÊı¾İ¿â
+					// å°†ä¿®æ”¹åçš„æ€§åˆ«â€œç”·â€å†™å…¥æ•°æ®åº“
 					SQLiteDatabase db = dbHelper.getWritableDatabase();
 					db.execSQL("update UserInfo set gender = ? where stu_id = ?",
-							new String[]{"ÄĞ", User.getCurrentUserStuId()});
+							new String[]{"ç”·", User.getCurrentUserStuId()});
 					db.close();
 				}
 			});
-			dialog.setNegativeButton("Å®", new DialogInterface.OnClickListener() {
+			dialog.setNegativeButton("å¥³", new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					// ½«ĞŞ¸ÄºóµÄĞÔ±ğ¡°ÄĞ¡±Ğ´ÈëÊı¾İ¿â
+					// å°†ä¿®æ”¹åçš„æ€§åˆ«â€œå¥³â€å†™å…¥æ•°æ®åº“
 					SQLiteDatabase db = dbHelper.getWritableDatabase();
 					db.execSQL("update UserInfo set gender = ? where stu_id = ?",
-							new String[]{"Å®", User.getCurrentUserStuId()});
+							new String[]{"å¥³", User.getCurrentUserStuId()});
 					db.close();
 				}
 			});
 			dialog.show();
-			refreshPersonalInfoList();	//Ë¢ĞÂlistView
+			refreshPersonalInfoList();	// åˆ·æ–°listView
 			break;
 		default:
-			// ½«¶ÔÓ¦Î»ÖÃµÄtitleºÍcontent´«¸øChangePersonalInfo£¬position×÷ÎªÇëÇóÂë
+			// å°†å¯¹åº”ä½ç½®çš„titleå’Œcontentä¼ ç»™ChangePersonalInfoï¼Œpositionä½œä¸ºè¯·æ±‚ç 
 			String title = ((PersonalInfo) view.getItemAtPosition(position)).getTitle();
 			String content = ((PersonalInfo) view.getItemAtPosition(position)).getContent();
 			Log.d("title-content at position", title + "-" + content + " at " + position);
@@ -189,7 +189,7 @@ public class PersonalInfoActivity extends BaseActivity implements  OnItemClickLi
 		}
 	}
 
-	// ¸üĞÂ personalInfoList
+	// æ›´æ–° personalInfoList
 	private void refreshPersonalInfoList() {
 		Log.d("In PersonalInfoActivity", "refreshPersonalInfoList");
 		mHandler.postDelayed(new Runnable() {
@@ -204,7 +204,7 @@ public class PersonalInfoActivity extends BaseActivity implements  OnItemClickLi
 		}, 1000);
 	}
 	
-	// ´¦ÀíChangePersonalInfoActivityµÄ·µ»Ø½á¹û
+	// å¤„ç†ChangePersonalInfoActivityçš„è¿”å›ç»“æœ
 	@Override
 	protected void onActivityResult(int requesCode, int resultCode, Intent data) {
 		SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -257,7 +257,7 @@ public class PersonalInfoActivity extends BaseActivity implements  OnItemClickLi
 			break;
 		}
 		db.close();
-		refreshPersonalInfoList();	//Ë¢ĞÂlistView
+		refreshPersonalInfoList();	// åˆ·æ–°listView
 	}
 
 }

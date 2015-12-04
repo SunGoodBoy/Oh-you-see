@@ -50,12 +50,12 @@ public class AddFoundEventActivity extends BaseActivity	{
 		mSubmit_button = (Button) findViewById(R.id.add_found_event_submit);
 		mCancel_button = (Button) findViewById(R.id.add_found_event_cancel);
 		
-		mTimePicker.setIs24HourView(true);	//ÉèÖÃÊ±ÖÓÎª24Ğ¡Ê±ÖÆ
+		mTimePicker.setIs24HourView(true);	//ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½Îª24Ğ¡Ê±ï¿½ï¿½
 		
-		//´ò¿ª»ò´´½¨Êı¾İ¿â
+		// æ‰“å¼€æˆ–åˆ›å»ºæ•°æ®åº“
 		dbHelper = new MyDatabaseHelper(this, "EasyEcard.db", null, 1);
 		
-		//Ìá½»°´Å¥µã»÷ÊÂ¼ş
+		// â€œæäº¤â€æŒ‰é’®ç‚¹å‡»äº‹ä»¶
 		mSubmit_button.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -66,7 +66,7 @@ public class AddFoundEventActivity extends BaseActivity	{
 		});
 		
 
-		//¡°È¡Ïû¡±°´Å¥µÄµã»÷ÊÂ¼ş
+		// â€œå–æ¶ˆâ€æŒ‰é’®çš„ç‚¹å‡»äº‹ä»¶
 		mCancel_button.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -83,43 +83,43 @@ public class AddFoundEventActivity extends BaseActivity	{
 		String name = mName.getText().toString();
 		String contact = mContact.getText().toString();
 		
-		//ÅĞ¶ÏÑ§ºÅÊÇ·ñÎª¿Õ
+		// åˆ¤æ–­å­¦å·æ˜¯å¦ä¸ºç©º
 		if (!stu_id.isEmpty())	{
 			if (stu_id.length() == 11)	{
 				if (!hasRepeatedEvent(stu_id)) {
 					if (!name.isEmpty())	{
 						if (!contact.isEmpty())	{
-							//½«Êı¾İĞ´ÈëÊı¾İ¿â
+							// å†™å…¥æ•°æ®åº“
 							writeDataToDb();
 							finish();
-							Toast.makeText(AddFoundEventActivity.this, "Ìá½»³É¹¦£¡", Toast.LENGTH_SHORT).show();
+							Toast.makeText(AddFoundEventActivity.this, "æäº¤æˆåŠŸï¼", Toast.LENGTH_SHORT).show();
 						}
 						else {
-							Toast.makeText(AddFoundEventActivity.this, "±ØĞëÌîĞ´ÁªÏµ·½Ê½£¡", Toast.LENGTH_SHORT).show();
+							Toast.makeText(AddFoundEventActivity.this, "å¿…é¡»å¡«å†™è”ç³»æ–¹å¼ï¼", Toast.LENGTH_SHORT).show();
 						}
 					}
 					else	{
-						Toast.makeText(AddFoundEventActivity.this, "ĞÕÃû²»ÄÜÎª¿Õ£¡", Toast.LENGTH_SHORT).show();
+						Toast.makeText(AddFoundEventActivity.this, "å§“åä¸èƒ½ä¸ºç©ºï¼", Toast.LENGTH_SHORT).show();
 					}
 				}
 				else {
-					Toast.makeText(AddFoundEventActivity.this, "¸ÃÑ§ºÅÒÑ¾­·¢²¼ÁË¶ªÊ§ĞÅÏ¢£¡", Toast.LENGTH_SHORT).show();
+					Toast.makeText(AddFoundEventActivity.this, "å·²ç»å‘å¸ƒäº†æ‹¾è·æ­¤å¡çš„ä¿¡æ¯ï¼", Toast.LENGTH_SHORT).show();
 				}
 			}
 			else {
-				Toast.makeText(AddFoundEventActivity.this, "Ñ§ºÅ±ØĞëÎª11Î»£¡", Toast.LENGTH_SHORT).show();
+				Toast.makeText(AddFoundEventActivity.this, "å­¦å·å¿…é¡»ä¸º11ä½ï¼", Toast.LENGTH_SHORT).show();
 			}
 		}
 		else	{
-			Toast.makeText(AddFoundEventActivity.this, "Ñ§ºÅ²»ÄÜÎª¿Õ", Toast.LENGTH_LONG).show();
+			Toast.makeText(AddFoundEventActivity.this, "å­¦å·ä¸èƒ½ä¸ºç©º", Toast.LENGTH_LONG).show();
 		}
 	}
 
-	// ¸ÃÑ§ºÅ´æÔÚÖØ¸´µÄÎ´¹Ø±ÕµÄÊÂ¼ş
+	// è¯¥å­¦å·å­˜åœ¨é‡å¤çš„æœªå…³é—­çš„äº‹ä»¶
 	private boolean hasRepeatedEvent(String stu_id) {
-		// »ñµÃ¿É¶ÁÊı¾İ¿â
+		// éå†LostEventè¡¨
 		SQLiteDatabase db = dbHelper.getReadableDatabase();
-		//±éÀúLostEvent±í
+		//ï¿½ï¿½ï¿½ï¿½LostEventï¿½ï¿½
 		Cursor cursor = db.query("FoundEvent", null, null, null, null, null, null);
 		if (cursor.moveToLast()) {
 			do {
@@ -136,10 +136,10 @@ public class AddFoundEventActivity extends BaseActivity	{
 		return false;
 	}
 	
-	//½«Êı¾İĞ´ÈëÊı¾İ¿â
+	// å°†æ•°æ®å†™å…¥æ•°æ®åº“
 	private void writeDataToDb() {
 		
-		//»ñµÃµ±Ç°ÓÃ»§×÷Îª·¢²¼Õß
+		// è·å¾—å½“å‰ç”¨æˆ·ä½œä¸ºå‘å¸ƒè€…
 		String publisher = User.getCurrentUserStuId();
 		
 		String stu_id = mStu_id.getText().toString();
@@ -148,7 +148,7 @@ public class AddFoundEventActivity extends BaseActivity	{
 		String found_place = mFound_place.getText().toString();
 		String descrption = mDescription.getText().toString();
 		
-		//½«ÏµÍ³µÄµ±Ç°ÈÕÆÚ´«¸øadd_date£¬µ±Ç°Ê±¼ä´«¸øadd_time
+		// å°†ç³»ç»Ÿçš„å½“å‰æ—¥æœŸä¼ ç»™add_dateï¼Œå½“å‰æ—¶é—´ä¼ ç»™add_time
 		Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH);
@@ -159,18 +159,18 @@ public class AddFoundEventActivity extends BaseActivity	{
 		String add_date = String.valueOf(year) + "-" + String.valueOf(month+1) + "-" + String.valueOf(day_of_month);
 		String add_time = String.valueOf(hour) + ":" + String.valueOf(minute) + ":" + "00";
 		
-		//»ñÈ¡DatePickerÖĞµÄÈÕÆÚ
+		// è·å–DatePickerä¸­çš„æ—¥æœŸ
 		year = mDatePicker.getYear();
 		month = mDatePicker.getMonth();
 		day_of_month = mDatePicker.getDayOfMonth();
 		String found_date = String.valueOf(year) + "-" + String.valueOf(month+1) + "-" + String.valueOf(day_of_month);
 
-		//»ñÈ¡TimePickerÖĞµÄÊ±¼ä
+		// è·å–TimePickerä¸­çš„æ—¶é—´
 		hour = mTimePicker.getCurrentHour();
 		minute = mTimePicker.getCurrentMinute();
 		String found_time = String.valueOf(hour) + ":" + String.valueOf(minute) + ":" + "00";
 		
-		//Ğ´ÈëÊı¾İ¿â
+		// å†™å…¥æ•°æ®åº“
 		SQLiteDatabase db = dbHelper.getWritableDatabase();
 		db.execSQL("insert into FoundEvent ("
 				+ "publisher_stu_id, "

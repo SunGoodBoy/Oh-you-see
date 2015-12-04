@@ -43,7 +43,7 @@ public class SignupActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.signup);
 		
-		//³õÊ¼»¯¿Ø¼ş¶ÔÓ¦µÄ±äÁ¿
+		//åˆå§‹åŒ–æ§ä»¶å¯¹åº”çš„å˜é‡
 		mStu_id = (EditText) findViewById(R.id.signup_stu_id_edit);
 		mPassword = (EditText) findViewById(R.id.signup_password_edit);
 		mPassword_confirm = (EditText) findViewById(R.id.signup_password_confirm_edit);
@@ -57,10 +57,10 @@ public class SignupActivity extends BaseActivity {
 		mSignup_button = (Button) findViewById(R.id.signup_button);
 		mCancel_signup_button = (Button) findViewById(R.id.signup_cancel);
 
-		//´´½¨Êı¾İ¿â
+		//åˆ›å»ºæ•°æ®åº“
 		dbHelper = new MyDatabaseHelper(this, "EasyEcard.db", null, 1);
 		
-		//×¢²á°´Å¥µÄµã»÷ÊÂ¼ş
+		//æ³¨å†ŒæŒ‰é’®çš„ç‚¹å‡»äº‹ä»¶
 		mSignup_button.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -71,7 +71,7 @@ public class SignupActivity extends BaseActivity {
 		});
 		
 
-		//¡°È¡Ïû×¢²á¡±°´Å¥µÄµã»÷ÊÂ¼ş
+		//â€œå–æ¶ˆæ³¨å†Œâ€æŒ‰é’®çš„ç‚¹å‡»äº‹ä»¶
 		mCancel_signup_button.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -89,7 +89,7 @@ public class SignupActivity extends BaseActivity {
 		String password = mPassword.getText().toString();
 		String password_confirm = mPassword_confirm.getText().toString();
 		
-		//ÅĞ¶ÏÊÇ·ñ¿ÉÒÔ×¢²á
+		//åˆ¤æ–­æ˜¯å¦å¯ä»¥æ³¨å†Œ
 		if (!stu_id.isEmpty())	{
 			if (stu_id.length() == 11)	{
 				if (!wasSigned(stu_id))	{
@@ -97,17 +97,17 @@ public class SignupActivity extends BaseActivity {
 						if (password.length() <= 16)	{
 							if (password.equals(password_confirm))	{
 								writeDataToDb();
-								Toast.makeText(SignupActivity.this, "×¢²á³É¹¦£¡", Toast.LENGTH_SHORT).show();
+								Toast.makeText(SignupActivity.this, "æ³¨å†ŒæˆåŠŸï¼", Toast.LENGTH_SHORT).show();
 								
-								//ÉèÖÃÎªµ±Ç°ÓÃ»§
+								//è®¾ç½®ä¸ºå½“å‰ç”¨æˆ·
 								User.setCurrentUserStuId(stu_id);
 								
-								//Í¨¹ıAlertDialogÑ¯ÎÊÊÇ·ñÖ±½ÓµÇÂ¼
+								//é€šè¿‡AlertDialogè¯¢é—®æ˜¯å¦ç›´æ¥ç™»å½•
 								AlertDialog.Builder dialog = new AlertDialog.Builder(SignupActivity.this);
-								dialog.setTitle("×¢²á³É¹¦£¡");
-								dialog.setMessage("ÄúÒÑ¾­³É¹¦×¢²á£¬ÊÇ·ñÖ±½ÓµÇÂ¼£¿");
+								dialog.setTitle("æ³¨å†ŒæˆåŠŸï¼");
+								dialog.setMessage("æ‚¨å·²ç»æˆåŠŸæ³¨å†Œï¼Œæ˜¯å¦ç›´æ¥ç™»å½•ï¼Ÿ");
 								dialog.setCancelable(false);
-								dialog.setPositiveButton("ÊÇ", new DialogInterface.OnClickListener() {
+								dialog.setPositiveButton("æ˜¯", new DialogInterface.OnClickListener() {
 									
 									@Override
 									public void onClick(DialogInterface dialog, int which) {
@@ -117,12 +117,12 @@ public class SignupActivity extends BaseActivity {
 										finish();
 									}
 								});
-								dialog.setNegativeButton("·ñ", new DialogInterface.OnClickListener() {
+								dialog.setNegativeButton("å¦", new DialogInterface.OnClickListener() {
 									
 									@Override
 									public void onClick(DialogInterface dialog, int which) {
 										// TODO Auto-generated method stub
-										//Ïú»ÙSignupActivity£¬Ìø×ªÖÁµÇÂ¼½çÃæ
+										//é”€æ¯SignupActivityï¼Œè·³è½¬è‡³ç™»å½•ç•Œé¢
 										finish();
 									}
 								});
@@ -130,33 +130,33 @@ public class SignupActivity extends BaseActivity {
 								
 							}
 							else	{
-								Toast.makeText(SignupActivity.this, "Á½´ÎÃÜÂëÊäÈë²»Ò»ÖÂ\nÇëÖØĞÂÊäÈë", Toast.LENGTH_SHORT).show();
+								Toast.makeText(SignupActivity.this, "ä¸¤æ¬¡å¯†ç è¾“å…¥ä¸ä¸€è‡´\nè¯·é‡æ–°è¾“å…¥", Toast.LENGTH_SHORT).show();
 							}
 						}
 						else	{
-							Toast.makeText(SignupActivity.this, "ÃÜÂë²»ÄÜ³¬¹ı16Î»", Toast.LENGTH_SHORT).show();
+							Toast.makeText(SignupActivity.this, "å¯†ç ä¸èƒ½è¶…è¿‡16ä½", Toast.LENGTH_SHORT).show();
 						}
 					}
 					else	{
-						Toast.makeText(SignupActivity.this, "ÃÜÂë²»ÄÜÎª¿Õ", Toast.LENGTH_SHORT).show();
+						Toast.makeText(SignupActivity.this, "å¯†ç ä¸èƒ½ä¸ºç©º", Toast.LENGTH_SHORT).show();
 					}
 				}
 				else	{
-					Toast.makeText(SignupActivity.this, "¸ÃÕÊºÅÒÑ×¢²á", Toast.LENGTH_SHORT).show();
+					Toast.makeText(SignupActivity.this, "è¯¥å¸å·å·²æ³¨å†Œ", Toast.LENGTH_SHORT).show();
 				}
 				
 			}
 			else {
-				Toast.makeText(SignupActivity.this, "Ñ§ºÅ±ØĞëÎª11Î»£¡", Toast.LENGTH_SHORT).show();
+				Toast.makeText(SignupActivity.this, "å­¦å·å¿…é¡»ä¸º11ä½ï¼", Toast.LENGTH_SHORT).show();
 			}
 		}
 		else	{
-			Toast.makeText(SignupActivity.this, "Ñ§ºÅ²»ÄÜÎª¿Õ", Toast.LENGTH_LONG).show();
+			Toast.makeText(SignupActivity.this, "å­¦å·ä¸èƒ½ä¸ºç©º", Toast.LENGTH_LONG).show();
 		}
 		
 	}
 
-	//ÅĞ¶ÏÕÊºÅÊÇ·ñÒÑ¾­×¢²á
+	//åˆ¤æ–­å¸å·æ˜¯å¦å·²ç»æ³¨å†Œ
 	private boolean wasSigned(String stu_id_input) {
 		// TODO Auto-generated method stub
 		SQLiteDatabase db = dbHelper.getReadableDatabase();
@@ -172,7 +172,7 @@ public class SignupActivity extends BaseActivity {
 		return false;
 	}
 
-	//½«Êı¾İĞ´ÈëÊı¾İ¿â
+	//å°†æ•°æ®å†™å…¥æ•°æ®åº“
 	private void writeDataToDb() {
 		// TODO Auto-generated method stub
 		String stu_id = mStu_id.getText().toString();
@@ -183,7 +183,7 @@ public class SignupActivity extends BaseActivity {
 		String college = mCollege.getText().toString();
 		String email = mEmail.getText().toString();
 		String contact = mContact.getText().toString();
-		String gender = mRadioMale.isChecked() ? "ÄĞ" : "Å®";
+		String gender = mRadioMale.isChecked() ? "ç”·" : "å¥³";
 		
 		SQLiteDatabase db = dbHelper.getWritableDatabase();
 		ContentValues values = new ContentValues();

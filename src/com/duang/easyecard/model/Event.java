@@ -2,58 +2,58 @@ package com.duang.easyecard.model;
 
 public class Event {
 
-	private long event_id;			//ÊÂ¼şĞòºÅ
+	private long event_id;			//äº‹ä»¶åºå·
 	
 	protected User owner;
 
 	protected User founder;
 	
-	private String date;			//ÊÂ¼şÈÕÆÚ
-	private String place;			//ÊÂ¼şµØµã
-	private String duration;		//ÊÂ¼şÊ±³¤
-	private String due_date;		//ÊÂ¼şµ½ÆÚÈÕÆÚ
+	private String date;			//äº‹ä»¶æ—¥æœŸ
+	private String place;			//äº‹ä»¶åœ°ç‚¹
+	private String duration;		//äº‹ä»¶æ—¶é•¿
+	private String due_date;		//äº‹ä»¶åˆ°æœŸæ—¥æœŸ
 
-	private boolean close_flag;		//¹Ø±ÕÊÂ¼ş±êÖ¾
+	private boolean close_flag;		//å…³é—­äº‹ä»¶æ ‡å¿—
 
-	//ÎŞ²Î¹¹Ôìº¯Êı
+	//æ— å‚æ„é€ å‡½æ•°
 	public Event()
 	{
 		super();
 	}
 
-	//¹¹Ôìº¯Êı
+	//æ„é€ å‡½æ•°
 	public Event(String stu_id)
 	{
 		super();
 		this.owner = new User(stu_id);
 	}
 	
-	//¹Ø±ÕÊÂ¼ş
+	//å…³é—­äº‹ä»¶
 	private void closeEvent(){
 		setClose_flag(true);
 	}
 	
-	//ÊÂ¼şµ½ÆÚºó×Ô¶¯¹Ø±ÕÊÂ¼ş
+	//äº‹ä»¶åˆ°æœŸåè‡ªåŠ¨å…³é—­äº‹ä»¶
 	private void eventSelfClose()	{
-		//Èç¹ûÊÂ¼şÊ±³¤µ½ÆÚ£¬×Ô¶¯¹Ø±ÕÊÂ¼ş
+		//å¦‚æœäº‹ä»¶æ—¶é•¿åˆ°æœŸï¼Œè‡ªåŠ¨å…³é—­äº‹ä»¶
 		if (duration == due_date)
 			closeEvent();
 	}
 	
-	//ÉèÖÃÊÂ¼şÖĞµÄÊ§Ö÷
+	//è®¾ç½®äº‹ä»¶ä¸­çš„å¤±ä¸»
 	public void setEvent_owner(User owner)	{
 		this.owner = owner;
 	}
-	//»ñÈ¡ÊÂ¼şÖĞµÄÊ§Ö÷
+	//è·å–äº‹ä»¶ä¸­çš„å¤±ä¸»
 	public User getEvent_owner()	{
 		return owner;
 	}
 	
-	//ÉèÖÃÊÂ¼şÖĞµÄÊ°»ñÕß
+	//è®¾ç½®äº‹ä»¶ä¸­çš„æ‹¾è·è€…
 	public void setEvent_founder(User founder)	{
 		this.founder = founder;
 	}
-	//»ñÈ¡ÊÂ¼şµÄÊ°»ñÕß
+	//è·å–äº‹ä»¶çš„æ‹¾è·è€…
 	public User getEvent_founder()	{
 		return founder;
 	}

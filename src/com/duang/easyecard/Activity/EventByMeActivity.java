@@ -43,24 +43,24 @@ public class EventByMeActivity extends BaseActivity implements IXListViewListene
 		setContentView(R.layout.event_by_me);
 		Log.d("EventByMeActivity", "onCreate is called");
 		
-		//´ò¿ª»ò´´½¨Êı¾İ¿â
+		//æ‰“å¼€æˆ–åˆ›å»ºæ•°æ®åº“
 		dbHelper = new MyDatabaseHelper(this, "EasyEcard.db", null, 1);
 		
-		//³õÊ¼»¯¿Ø¼ş
+		//åˆå§‹åŒ–æ§ä»¶
 		lostEventCheckBox = (CheckBox) findViewById(R.id.event_by_me_check_box_lost);
 		foundEventCheckBox = (CheckBox) findViewById(R.id.event_by_me_check_box_found);
 		
-		//³õÊ¼»¯ÊÓÍ¼£¬ÏÔÊ¾È«²¿ÊÂ¼ş
+		//åˆå§‹åŒ–è§†å›¾ï¼Œæ˜¾ç¤ºå…¨éƒ¨äº‹ä»¶
 		doSearchQueryBoth();
 		initView();
 		
-		//¶ÔCheckBoxÉèÖÃ¼àÌıÊÂ¼ş
+		//å¯¹CheckBoxè®¾ç½®ç›‘å¬äº‹ä»¶
     	lostEventCheckBox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 			
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				if (isChecked) {
-					// lostEventCheckBox±»Ñ¡ÖĞ
+					// lostEventCheckBoxè¢«é€‰ä¸­
 					if (foundEventCheckBox.isChecked())
 					{
 						doSearchQueryBoth();
@@ -70,13 +70,13 @@ public class EventByMeActivity extends BaseActivity implements IXListViewListene
 						initView();
 					}
 				} else {
-					// lostEventCheckBoxÃ»ÓĞ±»Ñ¡ÖĞµÄÇé¿ö
+					// lostEventCheckBoxæ²¡æœ‰è¢«é€‰ä¸­çš„æƒ…å†µ
 					if (foundEventCheckBox.isChecked())
 					{
 						doSearchQueryInFoundEvent();
 						initView();
 					} else {
-						// ¶¼Ã»ÓĞ±»Ñ¡ÖĞ
+						// éƒ½æ²¡æœ‰è¢«é€‰ä¸­
 						dontSearchQuery();
 						initView();
 					}
@@ -97,13 +97,13 @@ public class EventByMeActivity extends BaseActivity implements IXListViewListene
 						initView();
 					}
 				} else {
-					// foundEventCheckBoxÃ»ÓĞ±»Ñ¡ÖĞµÄÇé¿ö
+					// foundEventCheckBoxæ²¡æœ‰è¢«é€‰ä¸­çš„æƒ…å†µ
 					if (lostEventCheckBox.isChecked())
 					{
 						doSearchQueryInLostEvent();
 						initView();
 					} else {
-						// ¶¼Ã»ÓĞ±»Ñ¡ÖĞ
+						// éƒ½æ²¡æœ‰è¢«é€‰ä¸­
 						dontSearchQuery();
 						initView();
 					}
@@ -125,21 +125,21 @@ public class EventByMeActivity extends BaseActivity implements IXListViewListene
 		mHandler = new Handler();
 	}
 	
-	//²»½øĞĞËÑË÷£¬½¨Á¢¿ÕµÄeventList
+	//ä¸è¿›è¡Œæœç´¢ï¼Œå»ºç«‹ç©ºçš„eventList
 	private void dontSearchQuery() {
 		eventList = new ArrayList<Event>();
 		mAdapter = new EventAdapter(this, eventList, R.layout.list_item);
 	}
 
 	/*
-	 * ÔÚLostEvent±íÖĞËÑË÷
-	 * Ö»ËÑË÷owner_stu_idºÍowner_nameÁĞ
+	 * åœ¨LostEventè¡¨ä¸­æœç´¢
+	 * åªæœç´¢owner_stu_idå’Œowner_nameåˆ—
 	 */
 	private void doSearchQueryInLostEvent() {
 		
 		eventList = new ArrayList<Event>();
     	SQLiteDatabase db = dbHelper.getReadableDatabase();
-    	//±éÀúLostEvent±í
+    	//éå†LostEventè¡¨
 		Cursor cursor = db.query("LostEvent", null, null, null, null, null, null);
 		if (cursor.moveToLast())
 		{
@@ -161,13 +161,13 @@ public class EventByMeActivity extends BaseActivity implements IXListViewListene
 	}
 
 	/*
-	 * ÔÚFoundEvent±íÖĞËÑË÷
-	 * Ö»ËÑË÷owner_stu_idºÍowner_nameÁĞ
+	 * åœ¨FoundEventè¡¨ä¸­æœç´¢
+	 * åªæœç´¢owner_stu_idå’Œowner_nameåˆ—
 	 */
 	private void doSearchQueryInFoundEvent() {
 		eventList = new ArrayList<Event>();
     	SQLiteDatabase db = dbHelper.getReadableDatabase();
-    	//±éÀúLostEvent±í
+    	//éå†LostEventè¡¨
 		Cursor cursor = db.query("LostEvent", null, null, null, null, null, null);
 		if (cursor.moveToLast())
 		{
@@ -189,13 +189,13 @@ public class EventByMeActivity extends BaseActivity implements IXListViewListene
 	}
 	
 	/*
-	 * ¼ÈÔÚLostEvent±íÖĞËÑËØ£¬Ò²ÔÚFoundEvent±íÖĞËÑË÷
-	 * Ö»ËÑË÷owner_stu_idºÍowner_nameÁĞ
+	 * æ—¢åœ¨LostEventè¡¨ä¸­æœç´ ï¼Œä¹Ÿåœ¨FoundEventè¡¨ä¸­æœç´¢
+	 * åªæœç´¢owner_stu_idå’Œowner_nameåˆ—
 	 */
 	private void doSearchQueryBoth() {
 		eventList = new ArrayList<Event>();
     	SQLiteDatabase db = dbHelper.getReadableDatabase();
-    	//±éÀúLostEvent±í
+    	//éå†LostEventè¡¨
 		Cursor cursor = db.query("LostEvent", null, null, null, null, null, null);
 		if (cursor.moveToLast())
 		{
@@ -212,7 +212,7 @@ public class EventByMeActivity extends BaseActivity implements IXListViewListene
 			} while (cursor.moveToPrevious());
 		}
 		
-    	//±éÀúFoundEvent±í
+    	//éå†FoundEventè¡¨
 		cursor = db.query("FoundEvent", null, null, null, null, null, null);
 		if (cursor.moveToLast())
 		{
@@ -233,14 +233,14 @@ public class EventByMeActivity extends BaseActivity implements IXListViewListene
 		mAdapter = new EventAdapter(this, eventList, R.layout.list_item);
 	}
 	
-	//ItemÏîµÄµã»÷ÊÂ¼ş
+	//Itemé¡¹çš„ç‚¹å‡»äº‹ä»¶
 	@Override
 	public void onItemClick(AdapterView<?> view, View arg1, int position, long arg3) {
 		// TODO Auto-generated method stub
-		//¿ÉÒÔÌø×ªÖÁÏêÏ¸ĞÅÏ¢½çÃæÁË
+		//å¯ä»¥è·³è½¬è‡³è¯¦ç»†ä¿¡æ¯ç•Œé¢äº†
 		//Toast.makeText(this, ((Event)view.getItemAtPosition(position))
 			//	.getEvent_owner().getUsername(), Toast.LENGTH_SHORT).show();
-		//»ñµÃµã»÷ÏîµÄÑ§ºÅ²¢´«µİµ½EventDetailsActivity
+		//è·å¾—ç‚¹å‡»é¡¹çš„å­¦å·å¹¶ä¼ é€’åˆ°EventDetailsActivity
 		Intent intent = new Intent(this, EventDetailsActivity.class);
 		String stu_id = ((Event)view.getItemAtPosition(position)).getEvent_owner().getStu_id();
 		String data = stu_id + "__3";
@@ -249,12 +249,12 @@ public class EventByMeActivity extends BaseActivity implements IXListViewListene
 		startActivity(intent);
 	}
 	
-	//ÏÂÀ­Ë¢ĞÂ
+	//ä¸‹æ‹‰åˆ·æ–°
 	@Override
 	public void onRefresh() {
 	}
 	
-	//¼ÓÔØ¸ü¶à
+	//åŠ è½½æ›´å¤š
 	@Override
 	public void onLoadMore() {
 	}

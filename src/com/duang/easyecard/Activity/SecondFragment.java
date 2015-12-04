@@ -22,8 +22,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Toast;
-
 
 public class SecondFragment extends Fragment implements IXListViewListener, OnItemClickListener{
 	
@@ -39,7 +37,7 @@ public class SecondFragment extends Fragment implements IXListViewListener, OnIt
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		
 		viewFragment = inflater.inflate(R.layout.second, null);
-		//´ò¿ª»ò´´½¨Êı¾İ¿â
+		//æ‰“å¼€æˆ–åˆ›å»ºæ•°æ®åº“
 		dbHelper = new MyDatabaseHelper(this.getActivity(), "EasyEcard.db", null, 1);
 		geneItems();
 		initViews();
@@ -47,7 +45,7 @@ public class SecondFragment extends Fragment implements IXListViewListener, OnIt
 	}
 	
 	
-	//³õÊ¼»¯ListView
+	//åˆå§‹åŒ–ListView
 	private void initViews(){
 		xListView = (XListView) viewFragment.findViewById(R.id.xListView_second_fragment);
 		xListView.setPullLoadEnable(true);
@@ -58,16 +56,16 @@ public class SecondFragment extends Fragment implements IXListViewListener, OnIt
 		mHandler = new Handler();
 	}
 
-	//Éú³ÉItemÏî
+	//ç”ŸæˆItemé¡¹
 	private void geneItems() {
 		eventList = new ArrayList<Event>();
-		//´ÓÊı¾İ¿âÖĞÈ¡³öÊı¾İÉú³ÉÏî
+		//ä»æ•°æ®åº“ä¸­å–å‡ºæ•°æ®ç”Ÿæˆé¡¹
 		SQLiteDatabase db = dbHelper.getReadableDatabase();
 		Cursor cursor = db.query("FoundEvent", null, null, null, null, null, null);
 		if (cursor.moveToLast())
 		{
 			do{
-				// Ö»ÏÔÊ¾Î´¹Ø±ÕµÄÊÂ¼ş
+				// åªæ˜¾ç¤ºæœªå…³é—­çš„äº‹ä»¶
 				if (cursor.getString(cursor.getColumnIndex("close_flag")).equals("0")) {
 					Event event = new Event(cursor.getString(cursor.getColumnIndex("owner_stu_id")));
 					event.getEvent_owner().setUsername(cursor.getString(cursor.getColumnIndex("owner_name")));
@@ -81,7 +79,7 @@ public class SecondFragment extends Fragment implements IXListViewListener, OnIt
 		mAdapter = new EventAdapter(this.getActivity(), eventList, R.layout.list_item);
 	}
 	
-	//Ë¢ĞÂ
+	//åˆ·æ–°
 	@Override
 	public void onRefresh() {
 		mHandler.postDelayed(new Runnable() {
@@ -96,7 +94,7 @@ public class SecondFragment extends Fragment implements IXListViewListener, OnIt
 		}, 2000);
 	}
 	
-	//¼ÓÔØ¸ü¶à
+	//åŠ è½½æ›´å¤š
 	@Override
 	public void onLoadMore() {
 		mHandler.postDelayed(new Runnable() {
@@ -112,16 +110,16 @@ public class SecondFragment extends Fragment implements IXListViewListener, OnIt
 	private void onLoad() {
 		xListView.stopRefresh();
 		xListView.stopLoadMore();
-		xListView.setRefreshTime("¸Õ¸Õ");
+		xListView.setRefreshTime("åˆšåˆš");
 	}
 	
-	//ItemµÄµã»÷¼àÌıÊÂ¼ş
+	//Itemçš„ç‚¹å‡»ç›‘å¬äº‹ä»¶
 	@Override
 	public void onItemClick(AdapterView<?> view, View arg1, int position, long arg3) {
-		//Ìø×ªÖÁÏêÏ¸ĞÅÏ¢½çÃæ
+		//è·³è½¬è‡³è¯¦ç»†ä¿¡æ¯ç•Œé¢
 		//Toast.makeText(this.getActivity(), ((Event)view.getItemAtPosition(position))
 			//	.getEvent_owner().getUsername(), Toast.LENGTH_SHORT).show();
-		//»ñµÃµã»÷ÏîµÄÑ§ºÅ²¢´«µİµ½EventDetailsActivity
+		//è·å¾—ç‚¹å‡»é¡¹çš„å­¦å·å¹¶ä¼ é€’åˆ°EventDetailsActivity
 		Intent intent = new Intent(getActivity(), EventDetailsActivity.class);
 		String stu_id = ((Event)view.getItemAtPosition(position)).getEvent_owner().getStu_id();
 		String data = stu_id + "__2";

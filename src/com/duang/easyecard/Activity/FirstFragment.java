@@ -38,7 +38,7 @@ public class FirstFragment extends Fragment implements IXListViewListener, OnIte
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		
 		viewFragment = inflater.inflate(R.layout.first, null);
-		//´ò¿ª»ò´´½¨Êı¾İ¿â
+		//æ‰“å¼€æˆ–åˆ›å»ºæ•°æ®åº“
 		dbHelper = new MyDatabaseHelper(this.getActivity(), "EasyEcard.db", null, 1);
 		geneItems();
 		initViews();
@@ -46,7 +46,7 @@ public class FirstFragment extends Fragment implements IXListViewListener, OnIte
 	}
 	
 	
-	//³õÊ¼»¯ListView
+	//åˆå§‹åŒ–ListView
 	private void initViews(){
 		xListView = (XListView) viewFragment.findViewById(R.id.xListView_first_fragment);
 		xListView.setPullLoadEnable(true);
@@ -57,16 +57,16 @@ public class FirstFragment extends Fragment implements IXListViewListener, OnIte
 		mHandler = new Handler();
 	}
 
-	//Éú³ÉItemÏî
+	//ç”ŸæˆItemé¡¹
 	private void geneItems() {
 		eventList = new ArrayList<Event>();
-		//´ÓÊı¾İ¿âÖĞÈ¡³öÊı¾İÉú³ÉÏî
+		//ä»æ•°æ®åº“ä¸­å–å‡ºæ•°æ®ç”Ÿæˆé¡¹
 		SQLiteDatabase db = dbHelper.getReadableDatabase();
 		Cursor cursor = db.query("LostEvent", null, null, null, null, null, null);
 		if (cursor.moveToLast())
 		{
 			do{
-				// Ö»ÏÔÊ¾Î´¹Ø±ÕµÄÊÂ¼ş
+				// åªæ˜¾ç¤ºæœªå…³é—­çš„äº‹ä»¶
 				if (cursor.getString(cursor.getColumnIndex("close_flag")).equals("0")) {
 					Log.d("close_flag in firstfragment", cursor.getString(cursor.getColumnIndex("close_flag")));
 					Event event = new Event(cursor.getString(cursor.getColumnIndex("owner_stu_id")));
@@ -82,7 +82,7 @@ public class FirstFragment extends Fragment implements IXListViewListener, OnIte
 		mAdapter = new EventAdapter(this.getActivity(), eventList, R.layout.list_item);
 	}
 	
-	//Ë¢ĞÂ
+	//åˆ·æ–°
 	@Override
 	public void onRefresh() {
 		mHandler.postDelayed(new Runnable() {
@@ -97,7 +97,7 @@ public class FirstFragment extends Fragment implements IXListViewListener, OnIte
 		}, 2000);
 	}
 	
-	//¼ÓÔØ¸ü¶à
+	//åŠ è½½æ›´å¤š
 	@Override
 	public void onLoadMore() {
 		mHandler.postDelayed(new Runnable() {
@@ -113,17 +113,17 @@ public class FirstFragment extends Fragment implements IXListViewListener, OnIte
 	private void onLoad() {
 		xListView.stopRefresh();
 		xListView.stopLoadMore();
-		xListView.setRefreshTime("¸Õ¸Õ");
+		xListView.setRefreshTime("åˆšåˆš");
 	}
 	
-	//ItemµÄµã»÷¼àÌıÊÂ¼ş
+	//Itemçš„ç‚¹å‡»ç›‘å¬äº‹ä»¶
 	@Override
 	public void onItemClick(AdapterView<?> view, View arg1, int position, long arg3) {
-		//Ìø×ªÖÁÏêÏ¸ĞÅÏ¢½çÃæ
+		//è·³è½¬è‡³è¯¦ç»†ä¿¡æ¯ç•Œé¢
 		//Toast.makeText(this.getActivity(), ((Event)view.getItemAtPosition(position))
 				//.getEvent_owner().getUsername(), Toast.LENGTH_SHORT).show();
 		
-		//»ñµÃµã»÷ÏîµÄÑ§ºÅ²¢´«µİµ½EventDetailsActivity
+		//è·å¾—ç‚¹å‡»é¡¹çš„å­¦å·å¹¶ä¼ é€’åˆ°EventDetailsActivity
 		Intent intent = new Intent(getActivity(), EventDetailsActivity.class);
 		String stu_id = ((Event)view.getItemAtPosition(position)).getEvent_owner().getStu_id();
 		String data = stu_id + "__1";

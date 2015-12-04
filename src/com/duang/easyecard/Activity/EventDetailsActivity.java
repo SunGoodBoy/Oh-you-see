@@ -45,9 +45,9 @@ public class EventDetailsActivity extends BaseActivity implements OnClickListene
 	private Button btnCloseEvent;
 	private Button btnFunction;
 	
-	private int FLAG;   //FLAGÓÃÓÚ±êÊ¶ÊÂ¼şÀàĞÍ  {LostEventÎª1, FoundEventÎª2}
-	private String mPublisher; //·¢²¼Õß
-	private String mCloseFlag; //ÊÂ¼şµÄ¹Ø±Õ±êÖ¾
+	private int FLAG;   //FLAGç”¨äºæ ‡è¯†äº‹ä»¶ç±»å‹  {LostEventä¸º1, FoundEventä¸º2}
+	private String mPublisher; //å‘å¸ƒè€…
+	private String mCloseFlag; //äº‹ä»¶çš„å…³é—­æ ‡å¿—
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +56,7 @@ public class EventDetailsActivity extends BaseActivity implements OnClickListene
 		setOverflowButtonAlways();
 		setContentView(R.layout.event_details);
 		
-		//¿Ø¼şµÄ³õÊ¼»¯ ÒªÔÚ¼ÓÔØ²¼¾ÖÎÄ¼şÖ®ºó
+		//æ§ä»¶çš„åˆå§‹åŒ– è¦åœ¨åŠ è½½å¸ƒå±€æ–‡ä»¶ä¹‹å
 		//imgvUserImg = (ImageView) findViewById(R.id.event_details_img);
 		
 		tvStu_id = (TextView) findViewById(R.id.event_details_stu_id);
@@ -74,7 +74,7 @@ public class EventDetailsActivity extends BaseActivity implements OnClickListene
 		btnCloseEvent = (Button) findViewById(R.id.event_details_close_event_button);
 		btnFunction = (Button) findViewById(R.id.event_details_function_button);
 		
-		//´ò¿ª»ò´´½¨Êı¾İ¿â
+		//æ‰“å¼€æˆ–åˆ›å»ºæ•°æ®åº“
 		dbHelper = new MyDatabaseHelper(this, "EasyEcard.db", null, 1);
 		if (dbHelper == null)
 		{
@@ -99,17 +99,17 @@ public class EventDetailsActivity extends BaseActivity implements OnClickListene
 		FLAG = Integer.parseInt(token.nextToken());
 		Log.d("EventDetailsActivity FLAG in data", String.valueOf(FLAG));
 		
-		tvStu_id.setText(stu_id);	//ÏÔÊ¾Ñ§ºÅ
+		tvStu_id.setText(stu_id);	//æ˜¾ç¤ºå­¦å·
 		
-		//ÅĞ¶ÏFLAGµÄÖµ£¬Ñ¡Ôñ²»Í¬µÄ±í½øĞĞ²éÑ¯
+		//åˆ¤æ–­FLAGçš„å€¼ï¼Œé€‰æ‹©ä¸åŒçš„è¡¨è¿›è¡ŒæŸ¥è¯¢
 		switch (FLAG)
 		{
 			case 3:
 			case 1:
 				getInfoFromLostEvent(stu_id);
-				//½«btnFunctionÏÔÊ¾Îª¡°ÎÒÕÒµ½ÁË¡±
-				btnFunction.setText("ÎÒÕÒµ½ÁË");
-				//Èç¹ûµ±Ç°ÓÃ»§ÊÇÊÂ¼ş·¢²¼Õß£¬²¢ÇÒÊÂ¼şÎ´±»¹Ø±Õ£¬½«¡°¹Ø±ÕÊÂ¼ş¡±°´Å¥ÖÃÎª¿Éµã»÷
+				//å°†btnFunctionæ˜¾ç¤ºä¸ºâ€œæˆ‘æ‰¾åˆ°äº†â€
+				btnFunction.setText("æˆ‘æ‰¾åˆ°äº†");
+				//å¦‚æœå½“å‰ç”¨æˆ·æ˜¯äº‹ä»¶å‘å¸ƒè€…ï¼Œå¹¶ä¸”äº‹ä»¶æœªè¢«å…³é—­ï¼Œå°†â€œå…³é—­äº‹ä»¶â€æŒ‰é’®ç½®ä¸ºå¯ç‚¹å‡»
 				if (User.getCurrentUserStuId().equals(mPublisher) &&
 						mCloseFlag.equals("0")) {
 					btnCloseEvent.setClickable(true);
@@ -118,9 +118,9 @@ public class EventDetailsActivity extends BaseActivity implements OnClickListene
 				break;
 			case 2:
 				getInfoFromFoundEvent(stu_id);
-				//½«btnFunctionÏÔÊ¾Îª¡°ÎÒÊÇÊ§Ö÷¡±
-				btnFunction.setText("ÎÒÊÇÊ§Ö÷");
-				//Èç¹ûµ±Ç°ÓÃ»§ÊÇÊÂ¼ş·¢²¼Õß£¬²¢ÇÒÊÂ¼şÎ´±»¹Ø±Õ£¬½«¡°¹Ø±ÕÊÂ¼ş¡±°´Å¥ÖÃÎª¿Éµã»÷
+				//å°†btnFunctionæ˜¾ç¤ºä¸ºâ€œæˆ‘æ˜¯å¤±ä¸»â€
+				btnFunction.setText("æˆ‘æ˜¯å¤±ä¸»");
+				//å¦‚æœå½“å‰ç”¨æˆ·æ˜¯äº‹ä»¶å‘å¸ƒè€…ï¼Œå¹¶ä¸”äº‹ä»¶æœªè¢«å…³é—­ï¼Œå°†â€œå…³é—­äº‹ä»¶â€æŒ‰é’®ç½®ä¸ºå¯ç‚¹å‡»
 				if (User.getCurrentUserStuId().equals(mPublisher) &&
 						mCloseFlag.equals("0")) {
 					btnCloseEvent.setClickable(true);
@@ -133,7 +133,7 @@ public class EventDetailsActivity extends BaseActivity implements OnClickListene
 		btnFunction.setOnClickListener(this);
 	}
 
-	//´ÓLostEvent»ñÈ¡ĞÅÏ¢£¬Ìî³äµ½²¼¾Ö
+	//ä»LostEventè·å–ä¿¡æ¯ï¼Œå¡«å……åˆ°å¸ƒå±€
 	protected void getInfoFromLostEvent(String stu_id) {
 		SQLiteDatabase db = dbHelper.getReadableDatabase();
 		Cursor cursor = db.query("LostEvent", null, null, null, null, null, null);
@@ -144,12 +144,12 @@ public class EventDetailsActivity extends BaseActivity implements OnClickListene
 				if (stu_id.equals(cursor.getString(cursor.getColumnIndex("owner_stu_id"))))
 				{
 					
-					//Ê§Ö÷ĞÕÃû
+					//å¤±ä¸»å§“å
 					tvName.setText(cursor.getString(cursor.getColumnIndex("owner_name")));
-					//Ê§Ö÷ÁªÏµ·½Ê½
+					//å¤±ä¸»è”ç³»æ–¹å¼
 					tvContact.setText(cursor.getString(cursor.getColumnIndex("owner_contact")));
-					//ÏÔÊ¾¶ªÊ§Ê±¼ä£¬¸ñÊ½Îª¡°2015Äê11ÔÂ14ÈÕ22µã54·Ö¡±
-					tvEventTimeTitle.setText("¶ªÊ§Ê±¼ä");
+					//æ˜¾ç¤ºä¸¢å¤±æ—¶é—´ï¼Œæ ¼å¼ä¸ºâ€œ2015å¹´11æœˆ14æ—¥22ç‚¹54åˆ†â€
+					tvEventTimeTitle.setText("ä¸¢å¤±æ—¶é—´");
 					String date = cursor.getString(cursor.getColumnIndex("lost_date"));
 					String split = "-";
 					StringTokenizer token = new StringTokenizer(date, split);
@@ -178,18 +178,18 @@ public class EventDetailsActivity extends BaseActivity implements OnClickListene
 					{
 						minute = token.nextToken();
 					}
-					tvEventTime.setText(year + "Äê" + month + "ÔÂ" + day + "ÈÕ" + hour + "µã" + minute + "·Ö");
-					Log.d("EventLostTime", year + "Äê" + month + "ÔÂ" + day + "ÈÕ" + hour + "µã" + minute + "·Ö");
-					//ÏÔÊ¾¶ªÊ§µØµã
-					tvEventPlaceTitle.setText("¶ªÊ§µØµã");
+					tvEventTime.setText(year + "å¹´" + month + "æœˆ" + day + "æ—¥" + hour + "ç‚¹" + minute + "åˆ†");
+					Log.d("EventLostTime", year + "å¹´" + month + "æœˆ" + day + "æ—¥" + hour + "ç‚¹" + minute + "åˆ†");
+					//æ˜¾ç¤ºä¸¢å¤±åœ°ç‚¹
+					tvEventPlaceTitle.setText("ä¸¢å¤±åœ°ç‚¹");
 					tvEventPlace.setText(cursor.getString(cursor.getColumnIndex("lost_place")));
-					//ÏÔÊ¾ÃèÊö
+					//æ˜¾ç¤ºæè¿°
 					tvEventDescription.setText(cursor.getString(cursor.getColumnIndex("description")));
-					//ÏÔÊ¾·¢²¼Õß£¨½öÑ§ºÅ£©
+					//æ˜¾ç¤ºå‘å¸ƒè€…ï¼ˆä»…å­¦å·ï¼‰
 					tvEventPublisher.setText(cursor.getString(cursor.getColumnIndex("publisher_stu_id")));
-					//½«·¢²¼Õß¸³¸ømPublisher
+					//å°†å‘å¸ƒè€…èµ‹ç»™mPublisher
 					mPublisher = cursor.getString(cursor.getColumnIndex("publisher_stu_id"));
-					//ÏÔÊ¾·¢²¼Ê±¼ä
+					//æ˜¾ç¤ºå‘å¸ƒæ—¶é—´
 					date = cursor.getString(cursor.getColumnIndex("lost_date"));
 					split = "-";
 					token = new StringTokenizer(date, split);
@@ -221,27 +221,27 @@ public class EventDetailsActivity extends BaseActivity implements OnClickListene
 					{
 						minute = token.nextToken();
 					}
-					tvEventAddTime.setText(year + "Äê" + month + "ÔÂ" + day + "ÈÕ" + hour + "µã" + minute + "·Ö");
-					Log.d("EventAddTime", year + "Äê" + month + "ÔÂ" + day + "ÈÕ" + hour + "µã" + minute + "·Ö");
+					tvEventAddTime.setText(year + "å¹´" + month + "æœˆ" + day + "æ—¥" + hour + "ç‚¹" + minute + "åˆ†");
+					Log.d("EventAddTime", year + "å¹´" + month + "æœˆ" + day + "æ—¥" + hour + "ç‚¹" + minute + "åˆ†");
 					
-					//°ÑÊÂ¼şÊÇ·ñ¹Ø±ÕµÄ×´Ì¬´«µİ¸ømCloseFlag
+					//æŠŠäº‹ä»¶æ˜¯å¦å…³é—­çš„çŠ¶æ€ä¼ é€’ç»™mCloseFlag
 					mCloseFlag = cursor.getString(cursor.getColumnIndex("close_flag"));
 					Log.d("close_flag", cursor.getString(cursor.getColumnIndex("close_flag")));
 					
-					//ÏÔÊ¾ÊÂ¼ş×´Ì¬  {"ÒÑ¾­ÕÒµ½", "ÕıÔÚÑ°ÕÒ", "ÒÑ¾­¹Ø±Õ"}
+					//æ˜¾ç¤ºäº‹ä»¶çŠ¶æ€  {"å·²ç»æ‰¾åˆ°", "æ­£åœ¨å¯»æ‰¾", "å·²ç»å…³é—­"}
 					if (cursor.getString(cursor.getColumnIndex("close_flag")).equals("0")) {
 						if (cursor.getString(cursor.getColumnIndex("found_flag")).equals("0"))
 						{
 							Log.d("found_flag", cursor.getString(cursor.getColumnIndex("found_flag")));
-							tvEventState.setText("ÕıÔÚÑ°ÕÒ");
+							tvEventState.setText("æ­£åœ¨å¯»æ‰¾");
 						}
 						else
 						{
 							Log.d("found_flag", cursor.getString(cursor.getColumnIndex("found_flag")));
-							tvEventState.setText("ÒÑ¾­ÕÒµ½");
+							tvEventState.setText("å·²ç»æ‰¾åˆ°");
 						}
 					} else {
-						tvEventState.setText("ÒÑ¾­¹Ø±Õ");
+						tvEventState.setText("å·²ç»å…³é—­");
 					}
 					
 				}
@@ -251,7 +251,7 @@ public class EventDetailsActivity extends BaseActivity implements OnClickListene
 		db.close();
 	}
 	
-	//´ÓFoundEvent»ñÈ¡ĞÅÏ¢£¬Ìî³äµ½²¼¾Ö
+	//ä»FoundEventè·å–ä¿¡æ¯ï¼Œå¡«å……åˆ°å¸ƒå±€
 	private void getInfoFromFoundEvent(String stu_id) {
 		// TODO Auto-generated method stub
 		SQLiteDatabase db = dbHelper.getReadableDatabase();
@@ -261,12 +261,12 @@ public class EventDetailsActivity extends BaseActivity implements OnClickListene
 			do{
 				if (stu_id.equals(cursor.getString(cursor.getColumnIndex("owner_stu_id"))))
 				{
-					//Ê§Ö÷ĞÕÃû
+					//å¤±ä¸»å§“å
 					tvName.setText(cursor.getString(cursor.getColumnIndex("owner_name")));
-					//Ê°»ñÕßÁªÏµ·½Ê½
+					//æ‹¾è·è€…è”ç³»æ–¹å¼
 					tvContact.setText(cursor.getString(cursor.getColumnIndex("owner_contact")));
-					//ÏÔÊ¾Ê°»ñÊ±¼ä£¬¸ñÊ½Îª¡°2015Äê11ÔÂ14ÈÕ22µã54·Ö¡±
-					tvEventTimeTitle.setText("Ê°»ñÊ±¼ä");
+					//æ˜¾ç¤ºæ‹¾è·æ—¶é—´ï¼Œæ ¼å¼ä¸ºâ€œ2015å¹´11æœˆ14æ—¥22ç‚¹54åˆ†â€
+					tvEventTimeTitle.setText("æ‹¾è·æ—¶é—´");
 					String date = cursor.getString(cursor.getColumnIndex("found_date"));
 					String split = "-";
 					StringTokenizer token = new StringTokenizer(date, split);
@@ -297,19 +297,19 @@ public class EventDetailsActivity extends BaseActivity implements OnClickListene
 					{
 						minute = token.nextToken();
 					}
-					tvEventTime.setText(year + "Äê" + month + "ÔÂ" + day + "ÈÕ" + hour + "µã" + minute + "·Ö");
-					Log.d("EventFoundTime", year + "Äê" + month + "ÔÂ" + day + "ÈÕ" + hour + "µã" + minute + "·Ö");
+					tvEventTime.setText(year + "å¹´" + month + "æœˆ" + day + "æ—¥" + hour + "ç‚¹" + minute + "åˆ†");
+					Log.d("EventFoundTime", year + "å¹´" + month + "æœˆ" + day + "æ—¥" + hour + "ç‚¹" + minute + "åˆ†");
 					
-					//ÏÔÊ¾Ê°»ñµØµã
-					tvEventPlaceTitle.setText("Ê°»ñµØµã");
+					//æ˜¾ç¤ºæ‹¾è·åœ°ç‚¹
+					tvEventPlaceTitle.setText("æ‹¾è·åœ°ç‚¹");
 					tvEventPlace.setText(cursor.getString(cursor.getColumnIndex("found_place")));
-					//ÏÔÊ¾ÃèÊö
+					//æ˜¾ç¤ºæè¿°
 					tvEventDescription.setText(cursor.getString(cursor.getColumnIndex("description")));
-					//ÏÔÊ¾·¢²¼Õß£¨½öÑ§ºÅ£©
+					//æ˜¾ç¤ºå‘å¸ƒè€…ï¼ˆä»…å­¦å·ï¼‰
 					tvEventPublisher.setText(cursor.getString(cursor.getColumnIndex("publisher_stu_id")));
-					//½«·¢²¼Õß¸³¸ømPublisher
+					//å°†å‘å¸ƒè€…èµ‹ç»™mPublisher
 					mPublisher = cursor.getString(cursor.getColumnIndex("publisher_stu_id"));
-					//ÏÔÊ¾·¢²¼Ê±¼ä
+					//æ˜¾ç¤ºå‘å¸ƒæ—¶é—´
 					date = cursor.getString(cursor.getColumnIndex("add_date"));
 					split = "-";
 					token = new StringTokenizer(date, split);
@@ -338,27 +338,27 @@ public class EventDetailsActivity extends BaseActivity implements OnClickListene
 					{
 						minute = token.nextToken();
 					}
-					tvEventAddTime.setText(year + "Äê" + month + "ÔÂ" + day + "ÈÕ" + hour + "µã" + minute + "·Ö");
-					Log.d("EventAddTime", year + "Äê" + month + "ÔÂ" + day + "ÈÕ" + hour + "µã" + minute + "·Ö");
+					tvEventAddTime.setText(year + "å¹´" + month + "æœˆ" + day + "æ—¥" + hour + "ç‚¹" + minute + "åˆ†");
+					Log.d("EventAddTime", year + "å¹´" + month + "æœˆ" + day + "æ—¥" + hour + "ç‚¹" + minute + "åˆ†");
 					
-					//°ÑÊÂ¼şÊÇ·ñ¹Ø±ÕµÄ×´Ì¬´«µİ¸ømCloseFlag
+					//æŠŠäº‹ä»¶æ˜¯å¦å…³é—­çš„çŠ¶æ€ä¼ é€’ç»™mCloseFlag
 					mCloseFlag = cursor.getString(cursor.getColumnIndex("close_flag"));
 					Log.d("close_flag", cursor.getString(cursor.getColumnIndex("close_flag")));
 					
-					//ÏÔÊ¾ÊÂ¼ş×´Ì¬  {"ÒÑ¾­¹é»¹", "Ñ°ÕÒÊ§Ö÷", "ÒÑ¾­¹Ø±Õ"}
+					//æ˜¾ç¤ºäº‹ä»¶çŠ¶æ€  {"å·²ç»å½’è¿˜", "å¯»æ‰¾å¤±ä¸»", "å·²ç»å…³é—­"}
 					if (cursor.getString(cursor.getColumnIndex("close_flag")).equals("0")) {
 						if (cursor.getString(cursor.getColumnIndex("returned_flag")).equals("0"))
 						{
 							Log.d("returned_flag", cursor.getString(cursor.getColumnIndex("returned_flag")));
-							tvEventState.setText("Ñ°ÕÒÊ§Ö÷");
+							tvEventState.setText("å¯»æ‰¾å¤±ä¸»");
 						}
 						else
 						{
 							Log.d("returned_flag", cursor.getString(cursor.getColumnIndex("returned_flag")));
-							tvEventState.setText("ÒÑ¾­¹é»¹");
+							tvEventState.setText("å·²ç»å½’è¿˜");
 						}
 					} else {
-						tvEventState.setText("ÒÑ¾­¹Ø±Õ");
+						tvEventState.setText("å·²ç»å…³é—­");
 					}
 				}
 			} while (cursor.moveToPrevious());
@@ -367,34 +367,34 @@ public class EventDetailsActivity extends BaseActivity implements OnClickListene
 		db.close();
 	}
 	
-	// ¹Ø±ÕLostEvent
+	// å…³é—­LostEvent
 	private void closeLostEvent() {
 		SQLiteDatabase db = dbHelper.getReadableDatabase();
 		db.execSQL("update LostEvent set close_flag = ? where publisher_stu_id = ?",
 				new String[] { "1", mPublisher});
 		db.close();
 	}
-	// ¹Ø±ÕFoundEvent
+	// å…³é—­FoundEvent
 	private void closeFoundEvent() {
 		SQLiteDatabase db = dbHelper.getReadableDatabase();
 		db.execSQL("update FoundEvent set close_flag = ? where publisher_stu_id = ?",
 				new String[] { "1", mPublisher});
 		db.close();
 	}
-	//¼àÌıButtonµÄµã»÷ÊÂ¼ş
+	//ç›‘å¬Buttonçš„ç‚¹å‡»äº‹ä»¶
 	@Override
 	public void onClick(View v) {
 		switch (v.getId())
 		{
-		// ¼àÌı¡°¹Ø±ÕÊÂ¼ş¡±°´Å¥
+		// ç›‘å¬â€œå…³é—­äº‹ä»¶â€æŒ‰é’®
 		case R.id.event_details_close_event_button:
 			AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-			dialog.setTitle("ÌáÊ¾");
-			dialog.setMessage("È·¶¨¹Ø±Õ¸ÃÊÂ¼şÂğ£¿");
-			dialog.setPositiveButton("È·¶¨", new DialogInterface.OnClickListener() {
+			dialog.setTitle("æç¤º");
+			dialog.setMessage("ç¡®å®šå…³é—­è¯¥äº‹ä»¶å—ï¼Ÿ");
+			dialog.setPositiveButton("ç¡®å®š", new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					// ¸ù¾İÊÂ¼şÀàĞÍ£¬½«¸Ä¶¯Ğ´ÈëÊı¾İ¿â
+					// æ ¹æ®äº‹ä»¶ç±»å‹ï¼Œå°†æ”¹åŠ¨å†™å…¥æ•°æ®åº“
 					if (FLAG == 1) {
 						closeLostEvent();
 						mCloseFlag = "1";
@@ -404,7 +404,7 @@ public class EventDetailsActivity extends BaseActivity implements OnClickListene
 					}
 				}
 			});
-			dialog.setNegativeButton("È¡Ïû", new DialogInterface.OnClickListener() {
+			dialog.setNegativeButton("å–æ¶ˆ", new DialogInterface.OnClickListener() {
 				
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
@@ -414,13 +414,13 @@ public class EventDetailsActivity extends BaseActivity implements OnClickListene
 			break;
 		
 		case R.id.event_details_function_button:
-			Toast.makeText(this, "ÄÇ¾Í¾¡¿ìÈ¡µÃÁªÏµ°É£¡^_^nn-", Toast.LENGTH_SHORT);
+			Toast.makeText(this, "é‚£å°±å°½å¿«å–å¾—è”ç³»å§ï¼^_^nn-", Toast.LENGTH_SHORT);
 			break;
 			default:
 		}
 	}
 	
-	// ´´½¨²Ëµ¥
+	// åˆ›å»ºèœå•
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();  
@@ -428,7 +428,7 @@ public class EventDetailsActivity extends BaseActivity implements OnClickListene
 		return super.onCreateOptionsMenu(menu);
 	}
 	
-	// ÉèÖÃActionBarµÄ°´Å¥ÔÚ±êÌâÀ¸Ò»Ö±ÏÔÊ¾
+	// è®¾ç½®ActionBarçš„æŒ‰é’®åœ¨æ ‡é¢˜æ ä¸€ç›´æ˜¾ç¤º
 	private void setOverflowButtonAlways()
 	{
 		try
@@ -443,7 +443,7 @@ public class EventDetailsActivity extends BaseActivity implements OnClickListene
 			e.printStackTrace();
 		}
 	}
-	// ÉèÖÃ²Ëµ¥°´Å¥µÄµã»÷ÊÂ¼ş
+	// è®¾ç½®èœå•æŒ‰é’®çš„ç‚¹å‡»äº‹ä»¶
 	public boolean onMenuItemSelected(int featureId, MenuItem item)	{
 		switch (item.getItemId())	{
 		case R.id.action_alter_event:
@@ -452,12 +452,12 @@ public class EventDetailsActivity extends BaseActivity implements OnClickListene
 					Intent intent = new Intent(EventDetailsActivity.this, AlterEventActivity.class);
 					intent.putExtra("stu_id__FLAG", tvStu_id.getText().toString() + "__" + FLAG);
 					startActivity(intent);
-					finish();  // Ïú»Ù±¾»î¶¯£¬ÒÔ·½±ãÖØĞÂ¼ÓÔØ
+					finish();  // é”€æ¯æœ¬æ´»åŠ¨ï¼Œä»¥æ–¹ä¾¿é‡æ–°åŠ è½½
 				} else {
-					Toast.makeText(this, "ÎŞ·¨ĞŞ¸ÄÒÑ¹Ø±ÕÊÂ¼ş", Toast.LENGTH_SHORT).show();
+					Toast.makeText(this, "æ— æ³•ä¿®æ”¹å·²å…³é—­äº‹ä»¶", Toast.LENGTH_SHORT).show();
 				}
 			} else {
-				Toast.makeText(this, "Ö»ÄÜĞŞ¸ÄÄú×Ô¼º·¢²¼µÄÊÂ¼ş", Toast.LENGTH_SHORT).show();
+				Toast.makeText(this, "åªèƒ½ä¿®æ”¹æ‚¨è‡ªå·±å‘å¸ƒçš„äº‹ä»¶", Toast.LENGTH_SHORT).show();
 			}
 		}
 		return false;

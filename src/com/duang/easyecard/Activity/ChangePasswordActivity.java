@@ -1,10 +1,8 @@
 package com.duang.easyecard.Activity;
 import com.duang.easyecard.R;
 import com.duang.easyecard.db.MyDatabaseHelper;
-import com.duang.easyecard.model.Event;
 import com.duang.easyecard.model.User;
 
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -44,7 +42,7 @@ public class ChangePasswordActivity extends BaseActivity implements OnFocusChang
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.change_password);
 		
-		//ÊµÀı»¯¿Ø¼ş
+		//å®ä¾‹åŒ–æ§ä»¶
 		oldPasswordEdit = (EditText) findViewById(R.id.change_password_old_password_edit);
 		newPasswordEdit = (EditText) findViewById(R.id.change_password_new_password_edit);
 		confirmNewPasswordEdit = (EditText) findViewById(R.id.change_password_confirm_new_password_edit);
@@ -55,20 +53,20 @@ public class ChangePasswordActivity extends BaseActivity implements OnFocusChang
 		cancelButton = (Button) findViewById(R.id.change_password_cancel_button);
 		confirmButton = (Button) findViewById(R.id.change_password_confirm_button);
 		
-		//´ò¿ª»ò´´½¨Êı¾İ¿â
+		//æ‰“å¼€æˆ–åˆ›å»ºæ•°æ®åº“
 		dbHelper = new MyDatabaseHelper(this, "EasyEcard.db", null, 1);
 		
-		//¼àÌıEditTextµÄ½¹µã¸Ä±ä
+		//ç›‘å¬EditTextçš„ç„¦ç‚¹æ”¹å˜
 		oldPasswordEdit.setOnFocusChangeListener(this);
 		newPasswordEdit.setOnFocusChangeListener(this);
 		confirmNewPasswordEdit.setOnFocusChangeListener(this);
 		
-		//¼àÌıButtonµÄµã»÷ÊÂ¼ş
+		//ç›‘å¬Buttonçš„ç‚¹å‡»äº‹ä»¶
 		cancelButton.setOnClickListener(this);
 		confirmButton.setOnClickListener(this);
 	}
 	
-	//EditTextµÄ½¹µã¼àÌıÊÂ¼ş
+	//EditTextçš„ç„¦ç‚¹ç›‘å¬äº‹ä»¶
 	@Override
 	public void onFocusChange(View v, boolean hasFocus) {
 		switch (v.getId())
@@ -76,26 +74,26 @@ public class ChangePasswordActivity extends BaseActivity implements OnFocusChang
 		// oldPassword
 		case R.id.change_password_old_password_edit:
 			if (hasFocus) {
-				//»ñÈ¡½¹µã
+				//è·å–ç„¦ç‚¹
 				if (oldPasswordEdit.getText().toString().isEmpty()) {
 					setConfirmNewPasswordCheckBoxChecked(false);
-					hintTextView.setText("ÌáÊ¾£ºÇëÊäÈë¾ÉÃÜÂë");
+					hintTextView.setText("æç¤ºï¼šè¯·è¾“å…¥æ—§å¯†ç ");
 				} else if (!checkOldPassword(oldPasswordEdit.getText().toString())){
 					setConfirmNewPasswordCheckBoxChecked(false);
-					hintTextView.setText("ÌáÊ¾£º¾ÉÃÜÂëÊäÈëÓĞÎó£¬ÇëÖØĞÂÊäÈë");
+					hintTextView.setText("æç¤ºï¼šæ—§å¯†ç è¾“å…¥æœ‰è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥");
 				}
 			} else {
-				//Ê§È¥½¹µã
+				//å¤±å»ç„¦ç‚¹
 				if (oldPasswordEdit.getText().toString().isEmpty()) {
 					setConfirmNewPasswordCheckBoxChecked(false);
-					hintTextView.setText("ÌáÊ¾£ºÇëÊäÈë¾ÉÃÜÂë");
+					hintTextView.setText("æç¤ºï¼šè¯·è¾“å…¥æ—§å¯†ç ");
 				} else {
 					if (checkOldPassword(oldPasswordEdit.getText().toString())) {
 						setOldPasswordCheckBoxChecked(true);
-						hintTextView.setText("ÌáÊ¾£ºÇëÊäÈëĞÂÃÜÂë");
+						hintTextView.setText("æç¤ºï¼šè¯·è¾“å…¥æ–°å¯†ç ");
 					} else {
 						setConfirmNewPasswordCheckBoxChecked(false);
-						hintTextView.setText("ÌáÊ¾£º¾ÉÃÜÂëÊäÈëÓĞÎó£¬ÇëÖØĞÂÊäÈë");
+						hintTextView.setText("æç¤ºï¼šæ—§å¯†ç è¾“å…¥æœ‰è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥");
 					}
 				}
 			}
@@ -104,18 +102,18 @@ public class ChangePasswordActivity extends BaseActivity implements OnFocusChang
 		// newPassword
 		case R.id.change_password_new_password_edit:
 			if (hasFocus) {
-				//»ñÈ¡½¹µã
+				//è·å–ç„¦ç‚¹
 				if (oldPasswordEdit.getText().toString().isEmpty()) {
 					setNewPasswordCheckBoxChecked(false);
-					hintTextView.setText("ÌáÊ¾£ºÇëÊäÈë¾ÉÃÜÂë");
+					hintTextView.setText("æç¤ºï¼šè¯·è¾“å…¥æ—§å¯†ç ");
 				} else {
-					//¾ÉÃÜÂëÒÑ¾­Í¨¹ıÑéÖ¤,»ñÈ¡½¹µãÊ±±à¼­¿òÄÚÎŞÄÚÈİ
+					//æ—§å¯†ç å·²ç»é€šè¿‡éªŒè¯,è·å–ç„¦ç‚¹æ—¶ç¼–è¾‘æ¡†å†…æ— å†…å®¹
 					if (oldPasswordCheckBox.isChecked()) {
 						if (newPasswordEdit.getText().toString().isEmpty()) {
 							setNewPasswordCheckBoxChecked(false);
-							hintTextView.setText("ÌáÊ¾£ºÇëÊäÈëĞÂÃÜÂë");
+							hintTextView.setText("æç¤ºï¼šè¯·è¾“å…¥æ–°å¯†ç ");
 						} else {
-							//¾ÉÃÜÂëÒÑ¾­Í¨¹ıÑéÖ¤£¬ÇÒ»ñÈ¡½¹µãÊ±±à¼­¿òÄÚÒÑ¾­ÓĞÄÚÈİ
+							//æ—§å¯†ç å·²ç»é€šè¿‡éªŒè¯ï¼Œä¸”è·å–ç„¦ç‚¹æ—¶ç¼–è¾‘æ¡†å†…å·²ç»æœ‰å†…å®¹
 							if (checkNewPassword(newPasswordEdit.getText().toString())) {
 								setNewPasswordCheckBoxChecked(true);
 							}
@@ -123,12 +121,12 @@ public class ChangePasswordActivity extends BaseActivity implements OnFocusChang
 					}
 				}
 			} else {
-				//Ê§È¥½¹µã
+				//å¤±å»ç„¦ç‚¹
 				if (oldPasswordCheckBox.isChecked()) {
 					if (!newPasswordEdit.getText().toString().isEmpty()) {
 						if (checkNewPassword(newPasswordEdit.getText().toString())) {
 							setNewPasswordCheckBoxChecked(true);
-							hintTextView.setText("ÌáÊ¾£ºÔÙ´ÎÊäÈëĞÂÃÜÂëÒÔÈ·ÈÏ");
+							hintTextView.setText("æç¤ºï¼šå†æ¬¡è¾“å…¥æ–°å¯†ç ä»¥ç¡®è®¤");
 						}
 					}
 				}
@@ -137,11 +135,11 @@ public class ChangePasswordActivity extends BaseActivity implements OnFocusChang
 		//confirmNewPassword
 		case R.id.change_password_confirm_new_password_edit:
 			if (hasFocus) {
-				//»ñÈ¡½¹µã
+				//è·å–ç„¦ç‚¹
 				if (!newPasswordCheckBox.isChecked()) {
 					setConfirmNewPasswordCheckBoxChecked(false);
 				} else {
-					//ĞÂÃÜÂëÒÑ¾­Í¨¹ıÑéÖ¤£¬ÇÒ»ñÈ¡½¹µãÊ±È·ÈÏÃÜÂë±à¼­À¸ÓĞÄÚÈİ
+					//æ–°å¯†ç å·²ç»é€šè¿‡éªŒè¯ï¼Œä¸”è·å–ç„¦ç‚¹æ—¶ç¡®è®¤å¯†ç ç¼–è¾‘æ æœ‰å†…å®¹
 					if (!confirmNewPasswordEdit.getText().toString().isEmpty()) {
 						if (!checkConfirmNewPassword(confirmNewPasswordEdit.getText().toString())) {
 							setConfirmNewPasswordCheckBoxChecked(false);
@@ -149,11 +147,11 @@ public class ChangePasswordActivity extends BaseActivity implements OnFocusChang
 					}
 				}
 			} else {
-				//Ê§È¥½¹µã
+				//å¤±å»ç„¦ç‚¹
 				if (!newPasswordCheckBox.isChecked()) {
 					setConfirmNewPasswordCheckBoxChecked(false);
 				} else {
-					//ĞÂÃÜÂëÒÑ¾­Í¨¹ıÑéÖ¤£¬ÇÒÊ§È¥½¹µãÊ±È·ÈÏÃÜÂë±à¼­À¸ÓĞÄÚÈİ
+					//æ–°å¯†ç å·²ç»é€šè¿‡éªŒè¯ï¼Œä¸”å¤±å»ç„¦ç‚¹æ—¶ç¡®è®¤å¯†ç ç¼–è¾‘æ æœ‰å†…å®¹
 					if (!confirmNewPasswordEdit.getText().toString().isEmpty()) {
 						if (checkConfirmNewPassword(confirmNewPasswordEdit.getText().toString())) {
 							setConfirmNewPasswordCheckBoxChecked(true);
@@ -165,7 +163,7 @@ public class ChangePasswordActivity extends BaseActivity implements OnFocusChang
 		
 	}
 
-	//ÑéÖ¤¾ÉÃÜÂë
+	//éªŒè¯æ—§å¯†ç 
 	public boolean checkOldPassword(String oldPassword) {
 		Log.d("currentUserStuId", User.getCurrentUserStuId());
 		SQLiteDatabase db = dbHelper.getReadableDatabase();
@@ -189,55 +187,55 @@ public class ChangePasswordActivity extends BaseActivity implements OnFocusChang
 		return false;
 	}
 
-	//ÑéÖ¤ĞÂÃÜÂëÊÇ·ñ·ûºÏÌõ¼ş(ÒÑ¾­È·±£²»»áÎª¿Õ)
+	//éªŒè¯æ–°å¯†ç æ˜¯å¦ç¬¦åˆæ¡ä»¶(å·²ç»ç¡®ä¿ä¸ä¼šä¸ºç©º)
 	private boolean checkNewPassword(String newPassword) {
-		//ÊÇ·ñÓë¾ÉÃÜÂëÏàÍ¬
+		//æ˜¯å¦ä¸æ—§å¯†ç ç›¸åŒ
 		if (!newPassword.equals(oldPasswordEdit.getText().toString())) {
-			//ÆäËûÏŞÖÆÌõ¼ş
+			//å…¶ä»–é™åˆ¶æ¡ä»¶
 			return true;
 		} else {
 			setNewPasswordCheckBoxChecked(false);
-			hintTextView.setText("ÌáÊ¾£ºĞÂÃÜÂë²»ÄÜÓë¾ÉÃÜÂëÏàÍ¬");
+			hintTextView.setText("æç¤ºï¼šæ–°å¯†ç ä¸èƒ½ä¸æ—§å¯†ç ç›¸åŒ");
 			return false;
 		}
 	}
 
-	//ÑéÖ¤Á½´ÎÃÜÂëÊäÈëÊÇ·ñÒ»ÖÂ
+	//éªŒè¯ä¸¤æ¬¡å¯†ç è¾“å…¥æ˜¯å¦ä¸€è‡´
 	private boolean checkConfirmNewPassword(String confirmNewPassword) {
 		if(confirmNewPassword.equals(newPasswordEdit.getText().toString())) {
-			hintTextView.setText("ÌáÊ¾£ºÍ¨¹ıÑéÖ¤£¬µã»÷È·¶¨Íê³ÉĞŞ¸Ä");
+			hintTextView.setText("æç¤ºï¼šé€šè¿‡éªŒè¯ï¼Œç‚¹å‡»ç¡®å®šå®Œæˆä¿®æ”¹");
 			return true;
 		} else {
-			hintTextView.setText("ÌáÊ¾£ºĞÂÃÜÂëÁ½´ÎÊäÈë²»Ò»ÖÂ");
+			hintTextView.setText("æç¤ºï¼šæ–°å¯†ç ä¸¤æ¬¡è¾“å…¥ä¸ä¸€è‡´");
 			return false;
 		}
 	}	
 	
-	//ButtonµÄµã»÷ÊÂ¼ş
+	//Buttonçš„ç‚¹å‡»äº‹ä»¶
 	@Override
 	public void onClick(View v) {
 		switch (v.getId())
 		{
-		// È¡Ïû°´Å¥
+		// å–æ¶ˆæŒ‰é’®
 		case R.id.change_password_cancel_button:
 			finish();
 			break;
-		// È·¶¨°´Å¥
+		// ç¡®å®šæŒ‰é’®
 		case R.id.change_password_confirm_button:
 			if (confirmNewPasswordCheckBox.isChecked()) {
 				SQLiteDatabase db = dbHelper.getWritableDatabase();
 				db.execSQL("update UserInfo set password = ? where stu_id = ?",
 						new String[] { newPasswordEdit.getText().toString(), User.getCurrentUserStuId()});
 				db.close();
-				Toast.makeText(this, "ĞŞ¸Ä³É¹¦£¡", Toast.LENGTH_SHORT).show();
+				Toast.makeText(this, "ä¿®æ”¹æˆåŠŸï¼", Toast.LENGTH_SHORT).show();
 				finish();
 				break;
 			} else {
-				//µã»÷È·¶¨°´Å¥²¢²»»áÊ¹EditTextÁ¢¼´Ê§È¥½¹µã
+				//ç‚¹å‡»ç¡®å®šæŒ‰é’®å¹¶ä¸ä¼šä½¿EditTextç«‹å³å¤±å»ç„¦ç‚¹
 				if (!newPasswordCheckBox.isChecked()) {
 					setConfirmNewPasswordCheckBoxChecked(false);
 				} else {
-					//ĞÂÃÜÂëÒÑ¾­Í¨¹ıÑéÖ¤£¬ÇÒµã»÷È·ÈÏ°´Å¥Ê±È·ÈÏÃÜÂë±à¼­À¸ÓĞÄÚÈİ
+					//æ–°å¯†ç å·²ç»é€šè¿‡éªŒè¯ï¼Œä¸”ç‚¹å‡»ç¡®è®¤æŒ‰é’®æ—¶ç¡®è®¤å¯†ç ç¼–è¾‘æ æœ‰å†…å®¹
 					if (!confirmNewPasswordEdit.getText().toString().isEmpty()) {
 						if (checkConfirmNewPassword(confirmNewPasswordEdit.getText().toString())) {
 							setConfirmNewPasswordCheckBoxChecked(true);
@@ -250,7 +248,7 @@ public class ChangePasswordActivity extends BaseActivity implements OnFocusChang
 		}
 	}
 	
-	//ÉèÖÃoldPasswordCheckBoxµÄÑ¡ÖĞ×´Ì¬
+	//è®¾ç½®oldPasswordCheckBoxçš„é€‰ä¸­çŠ¶æ€
 	protected void setOldPasswordCheckBoxChecked(boolean flag) {
 		if (flag) {
 			oldPasswordCheckBox.setChecked(true);
@@ -260,7 +258,7 @@ public class ChangePasswordActivity extends BaseActivity implements OnFocusChang
 			confirmNewPasswordCheckBox.setChecked(false);
 		}
 	}
-	//ÉèÖÃnewPasswordCheckBoxµÄÑ¡ÖĞ×´Ì¬
+	//è®¾ç½®newPasswordCheckBoxçš„é€‰ä¸­çŠ¶æ€
 	protected void setNewPasswordCheckBoxChecked(boolean flag) {
 		if (flag) {
 			if (oldPasswordCheckBox.isChecked()) {
@@ -271,7 +269,7 @@ public class ChangePasswordActivity extends BaseActivity implements OnFocusChang
 			confirmNewPasswordCheckBox.setChecked(false);
 		}
 	}
-	//ÉèÖÃconfirmNewPasswordCheckBoxµÄÑ¡ÖĞ×´Ì¬
+	//è®¾ç½®confirmNewPasswordCheckBoxçš„é€‰ä¸­çŠ¶æ€
 	protected void setConfirmNewPasswordCheckBoxChecked(boolean flag) {
 		if (flag) {
 			if (oldPasswordCheckBox.isChecked()) {

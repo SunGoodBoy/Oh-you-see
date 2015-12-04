@@ -46,23 +46,23 @@ public class NotificationActivity extends BaseActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		// Í¨¹ıflagµÄÖµÀ´È·¶¨±êÌâµÄÃû³ÆºÍurlµÄÖµ
+		// é€šè¿‡flagçš„å€¼æ¥ç¡®å®šæ ‡é¢˜çš„åç§°å’Œurlçš„å€¼
 		Intent intent = getIntent();
 		flag = intent.getStringExtra("FLAG");
 		if (flag.equals("N")) {
-			setTitle("Í¨Öª");
+			setTitle("é€šçŸ¥");
 			url = prefixUrl + notificationsPostfixUrl;
 		}
 		if (flag.equals("R")) {
-			setTitle("¹æÕÂÖÆ¶È");
+			setTitle("è§„ç« åˆ¶åº¦");
 			url = prefixUrl + rulesPostfixUrl;
 		}
 		if (flag.equals("D")) {
-			setTitle("ÎÄ¼şÏÂÔØ");
+			setTitle("æ–‡ä»¶ä¸‹è½½");
 			url = prefixUrl + downloadPostfixUrl;
 		}
 		if (flag.equals("H")) {
-			setTitle("Ğ£Ô°¿¨Ê¹ÓÃ°ïÖú");
+			setTitle("æ ¡å›­å¡ä½¿ç”¨å¸®åŠ©");
 			url = prefixUrl + helpPostfixUrl;
 		}
 		setContentView(R.layout.notification_list_view);
@@ -82,9 +82,9 @@ public class NotificationActivity extends BaseActivity {
 			// Create a progressdialog
 			mProgressDialog = new ProgressDialog(NotificationActivity.this);
 			// Set progressdialog title
-			mProgressDialog.setTitle("´ÓĞ£Ô°Ò»¿¨Í¨ÍøÕ¾»ñÈ¡Ïà¹ØĞÅÏ¢");
+			mProgressDialog.setTitle("ä»æ ¡å›­ä¸€å¡é€šç½‘ç«™è·å–ç›¸å…³ä¿¡æ¯");
 			// Set progressdialog message
-			mProgressDialog.setMessage("ÕıÔÚ¼ÓÔØ¡­¡­");
+			mProgressDialog.setMessage("æ­£åœ¨åŠ è½½â€¦â€¦");
 			mProgressDialog.setIndeterminate(false);
 			// Show progressdialog
 			mProgressDialog.show();
@@ -100,7 +100,7 @@ public class NotificationActivity extends BaseActivity {
 			
 			try {
 				doc = Jsoup.parse(new URL(url), 5000);
-				// ÔÚÍøÒ³ÖĞ½âÎö³öÍ¨Öª±êÌâºÍ·¢²¼Ê±¼ä
+				// åœ¨ç½‘é¡µä¸­è§£æå‡ºé€šçŸ¥æ ‡é¢˜å’Œå‘å¸ƒæ—¶é—´
 				Elements es = doc.getElementsByClass("biaotou");
 				String remainText2 = es.toString();
 				// Log.d("es class biaotou text", es.text());
@@ -108,20 +108,20 @@ public class NotificationActivity extends BaseActivity {
 				for (Element e : es) {
 					Elements div = e.getElementsByTag("div");
 					String remainText1 = div.text();
-					// Í¨¹ıÖ¸¶¨±êÇ©ËÑË÷»ñµÃÍ¨Öª±êÌâ
+					// é€šè¿‡æŒ‡å®šæ ‡ç­¾æœç´¢è·å¾—é€šçŸ¥æ ‡é¢˜
 					for (Element title : div.select("a[style]:gt(0)")) {
 						HashMap<String, String> map = new HashMap<String, String>();
 						map.put("title", title.text());
 						// Log.d("title", title.text());
-						// Í¨¹ı×Ö·û´®½ØÈ¡»ñµÃ·¢²¼Ê±¼ä
+						// é€šè¿‡å­—ç¬¦ä¸²æˆªå–è·å¾—å‘å¸ƒæ—¶é—´
 						remainText1 = remainText1.substring(remainText1.indexOf("<") + 1);
 						String titleText = remainText1.substring(0, remainText1.indexOf(">"));
-						map.put("publish_time", "·¢²¼Ê±¼ä£º" + titleText);
-						// Log.d("publish_time", "·¢²¼Ê±¼ä£º" + titleText);
+						map.put("publish_time", "å‘å¸ƒæ—¶é—´ï¼š" + titleText);
+						// Log.d("publish_time", "å‘å¸ƒæ—¶é—´ï¼š" + titleText);
 						/*
-						 * µ«ÊÇdownloadÀàĞÍµÄÍøÖ·ºÍÆäËûÍ¨ÖªÀàµÄÁ´½ÓÓĞÇø±ğ
-						 * ËùÒÔÏÈÒªÅĞ¶ÏÊÇ²»ÊÇdownloadÀàĞÍ
-						 * È»ºóÍ¨¹ı²»Í¬µÄ×Ö·û´®½ØÈ¡·½·¨»ñµÃÒªÌø×ªÍøÒ³µÄºó×º
+						 * ä½†æ˜¯downloadç±»å‹çš„ç½‘å€å’Œå…¶ä»–é€šçŸ¥ç±»çš„é“¾æ¥æœ‰åŒºåˆ«
+						 * æ‰€ä»¥å…ˆè¦åˆ¤æ–­æ˜¯ä¸æ˜¯downloadç±»å‹
+						 * ç„¶åé€šè¿‡ä¸åŒçš„å­—ç¬¦ä¸²æˆªå–æ–¹æ³•è·å¾—è¦è·³è½¬ç½‘é¡µçš„åç¼€
 						 */
 						if (flag.equals("D")) {
 							remainText2 = remainText2.substring(remainText2.indexOf("href=") + 6);

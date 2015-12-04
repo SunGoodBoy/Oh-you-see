@@ -29,7 +29,7 @@ public class ThirdFragment extends Fragment implements OnItemClickListener{
 	private List<Map<String, Object>> data_list;
 	private SimpleAdapter sim_adapter;
 	
-	// ItemImageÍ¼±ê·â×°ÎªÒ»¸öÊı×é
+	// ItemImageå›¾æ ‡å°è£…ä¸ºä¸€ä¸ªæ•°ç»„
 	private int [] iconImage = {
 			R.drawable.web_view_icon,
 			R.drawable.phone_icon,
@@ -38,35 +38,35 @@ public class ThirdFragment extends Fragment implements OnItemClickListener{
 			R.drawable.download_icon,
 			R.drawable.help_icon
 	};
-	// ItemText·â×°Êı×é
-	private String[] iconText = {"Ò»¿¨Í¨ÍøÕ¾", "²¦´ò¹ÒÊ§µç»°", "Í¨Öª",
-								 "¹æÕÂÖÆ¶È",   "ÎÄ¼şÏÂÔØ",  "Ğ£Ô°¿¨°ïÖú"};
+	// ItemTextå°è£…æ•°ç»„
+	private String[] iconText = {"ä¸€å¡é€šç½‘ç«™", "æ‹¨æ‰“æŒ‚å¤±ç”µè¯", "é€šçŸ¥",
+								 "è§„ç« åˆ¶åº¦",   "æ–‡ä»¶ä¸‹è½½",  "æ ¡å›­å¡å¸®åŠ©"};
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		viewFragment=inflater.inflate(R.layout.third, null);
 		
-		// ÊµÀı»¯¿Ø¼ş
+		// å®ä¾‹åŒ–æ§ä»¶
 		gridView = (GridView) viewFragment.findViewById(R.id.grid_view);
 		
-		// ĞÂ½¨List
+		// æ–°å»ºList
 		data_list = new ArrayList<Map<String, Object>>();
-		// »ñÈ¡Êı¾İ
+		// è·å–æ•°æ®
 		getData();
-		// ĞÂ½¨ÊÊÅäÆ÷
+		// æ–°å»ºé€‚é…å™¨
 		String [] from = {"image", "text"};
 		int [] to = {R.id.grid_view_item_img, R.id.grid_view_item_text};
 		sim_adapter = new SimpleAdapter(this.getActivity(), data_list, R.layout.grid_view_item, from, to);
-		// ÅäÖÃÊÊÅäÆ÷
+		// é…ç½®é€‚é…å™¨
 		gridView.setAdapter(sim_adapter);
-		// ÉèÖÃ¼àÌıÆ÷
+		// è®¾ç½®ç›‘å¬å™¨
 		gridView.setOnItemClickListener(this);
 		return viewFragment;
 	}
 	
 	public List<Map<String, Object>> getData(){        
-        //cionºÍiconNameµÄ³¤¶ÈÊÇÏàÍ¬µÄ£¬ÕâÀïÈÎÑ¡ÆäÒ»¶¼¿ÉÒÔ
+        //cionå’ŒiconNameçš„é•¿åº¦æ˜¯ç›¸åŒçš„ï¼Œè¿™é‡Œä»»é€‰å…¶ä¸€éƒ½å¯ä»¥
         for(int i = 0; i < iconImage.length; i++){
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("image", iconImage[i]);
@@ -77,32 +77,32 @@ public class ThirdFragment extends Fragment implements OnItemClickListener{
         return data_list;
     }
 
-	// ItemµÄµã»÷ÊÂ¼ş,¸ù¾İÍ¼Æ¬IDÀ´È·¶¨µã»÷¶ÔÏó
+	// Itemçš„ç‚¹å‡»äº‹ä»¶,æ ¹æ®å›¾ç‰‡IDæ¥ç¡®å®šç‚¹å‡»å¯¹è±¡
 	@Override
 	public void onItemClick(AdapterView<?> view, View arg1, int position, long arg3) {
 		// TODO Auto-generated method stub
 		switch (iconImage[position]) {
-		// ·ÃÎÊĞ£Ô°Ò»¿¨Í¨ÍøÕ¾
+		// è®¿é—®æ ¡å›­ä¸€å¡é€šç½‘ç«™
 		case R.drawable.web_view_icon:
 			Intent intent = new Intent(this.getActivity(), WebViewActivity.class);
 			intent.putExtra("postfixUrl", "homeLogin.action");
 			startActivity(intent);
 			break;
-		// ²¦´ò¹ÒÊ§µç»°
+		// æ‹¨æ‰“æŒ‚å¤±ç”µè¯
 		case R.drawable.phone_icon:
 			AlertDialog.Builder dialog = new AlertDialog.Builder(this.getActivity());
-			dialog.setTitle("ÌáÊ¾");
-			dialog.setMessage("ÄúÈ·¶¨Òª²¦´ò¹ÒÊ§µç»°\n(0532-6678-2221)Âğ£¿");
-			dialog.setPositiveButton("È·¶¨", new DialogInterface.OnClickListener() {
+			dialog.setTitle("æç¤º");
+			dialog.setMessage("æ‚¨ç¡®å®šè¦æ‹¨æ‰“æŒ‚å¤±ç”µè¯\n(0532-6678-2221)å—ï¼Ÿ");
+			dialog.setPositiveButton("ç¡®å®š", new DialogInterface.OnClickListener() {
 				
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					// Í¨¹ıIntentµ÷ÓÃ²¦´òµç»°³ÌĞò
+					// é€šè¿‡Intentè°ƒç”¨æ‹¨æ‰“ç”µè¯ç¨‹åº
 					Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + "053266782221"));
 					startActivity(intent);
 				}
 			});
-			dialog.setNegativeButton("È¡Ïû", new DialogInterface.OnClickListener() {
+			dialog.setNegativeButton("å–æ¶ˆ", new DialogInterface.OnClickListener() {
 				
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
@@ -112,25 +112,25 @@ public class ThirdFragment extends Fragment implements OnItemClickListener{
 			});
 			dialog.show();
 			break;
-		// Í¨Öª
+		// é€šçŸ¥
 		case R.drawable.notifications_icon:
 			intent = new Intent(this.getActivity(), NotificationActivity.class);
 			intent.putExtra("FLAG", "N");
 			startActivity(intent);
 			break;
-		// ¹æÕÂÖÆ¶È
+		// è§„ç« åˆ¶åº¦
 		case R.drawable.rules_icon:
 			intent = new Intent(this.getActivity(), NotificationActivity.class);
 			intent.putExtra("FLAG", "R");
 			startActivity(intent);
 			break;
-		// ÏÂÔØÎÄ¼ş
+		// ä¸‹è½½æ–‡ä»¶
 		case R.drawable.download_icon:
 			intent = new Intent(this.getActivity(), NotificationActivity.class);
 			intent.putExtra("FLAG", "D");
 			startActivity(intent);
 			break;
-		// Ğ£Ô°¿¨°ïÖú
+		// æ ¡å›­å¡å¸®åŠ©
 		case R.drawable.help_icon:
 			intent = new Intent(this.getActivity(), NotificationActivity.class);
 			intent.putExtra("FLAG", "H");

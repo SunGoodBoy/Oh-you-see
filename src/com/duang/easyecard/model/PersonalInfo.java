@@ -9,13 +9,13 @@ public class PersonalInfo
 	
 	private int type;
 	
-	//ÎŞ²Î¹¹Ôìº¯Êı
+	//æ— å‚æ„é€ å‡½æ•°
 	public PersonalInfo()
 	{
 		super();
 	}
 	
-	//¹¹Ôìº¯Êı
+	//æ„é€ å‡½æ•°
 	public PersonalInfo(String title)
 	{
 		super();

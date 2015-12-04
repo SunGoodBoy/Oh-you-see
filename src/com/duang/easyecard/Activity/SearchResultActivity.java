@@ -46,11 +46,11 @@ public class SearchResultActivity extends BaseActivity implements IXListViewList
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.search_result);
 		
-		//³õÊ¼»¯¿Ø¼ş
+		//åˆå§‹åŒ–æ§ä»¶
 		lostEventCheckBox = (CheckBox) findViewById(R.id.search_result_check_box_lost);
 		foundEventCheckBox = (CheckBox) findViewById(R.id.search_result_check_box_found);
 		
-		//´ò¿ª»ò´´½¨Êı¾İ¿â
+		//æ‰“å¼€æˆ–åˆ›å»ºæ•°æ®åº“
 		dbHelper = new MyDatabaseHelper(this, "EasyEcard.db", null, 1);
 		
 		geneSearchQueryItems(getIntent());
@@ -70,7 +70,7 @@ public class SearchResultActivity extends BaseActivity implements IXListViewList
 		Log.d("SearchResultActivity doSearchQuery", "initView called finished");
 	}
 
-	//Éú³ÉItemÏî
+	//ç”ŸæˆItemé¡¹
 	private void geneSearchQueryItems(Intent intent) 
 	{
 		if (intent == null)
@@ -82,24 +82,24 @@ public class SearchResultActivity extends BaseActivity implements IXListViewList
 		String queryAction = intent.getAction(); 
         if( Intent.ACTION_SEARCH.equals(queryAction))
         {
-        	//»ñÈ¡ËÑË÷ÄÚÈİ
+        	//è·å–æœç´¢å†…å®¹
         	queryString = intent.getStringExtra(SearchManager.QUERY);
         	Log.d("QureyString", queryString);
         	
         	tvSearchResultTitle = (TextView) findViewById(R.id.text_search_result_title);
-        	tvSearchResultTitle.setText("ËÑË÷ÄÚÈİ£º" + queryString);
+        	tvSearchResultTitle.setText("æœç´¢å†…å®¹ï¼š" + queryString);
         	
-        	//³õÊ¼»¯ÊÓÍ¼£¬ÏÔÊ¾È«²¿ÊÂ¼ş
+        	//åˆå§‹åŒ–è§†å›¾ï¼Œæ˜¾ç¤ºå…¨éƒ¨äº‹ä»¶
     		doSearchQueryBoth(queryString);
     		initView();
         	
-        	//¶ÔÁ½¸öCheckBoxÉèÖÃ¼àÌıÊÂ¼ş
+        	//å¯¹ä¸¤ä¸ªCheckBoxè®¾ç½®ç›‘å¬äº‹ä»¶
     		lostEventCheckBox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
     			
     			@Override
     			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
     				if (isChecked) {
-    					// lostEventCheckBox±»Ñ¡ÖĞ
+    					// lostEventCheckBoxè¢«é€‰ä¸­
     					if (foundEventCheckBox.isChecked())
     					{
     						doSearchQueryBoth(queryString);
@@ -109,13 +109,13 @@ public class SearchResultActivity extends BaseActivity implements IXListViewList
     						initView();
     					}
     				} else {
-    					// lostEventCheckBoxÃ»ÓĞ±»Ñ¡ÖĞµÄÇé¿ö
+    					// lostEventCheckBoxæ²¡æœ‰è¢«é€‰ä¸­çš„æƒ…å†µ
     					if (foundEventCheckBox.isChecked())
     					{
     						doSearchQueryInFoundEvent(queryString);
     						initView();
     					} else {
-    						// ¶¼Ã»ÓĞ±»Ñ¡ÖĞ
+    						// éƒ½æ²¡æœ‰è¢«é€‰ä¸­
     						dontSearchQuery();
     						initView();
     					}
@@ -136,13 +136,13 @@ public class SearchResultActivity extends BaseActivity implements IXListViewList
     						initView();
     					}
     				} else {
-    					// foundEventCheckBoxÃ»ÓĞ±»Ñ¡ÖĞµÄÇé¿ö
+    					// foundEventCheckBoxæ²¡æœ‰è¢«é€‰ä¸­çš„æƒ…å†µ
     					if (lostEventCheckBox.isChecked())
     					{
     						doSearchQueryInLostEvent(queryString);
     						initView();
     					} else {
-    						// ¶¼Ã»ÓĞ±»Ñ¡ÖĞ
+    						// éƒ½æ²¡æœ‰è¢«é€‰ä¸­
     						dontSearchQuery();
     						initView();
     					}
@@ -153,17 +153,17 @@ public class SearchResultActivity extends BaseActivity implements IXListViewList
         
 	}
 	
-	//²»ËÑË÷
+	//ä¸æœç´¢
 	private void dontSearchQuery() {
 		eventList = new ArrayList<Event>();
 		mAdapter = new EventAdapter(this, eventList, R.layout.list_item);
 	}
 	
-	//½öÔÚLostEventÖĞËÑË÷
+	//ä»…åœ¨LostEventä¸­æœç´¢
 	private void doSearchQueryInLostEvent(String queryString) {
 		eventList = new ArrayList<Event>();
     	SQLiteDatabase db = dbHelper.getReadableDatabase();
-    	//±éÀúLostEvent±í
+    	//éå†LostEventè¡¨
 		Cursor cursor = db.query("LostEvent", null, null, null, null, null, null);
 		if (cursor.moveToLast())
 		{
@@ -190,11 +190,11 @@ public class SearchResultActivity extends BaseActivity implements IXListViewList
 		}
 	}
 	
-	//½öÔÚFoundEventÖĞ½øĞĞËÑË÷
+	//ä»…åœ¨FoundEventä¸­è¿›è¡Œæœç´¢
 	private void doSearchQueryInFoundEvent(String queryString) {
 		eventList = new ArrayList<Event>();
     	SQLiteDatabase db = dbHelper.getReadableDatabase();
-    	//±éÀúLostEvent±í
+    	//éå†LostEventè¡¨
 		Cursor cursor = db.query("FoundEvent", null, null, null, null, null, null);
 		if (cursor.moveToLast())
 		{
@@ -222,8 +222,8 @@ public class SearchResultActivity extends BaseActivity implements IXListViewList
 	}
 
 	/*
-	 * ¸ù¾İqueryStringÒÀ´ÎÔÚÊı¾İ¿âµÄÁ½ÕÅEvent±íÖĞËÑË÷
-	 * Ö»ËÑË÷owner_stu_idºÍowner_nameÁĞ
+	 * æ ¹æ®queryStringä¾æ¬¡åœ¨æ•°æ®åº“çš„ä¸¤å¼ Eventè¡¨ä¸­æœç´¢
+	 * åªæœç´¢owner_stu_idå’Œowner_nameåˆ—
 	 */
 	private void doSearchQueryBoth(String queryString) {
 		
@@ -232,7 +232,7 @@ public class SearchResultActivity extends BaseActivity implements IXListViewList
 		eventList = new ArrayList<Event>();
     	SQLiteDatabase db = dbHelper.getReadableDatabase();
     	Log.d("SearchResultActivity doSearchQuery", "get database");
-    	//±éÀúLostEvent±í
+    	//éå†LostEventè¡¨
 		Cursor cursor = db.query("LostEvent", null, null, null, null, null, null);
 		if (cursor.moveToLast())
 		{
@@ -255,7 +255,7 @@ public class SearchResultActivity extends BaseActivity implements IXListViewList
 			} while (cursor.moveToPrevious());
 		}
 		
-		//±éÀúFoundEvent±í
+		//éå†FoundEventè¡¨
 		cursor = db.query("FoundEvent", null, null, null, null, null, null);
 		if (cursor.moveToLast())
 		{
@@ -281,14 +281,14 @@ public class SearchResultActivity extends BaseActivity implements IXListViewList
 		mAdapter = new EventAdapter(this, eventList, R.layout.list_item);
 	}
 
-	//ItemÏîµÄµã»÷ÊÂ¼ş
+	//Itemé¡¹çš„ç‚¹å‡»äº‹ä»¶
 	@Override
 	public void onItemClick(AdapterView<?> view, View arg1, int position, long arg3) {
 		// TODO Auto-generated method stub
-		//¿ÉÒÔÌø×ªÖÁÏêÏ¸ĞÅÏ¢½çÃæÁË
+		//å¯ä»¥è·³è½¬è‡³è¯¦ç»†ä¿¡æ¯ç•Œé¢äº†
 		//Toast.makeText(this, ((Event)view.getItemAtPosition(position))
 			//	.getEvent_owner().getUsername(), Toast.LENGTH_SHORT).show();
-		//»ñµÃµã»÷ÏîµÄÑ§ºÅ²¢´«µİµ½EventDetailsActivity
+		//è·å¾—ç‚¹å‡»é¡¹çš„å­¦å·å¹¶ä¼ é€’åˆ°EventDetailsActivity
 		Intent intent = new Intent(this, EventDetailsActivity.class);
 		String stu_id = ((Event)view.getItemAtPosition(position)).getEvent_owner().getStu_id();
 		String data = stu_id + "__3";
@@ -297,7 +297,7 @@ public class SearchResultActivity extends BaseActivity implements IXListViewList
 		startActivity(intent);
 	}
 
-	//activityÖØĞÂÖÃ¶¥
+	//activityé‡æ–°ç½®é¡¶
 	@Override 
     protected void onNewIntent(Intent intent) 
 	{  
@@ -305,7 +305,7 @@ public class SearchResultActivity extends BaseActivity implements IXListViewList
         geneSearchQueryItems(intent); 
     } 
 	
-	//ÏÂÀ­Ë¢ĞÂ
+	//ä¸‹æ‹‰åˆ·æ–°
 	@Override
 	public void onRefresh() {
 		mHandler.postDelayed(new Runnable() {
@@ -320,7 +320,7 @@ public class SearchResultActivity extends BaseActivity implements IXListViewList
 		}, 2000);
 	}
 	
-	//¼ÓÔØ¸ü¶à
+	//åŠ è½½æ›´å¤š
 	@Override
 	public void onLoadMore() {
 		mHandler.postDelayed(new Runnable() {
@@ -336,6 +336,6 @@ public class SearchResultActivity extends BaseActivity implements IXListViewList
 	private void onLoad() {
 		xListView.stopRefresh();
 		xListView.stopLoadMore();
-		xListView.setRefreshTime("¸Õ¸Õ");
+		xListView.setRefreshTime("åˆšåˆš");
 	}
 }

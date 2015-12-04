@@ -21,7 +21,7 @@ public class ActivityCollector {
 	}
 	
 	
-	//¼æÈÝFragmentActivity
+	// æŽ¨å¹¿åˆ°FragmentActivity
 	public static void addActivity(FragmentActivity fragmentActivity)	{
 		activities.add(fragmentActivity);
 	}
@@ -37,7 +37,7 @@ public class ActivityCollector {
 			}
 		}
 		
-		//¼æÈÝFragmentActivity
+		// æŽ¨å¹¿åˆ°FragmentActivity
 		for (FragmentActivity fragmentActivity : fragmentActivities)	{
 			if (!fragmentActivity.isFinishing())	{
 				fragmentActivity.finish();

@@ -49,7 +49,7 @@ OnPageChangeListener{
 	}
 
 	/**
-	 * ³õÊ¼»¯ËùÓĞÊÂ¼ş
+	 * åˆå§‹åŒ–æ‰€æœ‰äº‹ä»¶
 	 */
 	private void initEvent() {
 		mViewPager.setOnPageChangeListener(this);
@@ -60,7 +60,7 @@ OnPageChangeListener{
 		mViewPager = (ViewPager) this.findViewById(R.id.view_pager);
 		mPagerAdapter = new PagerAdapter(this);
 		
-		//³õÊ¼»¯×Ô¶¨ÒåµÄÏÂ·½µÄÍ¼±ê°´Å¥
+		//åˆå§‹åŒ–è‡ªå®šä¹‰çš„ä¸‹æ–¹çš„å›¾æ ‡æŒ‰é’®
 		ChangeColorIconWithText one = (ChangeColorIconWithText) findViewById(R.id.id_indicator_one);
 		mTabIndicators.add(one);
 		ChangeColorIconWithText two = (ChangeColorIconWithText) findViewById(R.id.id_indicator_two);
@@ -94,13 +94,13 @@ OnPageChangeListener{
 	}
 
 	
-	//ÏÔÊ¾²Ëµ¥£¬²¢ÉèÖÃaction_search½øÈë±à¼­×´Ì¬ºóËÑË÷°´Å¥µÄµã»÷ÊÂ¼ş
+	//æ˜¾ç¤ºèœå•ï¼Œå¹¶è®¾ç½®action_searchè¿›å…¥ç¼–è¾‘çŠ¶æ€åæœç´¢æŒ‰é’®çš„ç‚¹å‡»äº‹ä»¶
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)
 	{
 		getMenuInflater().inflate(R.menu.menu_main, menu);
 		
-		//»ñÈ¡SearchView¶ÔÏó
+		//è·å–SearchViewå¯¹è±¡
 		SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
 		//MenuItem searchItem = menu.findItem(R.id.action_search);  
 	    //SearchView searchView = (SearchView) searchItem.getActionView();
@@ -111,47 +111,47 @@ OnPageChangeListener{
 			return true;
 		}
 		
-		//»ñÈ¡ËÑË÷·şÎñ¹ÜÀíÆ÷
+		//è·å–æœç´¢æœåŠ¡ç®¡ç†å™¨
 		SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-		//ËùÔÚActivityÖĞµÄ component name£¬ÓÉ´ËÏµÍ³¿ÉÒÔÍ¨¹ıIntent»½Æğ
+		//æ‰€åœ¨Activityä¸­çš„ component nameï¼Œç”±æ­¤ç³»ç»Ÿå¯ä»¥é€šè¿‡Intentå”¤èµ·
 		ComponentName cn = new ComponentName(this, SearchResultActivity.class);
 		/*
-		 *  Í¨¹ıËÑË÷¹ÜÀíÆ÷£¬´Ósearchable activity(ËùÔÚµÄActivity)ÖĞ»ñÈ¡Ïà¹ØËÑË÷ĞÅÏ¢£¬¾ÍÊÇsearchableµÄxmlÉèÖÃ¡£
-		 *  Èç¹û·µ»Ønull£¬±íÊ¾¸Ãactivity²»´æÔÚ£¬»òÕß²»ÊÇsearchable
+		 *  é€šè¿‡æœç´¢ç®¡ç†å™¨ï¼Œä»searchable activity(æ‰€åœ¨çš„Activity)ä¸­è·å–ç›¸å…³æœç´¢ä¿¡æ¯ï¼Œå°±æ˜¯searchableçš„xmlè®¾ç½®ã€‚
+		 *  å¦‚æœè¿”å›nullï¼Œè¡¨ç¤ºè¯¥activityä¸å­˜åœ¨ï¼Œæˆ–è€…ä¸æ˜¯searchable
 		 */
 		SearchableInfo info = searchManager.getSearchableInfo(cn);
 		if (info == null)
 		{
 			Log.e("SearchableInfo", "Fail to get search info");
 		}
-		//½«searchable activityµÄËÑË÷ĞÅÏ¢ÓësearchView¹ØÁª
+		//å°†searchable activityçš„æœç´¢ä¿¡æ¯ä¸searchViewå…³è”
 		searchView.setSearchableInfo(info);
 
 		return true;
 	}
 	
-	//ÉèÖÃ²Ëµ¥°´Å¥µÄµã»÷ÊÂ¼ş
+	//è®¾ç½®èœå•æŒ‰é’®çš„ç‚¹å‡»äº‹ä»¶
 	public boolean onMenuItemSelected(int featureId, MenuItem item)	{
 		switch (item.getItemId())	{
 		case R.id.action_add_lost_info:
-			//Ìø×ªµ½Ìí¼Ó¶ªÊ§ĞÅÏ¢
+			//è·³è½¬åˆ°æ·»åŠ ä¸¢å¤±ä¿¡æ¯
 			Intent intent = new Intent(MainActivity.this, AddLostEventActivity.class);
 			startActivity(intent);
 			break;
 		case R.id.action_add_found_info:
-			//Ìø×ªµ½Ìí¼ÓÊ°»ñĞÅÏ¢
+			//è·³è½¬åˆ°æ·»åŠ æ‹¾è·ä¿¡æ¯
 			intent = new Intent(MainActivity.this, AddFoundEventActivity.class);
 			startActivity(intent);
 			break;
 		case R.id.action_feedback:
-			//Ìø×ªµ½Òâ¼û·´À¡
+			//è·³è½¬åˆ°æ„è§åé¦ˆ
 			break;
 		case R.id.action_exit:
-			//Í¨¹ıAlertDialogÑ¯ÎÊÊÇ·ñÒªÍË³öÓ¦ÓÃ³ÌĞò
+			//é€šè¿‡AlertDialogè¯¢é—®æ˜¯å¦è¦é€€å‡ºåº”ç”¨ç¨‹åº
 			AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-			dialog.setTitle("ÌáÊ¾");
-			dialog.setMessage("ÍË³öÓ¦ÓÃ£¿");
-			dialog.setPositiveButton("È·¶¨", new DialogInterface.OnClickListener() {
+			dialog.setTitle("æç¤º");
+			dialog.setMessage("é€€å‡ºåº”ç”¨ï¼Ÿ");
+			dialog.setPositiveButton("ç¡®å®š", new DialogInterface.OnClickListener() {
 				
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
@@ -159,7 +159,7 @@ OnPageChangeListener{
 					ActivityCollector.finishAll();
 				}
 			});
-			dialog.setNegativeButton("È¡Ïû", new DialogInterface.OnClickListener() {
+			dialog.setNegativeButton("å–æ¶ˆ", new DialogInterface.OnClickListener() {
 				
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
@@ -174,7 +174,7 @@ OnPageChangeListener{
 		return true;
 	}
 	
-	// ÉèÖÃActionBarµÄ°´Å¥ÔÚ±êÌâÀ¸Ò»Ö±ÏÔÊ¾
+	// è®¾ç½®ActionBarçš„æŒ‰é’®åœ¨æ ‡é¢˜æ ä¸€ç›´æ˜¾ç¤º
 	private void setOverflowButtonAlways()
 	{
 		try
@@ -191,7 +191,7 @@ OnPageChangeListener{
 	}
 	
 	/**
-	 * ÉèÖÃmenuÏÔÊ¾icon
+	 * è®¾ç½®menuæ˜¾ç¤ºicon
 	 */
 	@Override
 	public boolean onMenuOpened(int featureId, Menu menu)
@@ -218,14 +218,14 @@ OnPageChangeListener{
 	}
 
 	
-	// ¼àÌıBack°´Å¥µÄµã»÷
+	// ç›‘å¬BackæŒ‰é’®çš„ç‚¹å‡»
 	public boolean onKeyDown(int keyCode, KeyEvent event)	{
 		if (keyCode == KeyEvent.KEYCODE_BACK)	{
-			//Í¨¹ıAlertDialogÑ¯ÎÊÊÇ·ñÒªÍË³öÓ¦ÓÃ³ÌĞò
+			//é€šè¿‡AlertDialogè¯¢é—®æ˜¯å¦è¦é€€å‡ºåº”ç”¨ç¨‹åº
 			AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-			dialog.setTitle("ÌáÊ¾");
-			dialog.setMessage("ÍË³öÓ¦ÓÃ£¿");
-			dialog.setPositiveButton("È·¶¨", new DialogInterface.OnClickListener() {
+			dialog.setTitle("æç¤º");
+			dialog.setMessage("é€€å‡ºåº”ç”¨ï¼Ÿ");
+			dialog.setPositiveButton("ç¡®å®š", new DialogInterface.OnClickListener() {
 				
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
@@ -233,7 +233,7 @@ OnPageChangeListener{
 					ActivityCollector.finishAll();
 				}
 			});
-			dialog.setNegativeButton("È¡Ïû", new DialogInterface.OnClickListener() {
+			dialog.setNegativeButton("å–æ¶ˆ", new DialogInterface.OnClickListener() {
 				
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
@@ -250,7 +250,7 @@ OnPageChangeListener{
 	}
 	
 	
-	//µã»÷ÊÂ¼ş
+	//ç‚¹å‡»äº‹ä»¶
 	@Override
 	public void onClick(View v)
 	{
@@ -259,7 +259,7 @@ OnPageChangeListener{
 	}
 
 	/**
-	 * ¼àÌıTab°´Å¥µã»÷
+	 * ç›‘å¬TabæŒ‰é’®ç‚¹å‡»
 	 * 
 	 * @param v
 	 */
@@ -289,7 +289,7 @@ OnPageChangeListener{
 	}
 	
 	/**
-	 * ÖØÖÃÆäËûµÄTabIndicatorµÄÑÕÉ«
+	 * é‡ç½®å…¶ä»–çš„TabIndicatorçš„é¢œè‰²
 	 */
 	private void resetOtherTabs()
 	{

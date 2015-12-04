@@ -35,10 +35,10 @@ public class LoginActivity extends BaseActivity {
         mUsername = (EditText) findViewById(R.id.username_edit);
     	mPassword = (EditText) findViewById(R.id.password_edit); 
     	
-    	//´´½¨»ò´ò¿ªÊı¾İ¿â
+    	//åˆ›å»ºæˆ–æ‰“å¼€æ•°æ®åº“
     	dbHelper = new MyDatabaseHelper(this, "EasyEcard.db", null, 1);
     	
-    	//µÇÂ¼°´Å¥µÄµã»÷ÊÂ¼ş
+    	//ç™»å½•æŒ‰é’®çš„ç‚¹å‡»äº‹ä»¶
     	signin_button.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -48,7 +48,7 @@ public class LoginActivity extends BaseActivity {
 			}
 		});
     	
-    	//×¢²á°´Å¥µÄµã»÷ÊÂ¼ş
+    	//æ³¨å†ŒæŒ‰é’®çš„ç‚¹å‡»äº‹ä»¶
     	login_signup_button.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -60,7 +60,7 @@ public class LoginActivity extends BaseActivity {
 		});
 	}
 	
-	//µÇÂ¼ÅĞ¶Ï
+	//ç™»å½•åˆ¤æ–­
 	public void login_main(View v)	{
 		String username = mUsername.getText().toString();
 		String password = mPassword.getText().toString();
@@ -70,33 +70,33 @@ public class LoginActivity extends BaseActivity {
 			if (wasSigned(username))	{
 				if (!password.isEmpty())	{
 					if (passwordIsRight(username, password))	{
-						//Ìø×ªµ½³ÌĞò¹¦ÄÜ½çÃæ£¬½áÊøLoginActivity
+						//è·³è½¬åˆ°ç¨‹åºåŠŸèƒ½ç•Œé¢ï¼Œç»“æŸLoginActivity
 						
-						//ÉèÖÃÎªµ±Ç°ÓÃ»§
+						//è®¾ç½®ä¸ºå½“å‰ç”¨æˆ·
 						User.setCurrentUserStuId(username);
 						
-						Toast.makeText(LoginActivity.this, "µÇÂ¼³É¹¦£¡", Toast.LENGTH_SHORT).show();
+						Toast.makeText(LoginActivity.this, "ç™»å½•æˆåŠŸï¼", Toast.LENGTH_SHORT).show();
 						Intent intent = new Intent(LoginActivity.this, MainActivity.class);
 						startActivity(intent);
 						finish();
 						
 					}	else	{
-						Toast.makeText(LoginActivity.this, "ÃÜÂë´íÎó", Toast.LENGTH_SHORT).show();
+						Toast.makeText(LoginActivity.this, "å¯†ç é”™è¯¯", Toast.LENGTH_SHORT).show();
 						mPassword.setText("");
 					}
 				}	else	{
-					Toast.makeText(LoginActivity.this, "ÇëÊäÈëÃÜÂë", Toast.LENGTH_SHORT).show();
+					Toast.makeText(LoginActivity.this, "è¯·è¾“å…¥å¯†ç ", Toast.LENGTH_SHORT).show();
 				}
 				
 			}	else	{
-				Toast.makeText(LoginActivity.this, "Î´×¢²áµÄÕÊºÅ", Toast.LENGTH_SHORT).show();
+				Toast.makeText(LoginActivity.this, "æœªæ³¨å†Œçš„å¸å·", Toast.LENGTH_SHORT).show();
 			}
 		}	else	{
-			Toast.makeText(LoginActivity.this, "ÕÊºÅ²»ÄÜÎª¿Õ", Toast.LENGTH_SHORT).show();
+			Toast.makeText(LoginActivity.this, "å¸å·ä¸èƒ½ä¸ºç©º", Toast.LENGTH_SHORT).show();
 		}
 	}
 	
-	//ÅĞ¶ÏÃÜÂëÊÇ·ñÕıÈ·
+	//åˆ¤æ–­å¯†ç æ˜¯å¦æ­£ç¡®
 	protected boolean passwordIsRight(String username, String password)	{
 		SQLiteDatabase db = dbHelper.getReadableDatabase();
 		Cursor cursor = db.query("UserInfo", null, null, null, null, null, null);
@@ -116,7 +116,7 @@ public class LoginActivity extends BaseActivity {
 		return false;
     }
 	
-	//ÅĞ¶ÏÕÊºÅÊÇ·ñÒÑ¾­×¢²á£¬trueÎªÒÑ¾­×¢²á£¬falseÎªÎ´×¢²á
+	//åˆ¤æ–­å¸å·æ˜¯å¦å·²ç»æ³¨å†Œï¼Œtrueä¸ºå·²ç»æ³¨å†Œï¼Œfalseä¸ºæœªæ³¨å†Œ
 	protected boolean wasSigned(String stu_id_input) {
 		// TODO Auto-generated method stub
 		SQLiteDatabase db = dbHelper.getReadableDatabase();

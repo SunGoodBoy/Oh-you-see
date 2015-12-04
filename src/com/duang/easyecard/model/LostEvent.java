@@ -2,14 +2,14 @@ package com.duang.easyecard.model;
 
 public class LostEvent extends Event	{
 
-	private long lost_event_id;		//¶ªÊ§ÊÂ¼şĞòºÅ
+	private long lost_event_id;		//ä¸¢å¤±äº‹ä»¶åºå·
 
-	private String lost_date = getDate();		//¶ªÊ§ÈÕÆÚ,´Ó¸¸Àà»ñÈ¡
-	private String lost_place = getPlace();		//¶ªÊ§µØµã£¬´Ó¸¸Àà»ñÈ¡
+	private String lost_date = getDate();		//ä¸¢å¤±æ—¥æœŸ,ä»çˆ¶ç±»è·å–
+	private String lost_place = getPlace();		//ä¸¢å¤±åœ°ç‚¹ï¼Œä»çˆ¶ç±»è·å–
 
-	private boolean found_flag;		//ÒÑÕÒµ½±êÖ¾
+	private boolean found_flag;		//å·²æ‰¾åˆ°æ ‡å¿—
 
-	//¹¹Ôìº¯Êı
+	//æ„é€ å‡½æ•°
 	public LostEvent()	{
 		super();
 	}

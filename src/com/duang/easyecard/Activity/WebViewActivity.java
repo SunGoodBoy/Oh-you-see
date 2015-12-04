@@ -12,7 +12,7 @@ import android.webkit.WebViewClient;
 public class WebViewActivity extends BaseActivity {
 
 	private WebView webView;
-	// Ö¸¶¨ÍøÖ·µÄÇ°×º
+	// æŒ‡å®šç½‘å€çš„å‰ç¼€
 	private  final String prefixUrl = "http://ecard.ouc.edu.cn/";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -26,24 +26,24 @@ public class WebViewActivity extends BaseActivity {
 			@Override
 			public boolean shouldOverrideUrlLoading(WebView view, String
 					url) {
-				view.loadUrl(url);  //¸ù¾İ´«ÈëµÄ²ÎÊı¼ÓÔØÍøÒ³
+				view.loadUrl(url);  //æ ¹æ®ä¼ å…¥çš„å‚æ•°åŠ è½½ç½‘é¡µ
 				return true;
 			}
 		});
 		
-		// ¼àÌıÏÂÔØ
+		// ç›‘å¬ä¸‹è½½
 		webView.setDownloadListener(new DownloadListener() {
 			
 			@Override
 			public void onDownloadStart(String url, String userAgent,
 					String contentDisposition, String mimetype, long contentLength) {
-				// µ±ÓÃ»§µã»÷ÏÂÔØÁ´½ÓÊ±£¬Ö±½Óµ÷ÓÃÏµÍ³µÄä¯ÀÀÆ÷ÏÂÔØ
+				// å½“ç”¨æˆ·ç‚¹å‡»ä¸‹è½½é“¾æ¥æ—¶ï¼Œç›´æ¥è°ƒç”¨ç³»ç»Ÿçš„æµè§ˆå™¨ä¸‹è½½
 				Uri uri = Uri.parse(url);
 				Intent intent = new Intent(Intent.ACTION_VIEW, uri);  
                 startActivity(intent);
 			}
 		});
-		// ÉèÖÃÖ§³ÖËõ·Å
+		// è®¾ç½®æ”¯æŒç¼©æ”¾
 		webView.getSettings().setBuiltInZoomControls(true);
 		
 		Intent intent = getIntent();

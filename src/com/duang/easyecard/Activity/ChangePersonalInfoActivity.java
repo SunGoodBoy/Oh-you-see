@@ -1,6 +1,5 @@
 package com.duang.easyecard.Activity;
 
-import java.lang.reflect.Field;
 import java.util.StringTokenizer;
 
 import com.duang.easyecard.R;
@@ -31,7 +30,7 @@ public class ChangePersonalInfoActivity extends BaseActivity {
 		//setOverflowButtonAlways();
 		setContentView(R.layout.change_personal_info);
 		
-		//ÊµÀı»¯¿Ø¼ş
+		//å®ä¾‹åŒ–æ§ä»¶
 		textViewTitle = (TextView) findViewById(R.id.change_personal_info_title);
 		editText = (EditText) findViewById(R.id.change_personal_info_edit);
 		textViewHint = (TextView) findViewById(R.id.change_personal_info_text);
@@ -48,17 +47,17 @@ public class ChangePersonalInfoActivity extends BaseActivity {
 			content = token.nextToken();
 		}
 		
-		//ÏÔÊ¾Ô­ÄÚÈİ
+		//æ˜¾ç¤ºåŸå†…å®¹
 		textViewTitle.setText(title);
 		editText.setText(content);
 		
-		//¼àÌı±£´æ°´Å¥
+		//ç›‘å¬ä¿å­˜æŒ‰é’®
 		saveButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				//´Ó editText »ñÈ¡ĞŞ¸ÄºóµÄÄÚÈİ
+				//ä» editText è·å–ä¿®æ”¹åçš„å†…å®¹
 				content = editText.getText().toString();
-				// ½«ĞŞ¸ÄºóµÄÄÚÈİ·µ»Øµ½ PersonalInfoActivity
+				// å°†ä¿®æ”¹åçš„å†…å®¹è¿”å›åˆ° PersonalInfoActivity
 				Intent intent = new Intent();
 				intent.putExtra("content_return", content);
 				setResult(RESULT_OK, intent);
@@ -67,10 +66,10 @@ public class ChangePersonalInfoActivity extends BaseActivity {
 		});
 	}
 	
-	// ¼àÌıBack°´Å¥µÄµã»÷
+	// ç›‘å¬BackæŒ‰é’®çš„ç‚¹å‡»
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK)	{
-			// ²»¿¼ÂÇĞÅÏ¢ÊÇ·ñĞŞ¸Ä£¬Ö±½ÓÏú»Ù»î¶¯
+			// ä¸è€ƒè™‘ä¿¡æ¯æ˜¯å¦ä¿®æ”¹ï¼Œç›´æ¥é”€æ¯æ´»åŠ¨
 			Intent intent = new Intent();
 			setResult(RESULT_CANCELED, intent);
 			finish();

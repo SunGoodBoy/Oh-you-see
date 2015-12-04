@@ -24,7 +24,7 @@ public class ChangeColorIconWithText extends View
 
 	private int mColor = 0xFF45C01A;
 	private Bitmap mIconBitmap;
-	private String mText = "Ò»¿¨Í¨";
+	private String mText = "ä¸€å¡é€š";
 	private int mTextSize = (int) TypedValue.applyDimension(
 			TypedValue.COMPLEX_UNIT_SP, 12, getResources().getDisplayMetrics());
 
@@ -38,7 +38,7 @@ public class ChangeColorIconWithText extends View
 	private Rect mTextBound;
 	private Paint mTextPaint;
 
-	//¹¹Ôìº¯Êı
+	//æ„é€ å‡½æ•°
 	public ChangeColorIconWithText(Context context)
 	{
 		this(context, null);
@@ -50,7 +50,7 @@ public class ChangeColorIconWithText extends View
 	}
 
 	/**
-	 * »ñÈ¡×Ô¶¨ÒåÊôĞÔµÄÖµ
+	 * è·å–è‡ªå®šä¹‰å±æ€§çš„å€¼
 	 * 
 	 * @param context
 	 * @param attrs
@@ -121,9 +121,9 @@ public class ChangeColorIconWithText extends View
 
 		int alpha = (int) Math.ceil(255 * mAlpha);
 
-		//  ÄÚ´æÈ¥×¼±¸mBitmap , setAlpha , ´¿É« £¬xfermode £¬ Í¼±ê
+		// å†…å­˜å»å‡†å¤‡mBitmap , setAlpha , çº¯è‰² ï¼Œxfermode ï¼Œ å›¾æ ‡
 		setupTargetBitmap(alpha);
-		// 1¡¢»æÖÆÔ­ÎÄ±¾ £» 2¡¢»æÖÆ±äÉ«µÄÎÄ±¾
+		// 1ã€ç»˜åˆ¶åŸæ–‡æœ¬ ï¼› 2ã€ç»˜åˆ¶å˜è‰²çš„æ–‡æœ¬
 		drawSourceText(canvas, alpha);
 		drawTargetText(canvas, alpha);
 		
@@ -132,7 +132,7 @@ public class ChangeColorIconWithText extends View
 	}
 
 	/**
-	 * »æÖÆ±äÉ«µÄÎÄ±¾
+	 * ç»˜åˆ¶å˜è‰²çš„æ–‡æœ¬
 	 * 
 	 * @param canvas
 	 * @param alpha
@@ -148,7 +148,7 @@ public class ChangeColorIconWithText extends View
 	}
 
 	/**
-	 * »æÖÆÔ­ÎÄ±¾
+	 * ç»˜åˆ¶åŸæ–‡æœ¬
 	 * 
 	 * @param canvas
 	 * @param alpha
@@ -164,7 +164,7 @@ public class ChangeColorIconWithText extends View
 	}
 
 	/**
-	 * ÔÚÄÚ´æÖĞ»æÖÆ¿É±äÉ«µÄIcon
+	 * åœ¨å†…å­˜ä¸­ç»˜åˆ¶å¯å˜è‰²çš„Icon
 	 */
 	private void setupTargetBitmap(int alpha)
 	{
@@ -214,7 +214,7 @@ public class ChangeColorIconWithText extends View
 	}
 
 	/**
-	 * ÖØ»æ
+	 * é‡ç»˜
 	 */
 	private void invalidateView()
 	{

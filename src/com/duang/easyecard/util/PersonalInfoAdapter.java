@@ -73,7 +73,7 @@ public class PersonalInfoAdapter extends BaseAdapter
 				holderImg.img_content = (ImageView) convertView.findViewById(R.id.personal_info_img);
 				holderImg.img_title.setText(personalInfo.getTitle());
 				holderImg.img_content.setImageResource(personalInfo.getImgId());
-				// ÉèÖÃuserpicµÄµã»÷ÊÂ¼ş
+				// è®¾ç½®userpicçš„ç‚¹å‡»äº‹ä»¶
 				holderImg.img_content.setOnClickListener(new OnClickListener() {
 					
 					@Override
@@ -118,9 +118,9 @@ public class PersonalInfoAdapter extends BaseAdapter
 	}
 	
 	/** 
-     * ¸ù¾İÊı¾İÔ´µÄposition·µ»ØĞèÒªÏÔÊ¾µÄµÄlayoutµÄtype 
+     * æ ¹æ®æ•°æ®æºçš„positionè¿”å›éœ€è¦æ˜¾ç¤ºçš„çš„layoutçš„type 
      *  
-     * typeµÄÖµ±ØĞë´Ó0¿ªÊ¼ 
+     * typeçš„å€¼å¿…é¡»ä»0å¼€å§‹ 
      *  
      * */
 	@Override
@@ -131,7 +131,7 @@ public class PersonalInfoAdapter extends BaseAdapter
 		return type;
 	}
 	/** 
-     * ·µ»ØËùÓĞµÄlayoutµÄÊıÁ¿ 
+     * è¿”å›æ‰€æœ‰çš„layoutçš„æ•°é‡ 
      *  
      * */ 
 	@Override
