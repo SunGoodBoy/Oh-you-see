@@ -35,6 +35,8 @@ public class ChangeUserpicActivity extends BaseActivity implements OnClickListen
 	private static final int CROP_PHOTO = 2;
 	private static final int GET_ALBUM = 3;
 	
+	private static final int SCALE = 5;  // 照片缩小比例
+	
 	private Uri imageUri;
 	
 	@Override
@@ -56,6 +58,16 @@ public class ChangeUserpicActivity extends BaseActivity implements OnClickListen
 		
 		// 监听“取消”按钮
 		cancelButton.setOnClickListener(this);
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if (resultCode == RESULT_OK) {
+			switch (requestCode) {
+			
+			}
+		}
 	}
 	
 	@Override
