@@ -17,6 +17,7 @@ public class ChangePersonalInfoActivity extends BaseActivity {
 	
 	private TextView textViewTitle;
 	private EditText editText;
+	@SuppressWarnings("unused")
 	private TextView textViewHint;
 	private Button saveButton;
 	

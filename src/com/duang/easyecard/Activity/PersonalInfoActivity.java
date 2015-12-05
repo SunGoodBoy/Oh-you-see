@@ -1,5 +1,7 @@
 package com.duang.easyecard.Activity;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,8 +16,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -31,6 +37,12 @@ public class PersonalInfoActivity extends BaseActivity implements  OnItemClickLi
 	private List<PersonalInfo> personalInfoList = new ArrayList<PersonalInfo>();
 	private Handler mHandler;
 	
+	private static final int TAKE_PICTURE = 10;
+	
+	private Uri imageUri;
+	private int outputX = 500;
+	private int outputY = 500;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -140,11 +152,77 @@ public class PersonalInfoActivity extends BaseActivity implements  OnItemClickLi
 		switch (position)
 		{
 		case 0:
-			// 修改头像
-			Log.d("PersoanlInfo item", "ChangeUserpic");
-			Intent intent = new Intent(this, ChangeUserpicActivity.class);
-			intent.putExtra("userpic", "userpic-uri");
-			startActivityForResult(intent, position);
+			// 修改头像，调用对话框选择图片来源
+			AlertDialog.Builder builder = new AlertDialog.Builder(PersonalInfoActivity.this);
+			builder.setTitle("修改头像");
+			builder.setNegativeButton("取消", null);
+			builder.setItems(new String[]{"拍照", "从相册中选取"}, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					switch (which) {
+					// 拍照
+					case 0:
+						// 创建File对象，用于存储拍照后的图片
+						String saveDir = Environment.getExternalStorageDirectory() + "/EasyEcard";
+						String fileName = User.getCurrentUserStuId() + ".jpg";
+						File dir = new File(saveDir);
+						if (!dir.exists()) {
+							dir.mkdir();
+						}
+						File outputImage = new File(dir, fileName);
+						try {
+							if (outputImage.exists()) {
+								outputImage.delete();
+							}
+							outputImage.createNewFile();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+						imageUri = Uri.fromFile(outputImage);
+						Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+						intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+						startActivityForResult(intent, TAKE_PICTURE);  // 启动相机程序
+						break;
+					// 从相册中选取
+					case 1:
+						// 创建File对象，用于存储拍照后的图片
+						saveDir = Environment.getExternalStorageDirectory() + "/EasyEcard";
+						fileName = User.getCurrentUserStuId() + ".jpg";
+						dir = new File(saveDir);
+						if (!dir.exists()) {
+							dir.mkdir();
+						}
+						outputImage = new File(dir, fileName);
+						try {
+							if (outputImage.exists()) {
+								outputImage.delete();
+							}
+							outputImage.createNewFile();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+						imageUri = Uri.fromFile(outputImage);
+						intent = new Intent("android.intent.action.GET_CONTENT");
+						intent.setType("image/*");
+						intent.putExtra("crop", "true");
+						intent.putExtra("scale", "true");
+				        intent.putExtra("aspectX", 1);
+				        intent.putExtra("aspectY", 1);
+				        intent.putExtra("outputX", outputX);
+				        intent.putExtra("outputY", outputY);
+				        intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
+				        intent.putExtra("return-data", false);
+				        intent.putExtra("noFaceDetection", true);  // 取消人脸识别
+				        intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);  // 输出地址
+				        startActivity(intent);
+				        break;
+
+					default:
+						break;
+					}
+				}
+			});
+			builder.create().show();
 			break;
 		case 1:
 			// 学号，不允许更改
@@ -182,14 +260,14 @@ public class PersonalInfoActivity extends BaseActivity implements  OnItemClickLi
 			String title = ((PersonalInfo) view.getItemAtPosition(position)).getTitle();
 			String content = ((PersonalInfo) view.getItemAtPosition(position)).getContent();
 			Log.d("title-content at position", title + "-" + content + " at " + position);
-			intent = new Intent(this, ChangePersonalInfoActivity.class);
+			Intent intent = new Intent(this, ChangePersonalInfoActivity.class);
 			intent.putExtra("title-content", title + "-" + content);
 			startActivityForResult(intent, position);
 			break;
 		}
 	}
 
-	// 更新 personalInfoList
+	// 刷新 personalInfoList
 	private void refreshPersonalInfoList() {
 		Log.d("In PersonalInfoActivity", "refreshPersonalInfoList");
 		mHandler.postDelayed(new Runnable() {
@@ -215,44 +293,69 @@ public class PersonalInfoActivity extends BaseActivity implements  OnItemClickLi
 			if (resultCode == RESULT_OK) {
 				db.execSQL("update UserInfo set name = ? where stu_id = ?",
 						new String[]{content, User.getCurrentUserStuId()});
-				break;
 			}
+			break;
 		case 3:
 			if (resultCode == RESULT_OK) {
 				db.execSQL("update UserInfo set real_name = ? where stu_id = ?",
 						new String[]{content, User.getCurrentUserStuId()});
-				break;
 			}
+			break;
 		case 5:
 			if (resultCode == RESULT_OK) {
 				db.execSQL("update UserInfo set grade = ? where stu_id = ?",
 						new String[]{content, User.getCurrentUserStuId()});
-				break;
 			}
+			break;
 		case 6:
 			if (resultCode == RESULT_OK) {
 				db.execSQL("update UserInfo set college = ? where stu_id = ?",
 						new String[]{content, User.getCurrentUserStuId()});
-				break;
 			}
+			break;
 		case 7:
 			if (resultCode == RESULT_OK) {
 				db.execSQL("update UserInfo set department = ? where stu_id = ?",
 						new String[]{content, User.getCurrentUserStuId()});
-				break;
 			}
+			break;
 		case 8:
 			if (resultCode == RESULT_OK) {
 				db.execSQL("update UserInfo set contact = ? where stu_id = ?",
 						new String[]{content, User.getCurrentUserStuId()});
-				break;
 			}
+			break;
 		case 9:
 			if (resultCode == RESULT_OK) {
 				db.execSQL("update UserInfo set email = ? where stu_id = ?",
 						new String[]{content, User.getCurrentUserStuId()});
-				break;
 			}
+			break;
+		case TAKE_PICTURE:
+			if (resultCode == RESULT_OK) {
+				if (data != null) {
+					Log.d("onActivityResult", "TAKE_PICTURE");
+					Intent intent = new Intent("com.android.camera.action.CROP");
+					intent.setDataAndType(imageUri, "image/*");
+					intent.putExtra("crop", "true");
+					intent.putExtra("scale", "true");
+			        //intent.putExtra("aspectX", 1);
+			        //intent.putExtra("aspectY", 1);
+			        //intent.putExtra("outputX", outputX);
+			        //intent.putExtra("outputY", outputY);
+			        intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
+			        intent.putExtra("return-data", false);
+			        //intent.putExtra("noFaceDetection", true);  // 取消人脸识别
+			        if (imageUri == null) {
+			        	Log.e("onActivityResult", "imageUri is null.");
+			        }
+			        intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+			        startActivity(intent);  // 启动裁剪程序
+				}
+			} else {
+				Log.e("Result for take photo", "Failed.");
+			}
+			break;
 		default:
 			break;
 		}

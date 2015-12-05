@@ -7,6 +7,7 @@ import java.io.IOException;
 import com.duang.easyecard.R;
 
 import android.content.ContentUris;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -104,5 +105,10 @@ public class ChangeUserpicActivity extends BaseActivity implements OnClickListen
 			break;
 		}
 
+	}
+	
+	// 裁剪图片后显示
+	public void showPicturePicker(Context context) {
+		
 	}
 }

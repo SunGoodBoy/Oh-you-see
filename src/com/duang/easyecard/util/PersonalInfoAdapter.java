@@ -1,16 +1,10 @@
 package com.duang.easyecard.util;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.zip.Inflater;
-
 import com.duang.easyecard.R;
-import com.duang.easyecard.Activity.PersonalInfoActivity;
 import com.duang.easyecard.model.PersonalInfo;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -97,7 +91,7 @@ public class PersonalInfoAdapter extends BaseAdapter
 				break;
 			}
 		} else {
-			Log.d("baseAdapter", "Adapter_:"+(convertView == null));
+			// Log.d("baseAdapter", "Adapter_:"+(convertView == null));
 			switch (type)
 			{
 			case TYPE_1:
@@ -127,7 +121,7 @@ public class PersonalInfoAdapter extends BaseAdapter
 	public int getItemViewType(int position) {
 		PersonalInfo personalInfo = mData.get(position);
 		int type = personalInfo.getType();
-		Log.d("TYPE:", type + "");
+		// Log.d("TYPE:", type + "");
 		return type;
 	}
 	/** 
