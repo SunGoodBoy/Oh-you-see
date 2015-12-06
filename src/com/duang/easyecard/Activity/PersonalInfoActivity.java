@@ -72,7 +72,6 @@ public class PersonalInfoActivity extends BaseActivity implements  OnItemClickLi
 					PersonalInfo personalInfo = new PersonalInfo("用户头像");
 					personalInfo.setType(0);
 					personalInfo.setTitle("用户头像");
-					personalInfo.setImgId(R.drawable.app_icon);
 					personalInfoList.add(personalInfo);
 					
 					personalInfo = new PersonalInfo("学号");

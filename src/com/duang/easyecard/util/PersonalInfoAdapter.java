@@ -3,8 +3,12 @@ package com.duang.easyecard.util;
 import java.util.List;
 import com.duang.easyecard.R;
 import com.duang.easyecard.model.PersonalInfo;
+import com.duang.easyecard.model.User;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -24,6 +28,7 @@ public class PersonalInfoAdapter extends BaseAdapter
 	final int TYPE_1 = 0;
 	final int TYPE_2 = 1;
 	
+	private final int SCALE = 5;
 	
 	public PersonalInfoAdapter(Context context, List<PersonalInfo> data) {
 		mContext = context;
@@ -66,7 +71,15 @@ public class PersonalInfoAdapter extends BaseAdapter
 				holderImg.img_title = (TextView) convertView.findViewById(R.id.personal_info_img_title);
 				holderImg.img_content = (ImageView) convertView.findViewById(R.id.personal_info_img);
 				holderImg.img_title.setText(personalInfo.getTitle());
-				holderImg.img_content.setImageResource(personalInfo.getImgId());
+				//将保存在本地的图片取出并缩小后显示在img_content
+				Bitmap bitmap = BitmapFactory.decodeFile(Environment.getExternalStorageDirectory() + "/EasyEcard/"
+						+ User.getCurrentUserStuId() + ".jpg");
+				Bitmap newBitmap = ImageTools.zoomBitmap(bitmap, bitmap.getWidth() / SCALE, bitmap.getHeight() / SCALE);
+				//由于Bitmap内存占用较大，这里需要回收内存，否则会报out of memory异常
+				bitmap.recycle();
+				//将处理过的图片显示在界面上
+				holderImg.img_content.setImageBitmap(newBitmap);
+				
 				// 设置userpic的点击事件
 				holderImg.img_content.setOnClickListener(new OnClickListener() {
 					
