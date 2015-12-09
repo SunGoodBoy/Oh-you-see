@@ -38,6 +38,7 @@ public class PersonalInfoActivity extends BaseActivity implements  OnItemClickLi
 	private Handler mHandler;
 	
 	private static final int TAKE_PICTURE = 10;
+	private static final int CROP_PICTURE = 11;
 	
 	private Uri imageUri;
 	private int outputX = 500;
@@ -264,6 +265,7 @@ public class PersonalInfoActivity extends BaseActivity implements  OnItemClickLi
 			startActivityForResult(intent, position);
 			break;
 		}
+		
 	}
 
 	// 刷新 personalInfoList
@@ -349,11 +351,15 @@ public class PersonalInfoActivity extends BaseActivity implements  OnItemClickLi
 			        	Log.e("onActivityResult", "imageUri is null.");
 			        }
 			        intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
-			        startActivity(intent);  // 启动裁剪程序
+			        startActivityForResult(intent, CROP_PICTURE);  // 启动裁剪程序
 				}
 			} else {
 				Log.e("Result for take photo", "Failed.");
 			}
+			break;
+		case CROP_PICTURE:
+			// 刷新界面
+			refreshPersonalInfoList();
 			break;
 		default:
 			break;
