@@ -105,7 +105,8 @@
         
         <activity 
             android:name=".Activity.ViewBigUserpicActivity"
-            android:label="@string/view_big_userpic">
+            android:label="@string/view_big_userpic"
+            android:theme="@style/ImageScale">
         </activity>
         
         <activity 
