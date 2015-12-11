@@ -104,6 +104,11 @@
         </activity>
         
         <activity 
+            android:name=".Activity.ViewBigUserpicActivity"
+            android:label="@string/view_big_userpic">
+        </activity>
+        
+        <activity 
             android:name=".Activity.EventAboutMeActivity"
             android:label="@string/event_about_me">
         </activity>

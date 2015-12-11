@@ -1,5 +1,7 @@
 package com.duang.easyecard.util;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import com.duang.easyecard.R;
 import com.duang.easyecard.model.PersonalInfo;
@@ -71,14 +73,30 @@ public class PersonalInfoAdapter extends BaseAdapter
 				holderImg.img_title = (TextView) convertView.findViewById(R.id.personal_info_img_title);
 				holderImg.img_content = (ImageView) convertView.findViewById(R.id.personal_info_img);
 				holderImg.img_title.setText(personalInfo.getTitle());
-				//将保存在本地的图片取出并缩小后显示在img_content
-				Bitmap bitmap = BitmapFactory.decodeFile(Environment.getExternalStorageDirectory() + "/EasyEcard/"
-						+ User.getCurrentUserStuId() + ".jpg");
-				Bitmap newBitmap = ImageTools.zoomBitmap(bitmap, bitmap.getWidth() / SCALE, bitmap.getHeight() / SCALE);
-				//由于Bitmap内存占用较大，这里需要回收内存，否则会报out of memory异常
-				bitmap.recycle();
-				//将处理过的图片显示在界面上
-				holderImg.img_content.setImageBitmap(newBitmap);
+				// 设置img_content
+				String imgPath = Environment.getExternalStorageDirectory() + "/EasyEcard";
+				String userpicName = User.getCurrentUserStuId().toString();
+				// 判断文件路径是否存在
+				File userpicDir = new File(imgPath);
+				if (!userpicDir.exists()) {
+					userpicDir.mkdir();
+				}
+				// 根据头像文件是否存在来决定显示的内容
+				File userpic = new File(userpicDir, userpicName);
+				try {
+					if (userpic.exists()) {
+						// 头像文件存在，通过Bitmap显示到ImageView，否则显示系统默认头像
+						Bitmap bitmap = BitmapFactory.decodeFile(Environment.getExternalStorageDirectory() + "/EasyEcard/"
+								+ User.getCurrentUserStuId() + ".jpg");
+						Bitmap newBitmap = ImageTools.zoomBitmap(bitmap, bitmap.getWidth() / SCALE, bitmap.getHeight() / SCALE);
+						// 由于Bitmap内存占用较大，这里需要回收内存，否则会报out of memory异常
+						bitmap.recycle();
+						// 将处理过的图片显示在界面上
+						holderImg.img_content.setImageBitmap(newBitmap);
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 				
 				// 设置userpic的点击事件
 				holderImg.img_content.setOnClickListener(new OnClickListener() {

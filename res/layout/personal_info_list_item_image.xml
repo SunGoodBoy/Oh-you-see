@@ -19,7 +19,7 @@
             android:layout_alignParentTop="true"
             android:contentDescription="@string/user_img"
             android:paddingRight="20dp"
-            android:src="@drawable/app_icon"
+            android:src="@drawable/default_userpic"
             android:clickable="true" />
 
         <TextView

@@ -105,6 +105,10 @@
     <string name="take_photo">拍照</string>
     <string name="choose_from_album">从相册中选取</string>
     
+    <!-- ViewBigUserpic -->
+    <string name="view_big_userpic">查看大图</string>
+    <string name="view_big_userpic_content_description">查看大图</string>
+    
     <!-- ChangePassword -->
     <string name="old_password">旧密码</string>
     <string name="new_password">新密码</string>
