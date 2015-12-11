@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000"
+    android:background="#FF000000"
     android:gravity="center"
     android:orientation="vertical" >
     
@@ -10,7 +10,9 @@
         android:id="@+id/view_big_userpic_imgv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
+        android:layout_gravity="center"
+        android:src="@drawable/default_userpic"
+        android:scaleType="fitCenter"
         android:contentDescription="@string/view_big_userpic_content_description"/>
 
 </LinearLayout>
