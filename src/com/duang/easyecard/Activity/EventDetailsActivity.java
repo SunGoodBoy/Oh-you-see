@@ -1,18 +1,23 @@
 package com.duang.easyecard.Activity;
 
+import java.io.File;
 import java.lang.reflect.Field;
 import java.util.StringTokenizer;
 
 import com.duang.easyecard.R;
 import com.duang.easyecard.db.MyDatabaseHelper;
 import com.duang.easyecard.model.User;
+import com.duang.easyecard.util.ImageTools;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -21,6 +26,7 @@ import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,7 +34,7 @@ public class EventDetailsActivity extends BaseActivity implements OnClickListene
 	
 	private MyDatabaseHelper dbHelper;
 	
-	//private ImageView imgvUserImg;
+	private ImageView imgvUserImg;
 	
 	private TextView tvStu_id;
 	private TextView tvName;
@@ -56,8 +62,8 @@ public class EventDetailsActivity extends BaseActivity implements OnClickListene
 		setOverflowButtonAlways();
 		setContentView(R.layout.event_details);
 		
-		//控件的初始化 要在加载布局文件之后
-		//imgvUserImg = (ImageView) findViewById(R.id.event_details_img);
+		// 控件的初始化 要在加载布局文件之后
+		imgvUserImg = (ImageView) findViewById(R.id.event_details_img);
 		
 		tvStu_id = (TextView) findViewById(R.id.event_details_stu_id);
 		tvName = (TextView) findViewById(R.id.event_details_name);
@@ -143,6 +149,33 @@ public class EventDetailsActivity extends BaseActivity implements OnClickListene
 			do{
 				if (stu_id.equals(cursor.getString(cursor.getColumnIndex("owner_stu_id"))))
 				{
+					/*
+					 *  设置失主用户头像
+					 *  如果event_owner已经设置了头像，显示event_owner的头像
+					 */
+					String userpicPath = Environment.getExternalStorageDirectory() + "/EasyEcard";
+					String userpicName = stu_id + ".jpg";
+					int SCALE = 4;
+					// 判断文件路径是否存在
+					File userpicDir = new File(userpicPath);
+					if (!userpicDir.exists()) {
+						userpicDir.mkdir();
+					}
+					// 根据头像文件是否存在来决定显示的内容
+					File userpic = new File(userpicDir, userpicName);
+					try {
+						if (userpic.exists()) {
+							// 头像文件存在，通过Bitmap显示到ImageView，否则显示系统默认头像
+							Bitmap bitmap = BitmapFactory.decodeFile(userpicPath + "/" + userpicName);
+							Bitmap newBitmap = ImageTools.zoomBitmap(bitmap, bitmap.getWidth() / SCALE, bitmap.getHeight() / SCALE);
+							// 由于Bitmap内存占用较大，这里需要回收内存，否则会报out of memory异常
+							bitmap.recycle();
+							// 将处理过的图片通过控件显示
+							imgvUserImg.setImageBitmap(newBitmap);
+						}
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 					
 					//失主姓名
 					tvName.setText(cursor.getString(cursor.getColumnIndex("owner_name")));
@@ -261,6 +294,34 @@ public class EventDetailsActivity extends BaseActivity implements OnClickListene
 			do{
 				if (stu_id.equals(cursor.getString(cursor.getColumnIndex("owner_stu_id"))))
 				{
+					/*
+					 *  设置失主用户头像
+					 *  如果event_owner已经设置了头像，显示event_owner的头像
+					 */
+					String userpicPath = Environment.getExternalStorageDirectory() + "/EasyEcard";
+					String userpicName = stu_id + ".jpg";
+					int SCALE = 4;
+					// 判断文件路径是否存在
+					File userpicDir = new File(userpicPath);
+					if (!userpicDir.exists()) {
+						userpicDir.mkdir();
+					}
+					// 根据头像文件是否存在来决定显示的内容
+					File userpic = new File(userpicDir, userpicName);
+					try {
+						if (userpic.exists()) {
+							// 头像文件存在，通过Bitmap显示到ImageView，否则显示系统默认头像
+							Bitmap bitmap = BitmapFactory.decodeFile(userpicPath + "/" + userpicName);
+							Bitmap newBitmap = ImageTools.zoomBitmap(bitmap, bitmap.getWidth() / SCALE, bitmap.getHeight() / SCALE);
+							// 由于Bitmap内存占用较大，这里需要回收内存，否则会报out of memory异常
+							bitmap.recycle();
+							// 将处理过的图片通过控件显示
+							imgvUserImg.setImageBitmap(newBitmap);
+						}
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					
 					//失主姓名
 					tvName.setText(cursor.getString(cursor.getColumnIndex("owner_name")));
 					//拾获者联系方式

@@ -9,7 +9,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
-import android.util.Log;
 
 public class EventAdapter extends CommonAdapter<Event>
 {
@@ -37,8 +36,8 @@ public class EventAdapter extends CommonAdapter<Event>
 		 */
 		String userpicPath = Environment.getExternalStorageDirectory() + "/EasyEcard";
 		String userpicName = event.getEvent_owner().getStu_id() + ".jpg";
-		Log.d("EventAdapter", userpicPath);
-		Log.d("EventAdapter", userpicName);
+		// Log.d("EventAdapter", userpicPath);
+		// Log.d("EventAdapter", userpicName);
 		// 判断文件路径是否存在
 		File userpicDir = new File(userpicPath);
 		if (!userpicDir.exists()) {
@@ -55,7 +54,7 @@ public class EventAdapter extends CommonAdapter<Event>
 				bitmap.recycle();
 				// 将处理过的图片通过控件显示
 				holder.setImageBitmap(R.id.list_user_img, newBitmap);
-				Log.d("EventAdapter", "holder.setImageBitmap");
+				// Log.d("EventAdapter", "holder.setImageBitmap");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
