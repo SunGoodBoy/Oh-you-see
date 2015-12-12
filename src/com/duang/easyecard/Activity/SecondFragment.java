@@ -69,7 +69,7 @@ public class SecondFragment extends Fragment implements IXListViewListener, OnIt
 				if (cursor.getString(cursor.getColumnIndex("close_flag")).equals("0")) {
 					Event event = new Event(cursor.getString(cursor.getColumnIndex("owner_stu_id")));
 					event.getEvent_owner().setUsername(cursor.getString(cursor.getColumnIndex("owner_name")));
-					event.getEvent_owner().setImageId(R.drawable.app_icon);
+					event.getEvent_owner().setImageId(R.drawable.default_userpic);
 					eventList.add(event);
 				}
 			} while (cursor.moveToPrevious());
