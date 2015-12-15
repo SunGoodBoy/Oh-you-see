@@ -12,12 +12,12 @@
         android:gravity="center"
         android:text="@string/lost_event" />
 
-    <com.duang.easyecard.util.XListView 
+    <com.duang.ohyousee.util.XListView 
         android:id="@+id/xListView_first_fragment"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" 
         android:fastScrollEnabled="true"
         android:cacheColorHint="#00000000">
-    </com.duang.easyecard.util.XListView>
+    </com.duang.ohyousee.util.XListView>
     
 </LinearLayout>

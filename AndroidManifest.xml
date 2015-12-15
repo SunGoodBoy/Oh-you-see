@@ -18,7 +18,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".Activity.AppStart"
+            android:name="com.duang.ohyousee.Activity.AppStart"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,39 +27,39 @@
         </activity>
         
         <activity
-            android:name=".Activity.BaseActivity">
+            android:name="com.duang.ohyousee.Activity.BaseActivity">
         </activity>
         
         <activity
-            android:name=".Activity.ActivityCollector">
+            android:name="com.duang.ohyousee.Activity.ActivityCollector">
         </activity>
         
         <activity
-            android:name=".Activity.MainActivity">
+            android:name="com.duang.ohyousee.Activity.MainActivity">
         </activity>
         
         <activity 
-            android:name=".Activity.LoginActivity"
+            android:name="com.duang.ohyousee.Activity.LoginActivity"
             android:label="@string/login">
         </activity>
         
         <activity 
-            android:name=".Activity.SignupActivity"
+            android:name="com.duang.ohyousee.Activity.SignupActivity"
             android:label="@string/signup">
         </activity>
         
         <activity 
-            android:name=".Activity.AddLostEventActivity"
+            android:name="com.duang.ohyousee.Activity.AddLostEventActivity"
             android:label="@string/add_lost_event">
         </activity>
         
         <activity 
-            android:name=".Activity.AddFoundEventActivity"
+            android:name="com.duang.ohyousee.Activity.AddFoundEventActivity"
             android:label="@string/add_found_event">
         </activity>
         
         <activity 
-            android:name=".Activity.SearchResultActivity"
+            android:name="com.duang.ohyousee.Activity.SearchResultActivity"
             android:label="@string/search_result">
             <intent-filter> 
                 <action android:name="android.intent.action.SEARCH"/>
@@ -69,58 +69,58 @@
         </activity>
 
         <activity 
-            android:name=".Activity.EventDetailsActivity"
+            android:name="com.duang.ohyousee.Activity.EventDetailsActivity"
             android:label="@string/event_details">
         </activity>
         
         <activity 
-            android:name=".Activity.AlterEventActivity"
+            android:name="com.duang.ohyousee.Activity.AlterEventActivity"
             android:label="@string/alter_event">
         </activity>
         
         <activity 
-            android:name=".Activity.WebViewActivity"
+            android:name="com.duang.ohyousee.Activity.WebViewActivity"
             android:label="@string/web_view">
         </activity>
         
         <activity 
-            android:name=".Activity.NotificationActivity"
+            android:name="com.duang.ohyousee.Activity.NotificationActivity"
             android:label="@string/notification">
         </activity>
         
         <activity 
-            android:name=".Activity.PersonalInfoActivity"
+            android:name="com.duang.ohyousee.Activity.PersonalInfoActivity"
             android:label="@string/personal_info">
         </activity>
         
         <activity 
-            android:name=".Activity.ChangePersonalInfoActivity"
+            android:name="com.duang.ohyousee.Activity.ChangePersonalInfoActivity"
             android:label="@string/change_personal_info">
         </activity>
         
         <activity 
-            android:name=".Activity.ChangeUserpicActivity"
+            android:name="com.duang.ohyousee.Activity.ChangeUserpicActivity"
             android:label="@string/change_userpic">
         </activity>
         
         <activity 
-            android:name=".Activity.ViewBigUserpicActivity"
+            android:name="com.duang.ohyousee.Activity.ViewBigUserpicActivity"
             android:label="@string/view_big_userpic"
             android:theme="@style/ImageScale">
         </activity>
         
         <activity 
-            android:name=".Activity.EventAboutMeActivity"
+            android:name="com.duang.ohyousee.Activity.EventAboutMeActivity"
             android:label="@string/event_about_me">
         </activity>
         
         <activity 
-            android:name=".Activity.EventByMeActivity"
+            android:name="com.duang.ohyousee.Activity.EventByMeActivity"
             android:label="@string/event_by_me">
         </activity>
         
         <activity 
-            android:name=".Activity.ChangePasswordActivity"
+            android:name="com.duang.ohyousee.Activity.ChangePasswordActivity"
             android:label="@string/change_password">
         </activity>
         

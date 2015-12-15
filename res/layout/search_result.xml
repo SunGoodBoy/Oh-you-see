@@ -57,12 +57,12 @@
 			android:background="#90909090" 
 			android:layout_marginRight="1dp" 
 			android:layout_marginLeft="1dp"/>
-    <com.duang.easyecard.util.XListView 
+    <com.duang.ohyousee.util.XListView 
         android:id="@+id/xListView_search_result"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" 
         android:fastScrollEnabled="true"
         android:cacheColorHint="#00000000">
-    </com.duang.easyecard.util.XListView>
+    </com.duang.ohyousee.util.XListView>
     
 </LinearLayout>
