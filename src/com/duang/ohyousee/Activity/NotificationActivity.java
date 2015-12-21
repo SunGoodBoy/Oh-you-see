@@ -11,7 +11,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import com.duang.easyecard.R;
+import com.duang.ohyousee.R;
 import com.duang.ohyousee.util.NotificationListViewAdapter;
 
 import android.app.ProgressDialog;

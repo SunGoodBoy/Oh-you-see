@@ -1,6 +1,6 @@
 package com.duang.ohyousee.Activity;
 
-import com.duang.easyecard.R;
+import com.duang.ohyousee.R;
 import com.duang.ohyousee.db.MyDatabaseHelper;
 import com.duang.ohyousee.model.User;
 

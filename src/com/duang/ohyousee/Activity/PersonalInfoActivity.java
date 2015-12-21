@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.duang.easyecard.R;
+import com.duang.ohyousee.R;
 import com.duang.ohyousee.db.MyDatabaseHelper;
 import com.duang.ohyousee.model.PersonalInfo;
 import com.duang.ohyousee.model.User;

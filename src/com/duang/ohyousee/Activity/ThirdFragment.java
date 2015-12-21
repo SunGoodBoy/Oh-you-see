@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.duang.easyecard.R;
+import com.duang.ohyousee.R;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;

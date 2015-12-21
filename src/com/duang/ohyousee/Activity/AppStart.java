@@ -1,6 +1,6 @@
 package com.duang.ohyousee.Activity;
 
-import com.duang.easyecard.R;
+import com.duang.ohyousee.R;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;

@@ -4,7 +4,7 @@ import java.io.File;
 import java.lang.reflect.Field;
 import java.util.StringTokenizer;
 
-import com.duang.easyecard.R;
+import com.duang.ohyousee.R;
 import com.duang.ohyousee.db.MyDatabaseHelper;
 import com.duang.ohyousee.model.User;
 import com.duang.ohyousee.util.ImageTools;

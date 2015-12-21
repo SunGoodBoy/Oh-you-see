@@ -5,7 +5,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.duang.easyecard.R;
+import com.duang.ohyousee.R;
 import com.duang.ohyousee.util.ChangeColorIconWithText;
 import com.duang.ohyousee.util.PagerAdapter;
 

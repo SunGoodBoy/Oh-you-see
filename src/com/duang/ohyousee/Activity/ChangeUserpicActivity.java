@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import com.duang.easyecard.R;
+import com.duang.ohyousee.R;
 
 import android.content.ContentUris;
 import android.content.Context;

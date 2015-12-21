@@ -3,7 +3,7 @@ package com.duang.ohyousee.Activity;
 import java.util.Calendar;
 import java.util.StringTokenizer;
 
-import com.duang.easyecard.R;
+import com.duang.ohyousee.R;
 import com.duang.ohyousee.db.MyDatabaseHelper;
 import com.duang.ohyousee.model.User;
 

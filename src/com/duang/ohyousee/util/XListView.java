@@ -1,6 +1,6 @@
 package com.duang.ohyousee.util;
 
-import com.duang.easyecard.R;
+import com.duang.ohyousee.R;
 
 import android.widget.ListView;
 

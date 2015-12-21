@@ -2,7 +2,7 @@ package com.duang.ohyousee.Activity;
 
 import java.util.StringTokenizer;
 
-import com.duang.easyecard.R;
+import com.duang.ohyousee.R;
 
 import android.content.Intent;
 import android.os.Bundle;

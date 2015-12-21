@@ -2,7 +2,7 @@ package com.duang.ohyousee.util;
 
 import java.io.File;
 import java.util.List;
-import com.duang.easyecard.R;
+import com.duang.ohyousee.R;
 import com.duang.ohyousee.Activity.ViewBigUserpicActivity;
 import com.duang.ohyousee.model.PersonalInfo;
 import com.duang.ohyousee.model.User;

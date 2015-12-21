@@ -3,7 +3,7 @@ package com.duang.ohyousee.util;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.duang.easyecard.R;
+import com.duang.ohyousee.R;
 import com.duang.ohyousee.Activity.NotificationActivity;
 import com.duang.ohyousee.Activity.WebViewActivity;
 

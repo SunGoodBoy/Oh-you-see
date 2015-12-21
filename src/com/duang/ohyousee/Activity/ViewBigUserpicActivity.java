@@ -2,7 +2,7 @@ package com.duang.ohyousee.Activity;
 
 import java.io.File;
 
-import com.duang.easyecard.R;
+import com.duang.ohyousee.R;
 import com.duang.ohyousee.model.User;
 
 import android.graphics.Bitmap;
